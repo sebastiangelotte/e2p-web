@@ -1,0 +1,31 @@
+.heading {
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto;
+    color: $color-blue;
+}
+
+.heading--inverted {
+    color: $color-white;
+}
+
+.heading--small {
+    .heading__text {
+        font-size: 16px;
+        font-weight: normal;
+    }
+}
+
+.heading__headline {
+    font-family: $font-family-serif;
+}
+
+.heading__headline--bigger {
+    font-size: 1.4em;
+}
+
+.heading__text {
+    font-family: $font-family-sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+}

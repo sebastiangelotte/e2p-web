@@ -1,0 +1,121 @@
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+//
+// Root
+//
+
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+//
+// Body
+//
+
+body {
+    background-color: $color-white;
+    color: $color-blue;
+    font-size: 13px;
+    font-family: $font-family-sans-serif;
+}
+
+//
+// Text
+//
+
+// Headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: $spacing-md;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: $font-size-xl;
+}
+
+h2 {
+    font-size: $font-size-lg;
+}
+
+h3,
+h4,
+h5,
+h6 {
+    font-size: $font-size-md;
+}
+
+// Paragraphs
+p {
+    margin-bottom: $spacing-md;
+}
+
+// Blockquote
+blockquote {
+    margin-bottom: $spacing-md;
+}
+
+// Links
+a {
+    color: $color-blue;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: $color-blue;
+        text-decoration: none;
+    }
+}
+
+//Lists
+ul,
+ol,
+dl {
+    margin-bottom: $spacing-md;
+}
+
+//
+// Media
+//
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+//
+// Forms
+//
+
+form {
+    margin-bottom: $spacing-md;
+}
+
+// Inputs
+// Note: Form elements don't always inherit font properties, so we force them to
+input,
+button,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+//
+// Tables
+//
+
+table {
+    margin-bottom: $spacing-md;
+}

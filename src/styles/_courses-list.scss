@@ -1,0 +1,12 @@
+.courses-list {
+    padding-bottom: $spacing-xl;
+
+    > h3 {
+        margin-right: $spacing-sm;
+        margin-left: $spacing-sm;
+        margin-bottom: $spacing-md;
+        padding-bottom: $spacing-sm;
+        border-bottom: 2px solid $color-blue;
+        color: $color-blue;
+    }
+}

@@ -1,0 +1,41 @@
+.pitch {
+    color: $color-light-blue;
+}
+
+.pitch--inverted {
+    .pitch__heading,
+    .pitch__text {
+        color: $color-white;
+    }
+}
+
+.pitch--centered {
+    text-align: center;
+}
+
+.pitch__heading {
+    font-family: $font-family-serif;
+    color: $color-light-blue;
+    line-height: 1.5;
+    word-wrap: break-word;
+
+    @include mq('max', $breakpoint-md) {
+        font-size: 16px;
+    }
+}
+
+.pitch__text {
+    //
+}
+
+.pitch__pre-header {
+    display: block;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-style: italic;
+    text-decoration: underline;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.5px;
+    padding-bottom: $spacing-md;
+}

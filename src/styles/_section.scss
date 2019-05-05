@@ -1,0 +1,112 @@
+//
+// Configuration
+//
+
+// How many columns? (12, 24 etc)
+$no-of-columns: 12;
+
+
+
+//
+// Code
+//
+
+.section {
+    padding: $spacing-lg $spacing-sm;
+    margin: 0 auto;
+
+    // @include content-width;
+    width: 100%;
+    max-width: $content-width-lg;
+
+    @include mq(min, $breakpoint-md) {
+        padding: 5rem $spacing-md;
+    }
+
+    @include mq(min, $breakpoint-lg) {
+        padding: $spacing-xl * 1.5 $spacing-lg;
+    }
+
+    @include mq(min, $breakpoint-xl) {
+        padding: $spacing-xl * 1.5 $spacing-xl;
+    }
+}
+
+.section--full {
+    margin: 0;
+    width: 100%;
+}
+
+.section--no-padding {
+    padding: 0;
+}
+
+.section--extra-top-padding {
+    padding-top: 7rem;
+}
+
+.section--small-vertical-padding {
+    padding-top: $spacing-sm;
+    padding-bottom: $spacing-sm;
+}
+
+.section--no-vertical-padding {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.section--no-top-padding {
+    padding-top: 0;
+}
+
+.section--no-bottom-padding {
+    padding-bottom: 0;
+}
+
+.section--slim {
+    padding: $spacing-xs $spacing-sm;
+
+    > .section {
+        padding: 0;
+    }
+}
+
+.section--no-horizontal-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.section--center-content {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section--grid {
+    display: flex;
+    flex-flow: column;
+
+    @include mq(min, $breakpoint-md) {
+        flex-flow: row;
+        flex-wrap: nowrap;
+    }
+}
+
+.section--wrap {
+    flex-wrap: wrap;
+}
+
+.section__column {
+    display: flex;
+    flex: 1 1 0%;
+    flex-flow: column;
+    padding: $spacing-sm;
+}
+
+// Creates modifier classes for the column sizes.
+@for $i from 1 through ($no-of-columns - 1) {
+    .section__column--#{$i} {
+        flex: 0 0 #{100 / $no-of-columns * $i}#{"%"};
+    }
+}

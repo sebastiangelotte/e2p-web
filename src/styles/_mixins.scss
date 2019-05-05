@@ -1,0 +1,37 @@
+@mixin mq($rangeSelector, $breakpoint, $optional-breakpoint: "") {
+    @if $rangeSelector=="min" {
+        @media screen and (min-width: $breakpoint) {
+            @content;
+        }
+    }
+
+    @else if $rangeSelector=="max" {
+        @media screen and (max-width: $breakpoint) {
+            @content;
+        }
+    }
+
+    @else if $rangeSelector=="between" {
+        @media screen and (min-width: $breakpoint) and (max-width: $optional-breakpoint) {
+            @content;
+        }
+    }
+}
+
+@mixin content-width {
+    @include mq(min, $breakpoint-sm) {
+        width: $content-width-sm;
+    }
+
+    @include mq(min, $breakpoint-md) {
+        width: $content-width-md;
+    }
+
+    @include mq(min, $breakpoint-lg) {
+        width: $content-width-lg;
+    }
+
+    @include mq(min, $breakpoint-xl) {
+        width: $content-width-xl;
+    }
+}

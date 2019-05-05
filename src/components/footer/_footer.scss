@@ -1,0 +1,32 @@
+.footer {
+    color: $color-white;
+    background-color: $color-lighter-blue;
+    padding: 30px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+
+    @media (max-width: $breakpoint-sm) {
+        text-align: center;
+    }
+
+    p {
+        color: $color-lightest-blue;
+    }
+}
+
+.footer__menu {
+    list-style: none;
+    padding: 0;
+
+    li {
+        padding: $spacing-sm / 2 0;
+    }
+
+    li a {
+        color: $color-white;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+}
