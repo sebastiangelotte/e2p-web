@@ -1,26 +1,30 @@
 import React from 'react'
+import { Link } from 'gatsby'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+
 
 const HomepageSection = (props) => {
+    const pitchIsInverted = props.data.theme === 'white' ? false : true
+
     return (
-        <div className="background--orange">
+        <div className={`background--${props.data.theme}`}>
             <section className="section section--grid section--center-content">
                 <div className="section__column">
-                    <div className="pitch pitch--centered pitch--inverted">
-                        <span className="pitch__pre-header">
-                            Webinar:
-                        </span>
+                    <div className={`pitch pitch--centered ${pitchIsInverted ? 'pitch--inverted': ''}`}>
                         <h2 className="pitch__heading">
                             {props.data.heading}
                         </h2>
                         <p className="pitch__text">
-                            Utbildning i koncentrat - snabb &amp; effektiv kunskapsuppdatering
+                            {documentToReactComponents(props.data.description.json)}
                         </p>
-                        <a href={props.data.buttonLink}>
-                            <button className="button button--white">
-                                <i className="fas fa-arrow-right"></i>&nbsp;
-                                {props.data.buttonText}
-                            </button>
-                        </a>
+                        {props.data.buttonLink && props.data.buttonText ? (
+                            <Link to={props.data.buttonLink}>
+                                <button className="button button--white">
+                                    <i className="fas fa-arrow-right"></i>&nbsp;
+                                    {props.data.buttonText}
+                                </button>
+                            </Link>
+                        ) : ''}
                     </div>
                 </div>
             </section>

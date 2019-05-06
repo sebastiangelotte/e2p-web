@@ -11,7 +11,7 @@ const Courses = () => {
       allContentfulCourse (
         sort: {
           fields: date,
-          order: DESC
+          order: ASC
         }
       ) {
         edges {
@@ -19,6 +19,8 @@ const Courses = () => {
             title
             slug
             date(formatString: "MMMM Do, YYYY")
+            price
+            numberOfDays
           }
         }
       }
@@ -43,8 +45,8 @@ const Courses = () => {
                 <section className="section section--no-vertical-padding">
                   <div className="courses-list">
                     <h3>maj 2019</h3>
-                    {data.allContentfulCourse.edges.map((edge) => {
-                      return <CourseCard data={edge.node} />
+                    {data.allContentfulCourse.edges.map((edge, index) => {
+                      return <CourseCard key={index} data={edge.node} />
                     })}
                   </div>
                 </section>

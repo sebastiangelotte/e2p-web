@@ -12,8 +12,12 @@ const IndexPage = () => {
         edges {
           node {
             heading
+            description {
+                json
+            }
             buttonText
             buttonLink
+            theme
           }
         }
       }

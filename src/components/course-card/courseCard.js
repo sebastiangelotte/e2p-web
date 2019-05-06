@@ -13,14 +13,14 @@ const CourseCard = (props) => {
             <h3>{props.data.title}</h3>
             </div>
             <div className="course-card__duration">
-              Längd: 2 dagar
+              Längd: {props.data.numberOfDays} dagar
             </div>
             <div className="course-card__location">
               Ort: Göteborg
             </div>
           </div>
           <div className="course-card__price">
-            Pris: 9995 kr            
+            Pris: {props.data.price} kr
           </div>
         </div>
     </Link>
