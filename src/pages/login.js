@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Layout from '../components/layout'
-import SignIn from '../components/SignIn'
+import SignIn from '../components/signIn'
 import Head from '../components/head'
 
 const LogIn = () => {
