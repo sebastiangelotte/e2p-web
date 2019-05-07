@@ -27,10 +27,23 @@ const IndexPage = () => {
   return (
     <Layout>
       <Head title="Startsida" />
-      {data.allContentfulHomepageSection.edges.map((edge) => {
-        return <HomepageSection data={edge.node} />
-      })}
       <div className="startpage">
+        <div className="background--white">
+            <section className="section section--extra-vertical-padding">
+                <div className="heading">
+                    <img style={{height: '200px'}} src="/logo.svg" />
+                </div>
+                <div className="heading">
+                    <h1 className="heading__headline">Välkommen!</h1>
+                    <span className="heading__text">
+                        <p>Vi vill göra det enklare att prestera i yrkesrollen!</p>
+                    </span>
+                </div>
+            </section>
+        </div>
+        {data.allContentfulHomepageSection.edges.map((edge, index) => {
+            return <HomepageSection key={index} data={edge.node} />
+        })}
         <div className="background--blue">
             <section className="section section--grid section--center-content">
                 <div className="section__column">

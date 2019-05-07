@@ -14,9 +14,9 @@ const HomepageSection = (props) => {
                         <h2 className="pitch__heading">
                             {props.data.heading}
                         </h2>
-                        <p className="pitch__text">
+                        <div className="pitch__text">
                             {documentToReactComponents(props.data.description.json)}
-                        </p>
+                        </div>
                         {props.data.buttonLink && props.data.buttonText ? (
                             <Link to={props.data.buttonLink}>
                                 <button className="button button--white">

@@ -17,9 +17,7 @@ const CouseLeader = (props) => {
                 </div>
             </div>
             <br />
-            <p>
-                {documentToReactComponents(props.data.description.json)}
-            </p>
+            {documentToReactComponents(props.data.description.json)}
         </div>
      )
 }
