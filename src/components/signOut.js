@@ -7,6 +7,7 @@ class Signout extends Component {
   }
   render() {
     return (
+      // eslint-disable-next-line
       <a href="#" onClick={this.signOut}>Logga ut</a>
     )
   }

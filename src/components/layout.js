@@ -51,6 +51,7 @@ class Layout extends Component {
   }
 
   render = () => {
+    // eslint-disable-next-line
     const { firebase, authenticated } = this.state
 
     if (!firebase) return null

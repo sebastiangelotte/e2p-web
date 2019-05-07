@@ -31,7 +31,7 @@ const IndexPage = () => {
         <div className="background--white">
             <section className="section section--extra-vertical-padding">
                 <div className="heading">
-                    <img style={{height: '200px'}} src="/logo.svg" />
+                    <img alt="" style={{height: '200px'}} src="/logo.svg" />
                 </div>
                 <div className="heading">
                     <h1 className="heading__headline">Välkommen!</h1>

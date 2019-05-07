@@ -6,6 +6,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    'gatsby-plugin-stripe-checkout',
     `gatsby-plugin-sass`,
     {
       resolve: `gatsby-source-contentful`,
