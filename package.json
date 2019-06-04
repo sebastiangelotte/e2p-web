@@ -7,7 +7,7 @@
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.2.0",
     "env-cmd": "^9.0.0",
-    "firebase": "^6.0.0",
+    "firebase": "^6.1.0",
     "gatsby": "^2.4.2",
     "gatsby-plugin-react-helmet": "^3.0.12",
     "gatsby-plugin-sass": "^2.0.11",
@@ -17,7 +17,6 @@
     "react": "^16.8.6",
     "react-burger-menu": "^2.6.10",
     "react-dom": "^16.8.6",
-    "react-firebaseui": "^3.1.2",
     "react-helmet": "^5.2.1",
     "react-with-firebase-auth": "^1.0.3",
     "redux": "^4.0.1",
