@@ -7,10 +7,17 @@ import '../styles/main.scss'
 import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app'
 import 'firebase/auth'
-import firebaseConfig from '../firebaseConfig'
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyAb0XyD6AgOfybvYqAE-pkS4sPyrMdqh38',
+  authDomain: 'e2p-web.firebaseapp.com',
+  databaseURL: 'https://e2p-web.firebaseio.com',
+  projectId: 'e2p-web',
+  storageBucket: 'e2p-web.appspot.com',
+  messagingSenderId: '226326778642',
+}
 
 const firebaseApp = firebase.initializeApp(firebaseConfig)
-
 
 class Layout extends Component {
 
