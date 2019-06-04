@@ -1,74 +1,55 @@
-// import React from "react"
-// import '../styles/main.scss'
-
-// import Navigation from './navigation/navigation'
-// import Footer from './footer/footer'
-
-// const Layout = ({children}) => (
-//   <div>
-//     <Navigation />
-//     {children}
-//     <Footer />
-//   </div>
-// )
-
-// export default Layout
-
-
 import React, { Component } from 'react'
-
-import getFirebase from '../firebase'
-import FirebaseContext from '../components/FirebaseContext'
-
 import Navigation from './navigation/navigation'
 import Footer from './footer/footer'
 
 import '../styles/main.scss'
 
+import withFirebaseAuth from 'react-with-firebase-auth'
+import * as firebase from 'firebase/app'
+import 'firebase/auth'
+import firebaseConfig from '../firebaseConfig'
+
+const firebaseApp = firebase.initializeApp(firebaseConfig)
+
+
 class Layout extends Component {
-  state = {
-    firebase: null,
-    authenticated: false,
-  }
-
-  componentDidMount() {
-    const app = import('firebase/app')
-    const auth = import('firebase/auth')
-    const database = import('firebase/database')
-
-    Promise.all([app, auth, database]).then(values => {
-      const firebase = getFirebase(values[0])
-      this.setState({ firebase })
-
-      firebase.auth().onAuthStateChanged(user => {
-        if (!user) {
-          this.setState({ authenticated: false })
-        } else {
-          this.setState({ authenticated: true })
-        }
-      })
-    })
-  }
 
   render = () => {
-    // eslint-disable-next-line
-    const { firebase, authenticated } = this.state
-
-    if (!firebase) return null
+    const {
+      user,
+      signOut,
+      signInWithGoogle,
+    } = this.props
 
     return (
-      <FirebaseContext.Provider value={firebase}>
-        <div id="outer-container">
-          <Navigation />
-          <main id="page-wrap">
-            {/* {authenticated ? <h1>INLOGGAD!</h1> : <h1>UTLOGGAD!</h1>} */}
-            {this.props.children}
-            <Footer />
-          </main>
-        </div>
-      </FirebaseContext.Provider>
+      <div id="outer-container">
+        <Navigation />
+        <main id="page-wrap">
+          {
+            user
+              ? <p>Hello, {user.displayName}</p>
+              : <p>Please sign in.</p>
+          }
+          {
+            user
+              ? <button onClick={signOut}>Sign out</button>
+              : <button onClick={signInWithGoogle}>Sign in with Google</button>
+          }
+          {this.props.children}
+          <Footer />
+        </main>
+      </div>
     )
   }
 }
 
-export default Layout
+const firebaseAppAuth = firebaseApp.auth();
+
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
+
+export default withFirebaseAuth({
+  providers,
+  firebaseAppAuth,
+})(Layout);
