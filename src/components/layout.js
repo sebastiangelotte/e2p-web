@@ -5,8 +5,9 @@ import Footer from './footer/footer'
 import '../styles/main.scss'
 
 import withFirebaseAuth from 'react-with-firebase-auth'
-import * as firebase from 'firebase/app'
-import 'firebase/auth'
+import * as firebase from "firebase/app"
+import "firebase/auth"
+
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAb0XyD6AgOfybvYqAE-pkS4sPyrMdqh38',
