@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Navigation from './navigation/navigation'
 import Footer from './footer/footer'
 
@@ -24,27 +24,48 @@ if (typeof window !== 'undefined') {
 
 }
 
-function signIn() {
-  firebase.auth().signInWithPopup(provider).then(function (result) {
-    var token = result.credential.accessToken
-    console.log(result)
+var token
+var user = 'poo'
+
+const signIn = () => {
+  console.log(user)
+  firebase.auth().signInWithPopup(provider).then(result => {
+    token = result.credential.accessToken
+    user = result.user
+  }).catch(error => {
+    console.error(error.code, error.message)
+  })
+  console.log(user)
+}
+
+const signOut = () => {
+  firebase.auth().signOut().then(() => {
+    console.log('Loggedout!')
+  }).catch(error => {
+    console.error(error)
   })
 }
 
-
-class Layout extends Component {
-  render() {
-    return (
-      <div id="outer-container">
-      <Navigation />
-      <main id="page-wrap">
-        <button onClick={signIn}>Logga in</button>
-        {this.props.children}
-        <Footer />
-      </main>
-    </div>
-    )
-  }
+const Layout = props => {
+  return (
+    <div id="outer-container">
+    <Navigation />
+    <main id="page-wrap">
+      {
+        user
+          ? <p>Hello, {user.displayName}</p>
+          : <p>Please sign in.</p>
+      }
+      {
+        user
+          ? <button onClick={signOut}>Sign out</button>
+          : <button onClick={signIn}>Sign in with Google</button>
+      }
+      {props.children}
+      <Footer />
+    </main>
+  </div>
+  )
 }
 
 export default Layout
