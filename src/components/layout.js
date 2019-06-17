@@ -4,60 +4,47 @@ import Footer from './footer/footer'
 
 import '../styles/main.scss'
 
-import withFirebaseAuth from 'react-with-firebase-auth'
-
-var firebase = require("firebase/app")
+const firebase = require("firebase/app")
 require("firebase/auth")
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyAb0XyD6AgOfybvYqAE-pkS4sPyrMdqh38',
-  authDomain: 'e2p-web.firebaseapp.com',
-  databaseURL: 'https://e2p-web.firebaseio.com',
-  projectId: 'e2p-web',
-  storageBucket: 'e2p-web.appspot.com',
-  messagingSenderId: '226326778642',
+if (typeof window !== 'undefined') {
+  
+  const firebaseConfig = {
+    apiKey: 'AIzaSyAb0XyD6AgOfybvYqAE-pkS4sPyrMdqh38',
+    authDomain: 'e2p-web.firebaseapp.com',
+    databaseURL: 'https://e2p-web.firebaseio.com',
+    projectId: 'e2p-web',
+    storageBucket: 'e2p-web.appspot.com',
+    messagingSenderId: '226326778642',
+  }
+  
+  firebase.initializeApp(firebaseConfig)
+
+  var provider = new firebase.auth.GoogleAuthProvider()
+
 }
 
-const firebaseApp = firebase.initializeApp(firebaseConfig)
+function signIn() {
+  firebase.auth().signInWithPopup(provider).then(function (result) {
+    var token = result.credential.accessToken
+    console.log(result)
+  })
+}
+
 
 class Layout extends Component {
-
-  render = () => {
-    const {
-      user,
-      signOut,
-      signInWithGoogle,
-    } = this.props
-
+  render() {
     return (
       <div id="outer-container">
-        <Navigation />
-        <main id="page-wrap">
-          {
-            user
-              ? <p>Hello, {user.displayName}</p>
-              : <p>Please sign in.</p>
-          }
-          {
-            user
-              ? <button onClick={signOut}>Sign out</button>
-              : <button onClick={signInWithGoogle}>Sign in with Google</button>
-          }
-          {this.props.children}
-          <Footer />
-        </main>
-      </div>
+      <Navigation />
+      <main id="page-wrap">
+        <button onClick={signIn}>Logga in</button>
+        {this.props.children}
+        <Footer />
+      </main>
+    </div>
     )
   }
 }
 
-const firebaseAppAuth = firebaseApp.auth();
-
-const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider(),
-};
-
-export default withFirebaseAuth({
-  providers,
-  firebaseAppAuth,
-})(Layout);
+export default Layout
