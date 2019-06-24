@@ -20,14 +20,14 @@ export const query = graphql`
                 description {
                     json
                 }
-                image {
-                    title
-                    fixed(width: 400) {
-                        width
-                        height
-                        src
-                    }
-                }
+                # image {
+                #     title
+                #     fixed(width: 400) {
+                #         width
+                #         height
+                #         src
+                #     }
+                # }
             }
         }
     }
@@ -37,8 +37,8 @@ const Course = (props) => {
     const options = {
         renderNode: {
             "embedded-asset-block": (node) => {
-                const alt = node.data.target.fields.title['en-US']
-                const url = node.data.target.fields.file['en-US'].url
+                const alt = node.data.target.fields.title['sv-SE']
+                const url = node.data.target.fields.file['sv-SE'].url
                 return <img alt={alt} src={url} />
             }
         }

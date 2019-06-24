@@ -7,11 +7,11 @@ const CouseLeader = (props) => {
         <div className="teaser">
             <h3 className="teaser__heading">Kursledare</h3>
             <div className="contact-card">
-                <img className="contact-card__image" 
+                {/* <img className="contact-card__image" 
                     src={props.data.image.fixed.src} 
                     height={props.data.image.fixed.width}
                     width={props.data.image.fixed.height}
-                    alt={props.data.image.title} />
+                    alt={props.data.image.title} /> */}
                 <div className="contact-card__text">
                     <h4>{props.data.name}</h4>
                 </div>
