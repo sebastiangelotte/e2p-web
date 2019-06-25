@@ -3,6 +3,7 @@ import Navigation from './navigation/navigation'
 import Footer from './footer/footer'
 import IdentityModal, { useIdentityContext } from 'react-netlify-identity-widget'
 import 'react-netlify-identity-widget/styles.css'
+import 'semantic-ui-css/semantic.min.css'
 
 import '../styles/main.scss'
 
@@ -17,9 +18,9 @@ const Layout = ({ children }) => {
 
   return (
     <div id="outer-container">
-      <button onClick={() => setDialog(true)}>
+      {/* <button onClick={() => setDialog(true)}>
         {isLoggedIn ? `Hello ${name}` : 'Logga in'}
-      </button>
+      </button> */}
       <Navigation />
       <main id="page-wrap">
         {children}

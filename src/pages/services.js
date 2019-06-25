@@ -1,6 +1,8 @@
 import React from 'react'
 import { graphql, useStaticQuery, Link } from 'gatsby'
+// import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
+import { Card, Icon } from 'semantic-ui-react'
 import Head from '../components/head'
 import Layout from '../components/layout'
 
@@ -12,6 +14,9 @@ const Services = () => {
                     node {
                         slug
                         title
+                        description {
+                            json
+                        }
                     }
                 }
             }
@@ -20,11 +25,30 @@ const Services = () => {
     return (
         <Layout>
             <Head title="Verktyg" />
-            <ul>
+            {/* <ul>
                 {data.allContentfulService.edges.map((edge, index) => {
                     return <li><Link to={`/services/${edge.node.slug}`} key={index}>{edge.node.title}</Link></li>
-                })}
-            </ul>
+            </ul> */}
+            <Card.Group centered>
+            {data.allContentfulService.edges.map((edge, index) => {
+                return (
+                    <Card>
+                        <Card.Content>
+                            <Card.Header>
+                                <Link to={`/services/${edge.node.slug}`} key={index}>
+                                    {edge.node.title}
+                                </Link>
+                            </Card.Header>
+                        </Card.Content>
+                        {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
+                        <Card.Content extra>
+                            <Icon name='user' />
+                            Extra info
+                        </Card.Content>
+                    </Card>
+                )
+            })}
+            </Card.Group>
         </Layout>
     )
 }
