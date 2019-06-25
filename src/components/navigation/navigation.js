@@ -11,6 +11,7 @@ const Navigation = () => {
                 <Link to="/courses">Kurser</Link>
                 <Link to="/services">Tjänster</Link>
                 <Link to="/tools">Verktyg</Link>
+                <Link to="/services">Tjänster</Link>
                 <Link to="/webinars">Webinars</Link>
                 <Link to="/account">Mitt konto</Link>
             </Menu>
