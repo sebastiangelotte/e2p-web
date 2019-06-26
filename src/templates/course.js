@@ -1,7 +1,8 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
+import { Card, Icon } from 'semantic-ui-react'
 import Head from '../components/head'
 import Layout from '../components/layout'
 import CourseLeader from '../components/course-leader/courseLeader'
@@ -28,6 +29,18 @@ export const query = graphql`
                 #         src
                 #     }
                 # }
+            }
+            linkedServices {
+                slug
+                title
+            }
+            linkedCourses {
+                slug
+                title
+            }
+            linkedTools {
+                slug
+                title
             }
         }
     }
@@ -67,7 +80,7 @@ const Course = (props) => {
                         <div className="section__column section__column--8 wysiwyg-content">
                             <section className="section section--grid section--wrap section--no-vertical-padding">
                                 <div className="section__column section__column--12">
-                                    <div className="backlink"><a href="/courses">&lt; Tillbaka till kurser</a></div>
+                                    <div className="backlink"><Link to="/courses">&lt; Tillbaka till kurser</Link></div>
                                     <p>{props.data.contentfulCourse.date}</p>
                                     {documentToReactComponents(props.data.contentfulCourse.description.json, options)}
                                     <button className="button">
@@ -90,6 +103,87 @@ const Course = (props) => {
                     </section>
                 </div>
             </div>
+
+            {/* LINKED SERVICES */}
+            {props.data.contentfulCourse.linkedServices &&
+                <>
+                    <h3>Relaterade tjänster</h3>
+                    <Card.Group>
+                        {props.data.contentfulCourse.linkedServices.map((service, index) => {
+                            return (
+                                <Card key={index}>
+                                    <Card.Content>
+                                        <Card.Header>
+                                            <Link to={`/services/${service.slug}`}>
+                                                {service.title}
+                                            </Link>
+                                        </Card.Header>
+                                    </Card.Content>
+                                    {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
+                                    <Card.Content extra>
+                                        <Icon name='user' />
+                                        Extra info
+                                    </Card.Content>
+                                </Card>
+                            )
+                        })}
+                    </Card.Group>
+                </>
+            }
+
+            {/* LINKED COURSES */}
+            {props.data.contentfulCourse.linkedCourses &&
+                <>
+                    <h3>Relaterade Kurser</h3>
+                    <Card.Group>
+                        {props.data.contentfulCourse.linkedCourses.map((course, index) => {
+                            return (
+                                <Card key={index}>
+                                    <Card.Content>
+                                        <Card.Header>
+                                            <Link to={`/courses/${course.slug}`}>
+                                                {course.title}
+                                            </Link>
+                                        </Card.Header>
+                                    </Card.Content>
+                                    {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
+                                    <Card.Content extra>
+                                        <Icon name='user' />
+                                        Extra info
+                                    </Card.Content>
+                                </Card>
+                            )
+                        })}
+                    </Card.Group>
+                </>
+            }
+
+            {/* LINKED TOOLS */}
+            {props.data.contentfulCourse.linkedTools &&
+                <>
+                    <h3>Relaterade verktyg</h3>
+                    <Card.Group>
+                        {props.data.contentfulCourse.linkedTools.map((tool, index) => {
+                            return (
+                                <Card key={index}>
+                                    <Card.Content>
+                                        <Card.Header>
+                                            <Link to={`/tools/${tool.slug}`}>
+                                                {tool.title}
+                                            </Link>
+                                        </Card.Header>
+                                    </Card.Content>
+                                    {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
+                                    <Card.Content extra>
+                                        <Icon name='user' />
+                                        Extra info
+                                    </Card.Content>
+                                </Card>
+                            )
+                        })}
+                    </Card.Group>
+                </>
+            }
         </Layout>
      )
 }

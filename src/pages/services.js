@@ -25,29 +25,25 @@ const Services = () => {
     return (
         <Layout>
             <Head title="Verktyg" />
-            {/* <ul>
-                {data.allContentfulService.edges.map((edge, index) => {
-                    return <li><Link to={`/services/${edge.node.slug}`} key={index}>{edge.node.title}</Link></li>
-            </ul> */}
             <Card.Group centered>
-            {data.allContentfulService.edges.map((edge, index) => {
-                return (
-                    <Card>
-                        <Card.Content>
-                            <Card.Header>
-                                <Link to={`/services/${edge.node.slug}`} key={index}>
-                                    {edge.node.title}
-                                </Link>
-                            </Card.Header>
-                        </Card.Content>
-                        {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
-                        <Card.Content extra>
-                            <Icon name='user' />
-                            Extra info
-                        </Card.Content>
-                    </Card>
-                )
-            })}
+                {data.allContentfulService.edges.map((edge, index) => {
+                    return (
+                        <Card key={index}>
+                            <Card.Content>
+                                <Card.Header>
+                                    <Link to={`/services/${edge.node.slug}`} key={index}>
+                                        {edge.node.title}
+                                    </Link>
+                                </Card.Header>
+                            </Card.Content>
+                            {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
+                            <Card.Content extra>
+                                <Icon name='user' />
+                                Extra info
+                            </Card.Content>
+                        </Card>
+                    )
+                })}
             </Card.Group>
         </Layout>
     )
