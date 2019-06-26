@@ -2,10 +2,8 @@ import React from 'react'
 import Navigation from './navigation/navigation'
 import Footer from './footer/footer'
 import IdentityModal, { useIdentityContext } from 'react-netlify-identity-widget'
-import 'react-netlify-identity-widget/styles.css'
+// import 'react-netlify-identity-widget/styles.css'
 import 'semantic-ui-css/semantic.min.css'
-
-import '../styles/main.scss'
 
 const Layout = ({ children }) => {
   const identity = useIdentityContext()
@@ -17,17 +15,14 @@ const Layout = ({ children }) => {
   const isLoggedIn = identity && identity.isLoggedIn
 
   return (
-    <div id="outer-container">
-      {/* <button onClick={() => setDialog(true)}>
-        {isLoggedIn ? `Hello ${name}` : 'Logga in'}
-      </button> */}
+    <>
       <Navigation />
-      <main id="page-wrap">
+      <main style={{minHeight: '100vh'}}>
         {children}
-        <Footer />
       </main>
+      <Footer />
       <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)}></IdentityModal>
-    </div>
+    </>
   )
 }
 

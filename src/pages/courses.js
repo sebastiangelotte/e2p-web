@@ -1,9 +1,27 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 
+import {
+  Item,
+  Segment,
+  Container,
+  Header
+} from 'semantic-ui-react'
+
 import Head from '../components/head'
 import Layout from '../components/layout'
 import CourseCard from '../components/course-card/courseCard'
+
+const style = {
+  segment: {
+      paddingTop: '6em',
+      paddingBottom: '6em'
+  },
+  link: {
+      paddingTop: '2em',
+      display: 'inline-block'
+  }
+}
 
 const Courses = () => {
   const data = useStaticQuery(graphql`
@@ -20,7 +38,10 @@ const Courses = () => {
             slug
             date(formatString: "MMMM Do, YYYY")
             price
-            numberOfDays
+            numberOfDays,
+            courseLeader {
+              name
+            }
           }
         }
       }
@@ -30,45 +51,24 @@ const Courses = () => {
     return (
       <Layout>
         <Head title="Kurser" />
-        <div className="courses">
-          <div className="background--white">
-            <section className="section section--extra-top-padding">
-              <div className="heading">
-                <h1 className="heading__headline">Kurser</h1>
-                <span className="heading__text"><p>Här kan ni läsa mer om de kurser vi erbjuder under respektive område.</p></span>
-              </div>
-            </section>
-          </div>
-          <div className="background--white-light">
-            <section className="section">
-              <div className="section__column">
-                <section className="section section--no-vertical-padding">
-                  <div className="courses-list">
-                    <h3>maj 2019</h3>
-                    {data.allContentfulCourse.edges.map((edge, index) => {
-                      return <CourseCard key={index} data={edge.node} />
-                    })}
-                  </div>
-                </section>
-              </div>
-            </section>
-          </div>
-          <div className="background--blue">
-            <section className="section section--grid section--center-content">
-              <div className="section__column">
-                <div className="pitch pitch--centered pitch--inverted">
-                  <h2 className="pitch__heading">
-                    Easy2perform – vi vill göra det enklare att prestera i yrkesrollen!
-                  </h2>
-                  <p className="pitch__text">
-                    Vi som jobbar med Easy2perform fokuserar på att ge stöd och vägledning till företag, chefer och medarbetare. Oavsett om det sker genom våra gratislösningar på mobil &amp; webb, kurser eller konsulttjänster, levererar vi kunskap som gör det enklare att
-                    prestera i yrkesrollen.
-                  </p>
+        <Segment style={style.segment} textAlign="center" vertical color="blue" inverted>
+            <Container text>
+                <Header as="h1" inverted>Utvecklande kurser</Header>
+                <div>
+                  <p>Easy2perform utvecklar och genomför inspirerande kurser för din utveckling.</p>
+                  <p>Vi följer nyheter, trender och målgruppsbehov inom exempelvis ledarskap, personal, HR, projektledning och utvecklar kurser som ger ökad kunskap och kompetens. Vi handplockar kursledare med rätt kompetens, erfarenhet och pedagogisk förmåga, för att ge dig den bästa upplevelsen.</p>
                 </div>
-              </div>
-            </section>
-          </div>
-        </div>
+            </Container>
+        </Segment>
+        <Segment style={style.segment} vertical center>
+          <Container text>
+            <Item.Group divided>
+              {data.allContentfulCourse.edges.map((edge, index) => {
+                return <CourseCard key={index} data={edge.node} />
+              })}
+            </Item.Group>
+          </Container>
+        </Segment>
       </Layout>
     )
 }

@@ -1,10 +1,16 @@
 import React from "react"
 import { graphql, useStaticQuery } from 'gatsby'
 
+import { 
+    Segment, 
+    Container,
+    Header,
+    Image
+} from 'semantic-ui-react'
+
 import Layout from "../components/layout"
 import Head from '../components/head'
 import HomepageSection from '../components/homepage-section/homepageSection'
-import ContactForm from '../components/contact-form/contactForm'
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -27,101 +33,17 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <Head title="Startsida" />
-      <div className="startpage">
-        <div className="background--white">
-            <section className="section section--extra-vertical-padding">
-                <div className="heading">
-                    <img alt="" style={{height: '200px'}} src="/logo.svg" />
-                </div>
-                <div className="heading">
-                    <h1 className="heading__headline">Välkommen!</h1>
-                    <span className="heading__text">
-                        <p>Vi vill göra det enklare att prestera i yrkesrollen!</p>
-                    </span>
-                </div>
-            </section>
-        </div>
+        <Head title="Startsida" />
+        {/* <Segment vertical textAlign="center">
+            <Image alt="easy2perform" size="medium" src="/logo.svg" centered />
+            <Container text>
+                <Header as="h1">Vi vill göra det enklare att prestera i yrkesrollen!</Header>
+            </Container>
+        </Segment> */}
+
         {data.allContentfulHomepageSection.edges.map((edge, index) => {
             return <HomepageSection key={index} data={edge.node} />
         })}
-        <div className="background--blue">
-            <section className="section section--grid section--center-content">
-                <div className="section__column">
-                    <div className="pitch pitch--centered pitch--inverted">
-                        <h2 className="pitch__heading">
-                            Easy2perform – vi vill göra det enklare att prestera i yrkesrollen!
-                        </h2>
-                        <p className="pitch__text">
-                            Vi som jobbar med Easy2perform fokuserar på att ge stöd och vägledning till företag, chefer och medarbetare. Oavsett om det sker genom våra gratislösningar på mobil &amp; webb, kurser eller konsulttjänster, levererar vi kunskap som gör det enklare att
-                            prestera i yrkesrollen.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section className="section section--grid section--no-top-padding">
-                <div className="section__column">
-                    <a href="#tools" className="card">
-                        <i className="card__icon fas fa-arrow-right"></i>
-                        <h3 className="card__heading">
-                            Praktiska checklistor &amp; mallar
-                        </h3>
-                        <p className="card__text">
-                            Effektiv vägledning i det dagliga arbetet. Gratis.
-                        </p>
-                        <button className="card__button">
-                            <i className="fas fa-list-ul"></i> Läs mer
-                        </button>
-                    </a>
-                </div>
-                <div className="section__column">
-                    <a href="/courses" className="card">
-                        <i className="card__icon fas fa-arrow-right"></i>
-                        <h3 className="card__heading">
-                            Öppna &amp; företagsinterna kurser
-                        </h3>
-                        <p className="card__text">
-                            Kunskap och kompetens som stärker chefer och ledare.
-                        </p>
-                        <button className="card__button">
-                            <i className="fas fa-list-ul"></i> Läs mer
-                        </button>
-                    </a>
-                </div>
-                <div className="section__column">
-                    <a href="/home/services" className="card">
-                        <i className="card__icon fas fa-arrow-right"></i>
-                        <h3 className="card__heading">
-                            Skräddarsydda konsulttjänster
-                        </h3>
-                        <p className="card__text">
-                            Behovsanpassad utveckling av organisation, chefer &amp; medarbetare!
-                        </p>
-                        <button className="card__button">
-                            <i className="fas fa-list-ul"></i> Läs mer
-                        </button>
-                    </a>
-                </div>
-            </section>
-        </div>
-        <div className="background--light-blue" id="newsletter">
-            <section className="section section--grid section--center-content">
-                <div className="section__column">
-                    <div className="pitch pitch--centered pitch--inverted">
-                        <h2 className="pitch__heading">
-                            Aktuella nyheter, nyttiga checklistor och praktiska tips för chefer &amp; ledare - anmäl dig till vårt kostnadsfria nyhetsbrev nu!
-                        </h2>
-                        <p className="pitch__text">
-                            Easy2performs nyhetsbrev utkommer 2-3 gånger per månad och innehåller aktuell information för dig som jobbar som chef och ledare. Vi kompletterar informationen med användbara checklistor, mallar och dokument du har nytta av i din yrkesroll. På webb och
-                            i mobilen. Helt gratis. Anmäl dig här.
-                        </p>
-                    </div>
-                    <i className="fas fa-envelope"></i>
-                </div>
-            </section>
-            <ContactForm />
-        </div>
-    </div>
   </Layout>
   )
 }

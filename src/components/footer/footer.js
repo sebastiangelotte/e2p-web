@@ -1,28 +1,51 @@
 import React from 'react'
+import { Link } from 'gatsby'
+
+import {
+    Segment,
+    Container,
+    Grid,
+    List,
+    Header
+} from 'semantic-ui-react'
+
+const style = {
+    segment: {
+        paddingTop: '6em',
+        paddingBottom: '6em'
+    }
+}
+
 
 const Footer = () => {
     return (
-    <footer className="footer">
-        <section className="section section--grid">
-                <div className="section__column section__column--2">
-                    <ul className="footer__menu">
-                        <li><a href="/home/services">Tjänster</a></li>
-                        <li><a href="/courses">Kurser</a></li>
-                        <li><a href="/home/about">Om Easy2Perform</a></li>
-                    </ul>
-                </div>
-                <div className="section__column section__column--6">
-                    <ul className="footer__menu">
-                        <li><a href="/account/register">Skapa konto</a></li>
-                        <li><a href="/account/login">Logga in</a></li>
-                    </ul>
-                </div>
-            <div className="section__column section__column--4">
-                <h3>Läs vårt nyhetsbrev!</h3>
-                <p>Anmäl dig till vårt nyhetsbrev för smarta checklistor, enkla råd &amp; tips.</p>
-            </div>
-        </section>
-    </footer>
+        <Segment style={style.segment} color="blue" vertical inverted>
+            <Container>
+                <Grid stackable>
+                    <Grid.Row>
+                        <Grid.Column width={3}>
+                            <List link inverted>
+                                <List.Item><Link to="services">Tjänster</Link></List.Item>
+                                <List.Item><Link to="courses">Kurser</Link></List.Item>
+                                <List.Item><Link to="tools">Verktyg</Link></List.Item>
+                                <List.Item><Link to="webinars">Webinars</Link></List.Item>
+                            </List>
+                        </Grid.Column>
+                        <Grid.Column width={3}>
+                            <List link inverted>
+                                <List.Item><Link to="about">Om oss</Link></List.Item>
+                                <List.Item><Link to="contact">Kontakt</Link></List.Item>
+                                <List.Item><Link to="newsletter">Nyhetsbrev</Link></List.Item>
+                            </List>
+                        </Grid.Column>
+                        <Grid.Column floated="right" width={6}>
+                            <Header as="h4" inverted>Läs vårt nyhetsbrev!</Header>
+                            <p>Anmäl dig till vårt nyhetsbrev för smarta checklistor, enkla råd & tips.</p>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+            </Container>
+        </Segment>
     )
 }
 
