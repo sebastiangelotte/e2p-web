@@ -41,6 +41,14 @@ const Courses = () => {
             numberOfDays,
             courseLeader {
               name
+              image {
+                    title
+                    fixed(width: 26) {
+                        width
+                        height
+                        src
+                    }
+                }
             }
           }
         }

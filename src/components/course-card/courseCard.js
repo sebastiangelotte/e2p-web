@@ -31,7 +31,7 @@ const CourseCard = (props) => {
             </Link>
             <Label basic>{props.data.numberOfDays} dag{props.data.numberOfDays > 1 ? 'ar' : ''}</Label>
             <Label as='a' basic image>
-              <img src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
+              <img src={props.data.courseLeader.image.fixed.src} />
               {props.data.courseLeader.name}
             </Label>
           </Item.Extra>

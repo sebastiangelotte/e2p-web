@@ -8,7 +8,9 @@ import {
     Segment,
     Container,
     Header,
-    Button
+    Button,
+    Grid,
+    Label
 } from 'semantic-ui-react'
 
 import Head from '../components/head'
@@ -34,20 +36,26 @@ export const query = graphql`
             description {
                 json
             }
+            practicalInfo {
+                json
+            }
+            includedInfo {
+                json
+            }
             courseLeader {
                 name
                 title
                 description {
                     json
                 }
-                # image {
-                #     title
-                #     fixed(width: 400) {
-                #         width
-                #         height
-                #         src
-                #     }
-                # }
+                image {
+                    title
+                    fixed(width: 400) {
+                        width
+                        height
+                        src
+                    }
+                }
             }
             linkedServices {
                 slug
@@ -83,103 +91,137 @@ const Course = (props) => {
                 <Container text>
                     <Header as="h1" inverted>{props.data.contentfulCourse.title}</Header>
                     <p>{props.data.contentfulCourse.date}</p>
-                    <a href="/"></a>
                     <Link style={style.link} to="/">
                         <Button content="Anmäl dig här" icon="arrow right" labelPosition="left" />
                     </Link>
                 </Container>
             </Segment>
-            <Segment style={style.segment} vertical center>
-                <Container text>
-                    {documentToReactComponents(props.data.contentfulCourse.description.json, options)}
-                    <a href="/">Anmäl dig här</a>
+            <Segment style={style.segment} vertical>
+                <Container>
+                    <Grid stackable>
+                        <Grid.Row>
+                            <Grid.Column width={11}>
+                                <Segment vertical center>
+                                    {documentToReactComponents(props.data.contentfulCourse.description.json, options)}
+                                    <Link style={style.link} to="/">
+                                        <Button primary content="Anmäl dig här" icon="arrow right" labelPosition="left" />
+                                    </Link>
+                                </Segment>
+                            </Grid.Column>
+                            <Grid.Column width={5} floated="right">
+                                {props.data.contentfulCourse.practicalInfo &&
+                                    <Segment vertical center>
+                                        <Header as="h3">Praktisk information</Header>
+                                        <Card fluid color='orange'>
+                                            <Card.Content>
+                                                <Label>
+                                                    <Icon name='calendar' />
+                                                    {props.data.contentfulCourse.date}
+                                                </Label>
+                                                {documentToReactComponents(props.data.contentfulCourse.practicalInfo.json, options)}
+                                            </Card.Content>
+                                        </Card>
+                                    </Segment>
+                                }
+                                {props.data.contentfulCourse.includedInfo &&
+                                    <Segment vertical center>
+                                        <Header as="h3">Vad ingår i kursen?</Header>
+                                        <Card fluid color='orange'>
+                                            <Card.Content>
+                                                {documentToReactComponents(props.data.contentfulCourse.includedInfo.json, options)}
+                                            </Card.Content>
+                                        </Card>
+                                    </Segment>
+                                }
+                                <Segment vertical center>
+                                    <Header as="h3">Kursledare</Header>
+                                    <CourseLeader data={props.data.contentfulCourse.courseLeader} />
+                                </Segment>
+                                {/* LINKED SERVICES */}
+                                {props.data.contentfulCourse.linkedServices &&
+                                    <Segment vertical center>
+                                        <Header as="h3">Relaterade tjänster</Header>
+                                        <Card.Group>
+                                            {props.data.contentfulCourse.linkedServices.map((service, index) => {
+                                                return (
+                                                    <Card key={index}>
+                                                        <Card.Content>
+                                                            <Card.Header>
+                                                                <Link to={`/services/${service.slug}`}>
+                                                                    {service.title}
+                                                                </Link>
+                                                            </Card.Header>
+                                                        </Card.Content>
+                                                        {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
+                                                        <Card.Content extra>
+                                                            <Icon name='user' />
+                                                            Extra info
+                                                        </Card.Content>
+                                                    </Card>
+                                                )
+                                            })}
+                                        </Card.Group>
+                                    </Segment>
+                                }
+
+                                {/* LINKED COURSES */}
+                                {props.data.contentfulCourse.linkedCourses &&
+                                    <Segment vertical center>
+                                        <Header as="h3">Relaterade kurser</Header>
+                                        <Card.Group>
+                                            {props.data.contentfulCourse.linkedCourses.map((course, index) => {
+                                                return (
+                                                    <Card key={index}>
+                                                        <Card.Content>
+                                                            <Card.Header>
+                                                                <Link to={`/courses/${course.slug}`}>
+                                                                    {course.title}
+                                                                </Link>
+                                                            </Card.Header>
+                                                        </Card.Content>
+                                                        {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
+                                                        <Card.Content extra>
+                                                            <Icon name='user' />
+                                                            Extra info
+                                                        </Card.Content>
+                                                    </Card>
+                                                )
+                                            })}
+                                        </Card.Group>
+                                    </Segment>
+                                }
+
+                                {/* LINKED TOOLS */}
+                                {props.data.contentfulCourse.linkedTools &&
+                                    <Segment vertical center>
+                                        <Header as="h3">Relaterade verktyg</Header>
+                                        <Card.Group>
+                                            {props.data.contentfulCourse.linkedTools.map((tool, index) => {
+                                                return (
+                                                    <Card key={index}>
+                                                        <Card.Content>
+                                                            <Card.Header>
+                                                                <Link to={`/tools/${tool.slug}`}>
+                                                                    {tool.title}
+                                                                </Link>
+                                                            </Card.Header>
+                                                        </Card.Content>
+                                                        {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
+                                                        <Card.Content extra>
+                                                            <Icon name='user' />
+                                                            Extra info
+                                                        </Card.Content>
+                                                    </Card>
+                                                )
+                                            })}
+                                        </Card.Group>
+                                    </Segment>
+                                }
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
                 </Container>
             </Segment>
-            <CourseLeader data={props.data.contentfulCourse.courseLeader} />
-
-            Vad ingår i kursen?
-            Praktisk information
-
-            {/* LINKED SERVICES */}
-            {props.data.contentfulCourse.linkedServices &&
-                <>
-                    <h3>Relaterade tjänster</h3>
-                    <Card.Group>
-                        {props.data.contentfulCourse.linkedServices.map((service, index) => {
-                            return (
-                                <Card key={index}>
-                                    <Card.Content>
-                                        <Card.Header>
-                                            <Link to={`/services/${service.slug}`}>
-                                                {service.title}
-                                            </Link>
-                                        </Card.Header>
-                                    </Card.Content>
-                                    {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
-                                    <Card.Content extra>
-                                        <Icon name='user' />
-                                        Extra info
-                                    </Card.Content>
-                                </Card>
-                            )
-                        })}
-                    </Card.Group>
-                </>
-            }
-
-            {/* LINKED COURSES */}
-            {props.data.contentfulCourse.linkedCourses &&
-                <>
-                    <h3>Relaterade Kurser</h3>
-                    <Card.Group>
-                        {props.data.contentfulCourse.linkedCourses.map((course, index) => {
-                            return (
-                                <Card key={index}>
-                                    <Card.Content>
-                                        <Card.Header>
-                                            <Link to={`/courses/${course.slug}`}>
-                                                {course.title}
-                                            </Link>
-                                        </Card.Header>
-                                    </Card.Content>
-                                    {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
-                                    <Card.Content extra>
-                                        <Icon name='user' />
-                                        Extra info
-                                    </Card.Content>
-                                </Card>
-                            )
-                        })}
-                    </Card.Group>
-                </>
-            }
-
-            {/* LINKED TOOLS */}
-            {props.data.contentfulCourse.linkedTools &&
-                <>
-                    <h3>Relaterade verktyg</h3>
-                    <Card.Group>
-                        {props.data.contentfulCourse.linkedTools.map((tool, index) => {
-                            return (
-                                <Card key={index}>
-                                    <Card.Content>
-                                        <Card.Header>
-                                            <Link to={`/tools/${tool.slug}`}>
-                                                {tool.title}
-                                            </Link>
-                                        </Card.Header>
-                                    </Card.Content>
-                                    {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
-                                    <Card.Content extra>
-                                        <Icon name='user' />
-                                        Extra info
-                                    </Card.Content>
-                                </Card>
-                            )
-                        })}
-                    </Card.Group>
-                </>
-            }
         </Layout>
      )
 }
