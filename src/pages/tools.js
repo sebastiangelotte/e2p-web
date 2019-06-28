@@ -8,7 +8,8 @@ import {
     Icon,
     Segment,
     Container,
-    Header
+    Header,
+    Dropdown
 } from 'semantic-ui-react'
 
 import Head from '../components/head'
@@ -24,6 +25,14 @@ const style = {
         display: 'inline-block'
     }
 }
+
+const options = [
+    { key: 'angular', text: 'Chef', value: 'angular' },
+    { key: 'css', text: 'Beslutsfattare', value: 'css' },
+    { key: 'design', text: 'HR', value: 'design' },
+    { key: 'ember', text: 'Utbildare', value: 'ember' },
+    { key: 'html', text: 'Ledarskap', value: 'html' },
+]
 
 const Tools = () => {
     const data = useStaticQuery(graphql`
@@ -49,6 +58,7 @@ const Tools = () => {
                     <Header as="h1" inverted>Gratis checklistor och mallar</Header>
                     <div>
                         <p>Easy2perform utvecklar kontinuerligt praktiska checklistor och mallar för att ge stöd och vägledning till svåra och komplexa arbetsuppgifter i det dagliga arbetet. Våra enkla och effektiva verktyg gör det enklare för dig att prestera i yrkesrollen.</p>
+                        <Dropdown placeholder='Filtrera på område' multiple selection options={options} />
                     </div>
                 </Container>
             </Segment>

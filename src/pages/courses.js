@@ -5,7 +5,8 @@ import {
   Item,
   Segment,
   Container,
-  Header
+  Header,
+  Dropdown
 } from 'semantic-ui-react'
 
 import Head from '../components/head'
@@ -22,6 +23,14 @@ const style = {
       display: 'inline-block'
   }
 }
+
+const options = [
+  { key: 'angular', text: 'Chef', value: 'angular' },
+  { key: 'css', text: 'Beslutsfattare', value: 'css' },
+  { key: 'design', text: 'HR', value: 'design' },
+  { key: 'ember', text: 'Utbildare', value: 'ember' },
+  { key: 'html', text: 'Ledarskap', value: 'html' },
+]
 
 const Courses = () => {
   const data = useStaticQuery(graphql`
@@ -65,6 +74,7 @@ const Courses = () => {
                 <div>
                   <p>Easy2perform utvecklar och genomför inspirerande kurser för din utveckling.</p>
                   <p>Vi följer nyheter, trender och målgruppsbehov inom exempelvis ledarskap, personal, HR, projektledning och utvecklar kurser som ger ökad kunskap och kompetens. Vi handplockar kursledare med rätt kompetens, erfarenhet och pedagogisk förmåga, för att ge dig den bästa upplevelsen.</p>
+                  <Dropdown placeholder='Filtrera på område' multiple selection options={options} />
                 </div>
             </Container>
         </Segment>

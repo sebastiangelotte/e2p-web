@@ -7,7 +7,8 @@ import {
     Icon,
     Segment,
     Container,
-    Header
+    Header,
+    Dropdown
 } from 'semantic-ui-react'
 
 import Head from '../components/head'
@@ -23,6 +24,14 @@ const style = {
         display: 'inline-block'
     }
 }
+
+const options = [
+    { key: 'angular', text: 'Chef', value: 'angular' },
+    { key: 'css', text: 'Beslutsfattare', value: 'css' },
+    { key: 'design', text: 'HR', value: 'design' },
+    { key: 'ember', text: 'Utbildare', value: 'ember' },
+    { key: 'html', text: 'Ledarskap', value: 'html' },
+]
 
 const Services = () => {
     const data = useStaticQuery(graphql`
@@ -48,6 +57,7 @@ const Services = () => {
                     <Header as="h1" inverted>Problemlösande tjänster</Header>
                     <div>
                         <p>Easy2perform erbjuder konsulttjänster för utveckling av organisation, chefer & medarbetare.</p>
+                        <Dropdown placeholder='Filtrera på område' multiple selection options={options} />
                     </div>
                 </Container>
             </Segment>
