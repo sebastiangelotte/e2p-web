@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 
 import {
@@ -24,14 +24,6 @@ const style = {
   }
 }
 
-const options = [
-  { key: 'angular', text: 'Chef', value: 'angular' },
-  { key: 'css', text: 'Beslutsfattare', value: 'css' },
-  { key: 'design', text: 'HR', value: 'design' },
-  { key: 'ember', text: 'Utbildare', value: 'ember' },
-  { key: 'html', text: 'Ledarskap', value: 'html' },
-]
-
 const Courses = () => {
   const data = useStaticQuery(graphql`
     query {
@@ -48,22 +40,66 @@ const Courses = () => {
             date(formatString: "MMMM Do, YYYY")
             price
             numberOfDays,
+            tags,
             courseLeader {
               name
               image {
-                    title
-                    fixed(width: 26) {
-                        width
-                        height
-                        src
-                    }
+                title
+                fixed(width: 200) {
+                    width
+                    height
+                    src
                 }
+              }
+              title
             }
           }
         }
       }
     }
   `)
+
+    // Extract the tags and put the into structure that <Dropdown /> expects
+    let uniqueTags = new Set()
+    data.allContentfulCourse.edges.forEach(edge => {
+        edge.node.tags && edge.node.tags.forEach(tag => uniqueTags.add(tag))
+    })
+    let filterOptions = Array.from(uniqueTags).map(tag => {
+        return {
+            key: tag,
+            text: tag,
+            value: tag
+        }
+    })
+
+    const [courses, setCourses] = useState(data.allContentfulCourse.edges)
+
+    const filterCourses = (event, data) => {
+        doFiltering(data.value)
+    }
+    
+    function doFiltering (activeTags) {
+        if (activeTags.length < 1) {
+            setCourses(data.allContentfulCourse.edges)
+        } else {
+            setCourses(
+                data.allContentfulCourse.edges.filter(course => 
+                    courseHasMatchingTag(course, activeTags)
+                )
+            )
+        }
+    }
+
+    function courseHasMatchingTag (course, activeTags) {
+        if (course.node.tags === null) return false
+        let matchingTags = course.node.tags.filter(tag => activeTags.includes(tag))
+        if (matchingTags.length > 0) return true
+        return false
+    }
+
+    
+    
+    
 
     return (
       <Layout>
@@ -74,14 +110,14 @@ const Courses = () => {
                 <div>
                   <p>Easy2perform utvecklar och genomför inspirerande kurser för din utveckling.</p>
                   <p>Vi följer nyheter, trender och målgruppsbehov inom exempelvis ledarskap, personal, HR, projektledning och utvecklar kurser som ger ökad kunskap och kompetens. Vi handplockar kursledare med rätt kompetens, erfarenhet och pedagogisk förmåga, för att ge dig den bästa upplevelsen.</p>
-                  <Dropdown placeholder='Filtrera på område' multiple selection options={options} />
+                  <Dropdown placeholder='Filtrera på område' multiple selection options={filterOptions} onChange={filterCourses} />
                 </div>
             </Container>
         </Segment>
-        <Segment style={style.segment} vertical center>
+        <Segment style={style.segment} vertical>
           <Container text>
             <Item.Group divided>
-              {data.allContentfulCourse.edges.map((edge, index) => {
+              {courses.map((edge, index) => {
                 return <CourseCard key={index} data={edge.node} />
               })}
             </Item.Group>

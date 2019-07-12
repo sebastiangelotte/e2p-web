@@ -1,7 +1,5 @@
 import React from 'react'
 import { graphql, useStaticQuery, Link } from 'gatsby'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-
 
 import { 
     Card,
