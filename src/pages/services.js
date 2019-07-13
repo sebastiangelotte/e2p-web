@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql, useStaticQuery, Link } from 'gatsby'
 // import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
@@ -8,11 +8,11 @@ import {
     Segment,
     Container,
     Header,
-    Dropdown
 } from 'semantic-ui-react'
 
 import Head from '../components/head'
 import Layout from '../components/layout'
+import Filter from '../components/filter'
 
 const style = {
     segment: {
@@ -25,14 +25,6 @@ const style = {
     }
 }
 
-const options = [
-    { key: 'angular', text: 'Chef', value: 'angular' },
-    { key: 'css', text: 'Beslutsfattare', value: 'css' },
-    { key: 'design', text: 'HR', value: 'design' },
-    { key: 'ember', text: 'Utbildare', value: 'ember' },
-    { key: 'html', text: 'Ledarskap', value: 'html' },
-]
-
 const Services = () => {
     const data = useStaticQuery(graphql`
         query {
@@ -41,6 +33,7 @@ const Services = () => {
                     node {
                         slug
                         title
+                        tags
                         description {
                             json
                         }
@@ -49,6 +42,17 @@ const Services = () => {
             }
         }
     `)
+
+    const [services, setServices] = useState(data.allContentfulService.edges)
+
+    const updateServices = services => {
+        if (services.length > 0) {
+            setServices(services)
+        } else {
+            setServices(data.allContentfulService.edges) // reset state
+        }
+    }
+
     return (
         <Layout>
             <Head title="Verktyg" />
@@ -57,7 +61,7 @@ const Services = () => {
                     <Header as="h1" inverted>Problemlösande tjänster</Header>
                     <div>
                         <p>Easy2perform erbjuder konsulttjänster för utveckling av organisation, chefer & medarbetare.</p>
-                        <Dropdown placeholder='Filtrera på område' multiple selection options={options} />
+                        <Filter data={data.allContentfulService.edges} onChange={updateServices} />
                     </div>
                 </Container>
             </Segment>
