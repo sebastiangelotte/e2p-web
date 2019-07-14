@@ -1,55 +1,46 @@
-import React from 'react'
+import React from "react"
 
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown } from "semantic-ui-react"
 
-const Filter = (props) => {
-    // Extract the tags and put the into structure that <Dropdown /> expects
-    let uniqueTags = new Set()
-    props.data.forEach(edge => {
-        edge.node.tags && edge.node.tags.forEach(tag => uniqueTags.add(tag))
-    })
-    let filterOptions = Array.from(uniqueTags).map(tag => {
-        return {
-            key: tag,
-            text: tag,
-            value: tag
-        }
-    })
+const Filter = props => {
+  let uniqueTags = new Set()
+  let activeTags = []
 
+  props.data.forEach(edge => {
+    edge.node.tags && edge.node.tags.forEach(tag => uniqueTags.add(tag))
+  })
 
-    const filterItems = (event, data) => {
-        doFiltering(data.value)
+  const filterOptions = Array.from(uniqueTags).map(tag => {
+    return {
+      key: tag,
+      text: tag,
+      value: tag,
     }
+  })
 
-    function doFiltering (activeTags) {
-        if (activeTags.length < 1) {
-            props.onChange([])
-        } else {
-            const data = props.data
-            const result = data.filter(item => 
-                itemHasMatchingTag(item, activeTags)
-            )
+  const filterItems = (event, dropdownData) => {
+    activeTags = dropdownData.value
 
-            props.onChange(result)
-        }
-    }
-
-    function itemHasMatchingTag (item, activeTags) {
-        if (item.node.tags === null) return false
-        let matchingTags = item.node.tags.filter(tag => activeTags.includes(tag))
-        if (matchingTags.length > 0) return true
-        return false
-    }
-
-    return (
-        <Dropdown 
-            placeholder='Filtrera på område' 
-            multiple selection 
-            options={filterOptions} 
-            onChange={filterItems} />
+    props.onChange(
+      activeTags.length
+        ? props.data.filter(item => itemHasMatchingTag(item, activeTags))
+        : [] // Tells parent component to reset its state if no tags are active
     )
+  }
+
+  const itemHasMatchingTag = item =>
+    item.node.tags &&
+    item.node.tags.filter(tag => activeTags.includes(tag)).length > 0
+
+  return (
+    <Dropdown
+      placeholder="Filtrera på område"
+      multiple
+      selection
+      options={filterOptions}
+      onChange={filterItems}
+    />
+  )
 }
 
 export default Filter
-
-

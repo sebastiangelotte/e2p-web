@@ -1,9 +1,9 @@
-import React from 'react'
-import Navigation from './navigation/navigation'
-import Footer from './footer/footer'
+import React from "react"
+import Navigation from "./navigation/navigation"
+import Footer from "./footer/footer"
 // import IdentityModal, { useIdentityContext } from 'react-netlify-identity-widget'
 // import 'react-netlify-identity-widget/styles.css'
-import 'semantic-ui-css/semantic.min.css'
+import "semantic-ui-css/semantic.min.css"
 
 const Layout = ({ children }) => {
   // const identity = useIdentityContext()
@@ -15,9 +15,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Navigation />
-      <main style={{minHeight: '100vh'}}>
-        {children}
-      </main>
+      <main style={{ minHeight: "100vh" }}>{children}</main>
       <Footer />
       {/* <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)}></IdentityModal> */}
     </>
