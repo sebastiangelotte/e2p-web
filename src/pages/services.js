@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { graphql, useStaticQuery, Link } from "gatsby"
 // import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
-import { Card, Icon, Segment, Container, Header } from "semantic-ui-react"
+import { Card, Segment, Container, Header, Label } from "semantic-ui-react"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
@@ -28,6 +28,9 @@ const Services = () => {
             slug
             title
             tags
+            shortDescription {
+              shortDescription
+            }
             description {
               json
             }
@@ -76,20 +79,27 @@ const Services = () => {
       <Segment style={style.segment} vertical center>
         <Container text>
           <Card.Group centered>
-            {data.allContentfulService.edges.map((edge, index) => {
+            {services.map((service, index) => {
               return (
                 <Card key={index}>
                   <Card.Content>
                     <Card.Header>
-                      <Link to={`/services/${edge.node.slug}`} key={index}>
-                        {edge.node.title}
+                      <Link to={`/services/${service.node.slug}`} key={index}>
+                        {service.node.title}
                       </Link>
                     </Card.Header>
                   </Card.Content>
                   {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
                   <Card.Content extra>
-                    <Icon name="user" />
-                    Extra info
+                    {service.node.shortDescription.shortDescription}
+                    {service.node.tags &&
+                      service.node.tags.map(tag => {
+                        return (
+                          <Label key={tag} size="tiny">
+                            {tag}
+                          </Label>
+                        )
+                      })}
                   </Card.Content>
                 </Card>
               )

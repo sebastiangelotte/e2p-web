@@ -11,6 +11,7 @@ import {
   Button,
   Grid,
   Label,
+  Modal,
 } from "semantic-ui-react"
 
 import Head from "../components/head"
@@ -99,13 +100,28 @@ const Course = props => {
             {props.data.contentfulCourse.title}
           </Header>
           <p>{props.data.contentfulCourse.date}</p>
-          <Link style={style.link} to="/">
-            <Button
-              content="Anmäl dig här"
-              icon="arrow right"
-              labelPosition="left"
-            />
-          </Link>
+          <Modal open>
+            <Modal.Header>Select a Photo</Modal.Header>
+            <Modal.Content image>
+              <Modal.Description>
+                <Header>Default Profile Image</Header>
+                <p>
+                  We've found the following gravatar image associated with your
+                  e-mail address.
+                </p>
+                <p>Is it okay to use this photo?</p>
+              </Modal.Description>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button color="black">Nope</Button>
+              <Button
+                positive
+                icon="checkmark"
+                labelPosition="right"
+                content="Yep, that's me"
+              />
+            </Modal.Actions>
+          </Modal>
         </Container>
       </Segment>
       <Segment style={style.segment} vertical>
@@ -161,9 +177,11 @@ const Course = props => {
                 )}
                 <Segment vertical center>
                   <Header as="h3">Kursledare</Header>
-                  <CourseLeader
-                    data={props.data.contentfulCourse.courseLeader}
-                  />
+                  {props.data.contentfulCourse.courseLeader && (
+                    <CourseLeader
+                      data={props.data.contentfulCourse.courseLeader}
+                    />
+                  )}
                 </Segment>
                 {/* LINKED SERVICES */}
                 {props.data.contentfulCourse.linkedServices && (

@@ -24,20 +24,22 @@ const CourseCard = props => {
             {props.data.numberOfDays} dag
             {props.data.numberOfDays > 1 ? "ar" : ""}
           </Label>
-          <Popup
-            trigger={
-              <Label as="a" basic image>
-                <img
-                  alt={props.data.courseLeader.name}
-                  src={props.data.courseLeader.image.fixed.src}
-                />
-                {props.data.courseLeader.name}
-              </Label>
-            }
-            on="click"
-            content={<CourseLeader data={props.data.courseLeader} />}
-            style={style.popup}
-          ></Popup>
+          {props.data.courseLeader && (
+            <Popup
+              trigger={
+                <Label as="a" basic image>
+                  <img
+                    alt={props.data.courseLeader.name}
+                    src={props.data.courseLeader.image.fixed.src}
+                  />
+                  {props.data.courseLeader.name}
+                </Label>
+              }
+              on="click"
+              content={<CourseLeader data={props.data.courseLeader} />}
+              style={style.popup}
+            ></Popup>
+          )}
           {props.data.tags &&
             props.data.tags.map(tag => {
               return <Label size="tiny">{tag}</Label>
