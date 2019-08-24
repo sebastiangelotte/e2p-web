@@ -43,7 +43,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "env-cmd gatsby build",
+    "build": "gatsby build",
     "develop": "env-cmd gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "serve": "gatsby serve",
