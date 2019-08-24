@@ -1,0 +1,8 @@
+type User @model {
+  id: ID!
+  courses: [Course] @connection(name: "UserCourses")
+}
+type Course @model {
+  id: ID!
+  blog: User @connection(name: "UserCourses")
+}

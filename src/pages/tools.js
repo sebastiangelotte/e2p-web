@@ -36,7 +36,7 @@ const Tools = () => {
     }
   `)
 
-  const [tools, setTools] = useState(data.allContentfulTool.edges)
+  const [, setTools] = useState(data.allContentfulTool.edges)
 
   const updateTools = tools => {
     if (tools.length > 0) {

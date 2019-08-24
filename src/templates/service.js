@@ -2,10 +2,12 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
-import { Card, Icon, Segment, Container, Header, Grid } from "semantic-ui-react"
+import { Card, Segment, Container, Grid, Header } from "semantic-ui-react"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
+import PageHeader from "../components/page-header/pageHeader"
+import SimpleCard from "../components/cards/simpleCard"
 
 const style = {
   segment: {
@@ -42,23 +44,12 @@ export const query = graphql`
 `
 
 const Service = props => {
+  const service = props.data.contentfulService
   return (
     <Layout>
       <Head title={`Tjänst: ${props.data.contentfulService.title}`} />
 
-      <Segment
-        style={style.segment}
-        textAlign="center"
-        vertical
-        color="blue"
-        inverted
-      >
-        <Container text>
-          <Header as="h1" inverted>
-            {props.data.contentfulService.title}
-          </Header>
-        </Container>
-      </Segment>
+      <PageHeader title={props.data.contentfulService.title} />
       <Segment style={style.segment} vertical>
         <Container>
           <Grid stackable>
@@ -73,90 +64,57 @@ const Service = props => {
               </Grid.Column>
               <Grid.Column width={5} floated="right">
                 {/* LINKED SERVICES */}
-                {props.data.contentfulService.linkedServices && (
-                  <>
-                    <h3>Relaterade tjänster</h3>
+                {service.linkedServices && (
+                  <Segment vertical center>
+                    <Header as="h3">Relaterade tjänster</Header>
                     <Card.Group>
-                      {props.data.contentfulService.linkedServices.map(
-                        (service, index) => {
-                          return (
-                            <Card key={index}>
-                              <Card.Content>
-                                <Card.Header>
-                                  <Link to={`/services/${service.slug}`}>
-                                    {service.title}
-                                  </Link>
-                                </Card.Header>
-                              </Card.Content>
-                              {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
-                              <Card.Content extra>
-                                <Icon name="user" />
-                                Extra info
-                              </Card.Content>
-                            </Card>
-                          )
-                        }
-                      )}
+                      {service.linkedServices.map((service, index) => {
+                        return (
+                          <SimpleCard
+                            title={service.title}
+                            link={`/services/${service.slug}`}
+                            key={index}
+                          />
+                        )
+                      })}
                     </Card.Group>
-                  </>
+                  </Segment>
                 )}
 
                 {/* LINKED COURSES */}
-                {props.data.contentfulService.linkedCourses && (
-                  <>
-                    <h3>Relaterade Kurser</h3>
+                {service.linkedCourses && (
+                  <Segment vertical center>
+                    <Header as="h3">Relaterade kurser</Header>
                     <Card.Group>
-                      {props.data.contentfulService.linkedCourses.map(
-                        (course, index) => {
-                          return (
-                            <Card key={index}>
-                              <Card.Content>
-                                <Card.Header>
-                                  <Link to={`/courses/${course.slug}`}>
-                                    {course.title}
-                                  </Link>
-                                </Card.Header>
-                              </Card.Content>
-                              {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
-                              <Card.Content extra>
-                                <Icon name="user" />
-                                Extra info
-                              </Card.Content>
-                            </Card>
-                          )
-                        }
-                      )}
+                      {service.linkedCourses.map((course, index) => {
+                        return (
+                          <SimpleCard
+                            title={course.title}
+                            link={`/courses/${course.slug}`}
+                            key={index}
+                          />
+                        )
+                      })}
                     </Card.Group>
-                  </>
+                  </Segment>
                 )}
 
                 {/* LINKED TOOLS */}
-                {props.data.contentfulService.linkedTools && (
-                  <>
-                    <h3>Relaterade verktyg</h3>
+                {service.linkedTools && (
+                  <Segment vertical center>
+                    <Header as="h3">Relaterade verktyg</Header>
                     <Card.Group>
-                      {props.data.contentfulService.linkedTools.map(
-                        (tool, index) => {
-                          return (
-                            <Card key={index}>
-                              <Card.Content>
-                                <Card.Header>
-                                  <Link to={`/tools/${tool.slug}`}>
-                                    {tool.title}
-                                  </Link>
-                                </Card.Header>
-                              </Card.Content>
-                              {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
-                              <Card.Content extra>
-                                <Icon name="user" />
-                                Extra info
-                              </Card.Content>
-                            </Card>
-                          )
-                        }
-                      )}
+                      {service.linkedTools.map((tool, index) => {
+                        return (
+                          <SimpleCard
+                            title={tool.title}
+                            link={`/tools/${tool.slug}`}
+                            key={index}
+                          />
+                        )
+                      })}
                     </Card.Group>
-                  </>
+                  </Segment>
                 )}
               </Grid.Column>
             </Grid.Row>
