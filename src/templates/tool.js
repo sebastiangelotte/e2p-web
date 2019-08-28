@@ -2,7 +2,14 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
-import { Card, Icon, Segment, Container, Header, Grid } from "semantic-ui-react"
+import {
+  Card,
+  Label,
+  Segment,
+  Container,
+  Header,
+  Grid,
+} from "semantic-ui-react"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
@@ -28,14 +35,17 @@ export const query = graphql`
       linkedServices {
         slug
         title
+        tags
       }
       linkedCourses {
         slug
         title
+        tags
       }
       linkedTools {
         slug
         title
+        tags
       }
     }
   }
@@ -89,8 +99,14 @@ const Tool = props => {
                               </Card.Content>
                               {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
                               <Card.Content extra>
-                                <Icon name="user" />
-                                Extra info
+                                {service.tags &&
+                                  service.tags.map(tag => {
+                                    return (
+                                      <Label key={tag} size="tiny">
+                                        {tag}
+                                      </Label>
+                                    )
+                                  })}
                               </Card.Content>
                             </Card>
                           )
@@ -118,8 +134,14 @@ const Tool = props => {
                               </Card.Content>
                               {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
                               <Card.Content extra>
-                                <Icon name="user" />
-                                Extra info
+                                {course.tags &&
+                                  course.tags.map(tag => {
+                                    return (
+                                      <Label key={tag} size="tiny">
+                                        {tag}
+                                      </Label>
+                                    )
+                                  })}
                               </Card.Content>
                             </Card>
                           )
@@ -147,8 +169,14 @@ const Tool = props => {
                               </Card.Content>
                               {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
                               <Card.Content extra>
-                                <Icon name="user" />
-                                Extra info
+                                {tool.tags &&
+                                  tool.tags.map(tag => {
+                                    return (
+                                      <Label key={tag} size="tiny">
+                                        {tag}
+                                      </Label>
+                                    )
+                                  })}
                               </Card.Content>
                             </Card>
                           )

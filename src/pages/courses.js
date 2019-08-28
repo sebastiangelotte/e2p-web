@@ -60,7 +60,7 @@ const Courses = () => {
   }
 
   return (
-    <Layout>
+    <Layout transparentNavigation>
       <Head title="Kurser" />
       <Segment
         style={style.segment}

@@ -40,12 +40,16 @@ const CourseCard = props => {
               style={style.popup}
             ></Popup>
           )}
-          {props.data.tags &&
-            props.data.tags.map(tag => {
-              return <Label size="tiny">{tag}</Label>
-            })}
         </Item.Extra>
         <Item.Meta>
+          {props.data.tags &&
+            props.data.tags.map((tag, index) => {
+              return (
+                <Label key={index} size="tiny" floated="left">
+                  {tag}
+                </Label>
+              )
+            })}
           <Link style={style.link} to={`/courses/${props.data.slug}`}>
             <Button
               content="Läs mer"

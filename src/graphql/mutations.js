@@ -1,75 +1,24 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createUser = `mutation CreateUser($input: CreateUserInput!) {
-  createUser(input: $input) {
+export const createUserData = `mutation CreateUserData($input: CreateUserDataInput!) {
+  createUserData(input: $input) {
     id
-    courses {
-      items {
-        id
-      }
-      nextToken
-    }
+    courses
   }
 }
 `;
-export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
-  updateUser(input: $input) {
+export const updateUserData = `mutation UpdateUserData($input: UpdateUserDataInput!) {
+  updateUserData(input: $input) {
     id
-    courses {
-      items {
-        id
-      }
-      nextToken
-    }
+    courses
   }
 }
 `;
-export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
-  deleteUser(input: $input) {
+export const deleteUserData = `mutation DeleteUserData($input: DeleteUserDataInput!) {
+  deleteUserData(input: $input) {
     id
-    courses {
-      items {
-        id
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const createCourse = `mutation CreateCourse($input: CreateCourseInput!) {
-  createCourse(input: $input) {
-    id
-    blog {
-      id
-      courses {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const updateCourse = `mutation UpdateCourse($input: UpdateCourseInput!) {
-  updateCourse(input: $input) {
-    id
-    blog {
-      id
-      courses {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const deleteCourse = `mutation DeleteCourse($input: DeleteCourseInput!) {
-  deleteCourse(input: $input) {
-    id
-    blog {
-      id
-      courses {
-        nextToken
-      }
-    }
+    courses
   }
 }
 `;

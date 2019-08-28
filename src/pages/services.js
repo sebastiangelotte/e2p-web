@@ -51,7 +51,7 @@ const Services = () => {
   }
 
   return (
-    <Layout>
+    <Layout transparentNavigation>
       <Head title="Verktyg" />
       <Segment
         style={style.segment}
@@ -77,7 +77,7 @@ const Services = () => {
         </Container>
       </Segment>
       <Segment style={style.segment} vertical center>
-        <Container text>
+        <Container>
           <Card.Group centered>
             {services.map((service, index) => {
               return (
@@ -88,10 +88,6 @@ const Services = () => {
                         {service.node.title}
                       </Link>
                     </Card.Header>
-                  </Card.Content>
-                  {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
-                  <Card.Content extra>
-                    {service.node.shortDescription.shortDescription}
                     {service.node.tags &&
                       service.node.tags.map(tag => {
                         return (
@@ -100,6 +96,10 @@ const Services = () => {
                           </Label>
                         )
                       })}
+                  </Card.Content>
+                  {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
+                  <Card.Content extra>
+                    {service.node.shortDescription.shortDescription}
                   </Card.Content>
                 </Card>
               )

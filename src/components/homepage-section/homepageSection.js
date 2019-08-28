@@ -9,6 +9,11 @@ const style = {
     paddingTop: "6em",
     paddingBottom: "6em",
   },
+  whiteSegment: {
+    backgroundColor: "white",
+    paddingTop: "6em",
+    paddingBottom: "6em",
+  },
   link: {
     paddingTop: "2em",
     display: "inline-block",
@@ -20,7 +25,7 @@ const HomepageSection = props => {
 
   return (
     <Segment
-      style={style.segment}
+      style={isInverted ? style.segment : style.whiteSegment}
       textAlign="center"
       vertical
       color={props.data.theme}

@@ -19,29 +19,29 @@ const Footer = () => {
             <Grid.Column width={3}>
               <List link inverted>
                 <List.Item>
-                  <Link to="services">Tjänster</Link>
+                  <Link to="/services">Tjänster</Link>
                 </List.Item>
                 <List.Item>
-                  <Link to="courses">Kurser</Link>
+                  <Link to="/courses">Kurser</Link>
                 </List.Item>
                 <List.Item>
-                  <Link to="tools">Verktyg</Link>
+                  <Link to="/tools">Verktyg</Link>
                 </List.Item>
-                <List.Item>
-                  <Link to="webinars">Webinars</Link>
-                </List.Item>
+                {/* <List.Item>
+                  <Link to="/webinars">Webinars</Link>
+                </List.Item> */}
               </List>
             </Grid.Column>
             <Grid.Column width={3}>
               <List link inverted>
                 <List.Item>
-                  <Link to="about">Om oss</Link>
+                  <Link to="/about">Om oss</Link>
                 </List.Item>
                 <List.Item>
-                  <Link to="contact">Kontakt</Link>
+                  <Link to="/contact">Kontakt</Link>
                 </List.Item>
                 <List.Item>
-                  <Link to="newsletter">Nyhetsbrev</Link>
+                  <Link to="/newsletter">Nyhetsbrev</Link>
                 </List.Item>
               </List>
             </Grid.Column>

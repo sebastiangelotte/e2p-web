@@ -1,75 +1,24 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateUser = `subscription OnCreateUser {
-  onCreateUser {
+export const onCreateUserData = `subscription OnCreateUserData {
+  onCreateUserData {
     id
-    courses {
-      items {
-        id
-      }
-      nextToken
-    }
+    courses
   }
 }
 `;
-export const onUpdateUser = `subscription OnUpdateUser {
-  onUpdateUser {
+export const onUpdateUserData = `subscription OnUpdateUserData {
+  onUpdateUserData {
     id
-    courses {
-      items {
-        id
-      }
-      nextToken
-    }
+    courses
   }
 }
 `;
-export const onDeleteUser = `subscription OnDeleteUser {
-  onDeleteUser {
+export const onDeleteUserData = `subscription OnDeleteUserData {
+  onDeleteUserData {
     id
-    courses {
-      items {
-        id
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onCreateCourse = `subscription OnCreateCourse {
-  onCreateCourse {
-    id
-    blog {
-      id
-      courses {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onUpdateCourse = `subscription OnUpdateCourse {
-  onUpdateCourse {
-    id
-    blog {
-      id
-      courses {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onDeleteCourse = `subscription OnDeleteCourse {
-  onDeleteCourse {
-    id
-    blog {
-      id
-      courses {
-        nextToken
-      }
-    }
+    courses
   }
 }
 `;

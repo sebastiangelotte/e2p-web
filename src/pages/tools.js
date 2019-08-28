@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { graphql, useStaticQuery, Link } from "gatsby"
 
-import { Card, Icon, Segment, Container, Header } from "semantic-ui-react"
+import { Card, Label, Segment, Container, Header } from "semantic-ui-react"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
@@ -47,7 +47,7 @@ const Tools = () => {
   }
 
   return (
-    <Layout>
+    <Layout transparentNavigation>
       <Head title="Verktyg" />
       <Segment
         style={style.segment}
@@ -75,7 +75,7 @@ const Tools = () => {
         </Container>
       </Segment>
       <Segment style={style.segment} vertical center>
-        <Container text>
+        <Container>
           <Card.Group centered>
             {data.allContentfulTool.edges.map((edge, index) => {
               return (
@@ -89,8 +89,14 @@ const Tools = () => {
                   </Card.Content>
                   {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
                   <Card.Content extra>
-                    <Icon name="user" />
-                    Extra info
+                    {edge.node.tags &&
+                      edge.node.tags.map(tag => {
+                        return (
+                          <Label key={tag} size="tiny">
+                            {tag}
+                          </Label>
+                        )
+                      })}
                   </Card.Content>
                 </Card>
               )

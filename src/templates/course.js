@@ -1,6 +1,9 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+
+import { Auth, API, graphqlOperation } from "aws-amplify"
+import * as mutations from "../graphql/mutations"
 
 import {
   Card,
@@ -33,6 +36,7 @@ const style = {
 export const query = graphql`
   query($slug: String!) {
     contentfulCourse(slug: { eq: $slug }) {
+      id
       title
       date(formatString: "MMM Do, YYYY")
       description {
@@ -88,6 +92,23 @@ const Course = props => {
 
   const course = props.data.contentfulCourse
 
+  const registerToCourse = async () => {
+    Auth.currentAuthenticatedUser({
+      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    })
+      .then(user => {
+        API.graphql(
+          graphqlOperation(mutations.createUserData, {
+            input: {
+              id: user.username,
+              courses: course.id,
+            },
+          })
+        )
+      })
+      .catch(err => console.log(err))
+  }
+
   return (
     <Layout>
       <Head title={`Kurs: ${course.title}`} />
@@ -99,14 +120,15 @@ const Course = props => {
               <Grid.Column width={11}>
                 <Segment vertical center>
                   {documentToReactComponents(course.description.json, options)}
-                  <Link style={style.link} to="/">
-                    <Button
-                      primary
-                      content="Anmäl dig här"
-                      icon="arrow right"
-                      labelPosition="left"
-                    />
-                  </Link>
+                  {/* <Link style={style.link} to="/"> */}
+                  <Button
+                    primary
+                    content="Anmäl dig här"
+                    icon="arrow right"
+                    labelPosition="left"
+                    onClick={registerToCourse}
+                  />
+                  {/* </Link> */}
                 </Segment>
               </Grid.Column>
               <Grid.Column width={5} floated="right">
