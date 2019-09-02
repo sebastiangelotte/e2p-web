@@ -6,8 +6,8 @@ const CourseSignup = () => {
   const [showContactPerson, setShowContactPerson] = useState(false)
 
   return (
-    <Form data-netlify="true" name="e2p course signup" action="/">
-      <input type="hidden" name="form-name" value="e2p course signup" />
+    <Form data-netlify="true" name="coursesignup" action="/">
+      <input type="hidden" name="form-name" value="coursesignup" />
       <h3>Deltagare</h3>
       {Array.apply(null, { length: numberOfParticipants }).map((_, index) => (
         <Form.Group widths="equal" key={index}>
