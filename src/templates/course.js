@@ -2,8 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
-import { Auth, API, graphqlOperation } from "aws-amplify"
-import * as mutations from "../graphql/mutations"
+// import { Auth, API, graphqlOperation } from "aws-amplify"
+// import * as mutations from "../graphql/mutations"
+// import * as queries from "../graphql/queries"
 
 import {
   Card,
@@ -14,6 +15,7 @@ import {
   Button,
   Grid,
   Label,
+  Modal,
 } from "semantic-ui-react"
 
 import Head from "../components/head"
@@ -21,6 +23,7 @@ import Layout from "../components/layout"
 import PageHeader from "../components/page-header/pageHeader"
 import CourseLeader from "../components/course-leader/courseLeader"
 import SimpleCard from "../components/cards/simpleCard"
+import CourseSignup from "../components/courseSignup"
 
 const style = {
   segment: {
@@ -38,7 +41,7 @@ export const query = graphql`
     contentfulCourse(slug: { eq: $slug }) {
       id
       title
-      date(formatString: "MMM Do, YYYY")
+      date(formatString: "D/M/YYYY")
       description {
         json
       }
@@ -92,22 +95,24 @@ const Course = props => {
 
   const course = props.data.contentfulCourse
 
-  const registerToCourse = async () => {
-    Auth.currentAuthenticatedUser({
-      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-    })
-      .then(user => {
-        API.graphql(
-          graphqlOperation(mutations.createUserData, {
-            input: {
-              id: user.username,
-              courses: course.id,
-            },
-          })
-        )
-      })
-      .catch(err => console.log(err))
-  }
+  //   const registerToCourse = async () => {
+  //     Auth.currentAuthenticatedUser().then(user => {
+  //       API.graphql(
+  //         graphqlOperation(queries.getUserData, {
+  //           id: user.username,
+  //         })
+  //       ).then(user => {
+  //         API.graphql(
+  //           graphqlOperation(mutations.updateUserData, {
+  //             input: {
+  //               id: user.data.getUserData.id,
+  //               courses: [...user.data.getUserData.courses, course.id],
+  //             },
+  //           })
+  //         )
+  //       })
+  //     })
+  //   }
 
   return (
     <Layout>
@@ -118,22 +123,38 @@ const Course = props => {
           <Grid stackable>
             <Grid.Row>
               <Grid.Column width={11}>
-                <Segment vertical center>
+                <Segment vertical>
                   {documentToReactComponents(course.description.json, options)}
-                  {/* <Link style={style.link} to="/"> */}
-                  <Button
-                    primary
-                    content="Anmäl dig här"
-                    icon="arrow right"
-                    labelPosition="left"
-                    onClick={registerToCourse}
-                  />
-                  {/* </Link> */}
+
+                  <Modal
+                    trigger={
+                      <Button
+                        primary
+                        content="Anmäl dig här"
+                        icon="arrow right"
+                        labelPosition="left"
+                      />
+                    }
+                    closeIcon
+                  >
+                    <Header
+                      icon="calendar plus outline"
+                      content={`Anmäl dig till kursen`}
+                    />
+                    <Header
+                      as="h5"
+                      icon="info circle"
+                      content={`${course.title} (${course.date})`}
+                    />
+                    <Modal.Content>
+                      <CourseSignup />
+                    </Modal.Content>
+                  </Modal>
                 </Segment>
               </Grid.Column>
               <Grid.Column width={5} floated="right">
                 {course.practicalInfo && (
-                  <Segment vertical center>
+                  <Segment vertical>
                     <Header as="h3">Praktisk information</Header>
                     <Card fluid color="orange">
                       <Card.Content>
@@ -150,7 +171,7 @@ const Course = props => {
                   </Segment>
                 )}
                 {course.includedInfo && (
-                  <Segment vertical center>
+                  <Segment vertical>
                     <Header as="h3">Vad ingår i kursen?</Header>
                     <Card fluid color="orange">
                       <Card.Content>
@@ -162,7 +183,7 @@ const Course = props => {
                     </Card>
                   </Segment>
                 )}
-                <Segment vertical center>
+                <Segment vertical>
                   <Header as="h3">Kursledare</Header>
                   {course.courseLeader && (
                     <CourseLeader data={course.courseLeader} />
@@ -170,7 +191,7 @@ const Course = props => {
                 </Segment>
                 {/* LINKED SERVICES */}
                 {course.linkedServices && (
-                  <Segment vertical center>
+                  <Segment vertical>
                     <Header as="h3">Relaterade tjänster</Header>
                     <Card.Group>
                       {course.linkedServices.map((service, index) => {
@@ -188,7 +209,7 @@ const Course = props => {
 
                 {/* LINKED COURSES */}
                 {course.linkedCourses && (
-                  <Segment vertical center>
+                  <Segment vertical>
                     <Header as="h3">Relaterade kurser</Header>
                     <Card.Group>
                       {course.linkedCourses.map((course, index) => {
@@ -206,7 +227,7 @@ const Course = props => {
 
                 {/* LINKED TOOLS */}
                 {course.linkedTools && (
-                  <Segment vertical center>
+                  <Segment vertical>
                     <Header as="h3">Relaterade verktyg</Header>
                     <Card.Group>
                       {course.linkedTools.map((tool, index) => {

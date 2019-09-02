@@ -55,7 +55,7 @@ const Service = props => {
           <Grid stackable>
             <Grid.Row>
               <Grid.Column width={11}>
-                <Segment vertical center>
+                <Segment vertical>
                   <Link to="/services">&lt; Tillbaka till tjänster</Link>
                   {documentToReactComponents(
                     props.data.contentfulService.description.json
@@ -65,7 +65,7 @@ const Service = props => {
               <Grid.Column width={5} floated="right">
                 {/* LINKED SERVICES */}
                 {service.linkedServices && (
-                  <Segment vertical center>
+                  <Segment vertical>
                     <Header as="h3">Relaterade tjänster</Header>
                     <Card.Group>
                       {service.linkedServices.map((service, index) => {
@@ -83,7 +83,7 @@ const Service = props => {
 
                 {/* LINKED COURSES */}
                 {service.linkedCourses && (
-                  <Segment vertical center>
+                  <Segment vertical>
                     <Header as="h3">Relaterade kurser</Header>
                     <Card.Group>
                       {service.linkedCourses.map((course, index) => {
@@ -101,7 +101,7 @@ const Service = props => {
 
                 {/* LINKED TOOLS */}
                 {service.linkedTools && (
-                  <Segment vertical center>
+                  <Segment vertical>
                     <Header as="h3">Relaterade verktyg</Header>
                     <Card.Group>
                       {service.linkedTools.map((tool, index) => {

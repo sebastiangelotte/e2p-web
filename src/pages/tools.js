@@ -74,15 +74,15 @@ const Tools = () => {
           </div>
         </Container>
       </Segment>
-      <Segment style={style.segment} vertical center>
+      <Segment style={style.segment} vertical>
         <Container>
           <Card.Group centered>
             {data.allContentfulTool.edges.map((edge, index) => {
               return (
-                <Card>
+                <Card key={index}>
                   <Card.Content>
                     <Card.Header>
-                      <Link to={`/tools/${edge.node.slug}`} key={index}>
+                      <Link to={`/tools/${edge.node.slug}`}>
                         {edge.node.title}
                       </Link>
                     </Card.Header>

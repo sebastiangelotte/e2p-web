@@ -2,6 +2,8 @@ import React from "react"
 import Amplify from "aws-amplify"
 // import awsconfig from "./src/aws-exports"
 
+import { UserProvider } from "./src/utils/user"
+
 const awsmobile = {
   aws_project_region: "eu-west-1",
   aws_cognito_identity_pool_id:
@@ -32,4 +34,6 @@ const awsmobile = {
 
 Amplify.configure(awsmobile)
 
-export const wrapRootElement = ({ element }) => <div> {element}</div>
+export const wrapRootElement = ({ element }) => (
+  <UserProvider> {element}</UserProvider>
+)

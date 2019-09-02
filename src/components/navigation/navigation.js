@@ -3,39 +3,13 @@ import { Link } from "gatsby"
 
 import { Menu, Icon } from "semantic-ui-react"
 
-import { Auth } from "aws-amplify"
-
-const style = {
-  menu: {
-    wrapper: {
-      marginBottom: 0,
-      borderColor: "white",
-      maxWidth: "1127px",
-      margin: "0 auto",
-    },
-    item: {
-      fontSize: "12px",
-      fontWeight: "600",
-      textTransform: "uppercase",
-      letterSpacing: "0.5px",
-    },
-  },
-  transparentMenu: {
-    backgroundColor: "transparent",
-    maxWidth: "1127px",
-    margin: "0 auto",
-    border: "none",
-    position: "relative",
-    top: "40px",
-    zIndex: "1",
-    marginTop: "-40px",
-  },
-  transparentLink: {
-    color: "white",
-  },
-}
+import { useUser } from "../../utils/user"
 
 const Navigation = ({ transparent }) => {
+  if (typeof window !== "undefined") {
+    var { user, logout } = useUser()
+  }
+
   return (
     <Menu
       as="nav"
@@ -105,18 +79,75 @@ const Navigation = ({ transparent }) => {
             Logga ut <Icon name="user" />
           </span>
         </Menu.Item> */}
-        <Menu.Item style={style.menu.item}>
-          <Link
-            to="/account"
-            activeStyle={{ textDecoration: "underline" }}
-            style={transparent ? style.transparentLink : {}}
-          >
-            Mina sidor <Icon name="user" />
-          </Link>
-        </Menu.Item>
+        {user ? (
+          <>
+            <Menu.Item style={style.menu.item}>
+              <Link
+                to="/"
+                onClick={e => {
+                  e.preventDefault()
+                  logout()
+                }}
+                activeStyle={{ textDecoration: "underline" }}
+                style={transparent ? style.transparentLink : {}}
+              >
+                Logga ut
+              </Link>
+            </Menu.Item>
+            <Menu.Item style={style.menu.item}>
+              <Link
+                to="/account"
+                activeStyle={{ textDecoration: "underline" }}
+                style={transparent ? style.transparentLink : {}}
+              >
+                Mina sidor <Icon name="user" />
+              </Link>
+            </Menu.Item>
+          </>
+        ) : (
+          <Menu.Item style={style.menu.item}>
+            <Link
+              to="/login"
+              activeStyle={{ textDecoration: "underline" }}
+              style={transparent ? style.transparentLink : {}}
+            >
+              Logga in <Icon name="lock" />
+            </Link>
+          </Menu.Item>
+        )}
       </Menu.Menu>
     </Menu>
   )
 }
 
 export default Navigation
+
+const style = {
+  menu: {
+    wrapper: {
+      marginBottom: 0,
+      borderColor: "white",
+      maxWidth: "1127px",
+      margin: "0 auto",
+    },
+    item: {
+      fontSize: "12px",
+      fontWeight: "600",
+      textTransform: "uppercase",
+      letterSpacing: "0.5px",
+    },
+  },
+  transparentMenu: {
+    backgroundColor: "transparent",
+    maxWidth: "1127px",
+    margin: "0 auto",
+    border: "none",
+    position: "relative",
+    top: "40px",
+    zIndex: "1",
+    marginTop: "-40px",
+  },
+  transparentLink: {
+    color: "white",
+  },
+}

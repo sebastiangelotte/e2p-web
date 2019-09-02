@@ -76,7 +76,7 @@ const Services = () => {
           </div>
         </Container>
       </Segment>
-      <Segment style={style.segment} vertical center>
+      <Segment style={style.segment} vertical>
         <Container>
           <Card.Group centered>
             {services.map((service, index) => {

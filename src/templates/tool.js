@@ -73,7 +73,7 @@ const Tool = props => {
           <Grid stackable>
             <Grid.Row>
               <Grid.Column width={11}>
-                <Segment vertical center>
+                <Segment vertical>
                   <Link to="/tools">&lt; Tillbaka till verktyg</Link>
                   {documentToReactComponents(
                     props.data.contentfulTool.description.json

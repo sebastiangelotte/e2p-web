@@ -3,7 +3,7 @@ import { Auth, API, graphqlOperation } from "aws-amplify"
 import * as queries from "../graphql/queries"
 import * as mutations from "../graphql/mutations"
 
-import { isLoggedIn } from "../utils/userData"
+import { isLoggedIn } from "../utils/user"
 
 const AuthTesting = () => {
   const [loggedIn, setLoggedIn] = useState(false)
