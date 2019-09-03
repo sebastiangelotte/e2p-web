@@ -1,19 +1,57 @@
 import React, { useState } from "react"
 import { Form, Button } from "semantic-ui-react"
 
-const CourseSignup = ({ courseName }) => {
-  const [numberOfParticipants, setNumberOfParticipants] = useState(1)
+import { API, graphqlOperation } from "aws-amplify"
+import * as mutations from "../graphql/mutations"
+import * as queries from "../graphql/queries"
+
+const CourseSignup = ({ courseName, courseID }) => {
+  const [extraParticipants, setExtraParticipants] = useState(0)
   const [showContactPerson, setShowContactPerson] = useState(false)
+  const [email, setEmail] = useState("")
+  const [formLoading, setFormLoading] = useState(false)
+
+  const handleSubmit = async event => {
+    setFormLoading(true)
+
+    // TODO: can we loop this for all email addresses in the form?
+    API.graphql(
+      graphqlOperation(queries.getUserData, {
+        id: email,
+      })
+    )
+      .then(user => {
+        API.graphql(
+          graphqlOperation(mutations.updateUserData, {
+            input: {
+              id: email,
+              courses: [...user.data.getUserData.courses, courseID],
+            },
+          })
+        )
+      })
+      .catch(() => {
+        // No existing record of this email in DynamoDB.
+        // Therefore create a new UserData record
+        API.graphql(
+          graphqlOperation(mutations.createUserData, {
+            input: {
+              id: email,
+              courses: [courseID],
+            },
+          })
+        )
+      })
+  }
 
   return (
     <Form
+      loading={formLoading}
       name="Kursanmälan"
-      //   action="https://formspree.io/mpeaqozx"
-      action="/"
+      action="https://formspree.io/mpeaqozx"
       method="POST"
-      data-netlify="true"
+      onSubmit={handleSubmit}
     >
-      <input type="hidden" name="form-name" value="Kursanmälan" />
       <input type="hidden" name="Kurs" value={courseName} />
       <input
         type="hidden"
@@ -21,14 +59,33 @@ const CourseSignup = ({ courseName }) => {
         value="https://pedantic-morse-58901e.netlify.com/"
       />
       <h3>Deltagare</h3>
-      {Array.apply(null, { length: numberOfParticipants }).map((_, index) => (
+      <Form.Group widths="equal">
+        <Form.Input
+          fluid
+          label="Namn"
+          placeholder="Namn"
+          required
+          name="namn"
+        />
+        <Form.Input
+          type="email"
+          fluid
+          label="E-post"
+          placeholder="E-post"
+          required
+          name="email"
+          value={email}
+          onInput={e => setEmail(e.target.value)}
+        />
+      </Form.Group>
+      {Array.apply(null, { length: extraParticipants - 1 }).map((_, index) => (
         <Form.Group widths="equal" key={index}>
           <Form.Input
             fluid
             label="Namn"
             placeholder="Namn"
             required
-            name="namn"
+            name={`namn${index}`}
           />
           <Form.Input
             type="email"
@@ -36,16 +93,16 @@ const CourseSignup = ({ courseName }) => {
             label="E-post"
             placeholder="E-post"
             required
-            name="epost"
+            name={`email${index}`}
           />
         </Form.Group>
       ))}
       <Button
-        content="Lägg till deltagare"
+        content="Anmäl fler deltagare"
         icon="plus"
         labelPosition="left"
         onClick={() => {
-          setNumberOfParticipants(numberOfParticipants + 1)
+          setExtraParticipants(extraParticipants + 1)
         }}
       />
       <h3>Faktureringsinformation</h3>

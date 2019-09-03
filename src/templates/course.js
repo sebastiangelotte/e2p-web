@@ -147,7 +147,10 @@ const Course = props => {
                       content={`${course.title} (${course.date})`}
                     />
                     <Modal.Content>
-                      <CourseSignup courseName={course.title} />
+                      <CourseSignup
+                        courseName={course.title}
+                        courseID={course.id}
+                      />
                     </Modal.Content>
                   </Modal>
                 </Segment>

@@ -49,9 +49,10 @@ const Account = () => {
   }
 
   const [userData, setUserData] = useState()
-  let userCourses = courses.filter(course => {
+  const userCourses = courses.filter(course => {
     return (
       userData &&
+      userData.data.getUserData &&
       userData.data.getUserData.courses.indexOf(course.node.id) !== -1
     )
   })
@@ -61,7 +62,7 @@ const Account = () => {
     Auth.currentAuthenticatedUser().then(user => {
       API.graphql(
         graphqlOperation(queries.getUserData, {
-          id: user.username,
+          id: user.attributes.email,
         })
       ).then(data => {
         if (isSubscribed) {
@@ -96,9 +97,10 @@ const Account = () => {
           <Segment vertical>
             <Container text>
               <Item.Group divided>
-                {userCourses.map((edge, index) => {
-                  return <CourseCard key={index} data={edge.node} />
-                })}
+                {userCourses &&
+                  userCourses.map((edge, index) => {
+                    return <CourseCard key={index} data={edge.node} />
+                  })}
               </Item.Group>
             </Container>
           </Segment>

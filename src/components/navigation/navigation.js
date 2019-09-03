@@ -1,9 +1,9 @@
 import React from "react"
 import { Link } from "gatsby"
-
-import { Menu, Icon } from "semantic-ui-react"
+import { Menu, Icon, Modal, Header } from "semantic-ui-react"
 
 import { useUser } from "../../utils/user"
+import LogIn from "../login"
 
 const Navigation = ({ transparent }) => {
   if (typeof window !== "undefined") {
@@ -63,22 +63,6 @@ const Navigation = ({ transparent }) => {
         </Link>
       </Menu.Item> */}
       <Menu.Menu position="right">
-        {/* <Menu.Item style={style.menu.item}>
-          <span onClick={() => Auth.federatedSignIn()}>
-          <Link
-            to="/login"
-            activeStyle={{ textDecoration: "underline" }}
-            style={transparent ? style.transparentLink : {}}
-          >
-            Logga in <Icon name="user" />
-          </Link>
-          </span>
-        </Menu.Item>
-        <Menu.Item style={style.menu.item}>
-          <span onClick={() => Auth.signOut()}>
-            Logga ut <Icon name="user" />
-          </span>
-        </Menu.Item> */}
         {user ? (
           <>
             <Menu.Item style={style.menu.item}>
@@ -106,13 +90,24 @@ const Navigation = ({ transparent }) => {
           </>
         ) : (
           <Menu.Item style={style.menu.item}>
-            <Link
-              to="/login"
-              activeStyle={{ textDecoration: "underline" }}
-              style={transparent ? style.transparentLink : {}}
+            <Modal
+              trigger={
+                <Link
+                  to="#"
+                  onClick={e => e.preventDefault()}
+                  activeStyle={{ textDecoration: "underline" }}
+                  style={transparent ? style.transparentLink : {}}
+                >
+                  Logga in <Icon name="lock" />
+                </Link>
+              }
+              closeIcon
             >
-              Logga in <Icon name="lock" />
-            </Link>
+              <Header icon="calendar plus outline" content={`Logga in`} />
+              <Modal.Content>
+                <LogIn />
+              </Modal.Content>
+            </Modal>
           </Menu.Item>
         )}
       </Menu.Menu>
