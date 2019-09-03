@@ -8,7 +8,8 @@ const CourseSignup = ({ courseName }) => {
   return (
     <Form
       name="Kursanmälan"
-      action="https://formspree.io/mpeaqozx"
+      //   action="https://formspree.io/mpeaqozx"
+      action="/"
       method="POST"
       data-netlify="true"
     >
