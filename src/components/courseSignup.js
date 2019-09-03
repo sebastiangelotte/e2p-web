@@ -1,13 +1,24 @@
 import React, { useState } from "react"
 import { Form, Button } from "semantic-ui-react"
 
-const CourseSignup = () => {
+const CourseSignup = ({ courseName }) => {
   const [numberOfParticipants, setNumberOfParticipants] = useState(1)
   const [showContactPerson, setShowContactPerson] = useState(false)
 
   return (
-    <Form data-netlify="true" name="coursesignup" action="/">
-      <input type="hidden" name="form-name" value="coursesignup" />
+    <Form
+      name="Kursanmälan"
+      action="https://formspree.io/mpeaqozx"
+      method="POST"
+      data-netlify="true"
+    >
+      <input type="hidden" name="form-name" value="Kursanmälan" />
+      <input type="hidden" name="Kurs" value={courseName} />
+      <input
+        type="hidden"
+        name="_next"
+        value="https://pedantic-morse-58901e.netlify.com/"
+      />
       <h3>Deltagare</h3>
       {Array.apply(null, { length: numberOfParticipants }).map((_, index) => (
         <Form.Group widths="equal" key={index}>
@@ -97,7 +108,7 @@ const CourseSignup = () => {
         placeholder="Allergier, speciella önskemål m.m."
         name="ovrigt"
       />
-      <Form.Button type="submit" primary>
+      <Form.Button type="submit" primary value="Send">
         Skicka anmälan
       </Form.Button>
     </Form>
