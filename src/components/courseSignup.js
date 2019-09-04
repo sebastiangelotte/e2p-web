@@ -166,9 +166,14 @@ const CourseSignup = ({ courseName, courseID }) => {
         placeholder="Allergier, speciella önskemål m.m."
         name="ovrigt"
       />
-      <Form.Button type="submit" primary value="Send">
-        Skicka anmälan
-      </Form.Button>
+      <Button
+        type="submit"
+        value="Send"
+        content="Skicka anmälan"
+        icon="send"
+        labelPosition="left"
+        positive
+      />
     </Form>
   )
 }

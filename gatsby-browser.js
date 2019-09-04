@@ -29,7 +29,7 @@ const awsmobile = {
     "https://ud4aelbvm5dsxcg2ugviokr5ey.appsync-api.eu-west-1.amazonaws.com/graphql",
   aws_appsync_region: "eu-west-1",
   aws_appsync_authenticationType: "API_KEY",
-  aws_appsync_apiKey: "da2-yrngilrkanbhpj2t33kdxcl5fi",
+  aws_appsync_apiKey: "da2-hfr7ny2ntvckzo5yitsepoozei",
 }
 
 Amplify.configure(awsmobile)

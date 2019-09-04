@@ -12,6 +12,7 @@ const style = {
   segment: {
     paddingTop: "6em",
     paddingBottom: "6em",
+    backgroundColor: "#f7f7f7",
   },
   link: {
     paddingTop: "2em",
@@ -27,10 +28,13 @@ const Courses = () => {
           node {
             title
             slug
-            date(formatString: "MMMM Do, YYYY")
+            date(formatString: "D/M/YYYY")
+            rawDate: date
             price
             numberOfDays
             tags
+            city
+            companyInternalCourse
             courseLeader {
               name
               image {
@@ -95,9 +99,14 @@ const Courses = () => {
       <Segment style={style.segment} vertical>
         <Container text>
           <Item.Group divided>
-            {courses.map((edge, index) => {
-              return <CourseCard key={index} data={edge.node} />
-            })}
+            {courses
+              .filter(course => {
+                return course.node.companyInternalCourse === false
+              })
+              .filter(course => new Date(course.node.rawDate) > new Date())
+              .map((edge, index) => {
+                return <CourseCard key={index} data={edge.node} />
+              })}
           </Item.Group>
         </Container>
       </Segment>

@@ -20,10 +20,18 @@ const Account = () => {
             id
             title
             slug
-            date(formatString: "MMMM Do, YYYY")
+            date(formatString: "D/M/YYYY")
+            rawDate: date
             price
             numberOfDays
             tags
+            city
+            courseMaterial {
+              title
+              file {
+                url
+              }
+            }
             courseLeader {
               name
               image {
@@ -75,7 +83,7 @@ const Account = () => {
   }, [])
 
   return (
-    <Layout>
+    <Layout transparentNavigation>
       <Head title="Verktyg" />
       <Segment
         style={style.segment}
@@ -93,16 +101,36 @@ const Account = () => {
       <Segment style={style.segment} vertical>
         <Container text>Email: {user && user.attributes.email}</Container>
         <Container text>
-          <h2>Kommande kurser:</h2>
-          <Segment vertical>
-            <Container text>
-              <Item.Group divided>
-                {userCourses &&
-                  userCourses.map((edge, index) => {
-                    return <CourseCard key={index} data={edge.node} />
+          <h2>Mina kommande kurser:</h2>
+          <Segment>
+            <Item.Group divided>
+              {userCourses &&
+                userCourses
+                  .filter(course => new Date(course.node.rawDate) > new Date())
+                  .map((edge, index) => {
+                    return <CourseCard key={index} data={edge.node} simple />
                   })}
-              </Item.Group>
-            </Container>
+            </Item.Group>
+          </Segment>
+        </Container>
+        <Container text>
+          <h2 style={{ marginTop: "4rem" }}>Mina avklarade kurser:</h2>
+          <Segment>
+            <Item.Group divided>
+              {userCourses &&
+                userCourses
+                  .filter(course => new Date(course.node.rawDate) < new Date())
+                  .map((edge, index) => {
+                    return (
+                      <CourseCard
+                        key={index}
+                        data={edge.node}
+                        simple
+                        showFiles
+                      />
+                    )
+                  })}
+            </Item.Group>
           </Segment>
         </Container>
       </Segment>
@@ -115,5 +143,6 @@ const style = {
   segment: {
     paddingTop: "6em",
     paddingBottom: "6em",
+    backgroundColor: "#f7f7f7",
   },
 }

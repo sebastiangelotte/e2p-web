@@ -2,10 +2,6 @@ import React from "react"
 import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
-// import { Auth, API, graphqlOperation } from "aws-amplify"
-// import * as mutations from "../graphql/mutations"
-// import * as queries from "../graphql/queries"
-
 import {
   Card,
   Icon,
@@ -24,11 +20,13 @@ import PageHeader from "../components/page-header/pageHeader"
 import CourseLeader from "../components/course-leader/courseLeader"
 import SimpleCard from "../components/cards/simpleCard"
 import CourseSignup from "../components/courseSignup"
+import ContactForm from "../components/contactForm"
 
 const style = {
   segment: {
-    paddingTop: "6em",
+    paddingTop: "2em",
     paddingBottom: "6em",
+    backgroundColor: "#f7f7f7",
   },
   link: {
     paddingTop: "2em",
@@ -42,6 +40,13 @@ export const query = graphql`
       id
       title
       date(formatString: "D/M/YYYY")
+      numberOfDays
+      city
+      price
+      location {
+        lat
+        lon
+      }
       description {
         json
       }
@@ -94,44 +99,47 @@ const Course = props => {
   }
 
   const course = props.data.contentfulCourse
-
-  //   const registerToCourse = async () => {
-  //     Auth.currentAuthenticatedUser().then(user => {
-  //       API.graphql(
-  //         graphqlOperation(queries.getUserData, {
-  //           id: user.username,
-  //         })
-  //       ).then(user => {
-  //         API.graphql(
-  //           graphqlOperation(mutations.updateUserData, {
-  //             input: {
-  //               id: user.data.getUserData.id,
-  //               courses: [...user.data.getUserData.courses, course.id],
-  //             },
-  //           })
-  //         )
-  //       })
-  //     })
-  //   }
+  const locationLink = `https://www.google.com/maps/search/?api=1&query=${course.location.lat},${course.location.lon}`
 
   return (
-    <Layout>
+    <Layout transparentNavigation>
       <Head title={`Kurs: ${course.title}`} />
-      <PageHeader title={course.title} date={course.date} />
+      <PageHeader title={course.title} />
+
       <Segment style={style.segment} vertical>
         <Container>
           <Grid stackable>
             <Grid.Row>
               <Grid.Column width={11}>
                 <Segment vertical>
+                  <Segment vertical>
+                    <Label>
+                      <Icon name="calendar alternate outline" />
+                      {course.date}
+                    </Label>
+                    <Label>
+                      <Icon name="clock outline" />
+                      {course.numberOfDays} dag
+                      {course.numberOfDays > 1 ? "ar" : ""}
+                    </Label>
+                    <Label>
+                      <Icon name="map marker alternate" />
+                      {course.city}
+                    </Label>
+                    <Label>
+                      {Number(course.price).toLocaleString()} SEK exkl. moms
+                    </Label>
+                  </Segment>
                   {documentToReactComponents(course.description.json, options)}
 
                   <Modal
                     trigger={
                       <Button
-                        primary
+                        positive
+                        fluid
+                        size="huge"
                         content="Anmäl dig här"
-                        icon="arrow right"
+                        icon="calendar plus outline"
                         labelPosition="left"
                       />
                     }
@@ -154,6 +162,34 @@ const Course = props => {
                     </Modal.Content>
                   </Modal>
                 </Segment>
+                <Segment>
+                  <Header as="h5">
+                    Önskar du få kursen genomförd som företagsintern utbildning?{" "}
+                  </Header>
+                  <p>
+                    <i>
+                      Vi anpassar kursen utifrån gruppens behov och genomför när
+                      det passar er och på den ort ni önskar. Beskriv dina
+                      önskemål, så sänder vi dig kostnadsfri offert.
+                    </i>
+                  </p>
+                  <Modal
+                    trigger={
+                      <Button
+                        fluid
+                        content="Företagsintern utbildning"
+                        icon="arrow right"
+                        labelPosition="left"
+                      />
+                    }
+                    closeIcon
+                  >
+                    <Header icon="mail" content={`Företagsintern kurs`} />
+                    <Modal.Content>
+                      <ContactForm source={course.title} />
+                    </Modal.Content>
+                  </Modal>
+                </Segment>
               </Grid.Column>
               <Grid.Column width={5} floated="right">
                 {course.practicalInfo && (
@@ -161,14 +197,23 @@ const Course = props => {
                     <Header as="h3">Praktisk information</Header>
                     <Card fluid color="orange">
                       <Card.Content>
-                        <Label>
-                          <Icon name="calendar" />
-                          {course.date}
-                        </Label>
                         {documentToReactComponents(
                           course.practicalInfo.json,
                           options
                         )}
+                        <a
+                          href={locationLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          // https://stackoverflow.com/questions/50709625/link-with-target-blank-and-rel-noopener-noreferrer-still-vulnerable
+                        >
+                          <Button
+                            content="Hitta till kurslokalen"
+                            icon="external alternate"
+                            labelPosition="left"
+                            fluid
+                          />
+                        </a>
                       </Card.Content>
                     </Card>
                   </Segment>

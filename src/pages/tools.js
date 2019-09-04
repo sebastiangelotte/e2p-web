@@ -11,6 +11,7 @@ const style = {
   segment: {
     paddingTop: "6em",
     paddingBottom: "6em",
+    backgroundColor: "#f7f7f7",
   },
   link: {
     paddingTop: "2em",
