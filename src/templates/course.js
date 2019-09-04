@@ -99,7 +99,9 @@ const Course = props => {
   }
 
   const course = props.data.contentfulCourse
-  const locationLink = `https://www.google.com/maps/search/?api=1&query=${course.location.lat},${course.location.lon}`
+  const locationLink =
+    course.location &&
+    `https://www.google.com/maps/search/?api=1&query=${course.location.lat},${course.location.lon}`
 
   return (
     <Layout transparentNavigation>
