@@ -1,9 +1,8 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-
 import { Card, Segment, Container, Grid, Header } from "semantic-ui-react"
-
+import ContactForm from "../components/contactForm"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import PageHeader from "../components/page-header/pageHeader"
@@ -47,7 +46,7 @@ export const query = graphql`
 const Service = props => {
   const service = props.data.contentfulService
   return (
-    <Layout>
+    <Layout transparentNavigation>
       <Head title={`Tjänst: ${props.data.contentfulService.title}`} />
 
       <PageHeader title={props.data.contentfulService.title} />
@@ -61,6 +60,14 @@ const Service = props => {
                   {documentToReactComponents(
                     props.data.contentfulService.description.json
                   )}
+                </Segment>
+                <Segment vertical>
+                  <h2>Önskar du offert?</h2>
+                  <p>
+                    Beskriv dina önskemål, så sänder vi dig en offert
+                    kostnadsfritt.
+                  </p>
+                  <ContactForm />
                 </Segment>
               </Grid.Column>
               <Grid.Column width={5} floated="right">

@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 
 import { Segment, Container, Grid, List, Header } from "semantic-ui-react"
+import MailchimpSignup from "../mailchimpSignup"
 
 const style = {
   segment: {
@@ -40,9 +41,6 @@ const Footer = () => {
                 <List.Item>
                   <Link to="/contact">Kontakt</Link>
                 </List.Item>
-                <List.Item>
-                  <Link to="/newsletter">Nyhetsbrev</Link>
-                </List.Item>
               </List>
             </Grid.Column>
             <Grid.Column floated="right" width={6}>
@@ -53,6 +51,7 @@ const Footer = () => {
                 Anmäl dig till vårt nyhetsbrev för smarta checklistor, enkla råd
                 & tips.
               </p>
+              <MailchimpSignup />
             </Grid.Column>
           </Grid.Row>
         </Grid>
