@@ -43,9 +43,9 @@ module.exports = {
         // Setting this parameter is optional
         anonymize: true,
         // Setting this parameter is also optional
-        respectDNT: true,
+        // respectDNT: true,
         // Avoids sending pageview hits from custom paths
-        exclude: ["/preview/**", "/do-not-track/me/too/"],
+        // exclude: ["/preview/**", "/do-not-track/me/too/"],
         // Delays sending pageview hits on route update (in milliseconds)
         pageTransitionDelay: 0,
       },
