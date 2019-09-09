@@ -35,5 +35,5 @@ const awsmobile = {
 Amplify.configure(awsmobile)
 
 export const wrapRootElement = ({ element }) => (
-  <UserProvider> {element}</UserProvider>
+  <UserProvider>{element}</UserProvider>
 )

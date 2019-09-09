@@ -3,7 +3,7 @@ import { Segment, Container, Header } from "semantic-ui-react"
 
 const style = {
   segment: {
-    paddingTop: "6em",
+    paddingTop: "10em",
     paddingBottom: "6em",
   },
   link: {
@@ -12,7 +12,7 @@ const style = {
   },
 }
 
-const PageHeader = ({ title, date }) => {
+const PageHeader = ({ title }) => {
   return (
     <Segment
       style={style.segment}
@@ -25,7 +25,6 @@ const PageHeader = ({ title, date }) => {
         <Header as="h1" inverted>
           {title}
         </Header>
-        {date && <p>{date}</p>}
       </Container>
     </Segment>
   )

@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import Layout from "../components/layout"
-import { Segment, Container, Header } from "semantic-ui-react"
+import { Segment, Container } from "semantic-ui-react"
 import Head from "../components/head"
 import ContactForm from "../components/contactForm"
 import PageHeader from "../components/page-header/pageHeader"
@@ -9,7 +9,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 const style = {
   segment: {
-    paddingTop: "6em",
+    paddingTop: "10em",
     paddingBottom: "6em",
     backgroundColor: "#f7f7f7",
   },

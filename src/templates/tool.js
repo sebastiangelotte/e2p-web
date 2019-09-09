@@ -16,7 +16,7 @@ import Layout from "../components/layout"
 
 const style = {
   segment: {
-    paddingTop: "6em",
+    paddingTop: "10em",
     paddingBottom: "6em",
     backgroundColor: "#f7f7f7",
   },

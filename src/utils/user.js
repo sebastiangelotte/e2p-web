@@ -14,9 +14,9 @@ export const UserProvider = ({ children }) => {
   React.useEffect(() => {
     // Configure the keys needed for the Auth module. Essentially this is
     // like calling `Amplify.configure` but only for `Auth`.
-    Auth.configure({
-      // ...
-    })
+    // Auth.configure({
+    // ...
+    // })
 
     // attempt to fetch the info of the user that was already logged in
     Auth.currentAuthenticatedUser()
@@ -36,6 +36,7 @@ export const UserProvider = ({ children }) => {
       .catch(err => {
         if (err.code === "UserNotFoundException") {
           err.message = "Invalid username or password"
+          console.log(err.message)
         }
 
         // ... (other checks)

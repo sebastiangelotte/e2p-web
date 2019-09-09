@@ -6,9 +6,10 @@ import Layout from "../components/layout"
 import Head from "../components/head"
 import HomepageHeading from "../components/homepageHeading"
 import HomepageSection from "../components/homepage-section/homepageSection"
+import backgroundImage from "../images/meeting.jpg"
 
 const Wrapper = styled.div`
-  background-image: url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+  background-image: url(${backgroundImage});
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

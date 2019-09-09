@@ -1,6 +1,6 @@
 ## Before launch
 
-- [ ] top menu
+- [x] top menu
 - [ ] login, reload?
 - [ ] auth forms
   - [ ] forgot password
@@ -16,7 +16,7 @@
 - [x] newsletter input (mailchimp) (sno från gamla sidan?)
 - [ ] gå igenom alla tools och services i Contentful
 - [ ] cookie bar
-- [ ] startpage background image => move to contentful
+- [x] startpage background image => move to contentful
 - [ ] redirect pages after form submissions
 - [ ] companySpecific courses
 

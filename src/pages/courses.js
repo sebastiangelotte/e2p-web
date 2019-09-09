@@ -1,18 +1,24 @@
 import React, { useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
-import { Item, Segment, Container, Header } from "semantic-ui-react"
+import { Item, Segment, Container, Header, Menu } from "semantic-ui-react"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
 import CourseCard from "../components/course-card/courseCard"
 import Filter from "../components/filter"
+import backgroundImage from "../images/meeting.jpg"
 
 const style = {
   segment: {
-    paddingTop: "6em",
+    paddingTop: "10em",
     paddingBottom: "6em",
-    backgroundColor: "#f7f7f7",
+    backgroundColor: "#00000055",
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
   },
   link: {
     paddingTop: "2em",
@@ -63,6 +69,8 @@ const Courses = () => {
     }
   }
 
+  const [activeItem, setActiveItem] = useState("Öppna kurser")
+
   return (
     <Layout transparentNavigation>
       <Head title="Kurser" />
@@ -70,7 +78,7 @@ const Courses = () => {
         style={style.segment}
         textAlign="center"
         vertical
-        color="blue"
+        // color="blue"
         inverted
       >
         <Container text>
@@ -96,17 +104,44 @@ const Courses = () => {
           </div>
         </Container>
       </Segment>
-      <Segment style={style.segment} vertical>
+      <Segment vertical style={{ border: "none" }}>
+        <Container text>
+          <Menu pointing secondary size="big">
+            <Menu.Item
+              active={activeItem === "Öppna kurser"}
+              onClick={() => setActiveItem("Öppna kurser")}
+            >
+              Öppna kurser
+            </Menu.Item>
+            <Menu.Item
+              active={activeItem === "Företagsinterna kurser"}
+              onClick={() => setActiveItem("Företagsinterna kurser")}
+            >
+              Företagsinterna kurser
+            </Menu.Item>
+          </Menu>
+        </Container>
+      </Segment>
+      <Segment vertical>
         <Container text>
           <Item.Group divided>
-            {courses
-              .filter(course => {
-                return course.node.companyInternalCourse === false
-              })
-              .filter(course => new Date(course.node.rawDate) > new Date())
-              .map((edge, index) => {
-                return <CourseCard key={index} data={edge.node} />
-              })}
+            {activeItem === "Öppna kurser" &&
+              courses
+                .filter(course => {
+                  return course.node.companyInternalCourse === false
+                })
+                .filter(course => new Date(course.node.rawDate) > new Date())
+                .map((edge, index) => {
+                  return <CourseCard key={index} data={edge.node} />
+                })}
+            {activeItem === "Företagsinterna kurser" &&
+              courses
+                .filter(course => {
+                  return course.node.companyInternalCourse === true
+                })
+                .map((edge, index) => {
+                  return <CourseCard key={index} data={edge.node} />
+                })}
           </Item.Group>
         </Container>
       </Segment>

@@ -19,24 +19,27 @@ const Wrapper = styled.div`
   }
 `
 
+const ResponsiveHeader = styled.h1`
+  font-size: 4em;
+  font-weight: normal;
+  margin-bottom: 0;
+  margin-top: 3em !important;
+  color: white;
+
+  @media only screen and (max-width: 600px) {
+    font-size: 2.5em;
+    margin-top: 4em !important;
+  }
+`
+
 const HomepageHeading = ({ mobile }) => (
   <Wrapper>
     <Container
       text
       textAlign="center"
-      style={{ position: "relative", zIndex: "2" }}
+      style={{ position: "relative", zIndex: "1" }}
     >
-      <Header
-        as="h1"
-        content="Välkommen!"
-        inverted
-        style={{
-          fontSize: mobile ? "2em" : "4em",
-          fontWeight: "normal",
-          marginBottom: 0,
-          marginTop: mobile ? "1.5em" : "3em",
-        }}
-      />
+      <ResponsiveHeader>Välkommen!</ResponsiveHeader>
       <Header
         as="h2"
         content="Easy2perform utvecklar och genomför inspirerande kurser för din utveckling."
@@ -48,13 +51,13 @@ const HomepageHeading = ({ mobile }) => (
         }}
       />
       <Link to="/courses">
-        <Button primary size="huge">
+        <Button primary size="big">
           Kurser
           <Icon name="right arrow" />
         </Button>
       </Link>
       <Link to="/tools">
-        <Button primary size="huge">
+        <Button primary size="big">
           Verktyg
           <Icon name="right arrow" />
         </Button>
