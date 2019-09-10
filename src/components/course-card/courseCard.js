@@ -19,10 +19,12 @@ const CourseCard = props => {
           <Item.Content>
             <Item.Header>{props.data.title}</Item.Header>
             <Item.Extra>
-              <Label basic>
-                <Icon name="calendar alternate outline" />
-                {props.data.date}
-              </Label>
+              {props.data.date && (
+                <Label basic>
+                  <Icon name="calendar alternate outline" />
+                  {props.data.date}
+                </Label>
+              )}
               <Label basic>
                 <Icon name="clock outline" />
                 {props.data.numberOfDays} dag
@@ -97,19 +99,23 @@ const CourseCard = props => {
           <Item.Content>
             <Item.Header>{props.data.title}</Item.Header>
             <Item.Extra>
-              <Label basic>
-                <Icon name="calendar alternate outline" />
-                {props.data.date}
-              </Label>
+              {props.data.date && (
+                <Label basic>
+                  <Icon name="calendar alternate outline" />
+                  {props.data.date}
+                </Label>
+              )}
               <Label basic>
                 <Icon name="clock outline" />
                 {props.data.numberOfDays} dag
                 {props.data.numberOfDays > 1 ? "ar" : ""}
               </Label>
-              <Label basic>
-                <Icon name="map marker alternate" />
-                {props.data.city}
-              </Label>
+              {props.data.city && (
+                <Label basic>
+                  <Icon name="map marker alternate" />
+                  {props.data.city}
+                </Label>
+              )}
               {props.data.courseLeader && (
                 <Popup
                   trigger={
@@ -126,9 +132,11 @@ const CourseCard = props => {
                   style={style.popup}
                 ></Popup>
               )}
-              <Label basic>
-                {Number(props.data.price).toLocaleString()} SEK exkl. moms
-              </Label>
+              {props.data.price && (
+                <Label basic>
+                  {Number(props.data.price).toLocaleString()} SEK exkl. moms
+                </Label>
+              )}
             </Item.Extra>
             <Item.Extra>
               {props.data.tags &&
@@ -142,6 +150,7 @@ const CourseCard = props => {
                 })}
               <Link to={`/courses/${props.data.slug}`}>
                 <Button
+                  positive
                   content="Läs mer"
                   icon="arrow right"
                   labelPosition="right"

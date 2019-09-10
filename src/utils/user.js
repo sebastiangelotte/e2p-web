@@ -27,7 +27,7 @@ export const UserProvider = ({ children }) => {
   // We make sure to handle the user update here, but return the resolve value in order for our components to be
   // able to chain additional `.then()` logic. Additionally, we `.catch` the error and "enhance it" by providing
   // a message that our React components can use.
-  const login = (usernameOrEmail, password) =>
+  const login = async (usernameOrEmail, password) =>
     Auth.signIn(usernameOrEmail, password)
       .then(cognitoUser => {
         setUser(cognitoUser)
@@ -51,13 +51,45 @@ export const UserProvider = ({ children }) => {
       return data
     })
 
+  const createAccount = async (username, password, email) =>
+    Auth.signUp({ username, password, attributes: { email } })
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+
+  const confirmAccount = async (username, code) =>
+    Auth.confirmSignUp(username, code, {
+      // Optional. Force user confirmation irrespective of existing alias. By default set to True.
+      forceAliasCreation: true,
+    })
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+
+  const resendConfirmCode = async username =>
+    Auth.resendSignUp(username)
+      .then(() => {
+        console.log("code resent successfully")
+      })
+      .catch(e => {
+        console.log(e)
+      })
+
   // Make sure to not force a re-render on the components that are reading these values,
   // unless the `user` value has changed. This is an optimisation that is mostly needed in cases
   // where the parent of the current component re-renders and thus the current component is forced
   // to re-render as well. If it does, we want to make sure to give the `UserContext.Provider` the
   // same value as long as the user data is the same. If you have multiple other "controller"
   // components or Providers above this component, then this will be a performance booster.
-  const values = React.useMemo(() => ({ user, login, logout }), [user])
+  const values = React.useMemo(
+    () => ({
+      user,
+      login,
+      logout,
+      createAccount,
+      confirmAccount,
+      resendConfirmCode,
+    }),
+    [user]
+  )
 
   // Finally, return the interface that we want to expose to our other components
   return <UserContext.Provider value={values}>{children}</UserContext.Provider>

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import { Menu, Icon, Modal, Header, Sidebar } from "semantic-ui-react"
+import { Menu, Icon, Modal, Sidebar } from "semantic-ui-react"
 import styled from "styled-components"
 
 import { useUser } from "../../utils/user"

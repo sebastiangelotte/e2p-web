@@ -2,12 +2,27 @@ import React, { useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 import { Item, Segment, Container, Header, Menu } from "semantic-ui-react"
+import styled from "styled-components"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
 import CourseCard from "../components/course-card/courseCard"
 import Filter from "../components/filter"
 import backgroundImage from "../images/meeting.jpg"
+
+const StyledSegment = styled(Segment)`
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #000000aa;
+  }
+`
 
 const style = {
   segment: {
@@ -74,14 +89,14 @@ const Courses = () => {
   return (
     <Layout transparentNavigation>
       <Head title="Kurser" />
-      <Segment
+      <StyledSegment
         style={style.segment}
         textAlign="center"
         vertical
         // color="blue"
         inverted
       >
-        <Container text>
+        <Container text style={{ position: "relative", zIndex: "1" }}>
           <Header as="h1" inverted>
             Utvecklande kurser
           </Header>
@@ -103,7 +118,7 @@ const Courses = () => {
             />
           </div>
         </Container>
-      </Segment>
+      </StyledSegment>
       <Segment vertical style={{ border: "none" }}>
         <Container text>
           <Menu pointing secondary size="big">

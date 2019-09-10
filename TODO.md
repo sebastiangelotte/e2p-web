@@ -4,10 +4,11 @@
 - [ ] login, reload?
 - [ ] auth forms
   - [ ] forgot password
-  - [ ] login
+  - [x] login
   - [ ] create account
   - [ ] facebook button
-  - [ ] google button
+  - [x] google button
+  - [ ] change password
 - [x] pages
   - [x] om oss
   - [x] kontakt (w/ form)
@@ -15,10 +16,10 @@
 - [x] offline plugin
 - [x] newsletter input (mailchimp) (sno från gamla sidan?)
 - [ ] gå igenom alla tools och services i Contentful
-- [ ] cookie bar
+- [x] cookie bar
 - [x] startpage background image => move to contentful
 - [ ] redirect pages after form submissions
-- [ ] companySpecific courses
+- [x] companySpecific courses
 
 ---
 

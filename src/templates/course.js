@@ -43,6 +43,7 @@ export const query = graphql`
       numberOfDays
       city
       price
+      companyInternalCourse
       location {
         lat
         lon
@@ -114,84 +115,100 @@ const Course = props => {
             <Grid.Row>
               <Grid.Column width={11}>
                 <Segment vertical>
-                  <Segment vertical>
-                    <Label>
-                      <Icon name="calendar alternate outline" />
-                      {course.date}
-                    </Label>
-                    <Label>
-                      <Icon name="clock outline" />
-                      {course.numberOfDays} dag
-                      {course.numberOfDays > 1 ? "ar" : ""}
-                    </Label>
-                    <Label>
-                      <Icon name="map marker alternate" />
-                      {course.city}
-                    </Label>
-                    <Label>
-                      {Number(course.price).toLocaleString()} SEK exkl. moms
-                    </Label>
-                  </Segment>
+                  {!course.companyInternalCourse && (
+                    <Segment vertical>
+                      <Label>
+                        <Icon name="calendar alternate outline" />
+                        {course.date}
+                      </Label>
+                      <Label>
+                        <Icon name="clock outline" />
+                        {course.numberOfDays} dag
+                        {course.numberOfDays > 1 ? "ar" : ""}
+                      </Label>
+                      <Label>
+                        <Icon name="map marker alternate" />
+                        {course.city}
+                      </Label>
+                      <Label>
+                        {Number(course.price).toLocaleString()} SEK exkl. moms
+                      </Label>
+                    </Segment>
+                  )}
                   {documentToReactComponents(course.description.json, options)}
-
-                  <Modal
-                    trigger={
-                      <Button
-                        positive
-                        fluid
-                        size="huge"
-                        content="Anmäl dig här"
+                  {!course.companyInternalCourse && (
+                    <Modal
+                      trigger={
+                        <Button
+                          positive
+                          fluid
+                          size="huge"
+                          content="Anmäl dig här"
+                          icon="calendar plus outline"
+                          labelPosition="left"
+                        />
+                      }
+                      closeIcon
+                    >
+                      <Header
                         icon="calendar plus outline"
-                        labelPosition="left"
+                        content={`Anmäl dig till kursen`}
                       />
-                    }
-                    closeIcon
-                  >
-                    <Header
-                      icon="calendar plus outline"
-                      content={`Anmäl dig till kursen`}
-                    />
-                    <Header
-                      as="h5"
-                      icon="info circle"
-                      content={`${course.title} (${course.date})`}
-                    />
-                    <Modal.Content>
-                      <CourseSignup
-                        courseName={course.title}
-                        courseID={course.id}
+                      <Header
+                        as="h5"
+                        icon="info circle"
+                        content={`${course.title} (${course.date})`}
                       />
-                    </Modal.Content>
-                  </Modal>
+                      <Modal.Content>
+                        <CourseSignup
+                          courseName={course.title}
+                          courseID={course.id}
+                        />
+                      </Modal.Content>
+                    </Modal>
+                  )}
+                  {course.companyInternalCourse && (
+                    <Segment style={{ marginTop: "40px" }}>
+                      <h2>Önskar du prisförslag för företagsintern kurs?</h2>
+                      <p>
+                        Beskriv dina önskemål, så sänder vi dig en offert
+                        kostnadsfritt.
+                      </p>
+                      <ContactForm source={course.slug} />
+                    </Segment>
+                  )}
                 </Segment>
-                <Segment>
-                  <Header as="h5">
-                    Önskar du få kursen genomförd som företagsintern utbildning?{" "}
-                  </Header>
-                  <p>
-                    <i>
-                      Vi anpassar kursen utifrån gruppens behov och genomför när
-                      det passar er och på den ort ni önskar. Beskriv dina
-                      önskemål, så sänder vi dig kostnadsfri offert.
-                    </i>
-                  </p>
-                  <Modal
-                    trigger={
-                      <Button
-                        fluid
-                        content="Företagsintern utbildning"
-                        icon="arrow right"
-                        labelPosition="left"
-                      />
-                    }
-                    closeIcon
-                  >
-                    <Header icon="mail" content={`Företagsintern kurs`} />
-                    <Modal.Content>
-                      <ContactForm source={course.title} />
-                    </Modal.Content>
-                  </Modal>
-                </Segment>
+                {!course.companyInternalCourse && (
+                  <Segment>
+                    <Header as="h5">
+                      Önskar du få kursen genomförd som företagsintern
+                      utbildning?
+                    </Header>
+                    <p>
+                      <i>
+                        Vi anpassar kursen utifrån gruppens behov och genomför
+                        när det passar er och på den ort ni önskar. Beskriv dina
+                        önskemål, så sänder vi dig kostnadsfri offert.
+                      </i>
+                    </p>
+                    <Modal
+                      trigger={
+                        <Button
+                          fluid
+                          content="Företagsintern utbildning"
+                          icon="arrow right"
+                          labelPosition="left"
+                        />
+                      }
+                      closeIcon
+                    >
+                      <Header icon="mail" content={`Företagsintern kurs`} />
+                      <Modal.Content>
+                        <ContactForm source={course.title} />
+                      </Modal.Content>
+                    </Modal>
+                  </Segment>
+                )}
               </Grid.Column>
               <Grid.Column width={5} floated="right">
                 {course.practicalInfo && (
@@ -203,19 +220,21 @@ const Course = props => {
                           course.practicalInfo.json,
                           options
                         )}
-                        <a
-                          href={locationLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          // https://stackoverflow.com/questions/50709625/link-with-target-blank-and-rel-noopener-noreferrer-still-vulnerable
-                        >
-                          <Button
-                            content="Hitta till kurslokalen"
-                            icon="external alternate"
-                            labelPosition="left"
-                            fluid
-                          />
-                        </a>
+                        {!course.companyInternalCourse && (
+                          <a
+                            href={locationLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            // https://stackoverflow.com/questions/50709625/link-with-target-blank-and-rel-noopener-noreferrer-still-vulnerable
+                          >
+                            <Button
+                              content="Hitta till kurslokalen"
+                              icon="external alternate"
+                              labelPosition="left"
+                              fluid
+                            />
+                          </a>
+                        )}
                       </Card.Content>
                     </Card>
                   </Segment>
@@ -233,12 +252,14 @@ const Course = props => {
                     </Card>
                   </Segment>
                 )}
-                <Segment vertical>
-                  <Header as="h3">Kursledare</Header>
-                  {course.courseLeader && (
-                    <CourseLeader data={course.courseLeader} />
-                  )}
-                </Segment>
+                {course.courseLeader && (
+                  <Segment vertical>
+                    <Header as="h3">Kursledare</Header>
+                    {course.courseLeader && (
+                      <CourseLeader data={course.courseLeader} />
+                    )}
+                  </Segment>
+                )}
                 {/* LINKED SERVICES */}
                 {course.linkedServices && (
                   <Segment vertical>
