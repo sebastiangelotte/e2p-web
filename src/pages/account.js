@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
-import { Segment, Container, Header, Item } from "semantic-ui-react"
+import { Segment, Container, Header, Item, Menu, Icon } from "semantic-ui-react"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import CourseCard from "../components/course-card/courseCard"
@@ -10,6 +10,7 @@ import { useUser } from "../utils/user"
 
 import * as queries from "../graphql/queries"
 import { graphqlOperation, API, Auth } from "aws-amplify"
+import ChangePassword from "../components/changePassword"
 
 const Account = () => {
   const data = useStaticQuery(graphql`
@@ -51,6 +52,7 @@ const Account = () => {
   `)
 
   const [courses] = useState(data.allContentfulCourse.edges)
+  const [activeItem, setActiveItem] = useState("Kommande kurser")
 
   if (typeof window !== "undefined") {
     var { user } = useUser()
@@ -98,26 +100,47 @@ const Account = () => {
           </Header>
         </Container>
       </Segment>
-      <Segment style={style.segment} vertical>
-        <Container text>Email: {user && user.attributes.email}</Container>
+      <Segment vertical style={{ border: "none" }}>
         <Container text>
-          <h2>Mina kommande kurser:</h2>
+          <Menu pointing secondary size="big">
+            <Menu.Item
+              active={activeItem === "Kommande kurser"}
+              onClick={() => setActiveItem("Kommande kurser")}
+            >
+              Kommande kurser
+            </Menu.Item>
+            <Menu.Item
+              active={activeItem === "Avklarade kurser"}
+              onClick={() => setActiveItem("Avklarade kurser")}
+            >
+              Avklarade kurser
+            </Menu.Item>
+            <Menu.Menu position="right">
+              <Menu.Item
+                name="settings"
+                active={activeItem === "Inställningar"}
+                onClick={() => setActiveItem("Inställningar")}
+              >
+                <Icon name="setting" />
+                Inställningar
+              </Menu.Item>
+            </Menu.Menu>
+          </Menu>
+        </Container>
+      </Segment>
+      <Segment vertical>
+        <Container text>
           <Segment>
             <Item.Group divided>
               {userCourses &&
+                activeItem === "Kommande kurser" &&
                 userCourses
                   .filter(course => new Date(course.node.rawDate) > new Date())
                   .map((edge, index) => {
                     return <CourseCard key={index} data={edge.node} simple />
                   })}
-            </Item.Group>
-          </Segment>
-        </Container>
-        <Container text>
-          <h2 style={{ marginTop: "4rem" }}>Mina avklarade kurser:</h2>
-          <Segment>
-            <Item.Group divided>
               {userCourses &&
+                activeItem === "Avklarade kurser" &&
                 userCourses
                   .filter(course => new Date(course.node.rawDate) < new Date())
                   .map((edge, index) => {
@@ -130,6 +153,12 @@ const Account = () => {
                       />
                     )
                   })}
+              {activeItem === "Inställningar" && (
+                <Container>
+                  <h3>Ändra lösenord</h3>
+                  <ChangePassword />
+                </Container>
+              )}
             </Item.Group>
           </Segment>
         </Container>

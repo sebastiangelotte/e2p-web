@@ -1,12 +1,12 @@
 ## Before launch
 
 - [x] top menu
-- [ ] login, reload?
+- [x] login, reload?
 - [ ] auth forms
-  - [ ] forgot password
+  - [x] forgot password
   - [x] login
-  - [ ] create account
-  - [ ] facebook button
+  - [x] create account
+  - [x] facebook button
   - [x] google button
   - [ ] change password
 - [x] pages
@@ -20,6 +20,10 @@
 - [x] startpage background image => move to contentful
 - [ ] redirect pages after form submissions
 - [x] companySpecific courses
+- [ ] awsmobile innehåller KÄNSLIG DATA. kolla upp hur dölja
+- [ ] Mobilemeny och desktopmeny är båda synliga vid load
+- [ ] Signup nyhetsbrev - visa confirmation
+- [x] lägg till kontaktformulär på alla tools
 
 ---
 

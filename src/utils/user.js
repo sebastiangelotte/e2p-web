@@ -1,5 +1,5 @@
 import React from "react"
-import { Auth } from "aws-amplify"
+import { Auth, Hub } from "aws-amplify"
 
 // Create a context that will hold the values that we are going to expose to our components.
 // Don't worry about the `null` value. It's gonna be *instantly* overriden by the component below
@@ -18,6 +18,16 @@ export const UserProvider = ({ children }) => {
     // ...
     // })
 
+    // federatedLogin for some reason won't update state correctly. This is to force setUser if that occurs.
+    Hub.listen("auth", data => {
+      const { payload } = data
+      if (payload.event === "signIn") {
+        Auth.currentAuthenticatedUser()
+          .then(user => setUser(user))
+          .catch(() => setUser(null))
+      }
+    })
+
     // attempt to fetch the info of the user that was already logged in
     Auth.currentAuthenticatedUser()
       .then(user => setUser(user))
@@ -27,24 +37,24 @@ export const UserProvider = ({ children }) => {
   // We make sure to handle the user update here, but return the resolve value in order for our components to be
   // able to chain additional `.then()` logic. Additionally, we `.catch` the error and "enhance it" by providing
   // a message that our React components can use.
-  const login = async (usernameOrEmail, password) =>
-    Auth.signIn(usernameOrEmail, password)
-      .then(cognitoUser => {
-        setUser(cognitoUser)
-        return cognitoUser
-      })
-      .catch(err => {
-        if (err.code === "UserNotFoundException") {
-          err.message = "Invalid username or password"
-          console.log(err.message)
-        }
 
-        // ... (other checks)
+  const login = async (usernameOrEmail, password) => {
+    let result = await Auth.signIn(usernameOrEmail, password)
+    setUser(result)
+    return result
+  }
 
-        throw err
-      })
+  const forgotPasswordSubmit = async (username, code, new_password) => {
+    let result = await Auth.forgotPasswordSubmit(username, code, new_password)
+    return result
+  }
 
-  // same thing here
+  const federatedLogin = async provider => {
+    let result = Auth.federatedSignIn({ provider: provider })
+    setUser(result)
+    return result
+  }
+
   const logout = () =>
     Auth.signOut().then(data => {
       setUser(null)
@@ -56,13 +66,13 @@ export const UserProvider = ({ children }) => {
       .then(data => console.log(data))
       .catch(err => console.log(err))
 
-  const confirmAccount = async (username, code) =>
-    Auth.confirmSignUp(username, code, {
+  const confirmAccount = async (username, code) => {
+    let result = Auth.confirmSignUp(username, code, {
       // Optional. Force user confirmation irrespective of existing alias. By default set to True.
       forceAliasCreation: true,
     })
-      .then(data => console.log(data))
-      .catch(err => console.log(err))
+    return result
+  }
 
   const resendConfirmCode = async username =>
     Auth.resendSignUp(username)
@@ -72,6 +82,17 @@ export const UserProvider = ({ children }) => {
       .catch(e => {
         console.log(e)
       })
+
+  const forgotPassword = async username => {
+    let result = Auth.forgotPassword(username)
+    return result
+  }
+
+  const changePassword = async (oldPassword, newPassword) => {
+    let user = await Auth.currentAuthenticatedUser()
+    let result = await Auth.changePassword(user, oldPassword, newPassword)
+    return result
+  }
 
   // Make sure to not force a re-render on the components that are reading these values,
   // unless the `user` value has changed. This is an optimisation that is mostly needed in cases
@@ -87,6 +108,10 @@ export const UserProvider = ({ children }) => {
       createAccount,
       confirmAccount,
       resendConfirmCode,
+      forgotPassword,
+      forgotPasswordSubmit,
+      federatedLogin,
+      changePassword,
     }),
     [user]
   )

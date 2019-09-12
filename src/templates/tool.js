@@ -13,6 +13,7 @@ import {
 
 import Head from "../components/head"
 import Layout from "../components/layout"
+import ContactForm from "../components/contactForm"
 
 const style = {
   segment: {
@@ -54,7 +55,7 @@ export const query = graphql`
 
 const Tool = props => {
   return (
-    <Layout>
+    <Layout transparentNavigation>
       <Head title={`Verktyg: ${props.data.contentfulTool.title}`} />
       <Segment
         style={style.segment}
@@ -69,7 +70,7 @@ const Tool = props => {
           </Header>
         </Container>
       </Segment>
-      <Segment style={style.segment} vertical>
+      <Segment vertical>
         <Container>
           <Grid stackable>
             <Grid.Row>
@@ -79,6 +80,10 @@ const Tool = props => {
                   {documentToReactComponents(
                     props.data.contentfulTool.description.json
                   )}
+                </Segment>
+                <Segment vertical>
+                  <h2>Har du ytterligare frågor?</h2>
+                  <ContactForm source={props.data.contentfulTool.title} />
                 </Segment>
               </Grid.Column>
               <Grid.Column width={5} floated="right">

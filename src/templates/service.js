@@ -50,7 +50,7 @@ const Service = props => {
       <Head title={`Tjänst: ${props.data.contentfulService.title}`} />
 
       <PageHeader title={props.data.contentfulService.title} />
-      <Segment style={style.segment} vertical>
+      <Segment vertical>
         <Container>
           <Grid stackable>
             <Grid.Row>
@@ -67,7 +67,7 @@ const Service = props => {
                     Beskriv dina önskemål, så sänder vi dig en offert
                     kostnadsfritt.
                   </p>
-                  <ContactForm />
+                  <ContactForm source={props.data.contentfulService.title} />
                 </Segment>
               </Grid.Column>
               <Grid.Column width={5} floated="right">
