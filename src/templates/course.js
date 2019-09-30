@@ -256,7 +256,7 @@ const Course = props => {
                               <a
                                 href={locationLink(
                                   tillfalle.location.lat,
-                                  tillfalle.location.lat
+                                  tillfalle.location.lon
                                 )}
                                 target="_blank"
                                 rel="noopener noreferrer"
