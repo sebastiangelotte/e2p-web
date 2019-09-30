@@ -6,7 +6,7 @@ import Head from "../components/head"
 import Layout from "../components/layout"
 import CourseCard from "../components/course-card/courseCard"
 
-import { useUser } from "../utils/user"
+// import { useUser } from "../utils/user"
 
 import * as queries from "../graphql/queries"
 import { graphqlOperation, API, Auth } from "aws-amplify"
@@ -15,18 +15,18 @@ import ChangePassword from "../components/changePassword"
 const Account = () => {
   const data = useStaticQuery(graphql`
     query {
-      allContentfulCourse(sort: { fields: date, order: ASC }) {
+      allContentfulCourse(sort: { fields: title, order: ASC }) {
         edges {
           node {
             id
             title
             slug
-            date(formatString: "D/M/YYYY")
-            rawDate: date
+            # date(formatString: "D/M/YYYY")
+            # rawDate: date
             price
             numberOfDays
             tags
-            city
+            # city
             courseMaterial {
               title
               file {
@@ -52,11 +52,11 @@ const Account = () => {
   `)
 
   const [courses] = useState(data.allContentfulCourse.edges)
-  const [activeItem, setActiveItem] = useState("Kommande kurser")
+  const [activeItem, setActiveItem] = useState("Mina kurser")
 
-  if (typeof window !== "undefined") {
-    var { user } = useUser()
-  }
+  //   if (typeof window !== "undefined") {
+  //   var { user } = useUser()
+  //   }
 
   const [userData, setUserData] = useState()
   const userCourses = courses.filter(course => {
@@ -104,17 +104,17 @@ const Account = () => {
         <Container text>
           <Menu pointing secondary size="big">
             <Menu.Item
-              active={activeItem === "Kommande kurser"}
-              onClick={() => setActiveItem("Kommande kurser")}
+              active={activeItem === "Mina kurser"}
+              onClick={() => setActiveItem("Mina kurser")}
             >
-              Kommande kurser
+              Mina kurser
             </Menu.Item>
-            <Menu.Item
+            {/* <Menu.Item
               active={activeItem === "Avklarade kurser"}
               onClick={() => setActiveItem("Avklarade kurser")}
             >
               Avklarade kurser
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Menu position="right">
               <Menu.Item
                 name="settings"
@@ -133,13 +133,20 @@ const Account = () => {
           <Segment>
             <Item.Group divided>
               {userCourses &&
-                activeItem === "Kommande kurser" &&
+                activeItem === "Mina kurser" &&
                 userCourses
-                  .filter(course => new Date(course.node.rawDate) > new Date())
+                  //   .filter(course => new Date(course.node.rawDate) > new Date())
                   .map((edge, index) => {
-                    return <CourseCard key={index} data={edge.node} simple />
+                    return (
+                      <CourseCard
+                        key={index}
+                        data={edge.node}
+                        simple
+                        showFiles
+                      />
+                    )
                   })}
-              {userCourses &&
+              {/* {userCourses &&
                 activeItem === "Avklarade kurser" &&
                 userCourses
                   .filter(course => new Date(course.node.rawDate) < new Date())
@@ -152,7 +159,7 @@ const Account = () => {
                         showFiles
                       />
                     )
-                  })}
+                  })} */}
               {activeItem === "Inställningar" && (
                 <Container>
                   <h3>Ändra lösenord</h3>

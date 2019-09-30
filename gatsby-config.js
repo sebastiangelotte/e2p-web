@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `e2p`,
@@ -6,12 +10,11 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    // "gatsby-plugin-stripe-checkout",
     {
       resolve: `gatsby-source-contentful`,
       options: {
-        spaceId: "on5mzd6mcavd",
-        accessToken: "HKkUw5FREJp_HT06MwFUc0SCdHPVrzWRULzv8PYxTRQ",
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
     {

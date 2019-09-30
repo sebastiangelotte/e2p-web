@@ -39,16 +39,16 @@ export const query = graphql`
     contentfulCourse(slug: { eq: $slug }) {
       id
       title
-      date(formatString: "D/M/YYYY")
-      dates
+      #   date(formatString: "D/M/YYYY")
+      #   dates
       numberOfDays
-      city
+      #   city
       price
       companyInternalCourse
-      location {
-        lat
-        lon
-      }
+      #   location {
+      #     lat
+      #     lon
+      #   }
       description {
         json
       }
@@ -85,9 +85,22 @@ export const query = graphql`
         slug
         title
       }
+      kurstillflle {
+        city
+        date(formatString: "D/M/YYYY")
+        title
+        location {
+          lat
+          lon
+        }
+      }
     }
   }
 `
+
+const locationLink = (lat, lon) => {
+  return `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`
+}
 
 const Course = props => {
   const options = {
@@ -101,9 +114,6 @@ const Course = props => {
   }
 
   const course = props.data.contentfulCourse
-  const locationLink =
-    course.location &&
-    `https://www.google.com/maps/search/?api=1&query=${course.location.lat},${course.location.lon}`
 
   return (
     <Layout transparentNavigation>
@@ -122,32 +132,34 @@ const Course = props => {
                         <Icon name="calendar alternate outline" />
                         {course.date}
                       </Label> */}
-                      {course.dates &&
-                        course.dates
-                          .filter(date => {
-                            const courseDate = new Date(
-                              date.split("/")[2],
-                              date.split("/")[1] - 1,
-                              date.split("/")[0]
-                            ).toISOString()
-                            const currentTime = new Date().toISOString()
-                            return courseDate > currentTime
-                          })
-                          .map(date => (
-                            <Label>
-                              <Icon name="calendar alternate outline" />
-                              {date}
-                            </Label>
-                          ))}
+                      {course.kurstillflle &&
+                        course.kurstillflle
+                          //   .filter(date => {
+                          //     const courseDate = new Date(
+                          //       date.split("/")[2],
+                          //       date.split("/")[1] - 1,
+                          //       date.split("/")[0]
+                          //     ).toISOString()
+                          //     const currentTime = new Date().toISOString()
+                          //     return courseDate > currentTime
+                          //   })
+                          .map(tillfalle => {
+                            return (
+                              <Label>
+                                <Icon name="calendar alternate outline" />
+                                {`${tillfalle.city}: ${tillfalle.date}`}
+                              </Label>
+                            )
+                          })}
                       <Label>
                         <Icon name="clock outline" />
                         {course.numberOfDays} dag
                         {course.numberOfDays > 1 ? "ar" : ""}
                       </Label>
-                      <Label>
+                      {/* <Label>
                         <Icon name="map marker alternate" />
                         {course.city}
-                      </Label>
+                      </Label> */}
                       <Label>
                         {Number(course.price).toLocaleString()} SEK exkl. moms
                       </Label>
@@ -180,7 +192,7 @@ const Course = props => {
                         <CourseSignup
                           courseName={course.title}
                           courseID={course.id}
-                          courseDates={course.dates}
+                          courseDates={course.kurstillflle}
                         />
                       </Modal.Content>
                     </Modal>
@@ -238,21 +250,28 @@ const Course = props => {
                           course.practicalInfo.json,
                           options
                         )}
-                        {!course.companyInternalCourse && (
-                          <a
-                            href={locationLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            // https://stackoverflow.com/questions/50709625/link-with-target-blank-and-rel-noopener-noreferrer-still-vulnerable
-                          >
-                            <Button
-                              content="Hitta till kurslokalen"
-                              icon="external alternate"
-                              labelPosition="left"
-                              fluid
-                            />
-                          </a>
-                        )}
+                        {!course.companyInternalCourse &&
+                          course.kurstillflle.map(tillfalle => {
+                            return (
+                              <a
+                                href={locationLink(
+                                  tillfalle.location.lat,
+                                  tillfalle.location.lat
+                                )}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                // https://stackoverflow.com/questions/50709625/link-with-target-blank-and-rel-noopener-noreferrer-still-vulnerable
+                              >
+                                <Button
+                                  style={{ marginBottom: "10px" }}
+                                  content={`${tillfalle.city} ${tillfalle.date}`}
+                                  icon="map marker alternate"
+                                  labelPosition="left"
+                                  fluid
+                                />
+                              </a>
+                            )
+                          })}
                       </Card.Content>
                     </Card>
                   </Segment>

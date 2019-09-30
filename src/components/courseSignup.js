@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Form, Button, Message, Select } from "semantic-ui-react"
+import { Form, Button, Message } from "semantic-ui-react"
 
 import { API, graphqlOperation } from "aws-amplify"
 import * as mutations from "../graphql/mutations"
@@ -77,23 +77,23 @@ const CourseSignup = ({ courseName, courseID, courseDates }) => {
       )
   }
 
-  const upcomingDates = courseDates.filter(date => {
-    const courseDate = new Date(
-      date.split("/")[2],
-      date.split("/")[1] - 1,
-      date.split("/")[0]
-    ).toISOString()
-    const currentTime = new Date().toISOString()
-    return courseDate > currentTime
-  })
+  //   const upcomingDates = courseDates.filter(date => {
+  //     const courseDate = new Date(
+  //       date.split("/")[2],
+  //       date.split("/")[1] - 1,
+  //       date.split("/")[0]
+  //     ).toISOString()
+  //     const currentTime = new Date().toISOString()
+  //     return courseDate > currentTime
+  //   })
 
-  const dateOptions = Array.from(upcomingDates).map(date => {
-    return {
-      key: date,
-      text: date,
-      value: date,
-    }
-  })
+  //   const dateOptions = Array.from(upcomingDates).map(date => {
+  //     return {
+  //       key: date,
+  //       text: date,
+  //       value: date,
+  //     }
+  //   })
 
   return (
     <>
@@ -121,10 +121,13 @@ const CourseSignup = ({ courseName, courseID, courseDates }) => {
               id="date"
               label="Datum"
               name="Datum"
+              value={date}
               onChange={e => setDate(e.target.value)}
             >
-              {upcomingDates.map(date => (
-                <option value={date}>{date}</option>
+              {courseDates.map(tillfalle => (
+                <option
+                  value={tillfalle.date}
+                >{`${tillfalle.city}: ${tillfalle.date}`}</option>
               ))}
             </select>
           </Form.Group>

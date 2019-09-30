@@ -19,21 +19,21 @@ const CourseCard = props => {
           <Item.Content>
             <Item.Header>{props.data.title}</Item.Header>
             <Item.Extra>
-              {props.data.date && (
+              {/* {props.data.date && (
                 <Label basic>
                   <Icon name="calendar alternate outline" />
                   {props.data.date}
                 </Label>
-              )}
+              )} */}
               <Label basic>
                 <Icon name="clock outline" />
                 {props.data.numberOfDays} dag
                 {props.data.numberOfDays > 1 ? "ar" : ""}
               </Label>
-              <Label basic>
+              {/* <Label basic>
                 <Icon name="map marker alternate" />
                 {props.data.city}
-              </Label>
+              </Label> */}
               {props.data.courseLeader && (
                 <Popup
                   trigger={
@@ -90,6 +90,14 @@ const CourseCard = props => {
                       </div>
                     )
                   })}
+                <Link to={`/courses/${props.data.slug}`}>
+                  <Button
+                    content="Läs mer"
+                    icon="arrow right"
+                    labelPosition="right"
+                    floated="right"
+                  />
+                </Link>
               </Item.Extra>
             )}
           </Item.Content>
@@ -99,40 +107,38 @@ const CourseCard = props => {
           <Item.Content>
             <Item.Header>{props.data.title}</Item.Header>
             <Item.Extra>
-              {/* {props.data.date && (
-                <Label basic>
-                  <Icon name="calendar alternate outline" />
-                  {props.data.date}
-                </Label>
-              )} */}
-              {props.data.dates &&
-                props.data.dates
-                  .filter(date => {
-                    const courseDate = new Date(
-                      date.split("/")[2],
-                      date.split("/")[1] - 1,
-                      date.split("/")[0]
-                    ).toISOString()
-                    const currentTime = new Date().toISOString()
-                    return courseDate > currentTime
-                  })
-                  .map(date => (
-                    <Label basic>
-                      <Icon name="calendar alternate outline" />
-                      {date}
-                    </Label>
-                  ))}
+              {props.data.kurstillflle &&
+                props.data.kurstillflle
+                  //   .filter(date => {
+                  //     const courseDate = date.split(" ")[1]
+                  //     console.log(date)
+                  //     const courseDateISO = new Date(
+                  //       courseDate.split("/")[2],
+                  //       courseDate.split("/")[1] - 1,
+                  //       courseDate.split("/")[0]
+                  //     ).toISOString()
+                  //     const currentTimeISO = new Date().toISOString()
+                  //     return courseDateISO > currentTimeISO
+                  //   })
+                  .map(tillfalle => {
+                    return (
+                      <Label basic>
+                        <Icon name="calendar alternate outline" />
+                        {`${tillfalle.city}: ${tillfalle.date}`}
+                      </Label>
+                    )
+                  })}
               <Label basic>
                 <Icon name="clock outline" />
                 {props.data.numberOfDays} dag
                 {props.data.numberOfDays > 1 ? "ar" : ""}
               </Label>
-              {props.data.city && (
+              {/* {props.data.city && (
                 <Label basic>
                   <Icon name="map marker alternate" />
                   {props.data.city}
                 </Label>
-              )}
+              )} */}
               {props.data.courseLeader && (
                 <Popup
                   trigger={

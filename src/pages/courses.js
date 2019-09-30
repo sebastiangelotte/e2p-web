@@ -44,18 +44,14 @@ const style = {
 const Courses = () => {
   const data = useStaticQuery(graphql`
     query {
-      allContentfulCourse(sort: { fields: date, order: ASC }) {
+      allContentfulCourse(sort: { fields: title, order: ASC }) {
         edges {
           node {
             title
             slug
-            date(formatString: "D/M/YYYY")
-            rawDate: date
-            dates
             price
             numberOfDays
             tags
-            city
             companyInternalCourse
             courseLeader {
               name
@@ -68,6 +64,15 @@ const Courses = () => {
                 }
               }
               title
+            }
+            kurstillflle {
+              city
+              date(formatString: "D/M/YYYY")
+              title
+              location {
+                lat
+                lon
+              }
             }
           }
         }
