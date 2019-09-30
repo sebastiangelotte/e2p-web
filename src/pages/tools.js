@@ -37,7 +37,7 @@ const Tools = () => {
     }
   `)
 
-  const [, setTools] = useState(data.allContentfulTool.edges)
+  const [tools, setTools] = useState(data.allContentfulTool.edges)
 
   const updateTools = tools => {
     if (tools.length > 0) {
@@ -78,7 +78,7 @@ const Tools = () => {
       <Segment style={style.segment} vertical>
         <Container>
           <Card.Group centered>
-            {data.allContentfulTool.edges.map((edge, index) => {
+            {tools.map((edge, index) => {
               return (
                 <Card key={index}>
                   <Card.Content>

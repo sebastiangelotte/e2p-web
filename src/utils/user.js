@@ -25,6 +25,9 @@ export const UserProvider = ({ children }) => {
         Auth.currentAuthenticatedUser()
           .then(user => setUser(user))
           .catch(() => setUser(null))
+      } else if (payload.event === "signOut") {
+        console.log("LOGGA UT")
+        window.location.href = "/"
       }
     })
 

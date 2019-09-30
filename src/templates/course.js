@@ -40,6 +40,7 @@ export const query = graphql`
       id
       title
       date(formatString: "D/M/YYYY")
+      dates
       numberOfDays
       city
       price
@@ -117,10 +118,27 @@ const Course = props => {
                 <Segment vertical>
                   {!course.companyInternalCourse && (
                     <Segment vertical>
-                      <Label>
+                      {/* <Label>
                         <Icon name="calendar alternate outline" />
                         {course.date}
-                      </Label>
+                      </Label> */}
+                      {course.dates &&
+                        course.dates
+                          .filter(date => {
+                            const courseDate = new Date(
+                              date.split("/")[2],
+                              date.split("/")[1] - 1,
+                              date.split("/")[0]
+                            ).toISOString()
+                            const currentTime = new Date().toISOString()
+                            return courseDate > currentTime
+                          })
+                          .map(date => (
+                            <Label>
+                              <Icon name="calendar alternate outline" />
+                              {date}
+                            </Label>
+                          ))}
                       <Label>
                         <Icon name="clock outline" />
                         {course.numberOfDays} dag
@@ -154,15 +172,15 @@ const Course = props => {
                         icon="calendar plus outline"
                         content={`Anmäl dig till kursen`}
                       />
-                      <Header
-                        as="h5"
-                        icon="info circle"
-                        content={`${course.title} (${course.date})`}
-                      />
+                      <Header as="h5">
+                        <Icon name="info circle" />
+                        {course.title}
+                      </Header>
                       <Modal.Content>
                         <CourseSignup
                           courseName={course.title}
                           courseID={course.id}
+                          courseDates={course.dates}
                         />
                       </Modal.Content>
                     </Modal>

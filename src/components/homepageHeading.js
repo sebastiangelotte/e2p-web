@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: #000000aa;
+    background-color: rgba(0, 0, 0, 0.67);
   }
 `
 

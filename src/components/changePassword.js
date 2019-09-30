@@ -3,7 +3,7 @@ import { Form, Button, Message } from "semantic-ui-react"
 import { useUser } from "../utils/user"
 
 const ChangePassword = () => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading] = useState(false)
   const [message, setMessage] = useState({
     isVisible: false,
     header: "Ett meddelande",

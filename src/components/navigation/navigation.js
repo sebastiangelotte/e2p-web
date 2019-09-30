@@ -8,14 +8,16 @@ import LogIn from "../login"
 import logo from "../../images/logo.svg"
 
 const DesktopNav = styled.div`
-  @media only screen and (max-width: 600px) {
-    display: none;
+  display: none;
+  @media only screen and (min-width: 600px) {
+    display: block;
   }
 `
 
 const MobileNav = styled.div`
-  @media only screen and (min-width: 600px) {
-    display: none;
+  display: none;
+  @media only screen and (max-width: 600px) {
+    display: block;
   }
 `
 

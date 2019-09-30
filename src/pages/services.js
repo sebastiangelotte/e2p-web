@@ -27,7 +27,7 @@ const StyledSegment = styled(Segment)`
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: #000000aa;
+    background-color: rgba(0, 0, 0, 0.67);
   }
 `
 
@@ -106,31 +106,8 @@ const Services = () => {
         </Container>
       </StyledSegment>
       <Segment vertical>
-        {/* <Container>
-          <Card.Group centered> */}
         {services.map((service, index) => {
           return (
-            // <Card key={index}>
-            //   <Card.Content>
-            //     <Card.Header>
-            //       <Link to={`/services/${service.node.slug}`} key={index}>
-            //         {service.node.title}
-            //       </Link>
-            //     </Card.Header>
-            //     {service.node.tags &&
-            //       service.node.tags.map(tag => {
-            //         return (
-            //           <Label key={tag} size="tiny">
-            //             {tag}
-            //           </Label>
-            //         )
-            //       })}
-            //   </Card.Content>
-            //   {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
-            //   <Card.Content extra>
-            //     {service.node.shortDescription.shortDescription}
-            //   </Card.Content>
-            // </Card>
             <Segment
               textAlign="center"
               vertical
@@ -163,8 +140,6 @@ const Services = () => {
             </Segment>
           )
         })}
-        {/* </Card.Group>
-        </Container> */}
       </Segment>
     </Layout>
   )

@@ -99,12 +99,29 @@ const CourseCard = props => {
           <Item.Content>
             <Item.Header>{props.data.title}</Item.Header>
             <Item.Extra>
-              {props.data.date && (
+              {/* {props.data.date && (
                 <Label basic>
                   <Icon name="calendar alternate outline" />
                   {props.data.date}
                 </Label>
-              )}
+              )} */}
+              {props.data.dates &&
+                props.data.dates
+                  .filter(date => {
+                    const courseDate = new Date(
+                      date.split("/")[2],
+                      date.split("/")[1] - 1,
+                      date.split("/")[0]
+                    ).toISOString()
+                    const currentTime = new Date().toISOString()
+                    return courseDate > currentTime
+                  })
+                  .map(date => (
+                    <Label basic>
+                      <Icon name="calendar alternate outline" />
+                      {date}
+                    </Label>
+                  ))}
               <Label basic>
                 <Icon name="clock outline" />
                 {props.data.numberOfDays} dag

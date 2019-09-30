@@ -8,18 +8,6 @@ import Layout from "../components/layout"
 import PageHeader from "../components/page-header/pageHeader"
 import SimpleCard from "../components/cards/simpleCard"
 
-const style = {
-  segment: {
-    paddingTop: "10em",
-    paddingBottom: "6em",
-    backgroundColor: "#f7f7f7",
-  },
-  link: {
-    paddingTop: "2em",
-    display: "inline-block",
-  },
-}
-
 export const query = graphql`
   query($slug: String!) {
     contentfulService(slug: { eq: $slug }) {

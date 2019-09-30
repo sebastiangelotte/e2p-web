@@ -20,7 +20,7 @@ const StyledSegment = styled(Segment)`
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: #000000aa;
+    background-color: rgba(0, 0, 0, 0.67);
   }
 `
 
@@ -51,6 +51,7 @@ const Courses = () => {
             slug
             date(formatString: "D/M/YYYY")
             rawDate: date
+            dates
             price
             numberOfDays
             tags
@@ -145,7 +146,7 @@ const Courses = () => {
                 .filter(course => {
                   return course.node.companyInternalCourse === false
                 })
-                .filter(course => new Date(course.node.rawDate) > new Date())
+                // .filter(course => new Date(course.node.rawDate) > new Date())
                 .map((edge, index) => {
                   return <CourseCard key={index} data={edge.node} />
                 })}
