@@ -31,6 +31,7 @@
 - [ ] ny text Företagsintern utbildning
   - [ ] **Kursen företagsanpassas till deltagarnas behov. Vi har ett stort nätverk av erfarna och pedagogiskt skickliga kursledare. Om vi saknar kursledare med den specifika kompetens du efterfrågar, rekryterar och kvalitetssäkrar vi den du behöver. Allt för att ge dig den bästa upplevelsen.**
 - [ ] gå igenom startsidan
+- [ ] add date to account courses
 
 ---
 

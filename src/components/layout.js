@@ -5,9 +5,22 @@ import "semantic-ui-css/semantic.min.css"
 import ScrollUpButton from "react-scroll-up-button"
 import CookieConsent from "react-cookie-consent"
 
+import { createGlobalStyle } from "styled-components"
+
+const GlobalStyle = createGlobalStyle`
+  ul > li > p {
+      margin-bottom: 0;
+  }
+
+  ul > li > ul {
+      margin-bottom: 0.75em;
+  }
+`
+
 const Layout = ({ children, transparentNavigation }) => {
   return (
     <>
+      <GlobalStyle />
       <Navigation transparent={transparentNavigation} />
       <main style={{ minHeight: "100vh" }}>{children}</main>
       <Footer />
