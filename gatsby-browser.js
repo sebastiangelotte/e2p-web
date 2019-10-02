@@ -1,6 +1,7 @@
 import React from "react"
 import Amplify from "aws-amplify"
 // import awsconfig from "./src/aws-exports"
+import { BreakpointProvider } from "react-socks"
 
 import { UserProvider } from "./src/utils/user"
 
@@ -35,5 +36,7 @@ const awsmobile = {
 Amplify.configure(awsmobile)
 
 export const wrapRootElement = ({ element }) => (
-  <UserProvider>{element}</UserProvider>
+  <UserProvider>
+    <BreakpointProvider>{element}</BreakpointProvider>
+  </UserProvider>
 )
