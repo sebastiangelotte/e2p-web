@@ -50,7 +50,7 @@ const Navigation = ({ transparent }) => {
   }
 
   const [sidebarOpened, setSidebarOpened] = useState(false)
-  const [vpWidth] = useViewportSizes(1000) // 1s debounce
+  const [vpWidth] = useViewportSizes(10) // 10ms debounce
 
   const handleSidebarHide = () => setSidebarOpened(false)
   const handleSidebarToggle = () => setSidebarOpened(!sidebarOpened)
