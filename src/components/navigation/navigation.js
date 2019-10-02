@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 import { Menu, Icon, Modal, Sidebar } from "semantic-ui-react"
 import styled from "styled-components"
@@ -50,10 +50,17 @@ const Navigation = ({ transparent }) => {
   }
 
   const [sidebarOpened, setSidebarOpened] = useState(false)
-  const [vpWidth] = useViewportSizes(10) // 10ms debounce
+  const [vpWidth, updateVpSizes] = useViewportSizes(10) // 10ms debounce
 
   const handleSidebarHide = () => setSidebarOpened(false)
   const handleSidebarToggle = () => setSidebarOpened(!sidebarOpened)
+
+  // add one post-render update
+  // in order to register the client's viewport sizes
+  // after serving SSR content
+  useEffect(() => {
+    updateVpSizes()
+  }, [])
 
   return (
     <>
