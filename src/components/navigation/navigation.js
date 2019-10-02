@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link } from "gatsby"
 import { Menu, Icon, Modal, Sidebar } from "semantic-ui-react"
 import styled from "styled-components"
-import { Breakpoint } from "react-socks"
+import useViewportSizes from "use-viewport-sizes"
 
 import { useUser } from "../../utils/user"
 import LogIn from "../login"
@@ -50,107 +50,113 @@ const Navigation = ({ transparent }) => {
   }
 
   const [sidebarOpened, setSidebarOpened] = useState(false)
+  const [vpWidth] = useViewportSizes(1000) // 1s debounce
 
   const handleSidebarHide = () => setSidebarOpened(false)
   const handleSidebarToggle = () => setSidebarOpened(!sidebarOpened)
 
   return (
     <>
-      <Breakpoint small down>
-        <MobileLogo
-          to="/"
-          activeStyle={{ textDecoration: "underline" }}
-          style={transparent ? style.transparentLink : {}}
-        >
-          <img src={logo} alt="Easy2perform" style={{ width: "50px" }} />
-        </MobileLogo>
-        <MobileNav style={style.transparentMenu}>
-          <Hamburger
-            name="sidebar"
-            inverted
-            size="big"
-            onClick={() => handleSidebarToggle()}
-          />
-          <Sidebar
-            as={Menu}
-            animation="push"
-            onHide={handleSidebarHide}
-            vertical
-            visible={sidebarOpened}
+      {/* <Breakpoint small down> */}
+      {vpWidth < 600 ? (
+        <>
+          <MobileLogo
+            to="/"
+            activeStyle={{ textDecoration: "underline" }}
+            style={transparent ? style.transparentLink : {}}
           >
-            <Menu.Item style={style.menu.mobileItem}>
-              <Link to="/" activeStyle={{ textDecoration: "underline" }}>
-                <Icon name="home" /> Hem
-              </Link>
-            </Menu.Item>
-            <Menu.Item style={style.menu.mobileItem}>
-              <Link to="/courses" activeStyle={{ textDecoration: "underline" }}>
-                Kurser
-              </Link>
-            </Menu.Item>
-            <Menu.Item style={style.menu.mobileItem}>
-              <Link
-                to="/services"
-                activeStyle={{ textDecoration: "underline" }}
-              >
-                Tjänster
-              </Link>
-            </Menu.Item>
-            <Menu.Item style={style.menu.mobileItem}>
-              <Link to="/tools" activeStyle={{ textDecoration: "underline" }}>
-                Verktyg
-              </Link>
-            </Menu.Item>
-            <BottomMenuItems>
-              {user ? (
-                <>
-                  <Menu.Item style={style.menu.mobileItem}>
-                    <Link
-                      to="/account"
-                      activeStyle={{ textDecoration: "underline" }}
-                    >
-                      <Icon name="user" /> Mina sidor
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item style={style.menu.mobileItem}>
-                    <Link
-                      to="/"
-                      onClick={e => {
-                        e.preventDefault()
-                        logout()
-                      }}
-                      activeStyle={{ textDecoration: "underline" }}
-                    >
-                      Logga ut
-                    </Link>
-                  </Menu.Item>
-                </>
-              ) : (
-                <Menu.Item style={style.menu.mobileItem}>
-                  <Modal
-                    size="mini"
-                    trigger={
+            <img src={logo} alt="Easy2perform" style={{ width: "50px" }} />
+          </MobileLogo>
+          <MobileNav style={style.transparentMenu}>
+            <Hamburger
+              name="sidebar"
+              inverted
+              size="big"
+              onClick={() => handleSidebarToggle()}
+            />
+            <Sidebar
+              as={Menu}
+              animation="push"
+              onHide={handleSidebarHide}
+              vertical
+              visible={sidebarOpened}
+            >
+              <Menu.Item style={style.menu.mobileItem}>
+                <Link to="/" activeStyle={{ textDecoration: "underline" }}>
+                  <Icon name="home" /> Hem
+                </Link>
+              </Menu.Item>
+              <Menu.Item style={style.menu.mobileItem}>
+                <Link
+                  to="/courses"
+                  activeStyle={{ textDecoration: "underline" }}
+                >
+                  Kurser
+                </Link>
+              </Menu.Item>
+              <Menu.Item style={style.menu.mobileItem}>
+                <Link
+                  to="/services"
+                  activeStyle={{ textDecoration: "underline" }}
+                >
+                  Tjänster
+                </Link>
+              </Menu.Item>
+              <Menu.Item style={style.menu.mobileItem}>
+                <Link to="/tools" activeStyle={{ textDecoration: "underline" }}>
+                  Verktyg
+                </Link>
+              </Menu.Item>
+              <BottomMenuItems>
+                {user ? (
+                  <>
+                    <Menu.Item style={style.menu.mobileItem}>
                       <Link
-                        to="#"
-                        onClick={e => e.preventDefault()}
+                        to="/account"
                         activeStyle={{ textDecoration: "underline" }}
                       >
-                        <Icon name="lock" /> Logga in
+                        <Icon name="user" /> Mina sidor
                       </Link>
-                    }
-                    closeIcon
-                  >
-                    <Modal.Content>
-                      <LogIn />
-                    </Modal.Content>
-                  </Modal>
-                </Menu.Item>
-              )}
-            </BottomMenuItems>
-          </Sidebar>
-        </MobileNav>
-      </Breakpoint>
-      <Breakpoint small up>
+                    </Menu.Item>
+                    <Menu.Item style={style.menu.mobileItem}>
+                      <Link
+                        to="/"
+                        onClick={e => {
+                          e.preventDefault()
+                          logout()
+                        }}
+                        activeStyle={{ textDecoration: "underline" }}
+                      >
+                        Logga ut
+                      </Link>
+                    </Menu.Item>
+                  </>
+                ) : (
+                  <Menu.Item style={style.menu.mobileItem}>
+                    <Modal
+                      size="mini"
+                      trigger={
+                        <Link
+                          to="#"
+                          onClick={e => e.preventDefault()}
+                          activeStyle={{ textDecoration: "underline" }}
+                        >
+                          <Icon name="lock" /> Logga in
+                        </Link>
+                      }
+                      closeIcon
+                    >
+                      <Modal.Content>
+                        <LogIn />
+                      </Modal.Content>
+                    </Modal>
+                  </Menu.Item>
+                )}
+              </BottomMenuItems>
+            </Sidebar>
+          </MobileNav>
+        </>
+      ) : (
         <DesktopNav>
           <Menu
             as="nav"
@@ -244,7 +250,7 @@ const Navigation = ({ transparent }) => {
             </Menu.Menu>
           </Menu>
         </DesktopNav>
-      </Breakpoint>
+      )}
     </>
   )
 }
