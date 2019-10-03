@@ -6,6 +6,7 @@ import { Card, Label, Segment, Container, Header } from "semantic-ui-react"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import Filter from "../components/filter"
+import Hero from "../components/hero"
 
 const style = {
   segment: {
@@ -34,6 +35,15 @@ const Tools = () => {
           }
         }
       }
+      file(relativePath: { eq: "tools.jpg" }) {
+        childImageSharp {
+          # Specify the image processing specifications right in the query.
+          # Makes it trivial to update as your page's design changes.
+          fluid(maxHeight: 1000) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `)
 
@@ -50,31 +60,20 @@ const Tools = () => {
   return (
     <Layout transparentNavigation>
       <Head title="Verktyg" />
-      <Segment
-        style={style.segment}
-        textAlign="center"
-        vertical
-        color="blue"
-        inverted
-      >
-        <Container text>
-          <Header as="h1" inverted>
-            Gratis checklistor och mallar
-          </Header>
-          <div>
-            <p>
-              Easy2perform utvecklar kontinuerligt praktiska checklistor och
-              mallar för att ge stöd och vägledning till svåra och komplexa
-              arbetsuppgifter i det dagliga arbetet. Våra enkla och effektiva
-              verktyg gör det enklare för dig att prestera i yrkesrollen.
-            </p>
-            <Filter
-              data={data.allContentfulTool.edges}
-              onChange={updateTools}
-            />
-          </div>
-        </Container>
-      </Segment>
+      <Hero backgroundImage={data.file.childImageSharp.fluid}>
+        <Header as="h1" inverted>
+          Gratis checklistor och mallar
+        </Header>
+        <div>
+          <p>
+            Easy2perform utvecklar kontinuerligt praktiska checklistor och
+            mallar för att ge stöd och vägledning till svåra och komplexa
+            arbetsuppgifter i det dagliga arbetet. Våra enkla och effektiva
+            verktyg gör det enklare för dig att prestera i yrkesrollen.
+          </p>
+          <Filter data={data.allContentfulTool.edges} onChange={updateTools} />
+        </div>
+      </Hero>
       <Segment style={style.segment} vertical>
         <Container>
           <Card.Group centered>

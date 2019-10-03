@@ -35,7 +35,7 @@ const MobileLogo = styled(Link)`
   position: absolute;
   z-index: 1;
   left: 50%;
-  top: 10px;
+  top: 82px;
   transform: translateX(-50%);
 
   @media only screen and (min-width: 600px) {
@@ -43,10 +43,15 @@ const MobileLogo = styled(Link)`
   }
 `
 
+const Wrapper = styled.div`
+  position: relative;
+  z-index: 3;
+`
+
 const Navigation = ({ transparent }) => {
-  if (typeof window !== "undefined") {
-    var { user, logout } = useUser()
-  }
+  //   if (typeof window !== "undefined") {
+  var { user, logout } = useUser()
+  //   }
 
   const [sidebarOpened, setSidebarOpened] = useState(false)
 
@@ -54,7 +59,7 @@ const Navigation = ({ transparent }) => {
   const handleSidebarToggle = () => setSidebarOpened(!sidebarOpened)
 
   return (
-    <>
+    <Wrapper>
       <DesktopNav>
         <Menu
           as="nav"
@@ -151,13 +156,6 @@ const Navigation = ({ transparent }) => {
           {/* </Container> */}
         </Menu>
       </DesktopNav>
-      <MobileLogo
-        to="/"
-        activeStyle={{ textDecoration: "underline" }}
-        style={transparent ? style.transparentLink : {}}
-      >
-        <img src={logo} alt="Easy2perform" style={{ width: "50px" }} />
-      </MobileLogo>
       <MobileNav style={style.transparentMenu}>
         <Hamburger
           name="sidebar"
@@ -241,7 +239,14 @@ const Navigation = ({ transparent }) => {
           </BottomMenuItems>
         </Sidebar>
       </MobileNav>
-    </>
+      <MobileLogo
+        to="/"
+        activeStyle={{ textDecoration: "underline" }}
+        style={transparent ? style.transparentLink : {}}
+      >
+        <img src={logo} alt="Easy2perform" style={{ width: "50px" }} />
+      </MobileLogo>
+    </Wrapper>
   )
 }
 

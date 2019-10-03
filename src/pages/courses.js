@@ -2,44 +2,12 @@ import React, { useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 import { Item, Segment, Container, Header, Menu } from "semantic-ui-react"
-import styled from "styled-components"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
 import CourseCard from "../components/course-card/courseCard"
 import Filter from "../components/filter"
-import backgroundImage from "../images/meeting.jpg"
-
-const StyledSegment = styled(Segment)`
-  position: relative;
-
-  &:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.67);
-  }
-`
-
-const style = {
-  segment: {
-    paddingTop: "10em",
-    paddingBottom: "6em",
-    backgroundColor: "#00000055",
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundAttachment: "fixed",
-  },
-  link: {
-    paddingTop: "2em",
-    display: "inline-block",
-  },
-}
+import Hero from "../components/hero"
 
 const Courses = () => {
   const data = useStaticQuery(graphql`
@@ -77,6 +45,15 @@ const Courses = () => {
           }
         }
       }
+      file(relativePath: { eq: "courses.jpg" }) {
+        childImageSharp {
+          # Specify the image processing specifications right in the query.
+          # Makes it trivial to update as your page's design changes.
+          fluid(maxHeight: 1000) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `)
 
@@ -95,36 +72,26 @@ const Courses = () => {
   return (
     <Layout transparentNavigation>
       <Head title="Kurser" />
-      <StyledSegment
-        style={style.segment}
-        textAlign="center"
-        vertical
-        // color="blue"
-        inverted
-      >
-        <Container text style={{ position: "relative", zIndex: "1" }}>
-          <Header as="h1" inverted>
-            Utvecklande kurser
-          </Header>
-          <div>
-            <p>
-              Easy2perform utvecklar och genomför inspirerande kurser för din
-              utveckling.
-            </p>
-            <p>
-              Vi följer nyheter, trender och målgruppsbehov inom exempelvis
-              ledarskap, personal, HR, projektledning och utvecklar kurser som
-              ger ökad kunskap och kompetens. Vi handplockar kursledare med rätt
-              kompetens, erfarenhet och pedagogisk förmåga, för att ge dig den
-              bästa upplevelsen.
-            </p>
-            <Filter
-              data={data.allContentfulCourse.edges}
-              onChange={updateCourses}
-            />
-          </div>
-        </Container>
-      </StyledSegment>
+      <Hero backgroundImage={data.file.childImageSharp.fluid}>
+        <Header as="h1" inverted>
+          Utvecklande kurser
+        </Header>
+        <p>
+          Easy2perform utvecklar och genomför inspirerande kurser för din
+          utveckling.
+        </p>
+        <p>
+          Vi följer nyheter, trender och målgruppsbehov inom exempelvis
+          ledarskap, personal, HR, projektledning och utvecklar kurser som ger
+          ökad kunskap och kompetens. Vi handplockar kursledare med rätt
+          kompetens, erfarenhet och pedagogisk förmåga, för att ge dig den bästa
+          upplevelsen.
+        </p>
+        <Filter
+          data={data.allContentfulCourse.edges}
+          onChange={updateCourses}
+        />
+      </Hero>
       <Segment vertical style={{ border: "none" }}>
         <Container text>
           <Menu pointing secondary size="big">
