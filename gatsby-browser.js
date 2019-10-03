@@ -38,3 +38,11 @@ Amplify.configure(awsmobile)
 export const wrapRootElement = ({ element }) => (
   <UserProvider>{element}</UserProvider>
 )
+
+const ReactDOM = require("react-dom")
+
+export function replaceHydrateFunction() {
+  return (element, container, callback) => {
+    ReactDOM.render(element, container, callback)
+  }
+}

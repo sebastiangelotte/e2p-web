@@ -1,4 +1,3 @@
-import "semantic-ui-css/semantic.min.css"
 import React from "react"
 import Navigation from "./navigation/navigation"
 import Footer from "./footer/footer"
