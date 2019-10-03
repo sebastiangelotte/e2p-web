@@ -4,10 +4,16 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 
 const Wrapper = styled.div`
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
-
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:before {
     content: "";
@@ -21,14 +27,10 @@ const Wrapper = styled.div`
 
 const ResponsiveHeader = styled.h1`
   font-size: 4em;
-  font-weight: normal;
-  margin-bottom: 0;
-  margin-top: 3em !important;
   color: white;
 
   @media only screen and (max-width: 600px) {
     font-size: 2.5em;
-    margin-top: 4em !important;
   }
 `
 
@@ -45,9 +47,9 @@ const HomepageHeading = ({ mobile }) => (
         content="Easy2perform utvecklar och genomför inspirerande kurser för din utveckling."
         inverted
         style={{
-          fontSize: mobile ? "1.5em" : "1.7em",
+          fontSize: "1.7em",
           fontWeight: "normal",
-          marginTop: mobile ? "0.5em" : "1.5em",
+          marginTop: "1.5em",
         }}
       />
       <Link to="/courses">
