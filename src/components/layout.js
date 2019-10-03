@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Navigation from "./navigation/navigation"
 import Footer from "./footer/footer"
 import ScrollUpButton from "react-scroll-up-button"
@@ -17,8 +17,14 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const Layout = ({ children, transparentNavigation }) => {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   return (
-    <>
+    <React.Fragment key={isClient}>
       <GlobalStyle />
       <Navigation transparent={transparentNavigation} />
       <main style={{ minHeight: "100vh" }}>{children}</main>
@@ -37,7 +43,7 @@ const Layout = ({ children, transparentNavigation }) => {
       >
         Vi använder cookies på vår hemsida för att göra ditt besök bättre.
       </CookieConsent>
-    </>
+    </React.Fragment>
   )
 }
 
