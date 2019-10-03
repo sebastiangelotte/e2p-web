@@ -72,10 +72,25 @@ const Wrapper = styled.div`
   z-index: 3;
 `
 
+const DesktopMenuItem = styled(Menu.Item)`
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+`
+
+const MobileMenuItem = styled(Menu.Item)`
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 3px !important;
+`
+
 const Navigation = () => {
   if (typeof window !== "undefined") {
     var { user, logout } = useUser()
   }
+
   const Logo = styled.img`
     width: 50px;
 
@@ -93,30 +108,30 @@ const Navigation = () => {
     <Wrapper>
       <DesktopNav>
         <Menu as="nav" secondary>
-          <Menu.Item>
+          <DesktopMenuItem>
             <Link to="/" activeStyle={{ textDecoration: "underline" }}>
               <Logo src={logo} alt="Easy2perform" />
             </Link>
-          </Menu.Item>
-          <Menu.Item>
+          </DesktopMenuItem>
+          <DesktopMenuItem>
             <Link to="/courses" activeStyle={{ textDecoration: "underline" }}>
               Kurser
             </Link>
-          </Menu.Item>
-          <Menu.Item>
+          </DesktopMenuItem>
+          <DesktopMenuItem>
             <Link to="/services" activeStyle={{ textDecoration: "underline" }}>
               Tjänster
             </Link>
-          </Menu.Item>
-          <Menu.Item>
+          </DesktopMenuItem>
+          <DesktopMenuItem>
             <Link to="/tools" activeStyle={{ textDecoration: "underline" }}>
               Verktyg
             </Link>
-          </Menu.Item>
+          </DesktopMenuItem>
           <Menu.Menu position="right">
             {user ? (
               <>
-                <Menu.Item>
+                <DesktopMenuItem>
                   <Link
                     to="/"
                     onClick={e => {
@@ -127,18 +142,18 @@ const Navigation = () => {
                   >
                     Logga ut
                   </Link>
-                </Menu.Item>
-                <Menu.Item>
+                </DesktopMenuItem>
+                <DesktopMenuItem>
                   <Link
                     to="/account"
                     activeStyle={{ textDecoration: "underline" }}
                   >
                     Mina sidor <Icon name="user" />
                   </Link>
-                </Menu.Item>
+                </DesktopMenuItem>
               </>
             ) : (
-              <Menu.Item>
+              <DesktopMenuItem>
                 <Modal
                   size="mini"
                   trigger={
@@ -156,7 +171,7 @@ const Navigation = () => {
                     <LogIn />
                   </Modal.Content>
                 </Modal>
-              </Menu.Item>
+              </DesktopMenuItem>
             )}
           </Menu.Menu>
         </Menu>
@@ -175,38 +190,38 @@ const Navigation = () => {
           vertical
           visible={sidebarOpened}
         >
-          <Menu.Item>
+          <MobileMenuItem>
             <Link to="/" activeStyle={{ textDecoration: "underline" }}>
               <Icon name="home" /> Hem
             </Link>
-          </Menu.Item>
-          <Menu.Item>
+          </MobileMenuItem>
+          <MobileMenuItem>
             <Link to="/courses" activeStyle={{ textDecoration: "underline" }}>
               Kurser
             </Link>
-          </Menu.Item>
-          <Menu.Item>
+          </MobileMenuItem>
+          <MobileMenuItem>
             <Link to="/services" activeStyle={{ textDecoration: "underline" }}>
               Tjänster
             </Link>
-          </Menu.Item>
-          <Menu.Item>
+          </MobileMenuItem>
+          <MobileMenuItem>
             <Link to="/tools" activeStyle={{ textDecoration: "underline" }}>
               Verktyg
             </Link>
-          </Menu.Item>
+          </MobileMenuItem>
           <BottomMenuItems>
             {user ? (
               <>
-                <Menu.Item>
+                <MobileMenuItem>
                   <Link
                     to="/account"
                     activeStyle={{ textDecoration: "underline" }}
                   >
                     <Icon name="user" /> Mina sidor
                   </Link>
-                </Menu.Item>
-                <Menu.Item>
+                </MobileMenuItem>
+                <MobileMenuItem>
                   <Link
                     to="/"
                     onClick={e => {
@@ -217,10 +232,10 @@ const Navigation = () => {
                   >
                     Logga ut
                   </Link>
-                </Menu.Item>
+                </MobileMenuItem>
               </>
             ) : (
-              <Menu.Item>
+              <MobileMenuItem>
                 <Modal
                   size="mini"
                   trigger={
@@ -239,7 +254,7 @@ const Navigation = () => {
                     <LogIn />
                   </Modal.Content>
                 </Modal>
-              </Menu.Item>
+              </MobileMenuItem>
             )}
           </BottomMenuItems>
         </Sidebar>
