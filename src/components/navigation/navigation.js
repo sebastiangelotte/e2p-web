@@ -75,7 +75,13 @@ const Wrapper = styled.div`
 const Navigation = ({ transparent }) => {
   if (typeof window !== "undefined") {
     var { user, logout } = useUser()
+const Logo = styled.img`
+  width: 50px;
+
+  @media only screen and (max-width: 600px) {
+    width: 90px;
   }
+`
 
   const [sidebarOpened, setSidebarOpened] = useState(false)
 
@@ -87,22 +93,22 @@ const Navigation = ({ transparent }) => {
       <DesktopNav>
         <Menu as="nav" secondary>
           {/* <Container center> */}
-          <Menu.Item style={style.menu.item}>
+          <Menu.Item>
             <Link to="/" activeStyle={{ textDecoration: "underline" }}>
-              <img src={logo} alt="Easy2perform" style={{ width: "50px" }} />
+              <Logo src={logo} alt="Easy2perform" />
             </Link>
           </Menu.Item>
-          <Menu.Item style={style.menu.item}>
+          <Menu.Item>
             <Link to="/courses" activeStyle={{ textDecoration: "underline" }}>
               Kurser
             </Link>
           </Menu.Item>
-          <Menu.Item style={style.menu.item}>
+          <Menu.Item>
             <Link to="/services" activeStyle={{ textDecoration: "underline" }}>
               Tjänster
             </Link>
           </Menu.Item>
-          <Menu.Item style={style.menu.item}>
+          <Menu.Item>
             <Link to="/tools" activeStyle={{ textDecoration: "underline" }}>
               Verktyg
             </Link>
@@ -110,7 +116,7 @@ const Navigation = ({ transparent }) => {
           <Menu.Menu position="right">
             {user ? (
               <>
-                <Menu.Item style={style.menu.item}>
+                <Menu.Item>
                   <Link
                     to="/"
                     onClick={e => {
@@ -122,7 +128,7 @@ const Navigation = ({ transparent }) => {
                     Logga ut
                   </Link>
                 </Menu.Item>
-                <Menu.Item style={style.menu.item}>
+                <Menu.Item>
                   <Link
                     to="/account"
                     activeStyle={{ textDecoration: "underline" }}
@@ -132,7 +138,7 @@ const Navigation = ({ transparent }) => {
                 </Menu.Item>
               </>
             ) : (
-              <Menu.Item style={style.menu.item}>
+              <Menu.Item>
                 <Modal
                   size="mini"
                   trigger={
@@ -169,22 +175,22 @@ const Navigation = ({ transparent }) => {
           vertical
           visible={sidebarOpened}
         >
-          <Menu.Item style={style.menu.mobileItem}>
+          <Menu.Item>
             <Link to="/" activeStyle={{ textDecoration: "underline" }}>
               <Icon name="home" /> Hem
             </Link>
           </Menu.Item>
-          <Menu.Item style={style.menu.mobileItem}>
+          <Menu.Item>
             <Link to="/courses" activeStyle={{ textDecoration: "underline" }}>
               Kurser
             </Link>
           </Menu.Item>
-          <Menu.Item style={style.menu.mobileItem}>
+          <Menu.Item>
             <Link to="/services" activeStyle={{ textDecoration: "underline" }}>
               Tjänster
             </Link>
           </Menu.Item>
-          <Menu.Item style={style.menu.mobileItem}>
+          <Menu.Item>
             <Link to="/tools" activeStyle={{ textDecoration: "underline" }}>
               Verktyg
             </Link>
@@ -192,7 +198,7 @@ const Navigation = ({ transparent }) => {
           <BottomMenuItems>
             {user ? (
               <>
-                <Menu.Item style={style.menu.mobileItem}>
+                <Menu.Item>
                   <Link
                     to="/account"
                     activeStyle={{ textDecoration: "underline" }}
@@ -200,7 +206,7 @@ const Navigation = ({ transparent }) => {
                     <Icon name="user" /> Mina sidor
                   </Link>
                 </Menu.Item>
-                <Menu.Item style={style.menu.mobileItem}>
+                <Menu.Item>
                   <Link
                     to="/"
                     onClick={e => {
@@ -214,7 +220,7 @@ const Navigation = ({ transparent }) => {
                 </Menu.Item>
               </>
             ) : (
-              <Menu.Item style={style.menu.mobileItem}>
+              <Menu.Item>
                 <Modal
                   size="mini"
                   trigger={
@@ -239,37 +245,10 @@ const Navigation = ({ transparent }) => {
         </Sidebar>
       </MobileNav>
       <MobileLogo to="/" activeStyle={{ textDecoration: "underline" }}>
-        <img src={logo} alt="Easy2perform" style={{ width: "90px" }} />
+        <Logo src={logo} alt="Easy2perform" />
       </MobileLogo>
     </Wrapper>
   )
 }
 
 export default Navigation
-
-const style = {
-  menu: {
-    item: {
-      fontSize: "12px",
-      fontWeight: "600",
-      textTransform: "uppercase",
-      letterSpacing: "0.5px",
-    },
-    mobileItem: {
-      fontSize: "20px",
-      fontWeight: "600",
-      textTransform: "uppercase",
-      letterSpacing: "3px",
-    },
-  },
-  transparentMenu: {
-    backgroundColor: "transparent",
-    maxWidth: "1127px",
-    margin: "0 auto",
-    border: "none",
-    position: "relative",
-    top: "74px",
-    zIndex: "2",
-    marginTop: "-74px",
-  },
-}
