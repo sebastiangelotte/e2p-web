@@ -9,19 +9,43 @@ import logo from "../../images/logo.svg"
 
 const DesktopNav = styled.div`
   display: none;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+
   @media only screen and (min-width: 600px) {
     display: block;
+  }
+
+  a {
+    color: white;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: white;
+    }
   }
 `
 
 const MobileNav = styled.div`
   display: none;
+  background-color: transparent;
+  max-width: 1127px;
+  margin: 0 auto;
+  border: none;
+  position: relative;
+  z-index: 2;
+
   @media only screen and (max-width: 600px) {
     display: block;
   }
 `
 
 const Hamburger = styled(Icon)`
+  position: absolute;
   padding: 1rem;
 `
 
@@ -35,7 +59,7 @@ const MobileLogo = styled(Link)`
   position: absolute;
   z-index: 1;
   left: 50%;
-  top: 82px;
+  top: 15px;
   transform: translateX(-50%);
 
   @media only screen and (min-width: 600px) {
@@ -49,9 +73,9 @@ const Wrapper = styled.div`
 `
 
 const Navigation = ({ transparent }) => {
-  if (typeof window !== "undefined") {
-    var { user, logout } = useUser()
-  }
+  //   if (typeof window !== "undefined") {
+  var { user, logout } = useUser()
+  //   }
 
   const [sidebarOpened, setSidebarOpened] = useState(false)
 
@@ -61,45 +85,25 @@ const Navigation = ({ transparent }) => {
   return (
     <Wrapper>
       <DesktopNav>
-        <Menu
-          as="nav"
-          secondary
-          style={transparent ? style.transparentMenu : style.menu.wrapper}
-        >
+        <Menu as="nav" secondary>
           {/* <Container center> */}
           <Menu.Item style={style.menu.item}>
-            <Link
-              to="/"
-              activeStyle={{ textDecoration: "underline" }}
-              style={transparent ? style.transparentLink : {}}
-            >
+            <Link to="/" activeStyle={{ textDecoration: "underline" }}>
               <img src={logo} alt="Easy2perform" style={{ width: "50px" }} />
             </Link>
           </Menu.Item>
           <Menu.Item style={style.menu.item}>
-            <Link
-              to="/courses"
-              activeStyle={{ textDecoration: "underline" }}
-              style={transparent ? style.transparentLink : {}}
-            >
+            <Link to="/courses" activeStyle={{ textDecoration: "underline" }}>
               Kurser
             </Link>
           </Menu.Item>
           <Menu.Item style={style.menu.item}>
-            <Link
-              to="/services"
-              activeStyle={{ textDecoration: "underline" }}
-              style={transparent ? style.transparentLink : {}}
-            >
+            <Link to="/services" activeStyle={{ textDecoration: "underline" }}>
               Tjänster
             </Link>
           </Menu.Item>
           <Menu.Item style={style.menu.item}>
-            <Link
-              to="/tools"
-              activeStyle={{ textDecoration: "underline" }}
-              style={transparent ? style.transparentLink : {}}
-            >
+            <Link to="/tools" activeStyle={{ textDecoration: "underline" }}>
               Verktyg
             </Link>
           </Menu.Item>
@@ -114,7 +118,6 @@ const Navigation = ({ transparent }) => {
                       logout()
                     }}
                     activeStyle={{ textDecoration: "underline" }}
-                    style={transparent ? style.transparentLink : {}}
                   >
                     Logga ut
                   </Link>
@@ -123,7 +126,6 @@ const Navigation = ({ transparent }) => {
                   <Link
                     to="/account"
                     activeStyle={{ textDecoration: "underline" }}
-                    style={transparent ? style.transparentLink : {}}
                   >
                     Mina sidor <Icon name="user" />
                   </Link>
@@ -138,14 +140,12 @@ const Navigation = ({ transparent }) => {
                       to="#"
                       onClick={e => e.preventDefault()}
                       activeStyle={{ textDecoration: "underline" }}
-                      style={transparent ? style.transparentLink : {}}
                     >
                       Logga in <Icon name="lock" />
                     </Link>
                   }
                   closeIcon
                 >
-                  {/* <Header icon="lock" content={`Logga in`} /> */}
                   <Modal.Content>
                     <LogIn />
                   </Modal.Content>
@@ -153,10 +153,9 @@ const Navigation = ({ transparent }) => {
               </Menu.Item>
             )}
           </Menu.Menu>
-          {/* </Container> */}
         </Menu>
       </DesktopNav>
-      <MobileNav style={style.transparentMenu}>
+      <MobileNav>
         <Hamburger
           name="sidebar"
           inverted
@@ -239,12 +238,8 @@ const Navigation = ({ transparent }) => {
           </BottomMenuItems>
         </Sidebar>
       </MobileNav>
-      <MobileLogo
-        to="/"
-        activeStyle={{ textDecoration: "underline" }}
-        style={transparent ? style.transparentLink : {}}
-      >
-        <img src={logo} alt="Easy2perform" style={{ width: "50px" }} />
+      <MobileLogo to="/" activeStyle={{ textDecoration: "underline" }}>
+        <img src={logo} alt="Easy2perform" style={{ width: "90px" }} />
       </MobileLogo>
     </Wrapper>
   )
@@ -254,12 +249,6 @@ export default Navigation
 
 const style = {
   menu: {
-    wrapper: {
-      marginBottom: 0,
-      borderColor: "white",
-      maxWidth: "1127px",
-      margin: "0 auto",
-    },
     item: {
       fontSize: "12px",
       fontWeight: "600",
@@ -282,8 +271,5 @@ const style = {
     top: "74px",
     zIndex: "2",
     marginTop: "-74px",
-  },
-  transparentLink: {
-    color: "white",
   },
 }
