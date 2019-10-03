@@ -72,16 +72,17 @@ const Wrapper = styled.div`
   z-index: 3;
 `
 
-const Navigation = ({ transparent }) => {
+const Navigation = () => {
   if (typeof window !== "undefined") {
     var { user, logout } = useUser()
-const Logo = styled.img`
-  width: 50px;
-
-  @media only screen and (max-width: 600px) {
-    width: 90px;
   }
-`
+  const Logo = styled.img`
+    width: 50px;
+
+    @media only screen and (max-width: 600px) {
+      width: 90px;
+    }
+  `
 
   const [sidebarOpened, setSidebarOpened] = useState(false)
 
@@ -92,7 +93,6 @@ const Logo = styled.img`
     <Wrapper>
       <DesktopNav>
         <Menu as="nav" secondary>
-          {/* <Container center> */}
           <Menu.Item>
             <Link to="/" activeStyle={{ textDecoration: "underline" }}>
               <Logo src={logo} alt="Easy2perform" />
