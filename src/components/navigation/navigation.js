@@ -73,9 +73,9 @@ const Wrapper = styled.div`
 `
 
 const Navigation = ({ transparent }) => {
-  //   if (typeof window !== "undefined") {
-  var { user, logout } = useUser()
-  //   }
+  if (typeof window !== "undefined") {
+    var { user, logout } = useUser()
+  }
 
   const [sidebarOpened, setSidebarOpened] = useState(false)
 
