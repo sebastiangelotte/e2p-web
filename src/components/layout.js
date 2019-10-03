@@ -1,7 +1,7 @@
+import "semantic-ui-css/semantic.min.css"
 import React from "react"
 import Navigation from "./navigation/navigation"
 import Footer from "./footer/footer"
-import "semantic-ui-css/semantic.min.css"
 import ScrollUpButton from "react-scroll-up-button"
 import CookieConsent from "react-cookie-consent"
 
