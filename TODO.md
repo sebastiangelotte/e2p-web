@@ -33,6 +33,15 @@
 - [ ] gå igenom startsidan
 - [ ] add date to account courses
 
+## Efter telemöte 20191127
+
+- [ ] företagsinterna kurser första tabben
+- [ ] lägg till ny tab
+ - skräddarsydda kurser
+- [ ] lägg till textfält över listan med kurser på alla tabbar
+- [ ] gör så att man kan ändra texten i heron på alla sidor och under alla tabbar
+
+
 ---
 
 ## Later
