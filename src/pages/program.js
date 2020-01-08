@@ -76,14 +76,10 @@ const Services = () => {
             från förstudie och behovsanpassning, till genomförande, utvärdering
             och underhåll av utbildningsprogrammet över tid.
           </p>
-          <Filter
-            data={data.allContentfulService.edges}
-            onChange={updateServices}
-          />
         </div>
       </Hero>
       <Segment vertical>
-        {services.map((service, index) => {
+        {/* {services.map((service, index) => {
           return (
             <Segment
               textAlign="center"
@@ -116,7 +112,7 @@ const Services = () => {
               </Container>
             </Segment>
           )
-        })}
+        })} */}
       </Segment>
     </Layout>
   )

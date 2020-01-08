@@ -82,9 +82,7 @@ const Courses = () => {
     }
   }
 
-  const [activeItem, setActiveItem] = useState(
-    "Mest efterfrågade företagsinterna kurser"
-  )
+  const [activeItem, setActiveItem] = useState("Företagsinterna kurser")
 
   return (
     <Layout transparentNavigation>
@@ -108,9 +106,9 @@ const Courses = () => {
           <Grid.Row>
             {data.highlightedCourses.edges.map((course, i) => (
               <Grid.Column width={8}>
-                <Segment vertical>
+                <Segment vertical style={{ height: "100%" }}>
                   <Link to={`/courses/${course.node.slug}`}>
-                    <HighlightedCard key={i} data={course.node} />
+                    <HighlightedCard key={i} data={course.node} highlighted />
                   </Link>
                 </Segment>
               </Grid.Column>
@@ -120,37 +118,36 @@ const Courses = () => {
       </Container>
       <Segment vertical style={{ border: "none" }}>
         <Container>
-          {/* <Filter
+          <h2>Mest efterfrågade kurser</h2>
+          <Filter
             data={data.allContentfulCourse.edges}
             onChange={updateCourses}
-          /> */}
+          />
           <Menu pointing secondary size="big">
             <Menu.Item
-              active={activeItem === "Mest efterfrågade företagsinterna kurser"}
-              onClick={() =>
-                setActiveItem("Mest efterfrågade företagsinterna kurser")
-              }
+              active={activeItem === "Företagsinterna kurser"}
+              onClick={() => setActiveItem("Företagsinterna kurser")}
             >
-              Mest efterfrågade företagsinterna kurser
+              Företagsinterna
             </Menu.Item>
             <Menu.Item
-              active={activeItem === "Mest efterfrågade öppna kurser"}
-              onClick={() => setActiveItem("Mest efterfrågade öppna kurser")}
+              active={activeItem === "Öppna kurser"}
+              onClick={() => setActiveItem("Öppna kurser")}
             >
-              Mest efterfrågade öppna kurser
+              Öppna
             </Menu.Item>
           </Menu>
         </Container>
       </Segment>
       <Segment vertical>
         <Container>
-          {activeItem === "Mest efterfrågade öppna kurser" && (
+          {activeItem === "Öppna kurser" && (
             <p>
               Vi genomför ett mindre urval öppna kurser i Stockholm och Göteborg
               som komplement till våra företagsinterna kurser.
             </p>
           )}
-          {activeItem === "Mest efterfrågade företagsinterna kurser" && (
+          {activeItem === "Företagsinterna kurser" && (
             <p>
               Kurserna anpassas till företagets och deltagarnas verkliga behov
               genom en webbaserad förstudie där vi kartlägger behov,
@@ -162,7 +159,7 @@ const Courses = () => {
           )}
 
           <Item.Group divided>
-            {activeItem === "Mest efterfrågade öppna kurser" &&
+            {activeItem === "Öppna kurser" &&
               courses
                 .filter(course => {
                   return course.node.companyInternalCourse === false
@@ -171,7 +168,7 @@ const Courses = () => {
                 .map((edge, index) => {
                   return <CourseCard key={index} data={edge.node} />
                 })}
-            {activeItem === "Mest efterfrågade företagsinterna kurser" &&
+            {activeItem === "Företagsinterna kurser" &&
               courses
                 .filter(course => {
                   return course.node.companyInternalCourse === true

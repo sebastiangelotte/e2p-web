@@ -1,16 +1,18 @@
 import React, { useState } from "react"
 import { graphql, useStaticQuery, Link } from "gatsby"
 
-import { Card, Label, Segment, Container, Header } from "semantic-ui-react"
+import { Segment, Container, Header, Grid } from "semantic-ui-react"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
 import Filter from "../components/filter"
 import Hero from "../components/hero"
+import HighlightedCard from "../components/highlightedCard"
+import FilterResults from "react-filter-search"
+import styled from "styled-components"
 
 const style = {
   segment: {
-    paddingTop: "10em",
     paddingBottom: "6em",
     backgroundColor: "#f7f7f7",
   },
@@ -28,10 +30,21 @@ const Tools = () => {
           node {
             slug
             title
+            shortDescription
             tags
             description {
               json
             }
+          }
+        }
+      }
+      highlightedTools: allContentfulTool(filter: { highlight: { eq: true } }) {
+        edges {
+          node {
+            title
+            shortDescription
+            slug
+            tags
           }
         }
       }
@@ -48,6 +61,7 @@ const Tools = () => {
   `)
 
   const [tools, setTools] = useState(data.allContentfulTool.edges)
+  const [searchTerm, setSearchTerm] = useState("")
 
   const updateTools = tools => {
     if (tools.length > 0) {
@@ -55,6 +69,11 @@ const Tools = () => {
     } else {
       setTools(data.allContentfulTool.edges) // reset state
     }
+  }
+
+  const handleSearch = event => {
+    const { value } = event.target
+    setSearchTerm(value)
   }
 
   return (
@@ -69,37 +88,52 @@ const Tools = () => {
             Med våra enkla, praktiska checklistor får du stöd och vägledning i
             hur vissa viktiga arbetsmoment bör utföras. Helt gratis.
           </p>
-          <Filter data={data.allContentfulTool.edges} onChange={updateTools} />
         </div>
       </Hero>
+      <Container>
+        <Grid stackable>
+          <Grid.Row>
+            {data.highlightedTools.edges.map((tool, i) => (
+              <Grid.Column width={8}>
+                <Segment vertical style={{ height: "100%" }}>
+                  <Link to={`/tools/${tool.node.slug}`}>
+                    <HighlightedCard key={i} data={tool.node} highlighted />
+                  </Link>
+                </Segment>
+              </Grid.Column>
+            ))}
+          </Grid.Row>
+        </Grid>
+      </Container>
       <Segment style={style.segment} vertical>
         <Container>
-          <Card.Group centered>
-            {tools.map((edge, index) => {
-              return (
-                <Card key={index}>
-                  <Card.Content>
-                    <Card.Header>
-                      <Link to={`/tools/${edge.node.slug}`}>
-                        {edge.node.title}
-                      </Link>
-                    </Card.Header>
-                  </Card.Content>
-                  {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
-                  <Card.Content extra>
-                    {edge.node.tags &&
-                      edge.node.tags.map(tag => {
-                        return (
-                          <Label key={tag} size="tiny">
-                            {tag}
-                          </Label>
-                        )
-                      })}
-                  </Card.Content>
-                </Card>
-              )
-            })}
-          </Card.Group>
+          <h2>Alla checklistor </h2>
+          {/* <Filter data={data.allContentfulTool.edges} onChange={updateTools} /> */}
+          <SearchBox
+            type="search"
+            placeholder="🔍 Sök"
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+          <Grid stackable>
+            <Grid.Row>
+              <FilterResults
+                value={searchTerm}
+                data={tools}
+                renderResults={results => {
+                  return results.map((el, i) => (
+                    <Grid.Column width={8}>
+                      <Segment vertical style={{ height: "100%" }}>
+                        <Link to={`/tools/${el.node.slug}`}>
+                          <HighlightedCard key={i} data={el.node} />
+                        </Link>
+                      </Segment>
+                    </Grid.Column>
+                  ))
+                }}
+              />
+            </Grid.Row>
+          </Grid>
         </Container>
       </Segment>
     </Layout>
@@ -107,3 +141,12 @@ const Tools = () => {
 }
 
 export default Tools
+
+const SearchBox = styled.input`
+  display: block;
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 3px;
+`
