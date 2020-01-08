@@ -17374,6 +17374,11 @@ react-fast-compare@^2.0.2:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
+react-filter-search@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-filter-search/-/react-filter-search-1.0.9.tgz#4c7666bdc84f8fe706b9c258bff82bb5d6a94652"
+  integrity sha512-hwbd1/Bhe5ZMdv9+RcCXJJlIl5uU+api+kxzzlxWNH8o7gmpxDdKWc8HMl1jpe8ACC7pGN3YbGeAht2q4ntOeg==
+
 react-focus-lock@^1.17.7:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/react-focus-lock/-/react-focus-lock-1.19.1.tgz#2f3429793edaefe2d077121f973ce5a3c7a0651a"

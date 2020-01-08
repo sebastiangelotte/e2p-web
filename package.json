@@ -33,6 +33,7 @@
     "react": "^16.8.6",
     "react-cookie-consent": "^2.5.0",
     "react-dom": "^16.8.6",
+    "react-filter-search": "^1.0.9",
     "react-helmet": "^5.2.1",
     "react-scroll-up-button": "^1.6.4",
     "redux": "^4.0.1",
