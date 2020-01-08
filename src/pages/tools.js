@@ -62,14 +62,12 @@ const Tools = () => {
       <Head title="Verktyg" />
       <Hero backgroundImage={data.file.childImageSharp.fluid}>
         <Header as="h1" inverted>
-          Gratis checklistor och mallar
+          Varför uppfinna hjulet varje gång?
         </Header>
         <div>
           <p>
-            Easy2perform utvecklar kontinuerligt praktiska checklistor och
-            mallar för att ge stöd och vägledning till svåra och komplexa
-            arbetsuppgifter i det dagliga arbetet. Våra enkla och effektiva
-            verktyg gör det enklare för dig att prestera i yrkesrollen.
+            Med våra enkla, praktiska checklistor får du stöd och vägledning i
+            hur vissa viktiga arbetsmoment bör utföras. Helt gratis.
           </p>
           <Filter data={data.allContentfulTool.edges} onChange={updateTools} />
         </div>

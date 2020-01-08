@@ -41,10 +41,10 @@ const HomepageHeading = ({ mobile }) => (
       textAlign="center"
       style={{ position: "relative", zIndex: "1" }}
     >
-      <ResponsiveHeader>Välkommen!</ResponsiveHeader>
+      <ResponsiveHeader>Easy2perform</ResponsiveHeader>
       <Header
         as="h2"
-        content="Easy2perform utvecklar och genomför inspirerande kurser för din utveckling."
+        content="Kompetensutveckling och stöd för medarbetare och chefer"
         inverted
         style={{
           fontSize: "1.7em",

@@ -60,12 +60,21 @@ const Services = () => {
       <Head title="Verktyg" />
       <Hero backgroundImage={data.file.childImageSharp.fluid}>
         <Header as="h1" inverted>
-          Organisation & ledarutveckling
+          Skräddarsydd kompetensutveckling
         </Header>
         <div>
           <p>
-            Genom vårt omfattande konsultnätverk kan vi erbjuda konsulttjänster
-            för utveckling av organisation och ledare.
+            Behöver du hjälp att skräddarsy ett helt utbildningsprogram för en
+            viss målgrupp, exempelvis ett introduktionsprogram för nya ledare,
+            säljare, projektledare mfl?
+          </p>
+          <p>
+            Vi tar tillsammans med dig som kund fram en kravspecifikation
+            utifrån det specifika behovet. Du får sedan kostnadsfritt ett
+            förslag på innehållsmoduler, struktur samt utbildarprofiler för
+            respektive modul. Vill du gå vidare projektleder vi hela processen,
+            från förstudie och behovsanpassning, till genomförande, utvärdering
+            och underhåll av utbildningsprogrammet över tid.
           </p>
           <Filter
             data={data.allContentfulService.edges}
