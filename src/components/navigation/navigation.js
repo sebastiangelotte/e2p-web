@@ -119,13 +119,18 @@ const Navigation = () => {
             </Link>
           </DesktopMenuItem>
           <DesktopMenuItem>
-            <Link to="/services" activeStyle={{ textDecoration: "underline" }}>
-              Tjänster
+            <Link to="/program" activeStyle={{ textDecoration: "underline" }}>
+              Utbildningsprogram
             </Link>
           </DesktopMenuItem>
           <DesktopMenuItem>
             <Link to="/tools" activeStyle={{ textDecoration: "underline" }}>
-              Verktyg
+              Checklistor
+            </Link>
+          </DesktopMenuItem>
+          <DesktopMenuItem>
+            <Link to="/services" activeStyle={{ textDecoration: "underline" }}>
+              Övriga tjänster
             </Link>
           </DesktopMenuItem>
           <Menu.Menu position="right">
