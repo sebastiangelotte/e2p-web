@@ -55,7 +55,7 @@ const Account = () => {
   const [activeItem, setActiveItem] = useState("Mina kurser")
 
   //   if (typeof window !== "undefined") {
-  //   var { user } = useUser()
+  //     var { user } = useUser()
   //   }
 
   const [userData, setUserData] = useState()

@@ -11,9 +11,9 @@ const ChangePassword = () => {
     negative: false,
     positive: false,
   })
-  //   if (typeof window !== "undefined") {
-  var { user, changePassword } = useUser()
-  //   }
+  if (typeof window !== "undefined") {
+    var { user, changePassword } = useUser()
+  }
 
   const handleMessageDismiss = () => {
     setMessage({ isVisible: false })
