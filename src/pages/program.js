@@ -49,7 +49,7 @@ const Program = () => {
           </p>
         </div>
       </Hero>
-      <Segment vertical style={{ padding: "0 20px" }}>
+      <Segment vertical>
         <TopWrapper>
           <h2>5 stegs projektmodell för utveckling</h2>
           <p>
@@ -70,7 +70,8 @@ const Program = () => {
             <b>(5)</b>.
           </p>
         </TopWrapper>
-        <div style={{ backgroundColor: "#f7f7f7" }}>
+        <BottomWrapper>
+          <h2>Tidigare uppdrag</h2>
           <ExampleWrapper>
             <img src={scienceSVG} alt="Utbildningsprogram" />
             <div>
@@ -91,7 +92,7 @@ const Program = () => {
               </p>
             </div>
           </ExampleWrapper>
-          <ExampleWrapper>
+          <ExampleWrapper flipped>
             <div>
               <h3>Ledarutveckling och individuell coaching för enhetschefer</h3>
               <p>
@@ -131,7 +132,7 @@ const Program = () => {
               </p>
             </div>
           </ExampleWrapper>
-        </div>
+        </BottomWrapper>
       </Segment>
     </Layout>
   )
@@ -143,11 +144,25 @@ const TopWrapper = styled.div`
   text-align: center;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 30px 20px 50px 20px;
 
   p {
     font-size: 120%;
     line-height: 1.7em;
+  }
+`
+
+const BottomWrapper = styled.div`
+  padding: 50px 20px;
+  background-color: #f7f7f7;
+
+  h2 {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 30px;
   }
 `
 
@@ -160,8 +175,19 @@ const ExampleWrapper = styled.div`
   align-items: center;
   font-size: 120%;
 
-  > * {
-    padding-right: 80px;
+  > img {
+    ${props => (props.flipped ? "padding-left: 80px;" : "padding-right: 80px;")}
+  }
+
+  > div {
+    padding: 40px 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: #fff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23030301' stroke-width='67.7' stroke-opacity='0.15' %3E%3Ccircle fill='%23179dc2' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%231794ba' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23178bb2' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%231882a9' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%231979a1' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23197098' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%231a688f' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%231a5f87' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%231a577e' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%231a4f75' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%2319476c' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%23183f63' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%2317375a' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%23153051' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%23132948' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%2310223f' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%230e1b36' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%230b142e' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: cover;
   }
 
   img {
@@ -171,5 +197,17 @@ const ExampleWrapper = styled.div`
 
   @media only screen and (max-width: 800px) {
     flex-direction: column;
+
+    > img {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    img {
+      width: 70%;
+      margin-bottom: 20px;
+    }
+
+    ${props => props.flipped && "flex-direction: column-reverse;"}
   }
 `

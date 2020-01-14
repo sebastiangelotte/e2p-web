@@ -206,13 +206,18 @@ const Navigation = () => {
             </Link>
           </MobileMenuItem>
           <MobileMenuItem>
-            <Link to="/services" activeStyle={{ textDecoration: "underline" }}>
-              Tjänster
+            <Link to="/program" activeStyle={{ textDecoration: "underline" }}>
+              Utbildnings-program
             </Link>
           </MobileMenuItem>
           <MobileMenuItem>
             <Link to="/tools" activeStyle={{ textDecoration: "underline" }}>
-              Verktyg
+              Checklistor
+            </Link>
+          </MobileMenuItem>
+          <MobileMenuItem>
+            <Link to="/services" activeStyle={{ textDecoration: "underline" }}>
+              Övriga tjänster
             </Link>
           </MobileMenuItem>
           <BottomMenuItems>
