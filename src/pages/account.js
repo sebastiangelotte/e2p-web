@@ -54,9 +54,9 @@ const Account = () => {
   const [courses] = useState(data.allContentfulCourse.edges)
   const [activeItem, setActiveItem] = useState("Mina kurser")
 
-  //   if (typeof window !== "undefined") {
-  //     var { user } = useUser()
-  //   }
+  // if (typeof window !== "undefined") {
+  //   var { user } = useUser()
+  // }
 
   const [userData, setUserData] = useState()
   const userCourses = courses.filter(course => {
