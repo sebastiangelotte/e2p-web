@@ -53,13 +53,13 @@ const HomepageHeading = ({ mobile }) => (
         }}
       />
       <Link to="/courses">
-        <Button primary size="big">
+        <Button secondary size="big">
           Kurser
           <Icon name="right arrow" />
         </Button>
       </Link>
       <Link to="/tools">
-        <Button primary size="big">
+        <Button secondary size="big">
           Verktyg
           <Icon name="right arrow" />
         </Button>

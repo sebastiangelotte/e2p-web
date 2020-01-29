@@ -5,7 +5,6 @@ import { Segment, Container, Header, Grid } from "semantic-ui-react"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
-import Filter from "../components/filter"
 import Hero from "../components/hero"
 import HighlightedCard from "../components/highlightedCard"
 import FilterResults from "react-filter-search"
@@ -60,16 +59,8 @@ const Tools = () => {
     }
   `)
 
-  const [tools, setTools] = useState(data.allContentfulTool.edges)
+  const [tools] = useState(data.allContentfulTool.edges)
   const [searchTerm, setSearchTerm] = useState("")
-
-  const updateTools = tools => {
-    if (tools.length > 0) {
-      setTools(tools)
-    } else {
-      setTools(data.allContentfulTool.edges) // reset state
-    }
-  }
 
   const handleSearch = event => {
     const { value } = event.target

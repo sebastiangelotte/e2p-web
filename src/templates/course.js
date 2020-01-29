@@ -251,6 +251,7 @@ const Course = props => {
                           options
                         )}
                         {!course.companyInternalCourse &&
+                          course.kurstillflle &&
                           course.kurstillflle.map(tillfalle => {
                             return (
                               <a
