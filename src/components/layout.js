@@ -14,6 +14,16 @@ const GlobalStyle = createGlobalStyle`
   ul > li > ul {
       margin-bottom: 0.75em;
   }
+
+  .segment img {
+      max-width: 100%;
+  }
+
+  .segment blockquote {
+    border-left: 4px solid #7dcdea;
+    padding-left: 10px;
+    margin-left: 15px;
+  }
 `
 
 const Layout = ({ children, transparentNavigation }) => {
