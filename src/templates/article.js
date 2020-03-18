@@ -2,7 +2,7 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { Card, Segment, Container, Grid, Label } from "semantic-ui-react"
-// import ContactForm from "../components/contactForm"
+import ContactForm from "../components/contactForm"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import PageHeader from "../components/page-header/pageHeader"
@@ -50,23 +50,24 @@ const Article = props => {
             <Grid.Row>
               <Grid.Column width={11}>
                 <Segment vertical>
-                    <h3>Publicerat: {props.data.contentfulArticle.date}</h3>
+                  <h3>Publicerat: {props.data.contentfulArticle.date}</h3>
                   {documentToReactComponents(
-                    props.data.contentfulArticle.description.json, options
+                    props.data.contentfulArticle.description.json,
+                    options
                   )}
                 </Segment>
-                {/* <Segment vertical>
-                  <h2>Önskar du offert?</h2>
+                <Segment vertical>
+                  <h2>Undrar du något?</h2>
                   <p>
-                    Beskriv dina önskemål, så sänder vi dig en offert
-                    kostnadsfritt.
+                    Skicka ett meddelande till oss så hör vi av oss så snart vi
+                    kan.
                   </p>
                   <ContactForm source={props.data.contentfulArticle.title} />
-                </Segment> */}
+                </Segment>
               </Grid.Column>
               <Grid.Column width={5} floated="right">
-                                {/* LINKED COURSES */}
-                                {props.data.contentfulArticle.relateradeKurser && (
+                {/* LINKED COURSES */}
+                {props.data.contentfulArticle.relateradeKurser && (
                   <>
                     <h3>Relaterade Kurser</h3>
                     <Card.Group>
