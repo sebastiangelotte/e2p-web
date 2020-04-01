@@ -58,6 +58,28 @@ const Contact = () => {
               options
             )}
           <ContactForm source={data.allContentfulPage.edges[0].node.title} />
+          <h2>
+            Har du frågor, tips eller funderingar rörande easy2perform, vänligen
+            kontakta oss
+          </h2>
+          <p>
+            <b>Kurser & konsulttjänster: </b>
+            <a href="mailto:jan-erik.nilsson@easy2perform.se">
+              jan-erik.nilsson@easy2perform.se
+            </a>
+          </p>
+          <p>
+            <b>Nyhetsbrev & checklistor: </b>
+            <a href="mailto:elin.kalmhoff@easy2perform.se">
+              elin.kalmhoff@easy2perform.se
+            </a>
+          </p>
+          <p>
+            <b>Webb & IT: </b>
+            <a href="mailto:sebastian.gelotte@easy2perform.se">
+              sebastian.gelotte@easy2perform.se
+            </a>
+          </p>
         </Container>
       </Segment>
     </Layout>
