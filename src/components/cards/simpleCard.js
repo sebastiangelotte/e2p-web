@@ -11,11 +11,6 @@ const SimpleCard = ({ title, link }) => {
           <Link to={link}>{title}</Link>
         </Card.Header>
       </Card.Content>
-      {/* <Card.Content description={documentToReactComponents(edge.node.description.json)} /> */}
-      {/* <Card.Content extra>
-        <Icon name="user" />
-        Extra info
-      </Card.Content> */}
     </StyledCard>
   )
 }

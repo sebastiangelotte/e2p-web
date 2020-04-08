@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
-import { Segment, Container, Grid, List, Header } from "semantic-ui-react"
+import { Container, Grid, List, Header } from "semantic-ui-react"
 import MailchimpSignup from "../mailchimpSignup"
 
 const style = {
