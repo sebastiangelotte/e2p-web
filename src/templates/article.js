@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { INLINES } from "@contentful/rich-text-types"
 import { Card, Segment, Container, Grid, Label } from "semantic-ui-react"
 import ContactForm from "../components/contactForm"
 import Head from "../components/head"
@@ -36,7 +37,24 @@ const Article = props => {
         const url = node.data.target.fields.file.sv.url
         return <img alt={alt} src={url} />
       },
+      [INLINES.HYPERLINK]: node => {
+        console.log("asdasd", node)
+        if (node.data.uri.indexOf("youtube.com") !== -1) {
+          return (
+            <iframe
+              title="video"
+              width="100%"
+              height="400"
+              src={node.data.uri}
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          )
+        }
+      },
     },
+
   }
 
   return (
