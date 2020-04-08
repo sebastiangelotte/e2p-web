@@ -87,9 +87,9 @@ const MobileMenuItem = styled(Menu.Item)`
 `
 
 const Navigation = () => {
-  if (typeof window !== "undefined") {
+//   if (typeof window !== "undefined") {
     var { user, logout } = useUser()
-  }
+//   }
 
   const Logo = styled.img`
     width: 50px;

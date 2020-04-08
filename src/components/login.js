@@ -3,7 +3,7 @@ import { Form, Button, Icon, Divider, Message } from "semantic-ui-react"
 import { useUser } from "../utils/user"
 
 const LogIn = () => {
-  if (typeof window !== "undefined") {
+//   if (typeof window !== "undefined") {
     var {
       login,
       createAccount,
@@ -13,7 +13,7 @@ const LogIn = () => {
       forgotPasswordSubmit,
       federatedLogin,
     } = useUser()
-  }
+//   }
 
   const [view, setView] = useState("LOGIN")
   const [tempUsername, setTempUsername] = useState() // used for confirmAccount which needs username
