@@ -23,6 +23,7 @@ const Courses = () => {
             numberOfDays
             tags
             companyInternalCourse
+            onlineCourse
             courseLeader {
               name
               image {
@@ -57,6 +58,7 @@ const Courses = () => {
             numberOfDays
             slug
             tags
+            onlineCourse
           }
         }
       }
@@ -82,7 +84,7 @@ const Courses = () => {
     }
   }
 
-  const [activeItem, setActiveItem] = useState("Företagsinterna kurser")
+  const [activeItem, setActiveItem] = useState("Online")
 
   return (
     <Layout transparentNavigation>
@@ -108,7 +110,12 @@ const Courses = () => {
               <Grid.Column width={8}>
                 <Segment vertical style={{ height: "100%" }}>
                   <Link to={`/courses/${course.node.slug}`}>
-                    <HighlightedCard key={i} data={course.node} highlighted />
+                    <HighlightedCard
+                      key={i}
+                      data={course.node}
+                      highlighted
+                      online={course.node.onlineCourse}
+                    />
                   </Link>
                 </Segment>
               </Grid.Column>
@@ -124,6 +131,12 @@ const Courses = () => {
             onChange={updateCourses}
           />
           <Menu pointing secondary size="big">
+            <Menu.Item
+              active={activeItem === "Online"}
+              onClick={() => setActiveItem("Online")}
+            >
+              🟢 Online
+            </Menu.Item>
             <Menu.Item
               active={activeItem === "Företagsinterna kurser"}
               onClick={() => setActiveItem("Företagsinterna kurser")}
@@ -159,6 +172,14 @@ const Courses = () => {
           )}
 
           <Item.Group divided>
+            {activeItem === "Online" &&
+              courses
+                .filter(course => {
+                  return course.node.onlineCourse === true
+                })
+                .map((edge, index) => {
+                  return <CourseCard key={index} data={edge.node} />
+                })}
             {activeItem === "Öppna kurser" &&
               courses
                 .filter(course => {

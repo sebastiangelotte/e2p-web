@@ -2,15 +2,23 @@ import React from "react"
 import styled from "styled-components"
 import { Label, Icon } from "semantic-ui-react"
 
-const HighlightedCard = ({ data, highlighted, children }) => {
+const HighlightedCard = ({ data, highlighted, online, children }) => {
   return (
     <Wrapper highlighted={highlighted}>
-      {highlighted && (
+      {highlighted && online !== true && (
         <h4>
           <span role="img" aria-label="heart">
             ❤️
           </span>
-          Populär
+          &nbsp;Populär
+        </h4>
+      )}
+      {highlighted && online === true && (
+        <h4>
+          <span role="img" aria-label="heart">
+            🟢
+          </span>
+          &nbsp;Onlinekurs
         </h4>
       )}
       {data.title && <h3>{data.title}</h3>}
