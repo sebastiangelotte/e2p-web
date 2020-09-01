@@ -117,12 +117,11 @@ const Button = styled.button`
   font-size: 16px;
   margin-right: 22px;
   cursor: pointer;
-  transition: background-color 50ms ease-in, border-color 50ms ease-in;
+  transition: border-color 50ms ease-in;
 
   &:hover,
   :active,
   :focus {
-    background-color: ${props => (props.secondary ? "#FF0F54" : "#FFFFFF")};
     border-color: ${props => (props.secondary ? "#FFFFFF" : "#1a2653")};
   }
 
