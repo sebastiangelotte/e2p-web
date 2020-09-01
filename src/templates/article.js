@@ -38,7 +38,6 @@ const Article = props => {
         return <img alt={alt} src={url} />
       },
       [INLINES.HYPERLINK]: node => {
-        console.log("asdasd", node)
         if (node.data.uri.indexOf("youtube.com") !== -1) {
           return (
             <iframe
@@ -54,7 +53,6 @@ const Article = props => {
         }
       },
     },
-
   }
 
   return (
