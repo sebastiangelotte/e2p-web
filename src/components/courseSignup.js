@@ -1,11 +1,7 @@
 import React, { useState } from "react"
 import { Form, Button, Message } from "semantic-ui-react"
 
-import { API, graphqlOperation } from "aws-amplify"
-import * as mutations from "../graphql/mutations"
-import * as queries from "../graphql/queries"
-
-const CourseSignup = ({ courseName, courseID, courseDates }) => {
+const CourseSignup = ({ courseName, courseDates }) => {
   const [extraParticipants, setExtraParticipants] = useState(0)
   const [showContactPerson, setShowContactPerson] = useState(false)
   const [email, setEmail] = useState("")
@@ -24,76 +20,28 @@ const CourseSignup = ({ courseName, courseID, courseDates }) => {
     event.preventDefault()
     const data = new FormData(event.target)
 
-    // TODO: can we loop this for all email addresses in the form?
-    API.graphql(
-      graphqlOperation(queries.getUserData, {
-        id: email,
-      })
-    )
-      .then(user => {
-        API.graphql(
-          graphqlOperation(mutations.updateUserData, {
-            input: {
-              id: email,
-              courses: [...user.data.getUserData.courses, courseID],
-            },
-          })
-        )
-      })
-      .catch(() => {
-        // No existing record of this email in DynamoDB.
-        // Therefore create a new UserData record
-        API.graphql(
-          graphqlOperation(mutations.createUserData, {
-            input: {
-              id: email,
-              courses: [courseID],
-            },
-          })
-        )
-      })
-      .then(() =>
-        fetch("https://formspree.io/mpeaqozx", {
-          method: "POST",
-          body: data,
-          dataType: "json",
-          mode: "no-cors",
+    fetch("https://formspree.io/mpeaqozx", {
+      method: "POST",
+      body: data,
+      dataType: "json",
+      mode: "no-cors",
+    })
+      .then(() => {
+        setIsLoading(false)
+        setMessage({
+          isVisible: true,
+          header: "Tack för din anmälan!",
+          content: "En bekräftelse har skickats till din e-post.",
+          positive: true,
         })
-          .then(() => {
-            setIsLoading(false)
-            setMessage({
-              isVisible: true,
-              header: "Tack för din anmälan!",
-              content: "En bekräftelse har skickats till din e-post.",
-              positive: true,
-            })
-            document.getElementById("form-signup").reset() // reset form after submit
-            setEmail("") // reset controlled form field
-          })
-          .catch(err => {
-            console.log(err)
-            setIsLoading(false)
-          })
-      )
+        document.getElementById("form-signup").reset() // reset form after submit
+        setEmail("") // reset controlled form field
+      })
+      .catch(err => {
+        console.log(err)
+        setIsLoading(false)
+      })
   }
-
-  //   const upcomingDates = courseDates.filter(date => {
-  //     const courseDate = new Date(
-  //       date.split("/")[2],
-  //       date.split("/")[1] - 1,
-  //       date.split("/")[0]
-  //     ).toISOString()
-  //     const currentTime = new Date().toISOString()
-  //     return courseDate > currentTime
-  //   })
-
-  //   const dateOptions = Array.from(upcomingDates).map(date => {
-  //     return {
-  //       key: date,
-  //       text: date,
-  //       value: date,
-  //     }
-  //   })
 
   return (
     <>
@@ -122,7 +70,7 @@ const CourseSignup = ({ courseName, courseID, courseDates }) => {
               label="Datum"
               name="Datum"
               value={date}
-              onChange={e => setDate(e.target.value)}
+              onBlur={e => setDate(e.target.value)}
             >
               {courseDates.map(tillfalle => (
                 <option

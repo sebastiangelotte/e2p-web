@@ -80,7 +80,12 @@ const Bygg = () => {
             </p>
           </Left>
           <Right>
-            <h3>👉 Kostnadsfri offert</h3>
+            <h3>
+              <span role="img" aria-label="icon">
+                👉
+              </span>
+              Kostnadsfri offert
+            </h3>
             <p>
               <b>Berätta kort om ditt behov så tar vi fram förslag till dig.</b>
             </p>

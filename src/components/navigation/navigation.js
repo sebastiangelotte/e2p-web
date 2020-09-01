@@ -1,10 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import { Menu, Icon, Modal, Sidebar } from "semantic-ui-react"
+import { Menu, Icon, Sidebar } from "semantic-ui-react"
 import styled from "styled-components"
-
-import { useUser } from "../../utils/user"
-import LogIn from "../login"
 import logo from "../../images/logo.svg"
 
 const DesktopNav = styled.div`
@@ -87,10 +84,6 @@ const MobileMenuItem = styled(Menu.Item)`
 `
 
 const Navigation = () => {
-  if (typeof window !== "undefined") {
-    var { user, logout } = useUser()
-  }
-
   const Logo = styled.img`
     width: 50px;
 
@@ -133,52 +126,7 @@ const Navigation = () => {
               Övriga tjänster
             </Link>
           </DesktopMenuItem>
-          <Menu.Menu position="right">
-            {user ? (
-              <>
-                <DesktopMenuItem>
-                  <Link
-                    to="/"
-                    onClick={e => {
-                      e.preventDefault()
-                      logout()
-                    }}
-                    activeStyle={{ textDecoration: "underline" }}
-                  >
-                    Logga ut
-                  </Link>
-                </DesktopMenuItem>
-                <DesktopMenuItem>
-                  <Link
-                    to="/account"
-                    activeStyle={{ textDecoration: "underline" }}
-                  >
-                    Mina sidor <Icon name="user" />
-                  </Link>
-                </DesktopMenuItem>
-              </>
-            ) : (
-              <DesktopMenuItem>
-                <Modal
-                  size="mini"
-                  trigger={
-                    <Link
-                      to="#"
-                      onClick={e => e.preventDefault()}
-                      activeStyle={{ textDecoration: "underline" }}
-                    >
-                      Logga in <Icon name="lock" />
-                    </Link>
-                  }
-                  closeIcon
-                >
-                  <Modal.Content>
-                    <LogIn />
-                  </Modal.Content>
-                </Modal>
-              </DesktopMenuItem>
-            )}
-          </Menu.Menu>
+          <Menu.Menu position="right"></Menu.Menu>
         </Menu>
       </DesktopNav>
       <MobileNav>
@@ -220,53 +168,7 @@ const Navigation = () => {
               Övriga tjänster
             </Link>
           </MobileMenuItem>
-          <BottomMenuItems>
-            {user ? (
-              <>
-                <MobileMenuItem>
-                  <Link
-                    to="/account"
-                    activeStyle={{ textDecoration: "underline" }}
-                  >
-                    <Icon name="user" /> Mina sidor
-                  </Link>
-                </MobileMenuItem>
-                <MobileMenuItem>
-                  <Link
-                    to="/"
-                    onClick={e => {
-                      e.preventDefault()
-                      logout()
-                    }}
-                    activeStyle={{ textDecoration: "underline" }}
-                  >
-                    Logga ut
-                  </Link>
-                </MobileMenuItem>
-              </>
-            ) : (
-              <MobileMenuItem>
-                <Modal
-                  size="mini"
-                  trigger={
-                    <Link
-                      to="#"
-                      onClick={e => e.preventDefault()}
-                      activeStyle={{ textDecoration: "underline" }}
-                    >
-                      <Icon name="lock" /> Logga in
-                    </Link>
-                  }
-                  closeIcon
-                >
-                  {/* <Header icon="lock" content={`Logga in`} /> */}
-                  <Modal.Content>
-                    <LogIn />
-                  </Modal.Content>
-                </Modal>
-              </MobileMenuItem>
-            )}
-          </BottomMenuItems>
+          <BottomMenuItems></BottomMenuItems>
         </Sidebar>
       </MobileNav>
       <MobileLogo to="/" activeStyle={{ textDecoration: "underline" }}>
