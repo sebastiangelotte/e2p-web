@@ -11,6 +11,7 @@ const DesktopNav = styled.div`
   position: absolute;
   width: 100%;
   z-index: 2;
+  padding: 20px 0;
 
   @media only screen and (min-width: 600px) {
     display: block;
@@ -67,13 +68,18 @@ const MobileLogo = styled(Link)`
 const Wrapper = styled.div`
   position: relative;
   z-index: 3;
+  max-width: 1280px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 30px;
 `
 
 const DesktopMenuItem = styled(Menu.Item)`
-  font-size: 12px !important;
+  font-size: 16px !important;
   font-weight: 600 !important;
-  text-transform: uppercase !important;
   letter-spacing: 0.5px !important;
+  padding-left: 40px !important;
+  padding-right: 0 !important;
 `
 
 const MobileMenuItem = styled(Menu.Item)`
@@ -101,11 +107,9 @@ const Navigation = () => {
     <Wrapper>
       <DesktopNav>
         <Menu as="nav" secondary>
-          <DesktopMenuItem>
-            <Link to="/" activeStyle={{ textDecoration: "underline" }}>
-              <Logo src={logo} alt="Easy2perform" />
-            </Link>
-          </DesktopMenuItem>
+          <Link to="/" activeStyle={{ textDecoration: "underline" }}>
+            <Logo src={logo} alt="Easy2perform" />
+          </Link>
           <DesktopMenuItem>
             <Link to="/courses" activeStyle={{ textDecoration: "underline" }}>
               Kurser
