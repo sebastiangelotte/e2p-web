@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1.1347in" height="1.0068in" fill="none" version="1.1" viewBox="0 0 108.93 96.654" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <path d="m18.396 96.524s-31.546-53.952-12.018-63.443c19.529-9.4915 72.607-69.438 98.645 0 26.038 69.437-86.628 63.443-86.628 63.443z" clip-rule="evenodd" fill="url(#paint0_linear)" fill-opacity=".24" fill-rule="evenodd"/>
+ <defs>
+  <linearGradient id="paint0_linear" x1="68.006" x2="9.3084" y1="60.373" y2="-12.793" gradientTransform="translate(-1.0885 -2.3078e-5)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#F2F9FF" offset="0"/>
+   <stop stop-color="#fff" offset="1"/>
+  </linearGradient>
+ </defs>
+</svg>
