@@ -25,7 +25,7 @@ const CourseSignup = ({ courseName, courseDates }) => {
           content={message.content}
         />
       ) : (
-        <Form id="form-signup" name="Kursanmälan" netlify>
+        <Form id="form-signup" name="Kursanmälan" data-netlify="true">
           <input type="hidden" name="Kurs" value={courseName} />
           <input
             type="hidden"
