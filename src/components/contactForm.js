@@ -16,7 +16,7 @@ const ContactForm = ({ source }) => {
     event.preventDefault()
     const data = new FormData(event.target)
 
-    fetch("/", {
+    fetch("/contact", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: data,
