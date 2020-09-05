@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="179.65mm" height="250.56mm" version="1.1" viewBox="0 0 179.65 250.56" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <defs>
+  <linearGradient id="paint0_linear" x1="272" x2="49" y1="212" y2="-49" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#fff" offset="0"/>
+   <stop stop-color="#8792A1" stop-opacity=".08" offset="1"/>
+  </linearGradient>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(-19.487 -11.272)">
+  <g transform="matrix(.26458 0 0 .26458 87.485 121.6)">
+   <ellipse cx="82.5" cy="-80" rx="339.5" ry="337" fill="url(#paint0_linear)" opacity=".06"/>
+   <ellipse transform="matrix(1,0,0,-1,47.5,376)" rx="154.5" ry="154" fill="url(#paint0_linear)" opacity="0.1"/>
+  </g>
+ </g>
+</svg>

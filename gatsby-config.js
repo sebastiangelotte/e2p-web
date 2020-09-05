@@ -21,7 +21,7 @@ module.exports = {
       resolve: "gatsby-plugin-mailchimp",
       options: {
         endpoint:
-          "https://easy2perform.us17.list-manage.com/subscribe/post?u=bcd516fbabfad6023116c3f82&id=02f682493a",
+          "https://easy2perform.us17.list-manage.com/subscribe/post?u=bcd516fbabfad6023116c3f82&id=5873d8195e",
       },
     },
     {

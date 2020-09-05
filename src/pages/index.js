@@ -10,6 +10,7 @@ import Coaching from "../components/new/icons/coaching"
 import Online from "../components/new/icons/online"
 import ReviewCard from "../components/new/reviewCard"
 import LogoList from "../components/new/logoList"
+import Newsletter from "../components/new/newsletter"
 
 const IndexPage = () => {
   return (
@@ -79,6 +80,7 @@ const IndexPage = () => {
         </Grid>
         <LogoList />
       </Section>
+      <Newsletter />
     </Layout>
   )
 }
