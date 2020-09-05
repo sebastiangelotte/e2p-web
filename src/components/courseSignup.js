@@ -15,34 +15,6 @@ const CourseSignup = ({ courseName, courseDates }) => {
     positive: false,
   })
 
-  const handleSubmit = async event => {
-    setIsLoading(true)
-    event.preventDefault()
-    const data = new FormData(event.target)
-
-    fetch("https://formspree.io/mpeaqozx", {
-      method: "POST",
-      body: data,
-      dataType: "json",
-      mode: "no-cors",
-    })
-      .then(() => {
-        setIsLoading(false)
-        setMessage({
-          isVisible: true,
-          header: "Tack för din anmälan!",
-          content: "En bekräftelse har skickats till din e-post.",
-          positive: true,
-        })
-        document.getElementById("form-signup").reset() // reset form after submit
-        setEmail("") // reset controlled form field
-      })
-      .catch(err => {
-        console.log(err)
-        setIsLoading(false)
-      })
-  }
-
   return (
     <>
       {message.isVisible ? (
@@ -53,11 +25,7 @@ const CourseSignup = ({ courseName, courseDates }) => {
           content={message.content}
         />
       ) : (
-        <Form
-          id="form-signup"
-          name="Kursanmälan"
-          onSubmit={event => handleSubmit(event)}
-        >
+        <Form id="form-signup" name="Kursanmälan" netlify>
           <input type="hidden" name="Kurs" value={courseName} />
           <input
             type="hidden"
