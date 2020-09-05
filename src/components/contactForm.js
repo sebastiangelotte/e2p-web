@@ -11,11 +11,43 @@ const ContactForm = ({ source }) => {
     positive: false,
   })
 
+  const handleSubmit = event => {
+    setIsLoading(true)
+    event.preventDefault()
+    const data = new FormData(event.target)
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: data,
+      dataType: "json",
+      mode: "no-cors",
+    })
+      .then(() => {
+        setIsLoading(false)
+        setMessage({
+          isVisible: true,
+          header: "Meddelande skickat!",
+          content: "Vi återkommer så snart vi kan.",
+          positive: true,
+        })
+        document.getElementById("form").reset() // reset form after submit
+      })
+      .catch(err => {
+        console.log(err)
+        setIsLoading(false)
+      })
+  }
+
   const handleMessageDismiss = () => {
     setMessage({ isVisible: false })
   }
   return (
-    <Form id="form" name="Kontaktformulär" data-netlify="true">
+    <Form
+      id="form"
+      name="Kontaktformulär"
+      onSubmit={event => handleSubmit(event)}
+    >
       <input type="hidden" name="Skickat från" value={source} />
       <Form.Group widths="equal">
         <Form.Input fluid label="Namn" placeholder="Namn" name="namn" />
