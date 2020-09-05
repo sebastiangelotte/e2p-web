@@ -72,11 +72,12 @@ const CourseSignup = ({ courseName, courseDates }) => {
             value={date}
             onBlur={e => setDate(e.target.value)}
           >
-            {courseDates.map(tillfalle => (
-              <option
-                value={tillfalle.date}
-              >{`${tillfalle.city}: ${tillfalle.date}`}</option>
-            ))}
+            {courseDates &&
+              courseDates.map(tillfalle => (
+                <option
+                  value={tillfalle.date}
+                >{`${tillfalle.city}: ${tillfalle.date}`}</option>
+              ))}
           </select>
         </Form.Group>
         <h3>Deltagare</h3>
