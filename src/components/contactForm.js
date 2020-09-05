@@ -11,24 +11,16 @@ const ContactForm = ({ source }) => {
     positive: false,
   })
 
-  const encode = data => {
-    return Object.keys(data)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&")
-  }
-
   const handleSubmit = event => {
     setIsLoading(true)
     event.preventDefault()
-    const data = new FormData(event.target)
+    const formData = new FormData(event.target)
+    const searchParams = new URLSearchParams(formData).toString() // create URL params
 
-    fetch("/contact", {
+    fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": "contact",
-        data,
-      }),
+      body: searchParams,
       dataType: "json",
       mode: "no-cors",
     })
@@ -53,8 +45,9 @@ const ContactForm = ({ source }) => {
   }
   return (
     <Form id="form" name="contact" onSubmit={event => handleSubmit(event)}>
-      {/* <input type="hidden" name="Skickat från" value={source} /> */}
+      {/* needed for netlify */}
       <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="Skickat från" value={source} />
       <Form.Group widths="equal">
         <Form.Input fluid label="Namn" placeholder="Namn" name="namn" />
         <Form.Input

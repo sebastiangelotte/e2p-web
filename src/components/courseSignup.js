@@ -15,6 +15,36 @@ const CourseSignup = ({ courseName, courseDates }) => {
     positive: false,
   })
 
+  const handleSubmit = async event => {
+    setIsLoading(true)
+    event.preventDefault()
+    const formData = new FormData(event.target)
+    const searchParams = new URLSearchParams(formData).toString() // create URL params
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: searchParams,
+      dataType: "json",
+      mode: "no-cors",
+    })
+      .then(() => {
+        setIsLoading(false)
+        setMessage({
+          isVisible: true,
+          header: "Tack för din anmälan!",
+          content: "En bekräftelse har skickats till din e-post.",
+          positive: true,
+        })
+        document.getElementById("form-signup").reset() // reset form after submit
+        setEmail("") // reset controlled form field
+      })
+      .catch(err => {
+        console.log(err)
+        setIsLoading(false)
+      })
+  }
+
   return (
     <>
       {message.isVisible ? (
@@ -25,13 +55,14 @@ const CourseSignup = ({ courseName, courseDates }) => {
           content={message.content}
         />
       ) : (
-        <Form id="form-signup" name="Kursanmälan" data-netlify="true">
+        <Form
+          id="form-signup"
+          name="courseSignup"
+          onSubmit={event => handleSubmit(event)}
+        >
+          {/* needed for netlify */}
+          <input type="hidden" name="form-name" value="courseSignup" />
           <input type="hidden" name="Kurs" value={courseName} />
-          <input
-            type="hidden"
-            name="_next"
-            value="https://pedantic-morse-58901e.netlify.com/"
-          />
           <Form.Group widths="equal">
             <select
               id="date"
