@@ -11,6 +11,12 @@ const ContactForm = ({ source }) => {
     positive: false,
   })
 
+  const encode = data => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&")
+  }
+
   const handleSubmit = event => {
     setIsLoading(true)
     event.preventDefault()
@@ -19,7 +25,10 @@ const ContactForm = ({ source }) => {
     fetch("/contact", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: data,
+      body: encode({
+        "form-name": "contact",
+        data,
+      }),
       dataType: "json",
       mode: "no-cors",
     })
