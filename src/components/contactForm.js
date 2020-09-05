@@ -44,7 +44,12 @@ const ContactForm = ({ source }) => {
     setMessage({ isVisible: false })
   }
   return (
-    <Form id="form" name="contact" onSubmit={event => handleSubmit(event)}>
+    <Form
+      id="form"
+      name="contact"
+      onSubmit={event => handleSubmit(event)}
+      data-netlify="true"
+    >
       {/* needed for netlify */}
       <input type="hidden" name="form-name" value="contact" />
       <input type="hidden" name="Skickat från" value={source} />

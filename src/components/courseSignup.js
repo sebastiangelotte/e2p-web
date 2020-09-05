@@ -59,6 +59,7 @@ const CourseSignup = ({ courseName, courseDates }) => {
           id="form-signup"
           name="courseSignup"
           onSubmit={event => handleSubmit(event)}
+          data-netlify="true"
         >
           {/* needed for netlify */}
           <input type="hidden" name="form-name" value="courseSignup" />
