@@ -43,12 +43,9 @@ const ContactForm = ({ source }) => {
     setMessage({ isVisible: false })
   }
   return (
-    <Form
-      id="form"
-      name="Kontaktformulär"
-      onSubmit={event => handleSubmit(event)}
-    >
-      <input type="hidden" name="Skickat från" value={source} />
+    <Form id="form" name="contact" onSubmit={event => handleSubmit(event)}>
+      {/* <input type="hidden" name="Skickat från" value={source} /> */}
+      <input type="hidden" name="form-name" value="contact" />
       <Form.Group widths="equal">
         <Form.Input fluid label="Namn" placeholder="Namn" name="namn" />
         <Form.Input
