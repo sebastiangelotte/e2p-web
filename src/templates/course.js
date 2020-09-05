@@ -356,6 +356,11 @@ const Course = props => {
           </Grid>
         </Container>
       </Segment>
+      <CourseSignup
+        courseName={course.title}
+        courseID={course.id}
+        courseDates={course.kurstillflle}
+      />
     </Layout>
   )
 }
