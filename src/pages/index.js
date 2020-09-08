@@ -136,10 +136,17 @@ const NoticePositioner = styled.div`
 
 const Section = styled.section`
   padding-top: 132px;
+  padding-left: 30px;
+  padding-right: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 400px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 
   ${props =>
     props.gradient &&
@@ -182,7 +189,6 @@ const Grid = styled.div`
   max-width: 1280px;
   margin-right: auto;
   margin-left: auto;
-  padding: 0 30px;
 
   @media screen and (max-width: 1000px) {
     grid-template-columns: 1fr;
