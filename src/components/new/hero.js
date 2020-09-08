@@ -5,6 +5,7 @@ import styled from "styled-components"
 import background from "../../images/hero-bg.svg"
 import image from "../../images/hero-image.svg"
 import { Link } from "gatsby"
+import { ScaleBox } from "../scaleBox"
 
 const Hero = () => {
   return (
@@ -30,7 +31,9 @@ const Hero = () => {
             </ButtonWrapper>
             <SmallText>* Sveriges mest flexibla kursleverantör</SmallText>
           </TextWrapper>
-          <Image src={image} />
+          <ScaleBox>
+            <Image src={image} />
+          </ScaleBox>
         </Grid>
       </Container>
     </Wrapper>
