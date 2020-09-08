@@ -11,6 +11,8 @@ import Online from "../components/new/icons/online"
 import ReviewCard from "../components/new/reviewCard"
 import LogoList from "../components/new/logoList"
 import Newsletter from "../components/new/newsletter"
+import { IntersectionObserver } from "../components/intersectionObserver"
+import { ScaleBox } from "../components/scaleBox"
 
 const IndexPage = () => {
   return (
@@ -26,31 +28,42 @@ const IndexPage = () => {
         </Tag>
         <Heading primary>Vad passar dig bäst?</Heading>
         <Grid>
-          <Card>
-            <MegaPhone />
-            <h3>Grupputbildning</h3>
-            <p>
-              Lorem ipsum dolor si amet, an dus situ sint pertinacia consti
-              tuto, mir dignsius quo great.
-            </p>
-          </Card>
-
-          <Card>
-            <Coaching />
-            <h3>Skräddarsy coaching</h3>
-            <p>
-              Lorem ipsum dolor si amet, an dus situ sint pertinacia consti
-              tuto, mir dignsius quo great.
-            </p>
-          </Card>
-          <Card>
-            <Online />
-            <h3>Onlinekurs</h3>
-            <p>
-              Lorem ipsum dolor si amet, an dus situ sint pertinacia consti
-              tuto, mir dignsius quo great.
-            </p>
-          </Card>
+          <IntersectionObserver>
+            <ScaleBox>
+              <Card>
+                <MegaPhone />
+                <h3>Grupputbildning</h3>
+                <p>
+                  Lorem ipsum dolor si amet, an dus situ sint pertinacia consti
+                  tuto, mir dignsius quo great.
+                </p>
+              </Card>
+            </ScaleBox>
+          </IntersectionObserver>
+          <IntersectionObserver>
+            <ScaleBox>
+              <Card>
+                <Coaching />
+                <h3>Skräddarsy coaching</h3>
+                <p>
+                  Lorem ipsum dolor si amet, an dus situ sint pertinacia consti
+                  tuto, mir dignsius quo great.
+                </p>
+              </Card>
+            </ScaleBox>
+          </IntersectionObserver>
+          <IntersectionObserver>
+            <ScaleBox>
+              <Card>
+                <Online />
+                <h3>Onlinekurs</h3>
+                <p>
+                  Lorem ipsum dolor si amet, an dus situ sint pertinacia consti
+                  tuto, mir dignsius quo great.
+                </p>
+              </Card>
+            </ScaleBox>
+          </IntersectionObserver>
         </Grid>
       </Section>
       <Section gradient>
@@ -59,24 +72,36 @@ const IndexPage = () => {
         </Tag>
         <Heading secondary>Vad våra kursdeltagare säger...</Heading>
         <Grid>
-          <ReviewCard rating={5}>
-            <h4>Anna Johansson</h4>
-            <p>Helt suverän kurs!</p>
-          </ReviewCard>
-          <ReviewCard rating={5}>
-            <h4>Freddy Hejochhå</h4>
-            <p>
-              HelJohan var väldigt engagerad och fick hela gruppen att engagera
-              sig. Väldigt kunnig.
-            </p>
-          </ReviewCard>
-          <ReviewCard rating={5}>
-            <h4>Hopplan Hejsan</h4>
-            <p>
-              Jättebra att den var uppdelad på två halvdagar, svårt att hålla
-              fokus via webben en hel dag.
-            </p>
-          </ReviewCard>
+          <IntersectionObserver>
+            <ScaleBox>
+              <ReviewCard rating={5}>
+                <h4>Anna Johansson</h4>
+                <p>Helt suverän kurs!</p>
+              </ReviewCard>
+            </ScaleBox>
+          </IntersectionObserver>
+          <IntersectionObserver>
+            <ScaleBox>
+              <ReviewCard rating={5}>
+                <h4>Freddy Hejochhå</h4>
+                <p>
+                  HelJohan var väldigt engagerad och fick hela gruppen att
+                  engagera sig. Väldigt kunnig.
+                </p>
+              </ReviewCard>
+            </ScaleBox>
+          </IntersectionObserver>
+          <IntersectionObserver>
+            <ScaleBox>
+              <ReviewCard rating={5}>
+                <h4>Hopplan Hejsan</h4>
+                <p>
+                  Jättebra att den var uppdelad på två halvdagar, svårt att
+                  hålla fokus via webben en hel dag.
+                </p>
+              </ReviewCard>
+            </ScaleBox>
+          </IntersectionObserver>
         </Grid>
         <LogoList />
       </Section>
