@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react"
 import Navigation from "./navigation/navigation"
-import Footer from "./footer/footer"
 import ScrollUpButton from "react-scroll-up-button"
 import CookieConsent from "react-cookie-consent"
-
+import Footer from "./new/footer"
 import { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
