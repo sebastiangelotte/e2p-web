@@ -13,6 +13,7 @@ import LogoList from "../components/new/logoList"
 import Newsletter from "../components/new/newsletter"
 import { IntersectionObserver } from "../components/intersectionObserver"
 import { ScaleBox } from "../components/scaleBox"
+import FullWidthCard from "../components/new/fullWidthCard"
 
 const IndexPage = () => {
   return (
@@ -106,6 +107,13 @@ const IndexPage = () => {
         <LogoList />
       </Section>
       <Newsletter />
+      <Section gradient>
+        <IntersectionObserver>
+          <ScaleBox>
+            <FullWidthCard />
+          </ScaleBox>
+        </IntersectionObserver>
+      </Section>
     </Layout>
   )
 }
