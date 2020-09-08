@@ -14,6 +14,7 @@ import Newsletter from "../components/new/newsletter"
 import { IntersectionObserver } from "../components/intersectionObserver"
 import { ScaleBox } from "../components/scaleBox"
 import FullWidthCard from "../components/new/fullWidthCard"
+import ImageTextSection from "../components/new/imageTextSection"
 
 const IndexPage = () => {
   return (
@@ -66,6 +67,9 @@ const IndexPage = () => {
             </ScaleBox>
           </IntersectionObserver>
         </Grid>
+      </Section>
+      <Section>
+        <ImageTextSection />
       </Section>
       <Section gradient>
         <Tag>
