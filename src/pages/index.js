@@ -15,6 +15,8 @@ import { IntersectionObserver } from "../components/intersectionObserver"
 import { ScaleBox } from "../components/scaleBox"
 import FullWidthCard from "../components/new/fullWidthCard"
 import ImageTextSection from "../components/new/imageTextSection"
+import Avatar from "../components/new/avatar"
+import { Button } from "../components/new/styledComponents"
 
 const IndexPage = () => {
   return (
@@ -35,9 +37,10 @@ const IndexPage = () => {
               <Card>
                 <MegaPhone />
                 <h3>Grupputbildning</h3>
+                <p>Små och stora grupper.</p>
                 <p>
-                  Lorem ipsum dolor si amet, an dus situ sint pertinacia consti
-                  tuto, mir dignsius quo great.
+                  Färdiga moduler eller behovsanpassad utbildning. Online (live)
+                  eller on-site. När det passar dig.
                 </p>
               </Card>
             </ScaleBox>
@@ -46,10 +49,11 @@ const IndexPage = () => {
             <ScaleBox>
               <Card>
                 <Coaching />
-                <h3>Skräddarsy coaching</h3>
+                <h3>Individuell coaching</h3>
+                <p>Vi matchar ihop dig med en konsult.</p>
                 <p>
-                  Lorem ipsum dolor si amet, an dus situ sint pertinacia consti
-                  tuto, mir dignsius quo great.
+                  Individuell coaching innebär att du är i fokus. Målet med
+                  coachingen är att ge dig stöd och utveckling i din yrkesroll.
                 </p>
               </Card>
             </ScaleBox>
@@ -58,11 +62,13 @@ const IndexPage = () => {
             <ScaleBox>
               <Card>
                 <Online />
-                <h3>Onlinekurs</h3>
+                <h3>Praktiska checklistor</h3>
                 <p>
-                  Lorem ipsum dolor si amet, an dus situ sint pertinacia consti
-                  tuto, mir dignsius quo great.
+                  Att ha en användbar checklista till hands när man skall utföra
+                  viktiga och svåra uppgifter i rollen som chef och ledare är
+                  ovärderligt.
                 </p>
+                <p>Alla våra checklistor är gratis.</p>
               </Card>
             </ScaleBox>
           </IntersectionObserver>
@@ -80,18 +86,13 @@ const IndexPage = () => {
           <IntersectionObserver>
             <ScaleBox>
               <ReviewCard rating={5}>
-                <h4>Anna Johansson</h4>
-                <p>Helt suverän kurs!</p>
-              </ReviewCard>
-            </ScaleBox>
-          </IntersectionObserver>
-          <IntersectionObserver>
-            <ScaleBox>
-              <ReviewCard rating={5}>
-                <h4>Freddy Hejochhå</h4>
+                <h4>
+                  <Avatar round preset="man1" /> Kursdeltagare
+                </h4>
+                <p>Man hade verkligen fokus på vårt företag och vårt behov.</p>
                 <p>
-                  HelJohan var väldigt engagerad och fick hela gruppen att
-                  engagera sig. Väldigt kunnig.
+                  Kommer ha mycket nytta av det vi gick igenom om hur man
+                  coachar och stöttar teamet.
                 </p>
               </ReviewCard>
             </ScaleBox>
@@ -99,15 +100,39 @@ const IndexPage = () => {
           <IntersectionObserver>
             <ScaleBox>
               <ReviewCard rating={5}>
-                <h4>Hopplan Hejsan</h4>
+                <h4>
+                  <Avatar round preset="woman1" /> Kursdeltagare
+                </h4>
                 <p>
-                  Jättebra att den var uppdelad på två halvdagar, svårt att
-                  hålla fokus via webben en hel dag.
+                  Kursledaren gav personlig feedback och var lyhörd för våra
+                  utmaningar. Bra med liten grupp.
+                </p>
+              </ReviewCard>
+            </ScaleBox>
+          </IntersectionObserver>
+          <IntersectionObserver>
+            <ScaleBox>
+              <ReviewCard rating={5}>
+                <h4>
+                  <Avatar round preset="woman2" /> Kursdeltagare
+                </h4>
+                <p>
+                  Tack för bra dag. Stärkte mig oerhört inför några jobbiga
+                  samtal jag skall ha snart.
                 </p>
               </ReviewCard>
             </ScaleBox>
           </IntersectionObserver>
         </Grid>
+        <a
+          href="https://www.utbildning.se/kurser/easy2perform/recensioner"
+          target="_blank"
+        >
+          <Button>Fler recensioner på utbildning.se</Button>
+        </a>
+      </Section>
+      <Section background>
+        <Heading secondary>Några kunder vi jobbat med...</Heading>
         <LogoList />
       </Section>
       <Newsletter />
@@ -151,7 +176,12 @@ const Section = styled.section`
   ${props =>
     props.gradient &&
     `
-      background: linear-gradient(180deg, #FFFFFF 0%, #F2F9FF 100%);
+    background: linear-gradient(180deg, #FFFFFF 0%, #F2F9FF 100%);
+  `}
+  ${props =>
+    props.background &&
+    `
+    background-color: #F2F9FF;
   `}
 `
 

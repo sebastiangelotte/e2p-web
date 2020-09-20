@@ -13,13 +13,14 @@ const Hero = () => {
       <Container>
         <Grid>
           <TextWrapper>
-            <Heading>Kompetensutveckling och stöd</Heading>
+            <Heading>
+              Kompetensutveckling som ger stöd i det dagliga arbetet
+            </Heading>
             <Text>
-              Easy2perform* fokuserar på att ge stöd och vägledning till
-              företag, chefer och medarbetare. Oavsett om det sker genom våra
-              gratislösningar på mobil & webb, kurser eller konsulttjänster,
-              levererar vi kunskap som gör det enklare att prestera i
-              yrkesrollen.
+              Easy2perform* hjälper medarbetare och chefer att prestera bättre i
+              sin yrkesroll. Genom behovsanpassad utbildning, individuell
+              coaching och praktiska checklistor ger vi stöd i det dagliga
+              arbetet.
             </Text>
             <ButtonWrapper>
               <Link to="/courses">
@@ -29,7 +30,7 @@ const Hero = () => {
                 <Button>Läs våra checklistor</Button>
               </Link>
             </ButtonWrapper>
-            <SmallText>* Sveriges mest flexibla kursleverantör</SmallText>
+            <SmallText>* din flexibla kursleverantör</SmallText>
           </TextWrapper>
           <ScaleBox>
             <Image src={image} />
@@ -59,6 +60,10 @@ const TextWrapper = styled.div`
   @media screen and (max-width: 1023px) {
     padding-top: 60px;
     padding-bottom: 60px;
+  }
+
+  @media screen and (max-width: 500px) {
+    grid-gap: 0;
   }
 `
 
@@ -102,9 +107,9 @@ const SmallText = styled.p`
 const Image = styled.img`
   max-width: 100%;
 
-  @media screen and (max-width: 1023px) {
-    display: none;
-  }
+  // @media screen and (max-width: 1023px) {
+  //   display: none;
+  // }
 `
 
 const ButtonWrapper = styled.div``
