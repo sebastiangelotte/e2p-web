@@ -85,7 +85,7 @@ const Courses = () => {
   const [activeItem, setActiveItem] = useState("Företagsinterna kurser")
 
   return (
-    <Layout transparentNavigation>
+    <Layout>
       <Head title="Kurser" />
       <Hero backgroundImage={data.file.childImageSharp.fluid}>
         <Header as="h1" inverted>
