@@ -51,4 +51,9 @@ const Wrapper = styled.button`
   @media screen and (min-width: 900px) {
     display: none;
   }
+
+  > svg {
+    position: relative;
+    top: 4px;
+  }
 `

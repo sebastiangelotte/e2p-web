@@ -66,7 +66,7 @@ const Inner = styled.div`
   background: rgba(255, 255, 255, 0.25);
   height: 62px;
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 10px;
   left: 30px;
   right: 30px;
