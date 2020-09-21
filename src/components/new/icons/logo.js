@@ -13,7 +13,7 @@ const Logo = props => {
     >
       <Path
         variants={{
-          open: { fill: "#000" },
+          open: { fill: "#1e266d" },
           closed: { fill: "#fff" },
         }}
         fill="#fff"
@@ -24,7 +24,7 @@ const Logo = props => {
 
       <Path
         variants={{
-          open: { fill: "#000" },
+          open: { fill: "#1e266d" },
           closed: { fill: "#fff" },
         }}
         fill="#fff"

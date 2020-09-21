@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
+import facebook from "../../../images/fb.svg"
 
 const variants = {
   open: {
@@ -32,6 +33,15 @@ const MobileMenu = () => {
       <Item>
         <Link to="/contact">Kontakta oss</Link>
       </Item>
+      <Item>
+        <a
+          href="https://www.facebook.com/easy2perform/"
+          target="_blank"
+          title="Facebook"
+        >
+          <img height="30" src={facebook} alt="Facebook" />
+        </a>
+      </Item>
     </Wrapper>
   )
 }
@@ -45,7 +55,7 @@ const Wrapper = styled(motion.ul)`
   z-index: 3;
   list-style: none;
   padding-left: 0;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 60px;
 
   @media screen and (min-width: 900px) {
@@ -53,4 +63,8 @@ const Wrapper = styled(motion.ul)`
   }
 `
 
-const Item = styled(motion.li)``
+const Item = styled(motion.li)`
+  > a {
+    color: #1e266d;
+  }
+`
