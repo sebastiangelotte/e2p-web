@@ -106,10 +106,12 @@ const SmallText = styled.p`
 
 const Image = styled.img`
   max-width: 100%;
+  transform: scale(1.2);
 
-  // @media screen and (max-width: 1023px) {
-  //   display: none;
-  // }
+  @media screen and (max-width: 1023px) {
+    transform: scale(4) translateX(30%) translateY(30%);
+    height: 140px;
+  }
 `
 
 const ButtonWrapper = styled.div``

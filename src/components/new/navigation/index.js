@@ -68,8 +68,8 @@ const Inner = styled.div`
   position: absolute;
   z-index: 3;
   top: 10px;
-  left: 30px;
-  right: 30px;
+  left: 10px;
+  right: 10px;
   border-radius: 16px;
   padding: 10px 20px;
   display: flex;
