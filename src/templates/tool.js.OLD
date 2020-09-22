@@ -1,0 +1,163 @@
+import React from "react"
+import { graphql, Link } from "gatsby"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import Head from "../components/head"
+import Layout from "../components/layout"
+import ContactForm from "../components/contactForm"
+import styled from "styled-components"
+
+export const query = graphql`
+  query($slug: String!) {
+    contentfulTool(slug: { eq: $slug }) {
+      title
+      description {
+        json
+      }
+      linkedServices {
+        slug
+        title
+        tags
+      }
+      linkedCourses {
+        slug
+        title
+        tags
+      }
+      linkedTools {
+        slug
+        title
+        tags
+      }
+    }
+  }
+`
+
+const Tool = props => {
+  return (
+    <Layout transparentNavigation>
+      <Head title={`Verktyg: ${props.data.contentfulTool.title}`} />
+
+            {props.data.contentfulTool.title}
+
+
+                <Segment vertical>
+
+                  {documentToReactComponents(
+                    props.data.contentfulTool.description.json
+                  )}
+                </Segment>
+                <Segment vertical>
+                  <h2>Har du ytterligare frågor?</h2>
+                  <ContactForm source={props.data.contentfulTool.title} />
+                </Segment>
+             
+              <div>
+                {/* LINKED SERVICES */}
+                {props.data.contentfulTool.linkedServices && (
+                  <>
+                    <h3>Relaterade tjänster</h3>
+                    <div>
+                      {props.data.contentfulTool.linkedServices.map(
+                        (service, index) => {
+                          return (
+                            <div key={index}>
+                                                                <Link to={`/services/${service.slug}`}>
+                                    {service.title}
+                                  </Link>
+                                                             {service.tags &&
+                                  service.tags.map(tag => {
+                                    return (
+                                      <Label key={tag} size="tiny">
+                                        {tag}
+                                      </Label>
+                                    )
+                                  })}
+                            </div>
+                          )
+                        }
+                      )}
+                    </div>
+                  </>
+                )}
+
+                {/* LINKED COURSES */}
+                {props.data.contentfulTool.linkedCourses && (
+                  <>
+                    <h3>Relaterade Kurser</h3>
+                    <Card.Group>
+                      {props.data.contentfulTool.linkedCourses.map(
+                        (course, index) => {
+                          return (
+                            <StyledCard key={index}>
+                              <Card.Content>
+                                <Card.Header>
+                                  <Link to={`/courses/${course.slug}`}>
+                                    {course.title}
+                                  </Link>
+                                </Card.Header>
+                              </Card.Content>
+                              <Card.Content extra>
+                                {course.tags &&
+                                  course.tags.map(tag => {
+                                    return (
+                                      <Label key={tag} size="tiny">
+                                        {tag}
+                                      </Label>
+                                    )
+                                  })}
+                              </Card.Content>
+                            </StyledCard>
+                          )
+                        }
+                      )}
+                    </Card.Group>
+                  </>
+                )}
+
+                {/* LINKED TOOLS */}
+                {props.data.contentfulTool.linkedTools && (
+                  <>
+                    <h3>Relaterade verktyg</h3>
+                    <Card.Group>
+                      {props.data.contentfulTool.linkedTools.map(
+                        (tool, index) => {
+                          return (
+                            <StyledCard key={index}>
+                              <Card.Content>
+                                <Card.Header>
+                                  <Link to={`/tools/${tool.slug}`}>
+                                    {tool.title}
+                                  </Link>
+                                </Card.Header>
+                              </Card.Content>
+                              <Card.Content extra>
+                                {tool.tags &&
+                                  tool.tags.map(tag => {
+                                    return (
+                                      <Label key={tag} size="tiny">
+                                        {tag}
+                                      </Label>
+                                    )
+                                  })}
+                              </Card.Content>
+                            </StyledCard>
+                          )
+                        }
+                      )}
+                    </Card.Group>
+                  </>
+                )}
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
+      </Segment>
+    </Layout>
+  )
+}
+
+export default Tool
+
+const StyledCard = styled(Card)``
+
+const StyledSegment = styled.div``
