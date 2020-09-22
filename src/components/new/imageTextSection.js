@@ -7,6 +7,8 @@ import decoration3 from "../../images/decoration3.svg"
 import decoration4 from "../../images/decoration4.svg"
 import image from "../../images/computer.png"
 import { Button } from "./styledComponents"
+import { ScaleBox } from "../scaleBox"
+import { IntersectionObserver } from "../intersectionObserver"
 
 const ImageTextSection = () => {
   return (
@@ -22,7 +24,11 @@ const ImageTextSection = () => {
           right={-48}
           zIndex={2}
         />
-        <Image src={image} alt="Image Text Section" />
+        <IntersectionObserver>
+          <ScaleBox>
+            <Image src={image} alt="Image Text Section" />
+          </ScaleBox>
+        </IntersectionObserver>
       </ImageWrapper>
       <TextWrapper>
         <h2>Varför uppfinna hjulet varje gång?</h2>
