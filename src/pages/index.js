@@ -199,6 +199,7 @@ const Heading = styled.h2`
   color: #1e266d;
   margin-bottom: 82px;
   margin-top: 39px;
+  text-align: center;
 
   ${props =>
     props.primary &&
