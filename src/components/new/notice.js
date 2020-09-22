@@ -9,16 +9,18 @@ import circle1 from "../../images/circle1.svg"
 
 const Notice = () => {
   return (
-    <Link to="">
+    <Link to="/tools/medarbetarundersökning">
       <Wrapper>
         <Icon>
           <img alt="notice" src={cup} />
         </Icon>
         <TextWrapper>
-          <Heading>15% rabatt på kurs!</Heading>
+          <Heading>
+            Viktiga punkter att tänka på vid medarbetarundersökning år 2020
+          </Heading>
           <Text>
-            Just nu får du 15% rabatt på kursen “Att leda utan att vara chef”.
-            Under denna fullspäck...
+            Det är välkänt att medarbetare presterar bättre när de trivs och mår
+            bra på sin arbetsplats. Rätt använt är...
           </Text>
         </TextWrapper>
         <Button>
