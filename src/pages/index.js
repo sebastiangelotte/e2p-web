@@ -16,7 +16,7 @@ import { ScaleBox } from "../components/scaleBox"
 import FullWidthCard from "../components/new/fullWidthCard"
 import ImageTextSection from "../components/new/imageTextSection"
 import Avatar from "../components/new/avatar"
-import { Button } from "../components/new/styledComponents"
+import { Button, Section } from "../components/new/styledComponents"
 
 const IndexPage = () => {
   return (
@@ -157,32 +157,6 @@ const NoticePositioner = styled.div`
   max-width: 818px;
   padding-left: 10px;
   padding-right: 10px;
-`
-
-const Section = styled.section`
-  padding-top: 132px;
-  padding-left: 30px;
-  padding-right: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  @media screen and (max-width: 400px) {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
-  ${props =>
-    props.gradient &&
-    `
-    background: linear-gradient(180deg, #FFFFFF 0%, #F2F9FF 100%);
-  `}
-  ${props =>
-    props.background &&
-    `
-    background-color: #F2F9FF;
-  `}
 `
 
 const Tag = styled.div`
