@@ -15,8 +15,8 @@ export default Card
 
 const Wrapper = styled.div`
   padding: 58px;
-  box-shadow: 0px 4px 4px rgba(135, 146, 161, 0.08),
-    0px 14px 25px rgba(135, 146, 161, 0.06);
+  box-shadow: 0px 4px 4px rgba(135, 146, 161, 0.16),
+    0px 6px 41px rgba(135, 146, 161, 0.11);
   border-radius: 18px;
   overflow: hidden;
   transition: background 100ms ease-in;
