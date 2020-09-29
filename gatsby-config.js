@@ -85,7 +85,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`Crimson Text`],
+        fonts: [`Crimson Text`, `Lato:400,400i`],
       },
     },
   ],

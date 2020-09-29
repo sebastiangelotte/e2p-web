@@ -8,6 +8,37 @@ import { createGlobalStyle } from "styled-components"
 import styled from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body,
+  ul[class],
+  ol[class],
+  li,
+  figure,
+  figcaption,
+  blockquote,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    font-family: 'Lato', Arial;
+  }
+
+
+  h1, h2, h3, h4, h5 {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
   h2 {
     font-size: 36px;
   }
@@ -24,19 +55,29 @@ const GlobalStyle = createGlobalStyle`
       margin-bottom: 0.75em;
   }
 
-  .segment img {
-      max-width: 100%;
-  }
-
-  .segment blockquote {
-    border-left: 4px solid #7dcdea;
-    padding-left: 10px;
-    margin-left: 15px;
+  img {
+    max-width: 100%;
   }
 
   hr {
     border: none;
     border-top: 1px solid #e8e8e8;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  p {
+    margin-bottom: 20px;
+    margin-top: 0;
   }
 `
 
