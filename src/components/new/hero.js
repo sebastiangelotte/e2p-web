@@ -123,7 +123,7 @@ const Button = styled.button`
   border-style: solid;
   border-radius: 200px;
   border-width: 3px;
-  padding: 17px 28px 13px;
+  padding: 17px 28px;
   font-size: 16px;
   margin-right: 22px;
   cursor: pointer;

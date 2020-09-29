@@ -41,7 +41,7 @@ const Wrapper = styled.div`
     0px 6px 41px rgba(135, 146, 161, 0.11);
   border-radius: 18px;
   overflow: hidden;
-  padding: 44px 58px;
+  padding: 40px 58px;
   background-color: #ffffff;
   align-items: center;
   background-image: url(${circle1});

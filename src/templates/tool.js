@@ -101,6 +101,13 @@ const StyledSection = styled(Section)`
     font-size: 20px;
     font-family: "Crimson Text", Georgia, "Times New Roman", Times, serif;
   }
+
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-top: 40px;
+  }
 `
 
 const StyledInner = styled(Inner)`

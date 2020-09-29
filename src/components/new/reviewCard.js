@@ -31,6 +31,9 @@ const Wrapper = styled.div`
   h4 {
     color: #1e266d;
     font-size: 18px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
   }
 
   p {

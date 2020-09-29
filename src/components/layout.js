@@ -31,12 +31,13 @@ const GlobalStyle = createGlobalStyle`
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     font-family: 'Lato', Arial;
+    line-height: 1.5;
   }
 
 
   h1, h2, h3, h4, h5 {
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 0.5em;
   }
 
   h2 {
