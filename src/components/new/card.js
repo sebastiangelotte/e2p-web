@@ -24,6 +24,7 @@ const Wrapper = styled.div`
   cursor: pointer;
   position: relative;
   background-color: #ffffff;
+  color: #1e266d;
 
   &:after {
     content: "";

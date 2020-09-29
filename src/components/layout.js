@@ -5,8 +5,17 @@ import ScrollUpButton from "react-scroll-up-button"
 import CookieConsent from "react-cookie-consent"
 import Footer from "./new/footer"
 import { createGlobalStyle } from "styled-components"
+import styled from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
+  h2 {
+    font-size: 36px;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
   ul > li > p {
       margin-bottom: 0;
   }
@@ -24,9 +33,14 @@ const GlobalStyle = createGlobalStyle`
     padding-left: 10px;
     margin-left: 15px;
   }
+
+  hr {
+    border: none;
+    border-top: 1px solid #e8e8e8;
+  }
 `
 
-const Layout = ({ children, transparentNavigation }) => {
+const Layout = ({ children, darkNavigation }) => {
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -36,8 +50,8 @@ const Layout = ({ children, transparentNavigation }) => {
   return (
     <React.Fragment key={isClient}>
       <GlobalStyle />
-      <Navigation transparent={transparentNavigation} />
-      <main style={{ minHeight: "100vh" }}>{children}</main>
+      <Navigation darkNavigation={darkNavigation} />
+      <Main>{children}</Main>
       <Footer />
       <ScrollUpButton />
       <CookieConsent
@@ -58,3 +72,7 @@ const Layout = ({ children, transparentNavigation }) => {
 }
 
 export default Layout
+
+const Main = styled.main`
+  min-height: 100vh;
+`

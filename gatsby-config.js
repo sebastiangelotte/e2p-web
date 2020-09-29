@@ -82,5 +82,11 @@ module.exports = {
         pixelId: "1621963837942974",
       },
     },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Crimson Text`],
+      },
+    },
   ],
 }

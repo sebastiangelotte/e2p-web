@@ -7,6 +7,7 @@ import { motion, useCycle } from "framer-motion"
 import { useMeasure } from "react-use"
 import Logo from "../icons/logo"
 import { Link } from "gatsby"
+import { useGlobalState } from "../../../globalState"
 
 const sidebar = {
   open: {
@@ -15,9 +16,6 @@ const sidebar = {
     transition: {
       duration: 0.3,
       type: "linear",
-      // type: "spring",
-      // stiffness: 20,
-      // restDelta: 2,
     },
   },
   closed: {
@@ -27,13 +25,11 @@ const sidebar = {
       delay: 0,
       duration: 0.001,
       type: "linear",
-      // stiffness: 400,
-      // damping: 40,
     },
   },
 }
 
-const Navigation = () => {
+const Navigation = ({ darkNavigation }) => {
   const [isOpen, toggleOpen] = useCycle(false, true)
   const containerRef = useRef(null)
   const { height } = useMeasure(containerRef)
@@ -45,7 +41,7 @@ const Navigation = () => {
       custom={height}
       ref={containerRef}
     >
-      <Inner>
+      <Inner darkNavigation={darkNavigation} isOpen={isOpen}>
         <StyledLink to="/">
           <StyledLogo />
         </StyledLink>
@@ -64,6 +60,17 @@ const Wrapper = styled(motion.nav)``
 
 const Inner = styled.div`
   background: rgba(255, 255, 255, 0.25);
+  ${props =>
+    props.darkNavigation &&
+    `
+    background: #1e266d;
+  `}
+
+  ${props =>
+    props.isOpen &&
+    `
+    background: rgba(255, 255, 255, 0.25);
+  `}
   height: 62px;
   position: absolute;
   z-index: 3;
