@@ -7,7 +7,6 @@ import { motion, useCycle } from "framer-motion"
 import { useMeasure } from "react-use"
 import Logo from "../icons/logo"
 import { Link } from "gatsby"
-import { useGlobalState } from "../../../globalState"
 
 const sidebar = {
   open: {

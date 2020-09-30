@@ -47,14 +47,6 @@ const Services = () => {
 
   const [services, setServices] = useState(data.allContentfulService.edges)
 
-  const updateServices = services => {
-    if (services.length > 0) {
-      setServices(services)
-    } else {
-      setServices(data.allContentfulService.edges) // reset state
-    }
-  }
-
   return (
     <Layout transparentNavigation>
       <Head title="Verktyg" />
@@ -67,10 +59,6 @@ const Services = () => {
             Genom vårt omfattande konsultnätverk kan vi erbjuda konsulttjänster
             för utveckling av organisation och ledare.
           </p>
-          <Filter
-            data={data.allContentfulService.edges}
-            onChange={updateServices}
-          />
         </div>
       </Hero>
       <Segment vertical>

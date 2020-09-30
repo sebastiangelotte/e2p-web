@@ -26,6 +26,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
+  html, body {
+    overflow-x: hidden;
+  }
+
   body {
     min-height: 100vh;
     scroll-behavior: smooth;
@@ -79,6 +83,7 @@ const GlobalStyle = createGlobalStyle`
   p {
     margin-bottom: 20px;
     margin-top: 0;
+    max-width: 680px;
   }
 `
 

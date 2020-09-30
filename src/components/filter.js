@@ -1,46 +1,95 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+import styled from "styled-components"
+import { Button } from "../components/new/styledComponents"
 
-import { Dropdown } from "semantic-ui-react"
-
-const Filter = props => {
+const Filter = ({ courses, onChange }) => {
+  const [activeTags, setActiveTags] = useState([])
+  const [activeType, setActiveType] = useState("open")
   let uniqueTags = new Set()
-  let activeTags = []
 
-  props.data.forEach(edge => {
-    edge.node.tags && edge.node.tags.forEach(tag => uniqueTags.add(tag))
+  courses.forEach(course => {
+    course.node.tags && course.node.tags.forEach(tag => uniqueTags.add(tag))
   })
 
-  const filterOptions = Array.from(uniqueTags).map(tag => {
-    return {
-      key: tag,
-      text: tag,
-      value: tag,
-    }
-  })
-
-  const filterItems = (event, dropdownData) => {
-    activeTags = dropdownData.value
-
-    props.onChange(
-      activeTags.length
-        ? props.data.filter(item => itemHasMatchingTag(item, activeTags))
-        : [] // Tells parent component to reset its state if no tags are active
-    )
+  const updateTags = tag => {
+    activeTags.includes(tag)
+      ? setActiveTags(activeTags.filter(activeTag => activeTag !== tag))
+      : setActiveTags([...activeTags, tag])
   }
 
-  const itemHasMatchingTag = item =>
-    item.node.tags &&
-    item.node.tags.filter(tag => activeTags.includes(tag)).length > 0
+  useEffect(() => {
+    onChange(
+      courses.filter(course => {
+        return filterByTag(course) && filterByType(course)
+      })
+    )
+  }, [activeTags, activeType])
+
+  const filterByTag = course => {
+    return course.node.tags.filter(tag => activeTags.includes(tag)).length > 0
+  }
+
+  const filterByType = course => {
+    if (activeType === "open") {
+      return course.node.companyInternalCourse === false
+    } else if (activeType === "companyInternal") {
+      return course.node.companyInternalCourse === true
+    }
+  }
 
   return (
-    <Dropdown
-      placeholder="Filtrera på område"
-      multiple
-      selection
-      options={filterOptions}
-      onChange={filterItems}
-    />
+    <Wrapper>
+      <ButtonsWrapper>
+        <Text>Område:</Text>
+        {Array.from(uniqueTags).map(tag => (
+          <StyledButton
+            key={tag}
+            active={activeTags.includes(tag)}
+            onClick={() => updateTags(tag)}
+          >
+            {tag}
+          </StyledButton>
+        ))}
+      </ButtonsWrapper>
+      <ButtonsWrapper>
+        <Text>Kurstyp:</Text>
+        <StyledButton
+          active={activeType === "open"}
+          onClick={() => setActiveType("open")}
+        >
+          Öppen
+        </StyledButton>
+        <StyledButton
+          active={activeType === "companyInternal"}
+          onClick={() => setActiveType("companyInternal")}
+        >
+          Företagsintern
+        </StyledButton>
+      </ButtonsWrapper>
+    </Wrapper>
   )
 }
 
 export default Filter
+
+const Wrapper = styled.div``
+
+const Text = styled.span`
+  padding-right: 20px;
+`
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+`
+
+const StyledButton = styled(Button)`
+  margin-top: 0;
+
+  ${props =>
+    props.active &&
+    `
+    background-color: red;
+  `}
+`
