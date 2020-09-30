@@ -10,10 +10,17 @@ import {
 } from "react-share"
 
 const Share = ({ title }) => {
-  const url =
-    "https://www.easy2perform.se" + typeof window !== "undefined" &&
-    window.location.pathname + typeof window !== "undefined" &&
-    window.location.search
+  // const url = () => {
+  //   if (typeof window !== "undefined") {
+  //     return
+  //     "https://www.easy2perform.se" +
+  //       window.location.pathname +
+  //       window.location.search
+  //   } else {
+  //     return "https://www.easy2perform.se"
+  //   }
+  // }
+  const url = "https://www.easy2perform.se"
 
   return (
     <Wrapper>
