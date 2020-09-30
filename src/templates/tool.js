@@ -70,7 +70,7 @@ const Tool = props => {
           <Heading as="h1" inverted serif>
             {tool.title}
           </Heading>
-          {tool.tags.map(tag => (
+          {tool.tags?.map(tag => (
             <Tag>{tag}</Tag>
           ))}
         </StyledInner>
