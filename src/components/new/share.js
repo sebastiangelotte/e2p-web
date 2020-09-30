@@ -11,8 +11,8 @@ import {
 
 const Share = ({ title }) => {
   const url =
-    "https://www.easy2perform.se" +
-    window.location.pathname +
+    "https://www.easy2perform.se" + typeof window !== "undefined" &&
+    window.location.pathname + typeof window !== "undefined" &&
     window.location.search
 
   return (
