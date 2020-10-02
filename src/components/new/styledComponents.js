@@ -1,8 +1,18 @@
 import styled from "styled-components"
 
-export const Button = styled.button`
-  background-color: #3751ff;
-  color: #ffffff;
+export const Button = styled.button.attrs(props => ({
+  color: props.color || "#fff",
+  backgroundColor: props.backgroundColor || "#3751ff",
+  borderColor: props.borderColor || "transparent",
+}))`
+  ${props => `
+    --color: ${props.color};
+    --background-color: ${props.backgroundColor};
+    --border-color: ${props.borderColor};
+  `}
+
+  background-color: var(--background-color);
+  color: var(--color);
   border: none;
   border-radius: 200px;
   padding: 14px 40px;
@@ -11,11 +21,18 @@ export const Button = styled.button`
   cursor: pointer;
   transition: background-color 50ms ease-in;
   margin-top: 50px;
+  border: 2px solid var(--border-color);
 
   &:hover,
-  :active,
-  :focus {
-    background-color: #0322f0;
+  &:active,
+  &:focus {
+  }
+
+  > svg {
+    font-size: 1.5em;
+    vertical-align: bottom;
+    margin-right: 8px;
+    margin-left: -15px;
   }
 
   @media screen and (max-width: 500px) {

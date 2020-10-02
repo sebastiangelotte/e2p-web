@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { Button } from "../components/new/styledComponents"
+import { BsCheck, BsPlus } from "react-icons/bs"
 
 const Filter = ({ courses, onChange }) => {
   const [activeTags, setActiveTags] = useState([])
@@ -26,7 +27,11 @@ const Filter = ({ courses, onChange }) => {
   }, [activeTags, activeType])
 
   const filterByTag = course => {
-    return course.node.tags.filter(tag => activeTags.includes(tag)).length > 0
+    if (activeTags.length === 0) {
+      return true // if no filter active, return all
+    } else {
+      return course.node.tags.filter(tag => activeTags.includes(tag)).length > 0
+    }
   }
 
   const filterByType = course => {
@@ -47,6 +52,7 @@ const Filter = ({ courses, onChange }) => {
             active={activeTags.includes(tag)}
             onClick={() => updateTags(tag)}
           >
+            {activeTags.includes(tag) ? <BsCheck /> : <BsPlus />}
             {tag}
           </StyledButton>
         ))}
@@ -84,12 +90,8 @@ const ButtonsWrapper = styled.div`
   margin-bottom: 20px;
 `
 
-const StyledButton = styled(Button)`
-  margin-top: 0;
-
-  ${props =>
-    props.active &&
-    `
-    background-color: red;
-  `}
-`
+const StyledButton = styled(Button).attrs(({ active }) => ({
+  color: active ? "#fff" : "#ff0069",
+  backgroundColor: active ? "#ff0069" : "transparent",
+  borderColor: active ? "transparent" : "#ff0069",
+}))``
