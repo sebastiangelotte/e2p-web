@@ -45,7 +45,6 @@ const Filter = ({ courses, onChange }) => {
   return (
     <Wrapper>
       <ButtonsWrapper>
-        <Text>Område:</Text>
         {Array.from(uniqueTags).map(tag => (
           <StyledButton
             key={tag}
@@ -58,7 +57,6 @@ const Filter = ({ courses, onChange }) => {
         ))}
       </ButtonsWrapper>
       <ButtonsWrapper>
-        <Text>Kurstyp:</Text>
         <StyledButton
           active={activeType === "open"}
           onClick={() => setActiveType("open")}
@@ -88,10 +86,20 @@ const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 `
 
 const StyledButton = styled(Button).attrs(({ active }) => ({
-  color: active ? "#fff" : "#ff0069",
-  backgroundColor: active ? "#ff0069" : "transparent",
-  borderColor: active ? "transparent" : "#ff0069",
-}))``
+  color: active ? "#fff" : "var(--color-heading)",
+  backgroundColor: active ? "var(--color-heading)" : "transparent",
+  borderColor: active ? "transparent" : "#bfc9ea",
+}))`
+  font-size: 14px;
+  padding: 8px 20px 8px 30px;
+
+  @media screen and (max-width: 500px) {
+    width: auto;
+    font-size: 13px;
+    padding: 5px 15px 5px 23px;
+  }
+`
