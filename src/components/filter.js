@@ -87,6 +87,11 @@ const ButtonsWrapper = styled.div`
   align-items: center;
   margin-bottom: 20px;
   flex-wrap: wrap;
+
+  @media screen and (max-width: 500px) {
+    align-items: center;
+    justify-content: center;
+  }
 `
 
 const StyledButton = styled(Button).attrs(({ active }) => ({
