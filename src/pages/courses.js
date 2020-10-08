@@ -21,6 +21,7 @@ import {
   BsBuilding,
 } from "react-icons/bs"
 import { motion, AnimatePresence } from "framer-motion"
+import Newsletter from "../components/new/newsletter"
 
 const Courses = () => {
   const data = useStaticQuery(graphql`
@@ -166,6 +167,7 @@ const Courses = () => {
           </Grid>
         </Inner>
       </Section>
+      <Newsletter />
     </Layout>
   )
 }
