@@ -128,7 +128,7 @@ const IndexPage = () => {
           href="https://www.utbildning.se/kurser/easy2perform/recensioner"
           target="_blank"
         >
-          <Button>Fler recensioner på utbildning.se</Button>
+          <StyledButton>Fler recensioner på utbildning.se</StyledButton>
         </a>
       </Section>
       <Section background>
@@ -198,4 +198,8 @@ const Grid = styled.div`
   @media screen and (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
+`
+
+const StyledButton = styled(Button)`
+  margin-top: 50px;
 `

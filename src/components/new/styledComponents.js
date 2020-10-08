@@ -17,10 +17,10 @@ export const Button = styled.button.attrs(props => ({
   border-radius: 200px;
   padding: 14px 40px;
   font-size: 16px;
-  margin-right: 22px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
   transition: background-color 50ms ease-in;
-  margin-top: 50px;
   border: 2px solid var(--border-color);
 
   &:hover,

@@ -8,6 +8,11 @@ import { createGlobalStyle } from "styled-components"
 import styled from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    --color-heading: #1e266d;
+    --color-text: #455880;
+  }
+
   *,
   *::before,
   *::after {

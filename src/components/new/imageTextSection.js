@@ -37,7 +37,7 @@ const ImageTextSection = () => {
           vissa viktiga arbetsmoment bör utföras. Helt gratis.
         </p>
         <Link to="/tools">
-          <Button>Till checklistorna</Button>
+          <StyledButton>Till checklistorna</StyledButton>
         </Link>
       </TextWrapper>
     </Wrapper>
@@ -96,4 +96,8 @@ const TextWrapper = styled.div`
     line-height: 150%;
     color: #455880;
   }
+`
+
+const StyledButton = styled(Button)`
+  margin-top: 50px;
 `
