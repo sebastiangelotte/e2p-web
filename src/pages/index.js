@@ -50,7 +50,6 @@ const IndexPage = () => {
               <Card>
                 <Coaching />
                 <h3>Individuell coaching</h3>
-                <p>Vi matchar ihop dig med en konsult.</p>
                 <p>
                   Individuell coaching innebär att du är i fokus. Målet med
                   coachingen är att ge dig stöd och utveckling i din yrkesroll.
