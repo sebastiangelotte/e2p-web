@@ -5,7 +5,6 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import CourseLeader from "../components/course-leader/courseLeader"
-import SimpleCard from "../components/cards/simpleCard"
 import CourseSignup from "../components/courseSignup"
 import ContactForm from "../components/contactForm"
 import styled from "styled-components"
@@ -15,22 +14,14 @@ import {
   SectionWithBackgroundImage,
   Section,
   Inner,
-  Tag,
   Button,
 } from "../components/new/styledComponents"
 import RelatedGrid from "../components/new/relatedGrid"
-
-const style = {
-  segment: {
-    paddingTop: "2em",
-    paddingBottom: "6em",
-    backgroundColor: "#f7f7f7",
-  },
-  link: {
-    paddingTop: "2em",
-    display: "inline-block",
-  },
-}
+import ExpandableCard from "../components/new/expandableCard"
+import { BsClock, BsTag, BsCalendar } from "react-icons/bs"
+import { IntersectionObserver } from "../components/intersectionObserver"
+import { ScaleBox } from "../components/scaleBox"
+import Card from "../components/new/card"
 
 export const query = graphql`
   query($slug: String!) {
@@ -40,6 +31,7 @@ export const query = graphql`
       numberOfDays
       price
       companyInternalCourse
+      shortDescription
 
       description {
         json
@@ -126,96 +118,104 @@ const Course = props => {
   const course = props.data.contentfulCourse
 
   return (
-    <Layout transparentNavigation>
+    <Layout>
       <Head title={`Kurs: ${course.title}`} />
 
       <SectionWithBackgroundImage backgroundImage={bg} inverted firstSection>
         <Inner>
-          <Heading as="h1" inverted>
+          <StyledHeading as="h1" inverted>
             {course.title}
-          </Heading>
+          </StyledHeading>
+          <p>{course.shortDescription}</p>
         </Inner>
       </SectionWithBackgroundImage>
-      <Section>
-        <Inner>
-          {!course.companyInternalCourse && (
-            <div>
-              {course.kurstillflle &&
-                course.kurstillflle.map(tillfalle => {
-                  return <Tag>{`${tillfalle.city}: ${tillfalle.date}`}</Tag>
-                })}
-              <Tag>
-                {course.numberOfDays} dag
-                {course.numberOfDays > 1 ? "ar" : ""}
-              </Tag>
-              <Tag>{Number(course.price).toLocaleString()} SEK exkl. moms</Tag>
-            </div>
-          )}
-        </Inner>
+      <Section background>
         <StyledInner>
           <Description>
-            {documentToReactComponents(course.description.json, options)}
-            {course.companyInternalCourse && (
-              <div>
-                <h2>Önskar du prisförslag för företagsintern kurs?</h2>
-                <p>
-                  Beskriv dina önskemål, så sänder vi dig en offert
-                  kostnadsfritt.
-                </p>
-              </div>
+            {course.courseLeader && (
+              <ExpandableCard heading="Kursledare">
+                <CourseLeader data={course.courseLeader} />
+              </ExpandableCard>
             )}
-            {!course.companyInternalCourse && (
-              <div>
-                Önskar du få kursen genomförd som företagsintern utbildning?
-                <p>
-                  <i>
-                    Vi anpassar kursen utifrån gruppens behov och genomför när
-                    det passar er och på den ort ni önskar. Beskriv dina
-                    önskemål, så sänder vi dig kostnadsfri offert.
-                  </i>
-                </p>
-                <ContactForm source={course.title} />
-              </div>
-            )}
-          </Description>
-          <ExtraInfo>
-            {course.courseLeader && <CourseLeader data={course.courseLeader} />}
             {course.practicalInfo && (
-              <div>
+              <ExpandableCard heading="Praktisk information">
                 {documentToReactComponents(course.practicalInfo.json, options)}
-                {!course.companyInternalCourse &&
-                  course.kurstillflle &&
-                  course.kurstillflle.map(tillfalle => {
-                    return (
-                      <a
-                        href={locationLink(
-                          tillfalle.location.lat,
-                          tillfalle.location.lon
-                        )}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Button>
-                          {tillfalle.city} {tillfalle.date}
-                        </Button>
-                      </a>
-                    )
-                  })}
-              </div>
+                {/* {!course.companyInternalCourse && */}
+                {/*   course.kurstillflle && */}
+                {/*   course.kurstillflle.map(tillfalle => { */}
+                {/*     return ( */}
+                {/*       <a */}
+                {/*         href={locationLink( */}
+                {/*           tillfalle.location.lat, */}
+                {/*           tillfalle.location.lon */}
+                {/*         )} */}
+                {/*         target="_blank" */}
+                {/*         rel="noopener noreferrer" */}
+                {/*       > */}
+                {/*         <Button> */}
+                {/*           {tillfalle.city} {tillfalle.date} */}
+                {/*         </Button> */}
+                {/*       </a> */}
+                {/*     ) */}
+                {/*   })} */}
+              </ExpandableCard>
             )}
             {course.includedInfo && (
-              <div>
-                {documentToReactComponents(course.includedInfo.json, options)}
-              </div>
+              <ExpandableCard heading="Mer info">
+                <div>
+                  {documentToReactComponents(course.includedInfo.json, options)}
+                </div>
+              </ExpandableCard>
             )}
+            <ExpandableCard heading="Kursbeskrivning" forceOpen>
+              {documentToReactComponents(course.description.json, options)}
+            </ExpandableCard>
+          </Description>
+          <ExtraInfo>
+            <StickyWrapper>
+              {!course.companyInternalCourse && (
+                <List>
+                  {course.kurstillflle && (
+                    <li>
+                      <div>
+                        <b>Kommande tillfällen:</b>
+                        <ul>
+                          {course.kurstillflle.map(tillfalle => {
+                            return (
+                              <li>
+                                <BsCalendar />{" "}
+                                {`${tillfalle.city}: ${tillfalle.date}`}
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      </div>
+                    </li>
+                  )}
+                  <li>
+                    <BsClock />
+                    {course.numberOfDays} dag
+                    {course.numberOfDays > 1 ? "ar" : ""}
+                  </li>
+                  <li>
+                    <BsTag /> {Number(course.price).toLocaleString()} SEK exkl.
+                    moms
+                  </li>
+                </List>
+              )}
 
-            <div style={{ display: "none" }}>
-              <CourseSignup
-                courseName={course.title}
-                courseID={course.id}
-                courseDates={course.kurstillflle}
-              />
-            </div>
+              <IntersectionObserver>
+                <ScaleBox>
+                  <BookButton>Boka</BookButton>
+                  <AskButton>Fråga oss</AskButton>
+                </ScaleBox>
+              </IntersectionObserver>
+              {/* <CourseSignup */}
+              {/*   courseName={course.title} */}
+              {/*   courseID={course.id} */}
+              {/*   courseDates={course.kurstillflle} */}
+              {/* /> */}
+            </StickyWrapper>
           </ExtraInfo>
         </StyledInner>
       </Section>
@@ -231,15 +231,80 @@ const Course = props => {
 export default Course
 
 const StyledInner = styled(Inner)`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr minmax(auto, 250px);
+  grid-gap: 50px;
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
 `
 
-const Description = styled.div`
-  flex-basis: 680px;
-  padding-right: 40px;
+const StickyWrapper = styled.div`
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 550px) {
+    grid-template-columns: 1fr;
+  }
 `
+
+const Description = styled.div``
 
 const ExtraInfo = styled.div`
-  flex-basis: 300px;
+  @media screen and (max-width: 900px) {
+    order: -1;
+  }
+`
+
+const StyledHeading = styled(Heading)`
+  font-size: 34px;
+`
+
+const List = styled.ul`
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 30px;
+  font-size: 18px;
+  color: var(--color-heading);
+  line-height: 1.5;
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+  }
+
+  li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    > svg {
+      margin-right: 10px;
+    }
+  }
+`
+
+const BookButton = styled(Button)`
+  background: linear-gradient(180deg, #fbc917 0%, #ff8364 100%);
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 18px 45px 14px 45px;
+  width: 100%;
+`
+
+const AskButton = styled(Button)`
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 18px 45px 14px 45px;
+  width: 100%;
 `
