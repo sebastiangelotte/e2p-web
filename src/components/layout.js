@@ -20,8 +20,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body,
-  ul[class],
-  ol[class],
+  ul,
+  ol,
   li,
   figure,
   figcaption,
