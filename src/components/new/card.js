@@ -3,11 +3,21 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import circle2 from "../../images/circle2.svg"
 
-const Card = ({ link, children }) => {
+const Card = ({ link, withBackground, children }) => {
   return (
-    <Link to={link}>
-      <Wrapper>{children}</Wrapper>
-    </Link>
+    <>
+      {link ? (
+        <Link to={link}>
+          <Wrapper withBackground={withBackground}>
+            <div style={{ position: "relative", zIndex: 2 }}>{children}</div>
+          </Wrapper>
+        </Link>
+      ) : (
+        <Wrapper withBackground={withBackground}>
+          <div style={{ position: "relative", zIndex: 2 }}>{children}</div>
+        </Wrapper>
+      )}
+    </>
   )
 }
 
@@ -21,7 +31,6 @@ const Wrapper = styled.div`
   overflow: hidden;
   transition: background 100ms ease-in;
   height: 100%;
-  cursor: pointer;
   position: relative;
   background-color: #ffffff;
   color: #1e266d;
@@ -43,34 +52,56 @@ const Wrapper = styled.div`
   &:focus {
     background: linear-gradient(180deg, #179afb 0%, #6c63ff 100%);
 
-    > h3 {
+    h2,
+    h3,
+    h4 {
       color: #ffffff;
     }
 
-    > p {
+    p {
       color: #ffffff;
     }
 
-    > svg {
+    svg {
       fill: #ffffff;
       stroke: #ffffff;
     }
   }
 
-  > h3 {
+  h3 {
     font-size: 28px;
     margin-bottom: 27px;
     margin-top: 0;
     color: #1e266d;
   }
 
-  > p {
+  p {
     font-size: 18px;
     color: #455880;
     line-height: 27px;
   }
 
-  > svg {
-    margin-bottom: 45px;
+  svg {
+    margin-bottom: 25px;
   }
+
+  ${props =>
+    props.withBackground &&
+    `
+    background: linear-gradient(180deg, #179afb 0%, #6c63ff 100%);
+
+    h2, h3, h4 {
+      color: #ffffff;
+    }
+
+     p {
+      color: #ffffff;
+    }
+
+     svg {
+      fill: #ffffff;
+      stroke: #ffffff;
+    }
+
+  `}
 `
