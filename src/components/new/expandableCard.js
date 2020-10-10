@@ -42,6 +42,10 @@ const Content = styled.div`
   ul {
     margin-bottom: 30px;
   }
+
+  @media screen and (max-width: 500px) {
+    padding: 20px 15px;
+  }
 `
 
 const Activator = styled.div`
@@ -57,5 +61,9 @@ const Activator = styled.div`
   }
 
   svg {
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 15px 15px;
   }
 `
