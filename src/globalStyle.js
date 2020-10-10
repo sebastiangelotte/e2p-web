@@ -34,6 +34,7 @@ export const GlobalStyle = createGlobalStyle`
     text-rendering: optimizeSpeed;
     font-family: 'Lato', Arial;
     line-height: 1.5;
+    background-color: #F2F9FF;
   }
 
 
@@ -63,6 +64,7 @@ export const GlobalStyle = createGlobalStyle`
 
   ul {
     padding-left: 25px;
+    max-width: 680px;
   }
 
   ul > li > p {
@@ -105,12 +107,26 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
+    border: 1px solid #a8a8a8;
+    border-radius: 6px;
+
+
+    &::placeholder {
+      color: #555;
+    }
   }
 
   textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
+    border: 1px solid #a8a8a8;
+    border-radius: 6px;
+
+
+    &::placeholder {
+      color: #555;
+    }
   }
 
   select {
