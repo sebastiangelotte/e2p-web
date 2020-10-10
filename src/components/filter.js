@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { Button } from "../components/new/styledComponents"
-import { BsCheck, BsPlus } from "react-icons/bs"
+import { BsCheck, BsPlus, BsFillPersonFill, BsBuilding } from "react-icons/bs"
 
 const Filter = ({ courses, onChange }) => {
   const [activeTags, setActiveTags] = useState([])
@@ -61,13 +61,13 @@ const Filter = ({ courses, onChange }) => {
           active={activeType === "open"}
           onClick={() => setActiveType("open")}
         >
-          Öppen
+          <BsFillPersonFill /> Öppen
         </StyledButton>
         <StyledButton
           active={activeType === "companyInternal"}
           onClick={() => setActiveType("companyInternal")}
         >
-          Företagsintern
+          <BsBuilding /> Företagsintern
         </StyledButton>
       </ButtonsWrapper>
     </Wrapper>
