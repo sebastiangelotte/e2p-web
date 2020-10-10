@@ -34,7 +34,7 @@ const IndexPage = () => {
         <Grid>
           <IntersectionObserver>
             <ScaleBox>
-              <Card>
+              <Card link="/courses">
                 <MegaPhone />
                 <h3>Grupputbildning</h3>
                 <p>Små och stora grupper.</p>
@@ -47,7 +47,7 @@ const IndexPage = () => {
           </IntersectionObserver>
           <IntersectionObserver>
             <ScaleBox>
-              <Card>
+              <Card link="/coaching">
                 <Coaching />
                 <h3>Individuell coaching</h3>
                 <p>
@@ -59,7 +59,7 @@ const IndexPage = () => {
           </IntersectionObserver>
           <IntersectionObserver>
             <ScaleBox>
-              <Card>
+              <Card link="/tools">
                 <Online />
                 <h3>Praktiska checklistor</h3>
                 <p>
