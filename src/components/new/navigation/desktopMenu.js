@@ -7,6 +7,7 @@ const DesktopMenu = () => {
     <Wrapper>
       <Item>
         <Link to="/courses">Kurser</Link>
+        <Link to="/coaching">Coaching</Link>
         <Link to="/tools">Checklistor</Link>
         <Link to="/services">Tjänster</Link>
         <Link to="/contact">Kontakt</Link>

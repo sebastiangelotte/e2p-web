@@ -25,6 +25,9 @@ const MobileMenu = () => {
         <Link to="/courses">Kurser</Link>
       </Item>
       <Item>
+        <Link to="/coaching">Coaching</Link>
+      </Item>
+      <Item>
         <Link to="/tools">Checklistor</Link>
       </Item>
       <Item>
