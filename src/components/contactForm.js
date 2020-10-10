@@ -75,7 +75,9 @@ const ContactForm = ({ source }) => {
 
 export default ContactForm
 
-const Form = styled.form``
+const Form = styled.form`
+  max-width: 680px;
+`
 
 const Section = styled.div`
   margin-bottom: 20px;
