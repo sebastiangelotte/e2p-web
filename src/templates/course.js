@@ -138,14 +138,14 @@ const Course = props => {
                 {documentToReactComponents(course.practicalInfo.json, options)}
               </ExpandableCard>
             )}
-            <ExpandableCard heading="Kursbeskrivning" forceOpen>
-              {documentToReactComponents(course.description.json, options)}
-            </ExpandableCard>
             {course.courseLeader && (
-              <ExpandableCard heading="Kursledare">
+              <ExpandableCard heading="Kursledare" forceOpen>
                 <CourseLeader data={course.courseLeader} />
               </ExpandableCard>
             )}
+            <ExpandableCard heading="Kursbeskrivning" forceOpen>
+              {documentToReactComponents(course.description.json, options)}
+            </ExpandableCard>
             {course.includedInfo && (
               <ExpandableCard heading="Mer info">
                 <div>
