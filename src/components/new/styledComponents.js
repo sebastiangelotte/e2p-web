@@ -42,7 +42,7 @@ export const Button = styled.button.attrs(props => ({
 
 export const Section = styled.section`
   padding-top: 60px;
-  padding-bottom: 60px;
+  padding-bottom: 120px;
   padding-left: 30px;
   padding-right: 30px;
   display: flex;
@@ -75,7 +75,7 @@ export const Section = styled.section`
 export const SectionWithBackgroundImage = styled(Section)`
   background-image: url(${props => props.backgroundImage});
   background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center bottom;
   background-size: cover;
   color: #fff;
 `
@@ -109,6 +109,11 @@ export const Heading = styled.h2`
     props.inverted &&
     `
     color: #fff;
+  `}
+  ${props =>
+    props.italic &&
+    `
+    font-style: italic;
   `}
 `
 
