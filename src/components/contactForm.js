@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { Form, Button, Message } from "semantic-ui-react"
+import styled from "styled-components"
+import { Button } from "../components/new/styledComponents"
 
 const ContactForm = ({ source }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -40,61 +41,60 @@ const ContactForm = ({ source }) => {
       })
   }
 
-  const handleMessageDismiss = () => {
-    setMessage({ isVisible: false })
-  }
   return (
-    <Form
-      id="form"
-      name="contact"
-      onSubmit={event => handleSubmit(event)}
-      data-netlify="true"
-    >
-      {/* needed for netlify */}
-      <input type="hidden" name="form-name" value="contact" />
-      <input type="hidden" name="Skickat från" value={source} />
-      <Form.Group widths="equal">
-        <Form.Input fluid label="Namn" placeholder="Namn" name="namn" />
-        <Form.Input
-          type="email"
-          fluid
-          label="E-post"
-          placeholder="E-post"
-          required
-          name="email"
-        />
-        <Form.Input
-          fluid
-          label="Företag"
-          placeholder="Företag"
-          name="Företag"
-        />
-      </Form.Group>
-      <Form.TextArea
-        label="Meddelande"
-        placeholder="Meddelande"
-        name="Meddelande"
-      />
-      <Button
-        type="submit"
-        value="Send"
-        content="Skicka"
-        icon="send"
-        labelPosition="left"
-        positive
-        loading={isLoading}
-      />
-      {message.isVisible && (
-        <Message
-          negative={message.negative}
-          positive={message.positive}
-          onDismiss={handleMessageDismiss}
-          header={message.header}
-          content={message.content}
-        />
+    <>
+      {message.isVisible ? (
+        <Message>
+          <h3>{message.header}</h3>
+          <p>{message.content}</p>
+        </Message>
+      ) : (
+        <Form
+          id="form"
+          name="contact"
+          onSubmit={event => handleSubmit(event)}
+          data-netlify="true"
+        >
+          {/* needed for netlify */}
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="Skickat från" value={source} />
+          <Section widths="equal">
+            <input type="text" label="Namn" placeholder="Namn" name="namn" />
+            <input type="email" placeholder="E-post *" required name="email" />
+            <input type="text" placeholder="Företag" name="Företag" />
+          </Section>
+          <textarea placeholder="Meddelande" name="Meddelande" />
+          <SubmitButton type="submit" value="Send">
+            Skicka
+          </SubmitButton>
+        </Form>
       )}
-    </Form>
+    </>
   )
 }
 
 export default ContactForm
+
+const Form = styled.form``
+
+const Section = styled.div`
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: 20px;
+  }
+`
+
+const SubmitButton = styled(Button)`
+  width: 100%;
+  font-size: 20px;
+`
+
+const Message = styled.div`
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+`

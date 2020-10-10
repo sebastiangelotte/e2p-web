@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { Form, Button, Message } from "semantic-ui-react"
+import styled from "styled-components"
+import { Button } from "../components/new/styledComponents"
 
 const CourseSignup = ({ courseName, courseDates }) => {
   const [extraParticipants, setExtraParticipants] = useState(0)
@@ -48,12 +49,10 @@ const CourseSignup = ({ courseName, courseDates }) => {
   return (
     <>
       {message.isVisible ? (
-        <Message
-          negative={message.negative}
-          positive={message.positive}
-          header={message.header}
-          content={message.content}
-        />
+        <Message>
+          <h3>{message.header}</h3>
+          <p>{message.content}</p>
+        </Message>
       ) : (
         <Form
           id="form-signup"
@@ -64,147 +63,116 @@ const CourseSignup = ({ courseName, courseDates }) => {
           {/* needed for netlify */}
           <input type="hidden" name="form-name" value="courseSignup" />
           <input type="hidden" name="Kurs" value={courseName} />
-          <Form.Group widths="equal">
-            <select
-              id="date"
-              label="Datum"
-              name="Datum"
-              value={date}
-              onBlur={e => setDate(e.target.value)}
-            >
-              {courseDates &&
-                courseDates.map(tillfalle => (
+          {courseDates && (
+            <Section>
+              <select
+                id="date"
+                name="Datum"
+                value={date}
+                onChange={e => setDate(e.target.value)}
+              >
+                {courseDates.map((tillfalle, i) => (
                   <option
+                    key={i}
                     value={tillfalle.date}
                   >{`${tillfalle.city}: ${tillfalle.date}`}</option>
                 ))}
-            </select>
-          </Form.Group>
-          <h3>Deltagare</h3>
-          <Form.Group widths="equal">
-            <Form.Input
-              fluid
-              label="Namn"
-              placeholder="Namn"
-              required
-              name="namn"
-            />
-            <Form.Input
+              </select>
+            </Section>
+          )}
+          <Section>
+            <h3>Deltagare</h3>
+            <input type="text" placeholder="Namn *" required name="namn" />
+            <input
               type="email"
-              fluid
-              label="E-post"
-              placeholder="E-post"
+              placeholder="E-post *"
               required
               name="email"
               value={email}
-              onInput={e => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
             />
-          </Form.Group>
-          {Array.apply(null, { length: extraParticipants - 1 }).map(
-            (_, index) => (
-              <Form.Group widths="equal" key={index}>
-                <Form.Input
-                  fluid
-                  label="Namn"
-                  placeholder="Namn"
-                  required
-                  name={`namn${index}`}
-                />
-                <Form.Input
-                  type="email"
-                  fluid
-                  label="E-post"
-                  placeholder="E-post"
-                  required
-                  name={`email${index}`}
-                />
-              </Form.Group>
-            )
-          )}
-          <Button
-            content="Anmäl fler deltagare"
-            icon="plus"
-            labelPosition="left"
-            onClick={() => {
-              setExtraParticipants(extraParticipants + 1)
-            }}
-          />
-          <h3>Faktureringsinformation</h3>
-          <Form.Group widths="equal">
-            <Form.Input fluid label="Företag" placeholder="Företag" required />
-            <Form.Input
-              fluid
-              label="Fakturaadress"
-              placeholder="Fakturaadress"
+            <MutedButton
+              onClick={e => {
+                e.preventDefault()
+                setExtraParticipants(extraParticipants + 1)
+              }}
+            >
+              Anmäl fler deltagare
+            </MutedButton>
+            {Array.apply(null, { length: extraParticipants }).map(
+              (_, index) => (
+                <>
+                  <input
+                    type="text"
+                    placeholder="Namn *"
+                    required
+                    name={`namn${index}`}
+                  />
+                  <input
+                    type="email"
+                    placeholder="E-post *"
+                    required
+                    name={`email${index}`}
+                  />
+                </>
+              )
+            )}
+          </Section>
+          <Section>
+            <h3>Faktureringsinformation</h3>
+            <input type="text" placeholder="Företag *" required />
+            <input
+              type="text"
+              placeholder="Fakturaadress *"
               required
               name="fakturaadress"
             />
-            <Form.Input
-              fluid
-              label="Postnummer"
-              placeholder="Postnummer"
+            <input
+              type="text"
+              placeholder="Postnummer *"
               required
               name="postnummer"
             />
-            <Form.Input
-              fluid
-              label="Ort"
-              placeholder="Ort"
-              required
-              name="ort"
-            />
-          </Form.Group>
-          {!showContactPerson ? (
-            <Button
-              size="small"
+            <input type="text" placeholder="Ort *" required name="ort" />
+            <MutedButton
               onClick={e => {
                 e.preventDefault()
                 setShowContactPerson(true)
               }}
             >
               Annan kontaktperson?
-            </Button>
-          ) : (
+            </MutedButton>
+          </Section>
+          {showContactPerson && (
             <>
-              <h3>Kontaktperson</h3>
-              <Form.Group widths="equal">
-                <Form.Input
-                  fluid
-                  label="Namn"
+              <Section>
+                <h3>Kontaktperson</h3>
+                <input
+                  type="text"
                   placeholder="Namn"
                   name="kontaktperson-namn"
                 />
-                <Form.Input
-                  fluid
-                  label="E-post"
+                <input
+                  type="email"
                   placeholder="E-post"
                   name="kontaktperson-epost"
                 />
-                <Form.Input fluid label="Postnummer" placeholder="Postnummer" />
-                <Form.Input
-                  fluid
-                  label="Ort"
-                  placeholder="Ort"
-                  name="kontaktperson-ort"
-                />
-              </Form.Group>
+                <input type="text" placeholder="Postnummer" />
+                <input type="text" placeholder="Ort" name="kontaktperson-ort" />
+              </Section>
             </>
           )}
-
-          <h3>Övrigt</h3>
-          <Form.TextArea
-            placeholder="Allergier, speciella önskemål m.m."
-            name="ovrigt"
-          />
-          <Button
-            loading={isLoading}
-            type="submit"
-            value="Send"
-            content="Skicka anmälan"
-            icon="send"
-            labelPosition="left"
-            positive
-          />
+          <Section>
+            <h3>Övrigt</h3>
+            <textarea
+              placeholder="Allergier, speciella önskemål m.m."
+              name="ovrigt"
+            />
+            <SubmitButton type="submit" value="Send">
+              Skicka anmälan *
+            </SubmitButton>
+            <span>* bekräftelse skickas till din e-post</span>
+          </Section>
         </Form>
       )}
     </>
@@ -212,3 +180,33 @@ const CourseSignup = ({ courseName, courseDates }) => {
 }
 
 export default CourseSignup
+
+const Form = styled.form``
+
+const Section = styled.div`
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: 20px;
+  }
+`
+
+const MutedButton = styled(Button)`
+  width: 100%;
+  background-color: #1a1a1a;
+  padding: 8px 10px;
+`
+
+const SubmitButton = styled(Button)`
+  width: 100%;
+  font-size: 20px;
+`
+
+const Message = styled.div`
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+`
