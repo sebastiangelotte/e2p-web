@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
@@ -18,10 +18,10 @@ import {
 } from "../components/new/styledComponents"
 import RelatedGrid from "../components/new/relatedGrid"
 import ExpandableCard from "../components/new/expandableCard"
-import { BsClock, BsTag, BsCalendar } from "react-icons/bs"
+import { BsClock, BsTag, BsCalendar, BsBuilding } from "react-icons/bs"
 import { IntersectionObserver } from "../components/intersectionObserver"
 import { ScaleBox } from "../components/scaleBox"
-import Card from "../components/new/card"
+import Modal from "../components/new/modal"
 
 export const query = graphql`
   query($slug: String!) {
@@ -32,6 +32,8 @@ export const query = graphql`
       price
       companyInternalCourse
       shortDescription
+      onlineCourse
+      onSite
 
       description {
         json
@@ -94,11 +96,10 @@ export const query = graphql`
   }
 `
 
-const locationLink = (lat, lon) => {
-  return `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`
-}
-
 const Course = props => {
+  const [showCourseSignupModal, setShowCourseSignupModal] = useState(false)
+  const [showContactModal, setShowContactModal] = useState(false)
+
   const options = {
     renderNode: {
       "embedded-asset-block": node => {
@@ -132,32 +133,17 @@ const Course = props => {
       <Section background>
         <StyledInner>
           <Description>
-            {course.courseLeader && (
-              <ExpandableCard heading="Kursledare">
-                <CourseLeader data={course.courseLeader} />
-              </ExpandableCard>
-            )}
             {course.practicalInfo && (
               <ExpandableCard heading="Praktisk information">
                 {documentToReactComponents(course.practicalInfo.json, options)}
-                {/* {!course.companyInternalCourse && */}
-                {/*   course.kurstillflle && */}
-                {/*   course.kurstillflle.map(tillfalle => { */}
-                {/*     return ( */}
-                {/*       <a */}
-                {/*         href={locationLink( */}
-                {/*           tillfalle.location.lat, */}
-                {/*           tillfalle.location.lon */}
-                {/*         )} */}
-                {/*         target="_blank" */}
-                {/*         rel="noopener noreferrer" */}
-                {/*       > */}
-                {/*         <Button> */}
-                {/*           {tillfalle.city} {tillfalle.date} */}
-                {/*         </Button> */}
-                {/*       </a> */}
-                {/*     ) */}
-                {/*   })} */}
+              </ExpandableCard>
+            )}
+            <ExpandableCard heading="Kursbeskrivning" forceOpen>
+              {documentToReactComponents(course.description.json, options)}
+            </ExpandableCard>
+            {course.courseLeader && (
+              <ExpandableCard heading="Kursledare">
+                <CourseLeader data={course.courseLeader} />
               </ExpandableCard>
             )}
             {course.includedInfo && (
@@ -167,54 +153,86 @@ const Course = props => {
                 </div>
               </ExpandableCard>
             )}
-            <ExpandableCard heading="Kursbeskrivning" forceOpen>
-              {documentToReactComponents(course.description.json, options)}
-            </ExpandableCard>
           </Description>
           <ExtraInfo>
             <StickyWrapper>
-              {!course.companyInternalCourse && (
-                <List>
-                  {course.kurstillflle && (
-                    <li>
-                      <div>
-                        <b>Kommande tillfällen:</b>
-                        <ul>
-                          {course.kurstillflle.map(tillfalle => {
-                            return (
-                              <li>
-                                <BsCalendar />{" "}
-                                {`${tillfalle.city}: ${tillfalle.date}`}
-                              </li>
-                            )
-                          })}
-                        </ul>
-                      </div>
-                    </li>
-                  )}
+              <List>
+                {course.kurstillflle && (
                   <li>
-                    <BsClock />
-                    {course.numberOfDays} dag
-                    {course.numberOfDays > 1 ? "ar" : ""}
+                    <div>
+                      <ul>
+                        <li>
+                          <b>Kommande tillfällen:</b>
+                        </li>
+                        {course.kurstillflle.map((tillfalle, i) => {
+                          return (
+                            <li key={i}>
+                              <BsCalendar />{" "}
+                              {`${tillfalle.city}: ${tillfalle.date}`}
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
                   </li>
+                )}
+                <li>
+                  <BsClock />
+                  {course.numberOfDays} dag
+                  {course.numberOfDays > 1 ? "ar" : ""}
+                </li>
+                {Number(course.price) !== 0 && (
                   <li>
                     <BsTag /> {Number(course.price).toLocaleString()} SEK exkl.
                     moms
                   </li>
-                </List>
-              )}
+                )}
+                <li>
+                  <div>
+                    <ul>
+                      <li>
+                        <b>Tillgänglighet:</b>
+                      </li>
+                      {course.onlineCourse && <li>🟢 Online</li>}
+                      {course.onSite && (
+                        <li>
+                          <span>
+                            <BsBuilding /> On-site
+                          </span>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                </li>
+              </List>
 
+              <Modal
+                isOpen={showCourseSignupModal}
+                closeModal={() => setShowCourseSignupModal(false)}
+              >
+                <CourseSignup
+                  courseName={course.title}
+                  courseID={course.id}
+                  courseDates={course.kurstillflle}
+                />
+              </Modal>
+              <Modal
+                isOpen={showContactModal}
+                closeModal={() => setShowContactModal(false)}
+              >
+                <h3>Fråga oss</h3>
+                <ContactForm source={course.title} />
+              </Modal>
               <IntersectionObserver>
                 <ScaleBox>
-                  <BookButton>Boka</BookButton>
-                  <AskButton>Fråga oss</AskButton>
+                  <BookButton onClick={() => setShowCourseSignupModal(true)}>
+                    Boka
+                  </BookButton>
+                  <AskButton onClick={() => setShowContactModal(true)}>
+                    Fråga oss
+                  </AskButton>
                 </ScaleBox>
               </IntersectionObserver>
-              {/* <CourseSignup */}
-              {/*   courseName={course.title} */}
-              {/*   courseID={course.id} */}
-              {/*   courseDates={course.kurstillflle} */}
-              {/* /> */}
             </StickyWrapper>
           </ExtraInfo>
         </StyledInner>
@@ -278,7 +296,8 @@ const List = styled.ul`
   ul {
     list-style: none;
     padding-left: 0;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
   }
 
   li {
@@ -297,7 +316,7 @@ const BookButton = styled(Button)`
   border: none;
   font-size: 18px;
   font-weight: bold;
-  padding: 18px 45px 14px 45px;
+  padding: 18px 45px 16px 45px;
   width: 100%;
 `
 
@@ -305,6 +324,6 @@ const AskButton = styled(Button)`
   border: none;
   font-size: 18px;
   font-weight: bold;
-  padding: 18px 45px 14px 45px;
+  padding: 18px 45px 16px 45px;
   width: 100%;
 `
