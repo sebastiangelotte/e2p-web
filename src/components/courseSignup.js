@@ -169,7 +169,7 @@ const CourseSignup = ({ courseName, courseDates }) => {
               name="ovrigt"
             />
             <SubmitButton type="submit" value="Send">
-              Skicka anmälan *
+              Slutför bokning *
             </SubmitButton>
             <span>* bekräftelse skickas till din e-post</span>
           </Section>
