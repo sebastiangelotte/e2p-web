@@ -10,7 +10,6 @@ import {
   SectionWithBackgroundImage,
   Section,
   Inner,
-  Tag,
 } from "../components/new/styledComponents"
 import Filter from "../components/filter"
 import {
