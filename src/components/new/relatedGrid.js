@@ -48,6 +48,7 @@ const Wrapper = styled.div`
 
   h2 {
     color: #1e266d;
+    font-size: 32px;
   }
 `
 
