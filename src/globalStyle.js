@@ -44,10 +44,21 @@ export const GlobalStyle = createGlobalStyle`
 
   h2 {
     font-size: 36px;
+
   }
 
   h3 {
     font-size: 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    h2 {
+      font-size: 28px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
   }
 
   ul {
