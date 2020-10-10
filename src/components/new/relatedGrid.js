@@ -5,8 +5,6 @@ import Card from "./card"
 import { Tag, Heading } from "./styledComponents"
 
 const RelatedGrid = ({ items, title }) => {
-  console.log(items)
-
   const getType = item => {
     switch (item.internal.type) {
       case "ContentfulTool":
@@ -26,12 +24,12 @@ const RelatedGrid = ({ items, title }) => {
       <hr />
       <Grid>
         {items?.map((item, i) => (
-          <Link to={`/${getType(item)}/${item.slug}`}>
-            <Card key={i}>
+          <Link key={i} to={`/${getType(item)}/${item.slug}`}>
+            <Card>
               <CreatedAt>{item.createdAt}</CreatedAt>
               <Heading as="h3">{item.title}</Heading>
               {item.tags?.map(tag => (
-                <Tag>{tag}</Tag>
+                <Tag key={tag}>{tag}</Tag>
               ))}
             </Card>
           </Link>
