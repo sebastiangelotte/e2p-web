@@ -84,7 +84,7 @@ const Grid = styled.div`
       auto
     );
   grid-gap: 34px;
-  max-width: 1184px;
+  max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
 
