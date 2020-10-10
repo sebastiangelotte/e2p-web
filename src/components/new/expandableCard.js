@@ -30,6 +30,18 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   padding: 20px 30px 15px 30px;
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  ul {
+    margin-bottom: 30px;
+  }
 `
 
 const Activator = styled.div`
