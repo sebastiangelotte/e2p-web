@@ -3,18 +3,18 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import circle2 from "../../images/circle2.svg"
 
-const Card = ({ link, withBackground, children }) => {
+const Card = ({ link, withBackground, children, className }) => {
   return (
     <>
       {link ? (
         <Link to={link}>
-          <Wrapper withBackground={withBackground}>
-            <div style={{ position: "relative", zIndex: 2 }}>{children}</div>
+          <Wrapper withBackground={withBackground} className={className}>
+            <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
           </Wrapper>
         </Link>
       ) : (
-        <Wrapper withBackground={withBackground}>
-          <div style={{ position: "relative", zIndex: 2 }}>{children}</div>
+        <Wrapper withBackground={withBackground} className={className}>
+          <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
         </Wrapper>
       )}
     </>
@@ -104,4 +104,12 @@ const Wrapper = styled.div`
     }
 
   `}
+
+  @media screen and (max-width: 500px) {
+    padding: 20px;
+
+    h3 {
+      font-size: 22px;
+    }
+  }
 `
