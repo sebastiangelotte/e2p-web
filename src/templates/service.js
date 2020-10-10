@@ -1,31 +1,54 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import { Card, Segment, Container, Grid, Header } from "semantic-ui-react"
-import ContactForm from "../components/contactForm"
 import Head from "../components/head"
 import Layout from "../components/layout"
-import PageHeader from "../components/page-header/pageHeader"
-import SimpleCard from "../components/cards/simpleCard"
+import ContactForm from "../components/contactForm"
+import styled from "styled-components"
+import RelatedGrid from "../components/new/relatedGrid"
+import Share from "../components/new/share"
+import bg from "../images/hero-bg.svg"
+import {
+  Section,
+  Tag,
+  Heading,
+  SectionWithBackgroundImage,
+  Inner,
+} from "../components/new/styledComponents"
 
 export const query = graphql`
   query($slug: String!) {
     contentfulService(slug: { eq: $slug }) {
+      createdAt(formatString: "DD MMM, YYYY")
       title
       description {
         json
       }
+      tags
       linkedServices {
         slug
         title
+        tags
+        internal {
+          type
+        }
       }
       linkedCourses {
         slug
         title
+        tags
+        internal {
+          type
+        }
       }
       linkedTools {
         slug
         title
+        tags
+        internal {
+          type
+        }
+        createdAt(formatString: "DD MMM, YYYY")
       }
     }
   }
@@ -33,92 +56,61 @@ export const query = graphql`
 
 const Service = props => {
   const service = props.data.contentfulService
+  const services = props.data.contentfulService.linkedServices || []
+  const courses = props.data.contentfulService.linkedCourses || []
+  const tools = props.data.contentfulService.linkedTools || []
+
+  const relatedItems = [...services, ...courses, ...tools]
+
   return (
     <Layout transparentNavigation>
-      <Head title={`Tjänst: ${props.data.contentfulService.title}`} />
+      <Head title={`Tjänst: ${service.title}`} />
 
-      <PageHeader title={props.data.contentfulService.title} />
-      <Segment vertical>
-        <Container>
-          <Grid stackable>
-            <Grid.Row>
-              <Grid.Column width={11}>
-                <Segment vertical>
-                  <Link to="/services">&lt; Tillbaka till tjänster</Link>
-                  {documentToReactComponents(
-                    props.data.contentfulService.description.json
-                  )}
-                </Segment>
-                <Segment vertical>
-                  <h2>Önskar du offert?</h2>
-                  <p>
-                    Beskriv dina önskemål, så sänder vi dig en offert
-                    kostnadsfritt.
-                  </p>
-                  <ContactForm source={props.data.contentfulService.title} />
-                </Segment>
-              </Grid.Column>
-              <Grid.Column width={5} floated="right">
-                {/* LINKED SERVICES */}
-                {service.linkedServices && (
-                  <Segment vertical>
-                    <Header as="h3">Relaterade tjänster</Header>
-                    <Card.Group>
-                      {service.linkedServices.map((service, index) => {
-                        return (
-                          <SimpleCard
-                            title={service.title}
-                            link={`/services/${service.slug}`}
-                            key={index}
-                          />
-                        )
-                      })}
-                    </Card.Group>
-                  </Segment>
-                )}
-
-                {/* LINKED COURSES */}
-                {service.linkedCourses && (
-                  <Segment vertical>
-                    <Header as="h3">Relaterade kurser</Header>
-                    <Card.Group>
-                      {service.linkedCourses.map((course, index) => {
-                        return (
-                          <SimpleCard
-                            title={course.title}
-                            link={`/courses/${course.slug}`}
-                            key={index}
-                          />
-                        )
-                      })}
-                    </Card.Group>
-                  </Segment>
-                )}
-
-                {/* LINKED TOOLS */}
-                {service.linkedTools && (
-                  <Segment vertical>
-                    <Header as="h3">Relaterade verktyg</Header>
-                    <Card.Group>
-                      {service.linkedTools.map((tool, index) => {
-                        return (
-                          <SimpleCard
-                            title={tool.title}
-                            link={`/tools/${tool.slug}`}
-                            key={index}
-                          />
-                        )
-                      })}
-                    </Card.Group>
-                  </Segment>
-                )}
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Container>
-      </Segment>
+      <SectionWithBackgroundImage backgroundImage={bg} firstSection>
+        <StyledInner>
+          <Heading as="h1" inverted serif>
+            {service.title}
+          </Heading>
+          {service.tags?.map(tag => (
+            <Tag>{tag}</Tag>
+          ))}
+        </StyledInner>
+      </SectionWithBackgroundImage>
+      <StyledSection>
+        <StyledInner>
+          <Share title={service.title} />
+          {documentToReactComponents(service.description.json)}
+          <hr />
+          <h2>Har du ytterligare frågor?</h2>
+          <ContactForm source={service.title} />
+        </StyledInner>
+      </StyledSection>
+      {relatedItems.length !== 0 && (
+        <Section gradient>
+          <RelatedGrid items={relatedItems} title="Mer från easy2perform" />
+        </Section>
+      )}
     </Layout>
   )
 }
 
 export default Service
+
+const StyledSection = styled(Section)`
+  p {
+    font-size: 20px;
+    font-family: "Crimson Text", Georgia, "Times New Roman", Times, serif;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-top: 40px;
+  }
+`
+
+const StyledInner = styled(Inner)`
+  max-width: 680px;
+`
+
