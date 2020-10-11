@@ -50,9 +50,10 @@ export const Section = styled.section`
   align-items: center;
   justify-content: center;
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 600px) {
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 60px;
   }
 
   ${props =>
