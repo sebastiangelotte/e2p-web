@@ -213,11 +213,24 @@ const Course = props => {
                 isOpen={showCourseSignupModal}
                 closeModal={() => setShowCourseSignupModal(false)}
               >
-                <CourseSignup
-                  courseName={course.title}
-                  courseID={course.id}
-                  courseDates={course.kurstillflle}
-                />
+                {course.companyInternalCourse ? (
+                  <>
+                    <h3>Begär offert</h3>
+                    <p>
+                      Beskriv dina önskemål, så sänder vi dig en offert
+                      kostnadsfritt.
+                    </p>
+                    <ContactForm source={course.title} />
+                  </>
+                ) : (
+                  <>
+                    <CourseSignup
+                      courseName={course.title}
+                      courseID={course.id}
+                      courseDates={course.kurstillflle}
+                    />
+                  </>
+                )}
               </Modal>
               <Modal
                 isOpen={showContactModal}
@@ -229,7 +242,7 @@ const Course = props => {
               <IntersectionObserver>
                 <ScaleBox>
                   <BookButton onClick={() => setShowCourseSignupModal(true)}>
-                    Boka
+                    {course.companyInternalCourse ? "Begär offert" : "Boka"}
                   </BookButton>
                   <AskButton onClick={() => setShowContactModal(true)}>
                     Fråga oss

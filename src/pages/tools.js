@@ -66,8 +66,9 @@ const Tools = () => {
             Varför uppfinna hjulet varje gång?
           </Heading>
           <p>
-            Med våra enkla, praktiska checklistor får du stöd och vägledning i
-            hur vissa viktiga arbetsmoment bör utföras. Helt gratis.
+            Att ha en användbar checklista till hands när man skall utföra
+            viktiga och svåra uppgifter i rollen som chef och ledare är
+            ovärderligt. Alla våra checklistor är gratis att använda.
           </p>
         </Inner>
       </SectionWithBackgroundImage>
