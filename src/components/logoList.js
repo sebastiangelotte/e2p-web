@@ -1,12 +1,12 @@
 import React from "react"
 import styled from "styled-components"
-import botkyrka from "../../images/botkyrka.png"
-import elite from "../../images/elite.png"
-import bonnier from "../../images/bonnier.png"
-import samhall from "../../images/samhall.png"
-import siemens from "../../images/siemens.png"
-import trr from "../../images/trr.png"
-import kustbevakningen from "../../images/kustbevakningen.png"
+import botkyrka from "../images/botkyrka.png"
+import elite from "../images/elite.png"
+import bonnier from "../images/bonnier.png"
+import samhall from "../images/samhall.png"
+import siemens from "../images/siemens.png"
+import trr from "../images/trr.png"
+import kustbevakningen from "../images/kustbevakningen.png"
 
 const LogoList = () => {
   return (

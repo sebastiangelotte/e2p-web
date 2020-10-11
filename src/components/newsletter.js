@@ -1,8 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import bg from "../../images/newsletter-bg.svg"
-import bubble1 from "../../images/bubble1.svg"
-import bubble2 from "../../images/bubble2.svg"
+import bg from "../images/newsletter-bg.svg"
+import bubble1 from "../images/bubble1.svg"
+import bubble2 from "../images/bubble2.svg"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import { useState } from "react"
 

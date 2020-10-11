@@ -2,10 +2,10 @@
 // - fix bubbles in bg on small screens
 import React from "react"
 import styled from "styled-components"
-import background from "../../images/hero-bg.svg"
-import image from "../../images/hero-image.svg"
+import background from "../images/hero-bg.svg"
+import image from "../images/hero-image.svg"
 import { Link } from "gatsby"
-import { ScaleBox } from "../scaleBox"
+import { ScaleBox } from "./scaleBox"
 
 const Hero = () => {
   return (

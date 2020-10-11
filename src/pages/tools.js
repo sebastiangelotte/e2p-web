@@ -11,9 +11,9 @@ import {
   Section,
   Inner,
   Tag,
-} from "../components/new/styledComponents"
+} from "../components/styledComponents"
 import bg from "../images/hero-bg.svg"
-import Card from "../components/new/card"
+import Card from "../components/card"
 
 const Tools = () => {
   const data = useStaticQuery(graphql`

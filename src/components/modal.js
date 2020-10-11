@@ -2,7 +2,7 @@ import React, { useRef } from "react"
 import { createPortal } from "react-dom"
 import styled from "styled-components"
 import { MdClose } from "react-icons/md"
-import useClickOutside from "../../hooks/useClickOutside"
+import useClickOutside from "../hooks/useClickOutside"
 
 const Modal = ({ children, closeModal, isOpen }) => {
   const innerElement = useRef()

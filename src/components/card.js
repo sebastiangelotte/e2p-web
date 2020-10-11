@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import circle2 from "../../images/circle2.svg"
+import circle2 from "../images/circle2.svg"
 
 const Card = ({ link, withBackground, children, className }) => {
   return (

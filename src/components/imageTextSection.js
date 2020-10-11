@@ -1,14 +1,14 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import decoration1 from "../../images/decoration1.svg"
-import decoration2 from "../../images/decoration2.svg"
-import decoration3 from "../../images/decoration3.svg"
-import decoration4 from "../../images/decoration4.svg"
-import image from "../../images/computer.png"
+import decoration1 from "../images/decoration1.svg"
+import decoration2 from "../images/decoration2.svg"
+import decoration3 from "../images/decoration3.svg"
+import decoration4 from "../images/decoration4.svg"
+import image from "../images/computer.png"
 import { Button } from "./styledComponents"
-import { ScaleBox } from "../scaleBox"
-import { IntersectionObserver } from "../intersectionObserver"
+import { ScaleBox } from "./scaleBox"
+import { IntersectionObserver } from "./intersectionObserver"
 
 const ImageTextSection = () => {
   return (

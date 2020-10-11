@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import mailIcon from "../../images/mail.svg"
+import mailIcon from "../images/mail.svg"
 
 const FullWidthCard = () => {
   return (

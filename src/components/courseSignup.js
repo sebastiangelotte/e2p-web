@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { Button } from "../components/new/styledComponents"
+import { Button } from "./styledComponents"
 
 const CourseSignup = ({ courseName, courseDates }) => {
   const [extraParticipants, setExtraParticipants] = useState(0)

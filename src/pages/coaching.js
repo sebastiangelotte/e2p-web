@@ -7,10 +7,10 @@ import {
   Heading,
   SectionWithBackgroundImage,
   Inner,
-} from "../components/new/styledComponents"
+} from "../components/styledComponents"
 import { BsPersonBoundingBox } from "react-icons/bs"
 import { FaHandHoldingHeart, FaMagic } from "react-icons/fa"
-import Card from "../components/new/card"
+import Card from "../components/card"
 import CoachingForm from "../components/coachingForm"
 import { IntersectionObserver } from "../components/intersectionObserver"
 import { ScaleBox } from "../components/scaleBox"

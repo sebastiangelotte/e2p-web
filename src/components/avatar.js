@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
-import man1 from "../../images/man1.png"
-import man2 from "../../images/man2.jpg"
-import man3 from "../../images/man3.jpg"
-import woman1 from "../../images/woman1.png"
-import woman2 from "../../images/woman2.png"
-import woman3 from "../../images/woman3.png"
+import man1 from "../images/man1.png"
+import man2 from "../images/man2.jpg"
+import man3 from "../images/man3.jpg"
+import woman1 from "../images/woman1.png"
+import woman2 from "../images/woman2.png"
+import woman3 from "../images/woman3.png"
 
 const Avatar = ({ round, preset }) => {
   const [image, setImage] = useState(man1)

@@ -11,7 +11,7 @@ import {
   Heading,
   SectionWithBackgroundImage,
   Inner,
-} from "../components/new/styledComponents"
+} from "../components/styledComponents"
 
 const About = () => {
   const data = useStaticQuery(graphql`

@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
-import facebook from "../../../images/fb.svg"
+import facebook from "../../images/fb.svg"
 
 const variants = {
   open: {

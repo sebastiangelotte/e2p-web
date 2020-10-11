@@ -1,8 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import fb from "../../images/fb.svg"
+import fb from "../images/fb.svg"
 import { Link } from "gatsby"
-import logo from "../../images/logo-dark.svg"
+import logo from "../images/logo-dark.svg"
 
 const Footer = () => {
   return (

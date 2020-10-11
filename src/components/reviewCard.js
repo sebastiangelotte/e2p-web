@@ -1,5 +1,5 @@
 import React from "react"
-import star from "../../images/star.svg"
+import star from "../images/star.svg"
 import styled from "styled-components"
 
 const ReviewCard = ({ children, rating }) => {

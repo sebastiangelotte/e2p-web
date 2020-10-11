@@ -5,8 +5,8 @@ import Head from "../components/head"
 import Layout from "../components/layout"
 import ContactForm from "../components/contactForm"
 import styled from "styled-components"
-import RelatedGrid from "../components/new/relatedGrid"
-import Share from "../components/new/share"
+import RelatedGrid from "../components/relatedGrid"
+import Share from "../components/share"
 import bg from "../images/hero-bg.svg"
 import {
   Section,
@@ -14,7 +14,7 @@ import {
   Heading,
   SectionWithBackgroundImage,
   Inner,
-} from "../components/new/styledComponents"
+} from "../components/styledComponents"
 
 export const query = graphql`
   query($slug: String!) {

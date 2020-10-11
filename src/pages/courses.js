@@ -10,7 +10,7 @@ import {
   SectionWithBackgroundImage,
   Section,
   Inner,
-} from "../components/new/styledComponents"
+} from "../components/styledComponents"
 import Filter from "../components/filter"
 import {
   BsFillTagFill,
@@ -20,7 +20,7 @@ import {
   BsBuilding,
 } from "react-icons/bs"
 import { motion, AnimatePresence } from "framer-motion"
-import Newsletter from "../components/new/newsletter"
+import Newsletter from "../components/newsletter"
 
 const Courses = () => {
   const data = useStaticQuery(graphql`

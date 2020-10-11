@@ -15,13 +15,13 @@ import {
   Section,
   Inner,
   Button,
-} from "../components/new/styledComponents"
-import RelatedGrid from "../components/new/relatedGrid"
-import ExpandableCard from "../components/new/expandableCard"
+} from "../components/styledComponents"
+import RelatedGrid from "../components/relatedGrid"
+import ExpandableCard from "../components/expandableCard"
 import { BsClock, BsTag, BsCalendar, BsBuilding } from "react-icons/bs"
 import { IntersectionObserver } from "../components/intersectionObserver"
 import { ScaleBox } from "../components/scaleBox"
-import Modal from "../components/new/modal"
+import Modal from "../components/modal"
 
 export const query = graphql`
   query($slug: String!) {

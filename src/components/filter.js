@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
-import { Button } from "../components/new/styledComponents"
+import { Button } from "./styledComponents"
 import { BsCheck, BsPlus, BsFillPersonFill, BsBuilding } from "react-icons/bs"
 
 const Filter = ({ courses, onChange }) => {

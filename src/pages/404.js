@@ -10,7 +10,7 @@ import {
   SectionWithBackgroundImage,
   Inner,
   Button,
-} from "../components/new/styledComponents"
+} from "../components/styledComponents"
 
 const NotFoundPage = () => (
   <Layout transparentNavigation>

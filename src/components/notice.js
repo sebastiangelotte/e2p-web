@@ -3,9 +3,9 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import arrowButton from "../../images/arrow-button.svg"
-import cup from "../../images/cup.svg"
-import circle1 from "../../images/circle1.svg"
+import arrowButton from "../images/arrow-button.svg"
+import cup from "../images/cup.svg"
+import circle1 from "../images/circle1.svg"
 
 const Notice = () => {
   return (

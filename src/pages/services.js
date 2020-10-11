@@ -10,7 +10,7 @@ import {
   Inner,
   Button,
   Tag,
-} from "../components/new/styledComponents"
+} from "../components/styledComponents"
 import bg from "../images/hero-bg.svg"
 import { BsFillTagFill } from "react-icons/bs"
 
