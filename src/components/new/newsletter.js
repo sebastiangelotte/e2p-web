@@ -173,7 +173,7 @@ const Input = styled.input`
 
   @media screen and (max-width: 600px) {
     flex-basis: auto;
-    margin-bottom: 15px;
+    margin-bottom: 15px !important;
     width: 100%;
     margin-right: 0;
   }
