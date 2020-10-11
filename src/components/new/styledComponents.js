@@ -69,6 +69,10 @@ export const Section = styled.section`
     props.firstSection &&
     `
     padding-top: 150px;
+
+    p {
+      font-size: 20px;
+    }
   `}
 `
 

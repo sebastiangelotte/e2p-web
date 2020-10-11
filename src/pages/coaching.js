@@ -121,4 +121,8 @@ const CardWrapper = styled(Card)`
   h3 {
     font-size: 25px;
   }
+
+  p {
+    font-size: 18px;
+  }
 `
