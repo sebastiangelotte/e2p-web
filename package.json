@@ -2,8 +2,8 @@
   "name": "e2p",
   "private": true,
   "description": "e2p",
-  "version": "0.1.0",
-  "author": "Sebastian Gelotte",
+  "version": "2.0.0",
+  "author": "Sebastian Gelotte <sebastian.gelotte@gmail.com>",
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.2.0",
     "@reach/dialog": "^0.2.9",
@@ -41,8 +41,6 @@
     "react-share": "^4.3.0",
     "react-use": "^15.3.4",
     "redux": "^4.0.1",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.87.2",
     "styled-components": "^4.3.2",
     "video-react": "^0.13.7"
   },
@@ -51,7 +49,9 @@
     "prettier": "^1.17.0"
   },
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "styled-components",
+    "framer-motion"
   ],
   "license": "MIT",
   "scripts": {
@@ -65,7 +65,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/sebastiangelotte/e2p-web"
   },
   "proxy": {
     "/.netlify/functions": {

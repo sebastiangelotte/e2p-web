@@ -4,7 +4,6 @@ import bg from "../../images/newsletter-bg.svg"
 import bubble1 from "../../images/bubble1.svg"
 import bubble2 from "../../images/bubble2.svg"
 import addToMailchimp from "gatsby-plugin-mailchimp"
-import { Message } from "semantic-ui-react"
 import { useState } from "react"
 
 const Newsletter = () => {
@@ -14,8 +13,6 @@ const Newsletter = () => {
     isVisible: false,
     header: "Ett meddelande",
     content: "",
-    negative: false,
-    positive: false,
   })
 
   const handleSubmit = event => {
@@ -30,14 +27,12 @@ const Newsletter = () => {
           isVisible: true,
           header: "Tack för din prenumeration!",
           content: "",
-          positive: true,
         })
       } else if (data.result === "error") {
         setMessage({
           isVisible: true,
           header: "Fel vid prenumeration.",
-          content: "Du prenumererar redan på detta nyhetsbrev.",
-          negative: true,
+          content: "Försök igen.",
         })
       }
 
@@ -47,10 +42,6 @@ const Newsletter = () => {
 
   const handleEmailChange = event => {
     setEmail(event.currentTarget.value)
-  }
-
-  const handleMessageDismiss = () => {
-    setMessage({ isVisible: false })
   }
 
   return (
@@ -71,13 +62,10 @@ const Newsletter = () => {
           tips.
         </Text>
         {message.isVisible && (
-          <Message
-            negative={message.negative}
-            positive={message.positive}
-            onDismiss={handleMessageDismiss}
-            header={message.header}
-            content={message.content}
-          />
+          <div>
+            <h4>{message.header}</h4>
+            <span>{message.content}</span>
+          </div>
         )}
       </Inner>
     </Wrapper>
