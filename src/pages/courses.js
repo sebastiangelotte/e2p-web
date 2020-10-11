@@ -132,7 +132,11 @@ const Courses = () => {
                       </TagWrapper>
                       <TagWrapper>
                         <span>Tillgänglighet: </span>
-                        {course.node.onlineCourse && <span>🟢 Online</span>}
+                        {course.node.onlineCourse && (
+                          <span role="img" aria-label="online">
+                            🟢 Online
+                          </span>
+                        )}
                         {course.node.onSite && (
                           <span>
                             <BsBuilding /> On-site

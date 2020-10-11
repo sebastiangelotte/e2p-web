@@ -7,11 +7,11 @@ const ReviewCard = ({ children, rating }) => {
     <Wrapper>
       {children}
       <StarsWrapper>
-        <img src={star} />
-        <img src={star} />
-        <img src={star} />
-        <img src={star} />
-        <img src={star} />
+        <img src={star} alt="star" />
+        <img src={star} alt="star" />
+        <img src={star} alt="star" />
+        <img src={star} alt="star" />
+        <img src={star} alt="star" />
       </StarsWrapper>
     </Wrapper>
   )

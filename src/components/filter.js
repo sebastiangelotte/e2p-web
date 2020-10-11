@@ -23,7 +23,7 @@ const Filter = ({ courses, onChange }) => {
       courses.filter(course => {
         return filterByTag(course) && filterByType(course)
       })
-    )
+    ) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTags, activeType])
 
   const filterByTag = course => {
@@ -77,10 +77,6 @@ const Filter = ({ courses, onChange }) => {
 export default Filter
 
 const Wrapper = styled.div``
-
-const Text = styled.span`
-  padding-right: 20px;
-`
 
 const ButtonsWrapper = styled.div`
   display: flex;

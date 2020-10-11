@@ -9,7 +9,7 @@ const Footer = () => {
     <Wrapper>
       <Grid>
         <div>
-          <img src={logo} height="42px" />
+          <img src={logo} alt="logo" height="42px" />
           <Text>
             Vi som jobbar med Easy2perform fokuserar på att ge stöd och
             vägledning till företag, chefer och medarbetare. Oavsett om det sker

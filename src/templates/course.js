@@ -196,7 +196,13 @@ const Course = props => {
                       <li>
                         <b>Tillgänglighet:</b>
                       </li>
-                      {course.onlineCourse && <li>🟢 Online</li>}
+                      {course.onlineCourse && (
+                        <li>
+                          <span role="img" aria-label="online">
+                            🟢 Online
+                          </span>
+                        </li>
+                      )}
                       {course.onSite && (
                         <li>
                           <span>

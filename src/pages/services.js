@@ -35,7 +35,7 @@ const Services = () => {
     }
   `)
 
-  const [services, setServices] = useState(data.allContentfulService.edges)
+  const [services] = useState(data.allContentfulService.edges)
 
   return (
     <Layout transparentNavigation>
@@ -54,9 +54,9 @@ const Services = () => {
 
       <Section background>
         <StyledInner>
-          {services.map((service, index) => {
+          {services.map((service, i) => {
             return (
-              <div>
+              <div key={i}>
                 {service.node.tags &&
                   service.node.tags.map(tag => {
                     return (

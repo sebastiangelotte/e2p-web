@@ -129,6 +129,7 @@ const IndexPage = () => {
         <a
           href="https://www.utbildning.se/kurser/easy2perform/recensioner"
           target="_blank"
+          rel="noreferrer"
         >
           <StyledButton>Fler recensioner på utbildning.se</StyledButton>
         </a>

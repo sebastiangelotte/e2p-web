@@ -40,6 +40,7 @@ const MobileMenu = () => {
         <a
           href="https://www.facebook.com/easy2perform/"
           target="_blank"
+          rel="noreferrer"
           title="Facebook"
         >
           <img height="30" src={facebook} alt="Facebook" />

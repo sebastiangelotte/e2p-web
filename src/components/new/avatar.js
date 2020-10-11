@@ -33,7 +33,7 @@ const Avatar = ({ round, preset }) => {
       default:
         setImage(woman1)
     }
-  }, [])
+  }, [preset])
 
   return (
     <Wrapper round={round}>

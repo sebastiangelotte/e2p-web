@@ -5,11 +5,9 @@ import Head from "../components/head"
 import Layout from "../components/layout"
 import ContactForm from "../components/contactForm"
 import styled from "styled-components"
-import Share from "../components/new/share"
 import bg from "../images/hero-bg.svg"
 import {
   Section,
-  Tag,
   Heading,
   SectionWithBackgroundImage,
   Inner,

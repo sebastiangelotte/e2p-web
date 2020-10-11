@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Button } from "../components/new/styledComponents"
 
 const ContactForm = ({ source }) => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [, setIsLoading] = useState(false)
   const [message, setMessage] = useState({
     isVisible: false,
     header: "Ett meddelande",

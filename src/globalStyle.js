@@ -1,6 +1,11 @@
 import { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
+// html:not(img):not(video):not(.all-color-critical-elements) { 
+//        background: black;
+//        filter: invert(1) hue-rotate(180deg);
+// }
+
   :root {
     --color-heading: #1e266d;
     --color-text: #455880;

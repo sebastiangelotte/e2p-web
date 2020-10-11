@@ -3,8 +3,6 @@ import { graphql, useStaticQuery, Link } from "gatsby"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
-import Hero from "../components/hero"
-import HighlightedCard from "../components/highlightedCard"
 import FilterResults from "react-filter-search"
 import styled from "styled-components"
 import {
@@ -16,17 +14,6 @@ import {
 } from "../components/new/styledComponents"
 import bg from "../images/hero-bg.svg"
 import Card from "../components/new/card"
-
-const style = {
-  segment: {
-    paddingBottom: "6em",
-    backgroundColor: "#f7f7f7",
-  },
-  link: {
-    paddingTop: "2em",
-    display: "inline-block",
-  },
-}
 
 const Tools = () => {
   const data = useStaticQuery(graphql`

@@ -7,7 +7,7 @@ const CourseSignup = ({ courseName, courseDates }) => {
   const [showContactPerson, setShowContactPerson] = useState(false)
   const [email, setEmail] = useState("")
   const [date, setDate] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  const [, setIsLoading] = useState(false)
   const [message, setMessage] = useState({
     isVisible: false,
     header: "Ett meddelande",
@@ -65,6 +65,7 @@ const CourseSignup = ({ courseName, courseDates }) => {
           <input type="hidden" name="Kurs" value={courseName} />
           {courseDates && (
             <Section>
+              {/* eslint-disable-next-line */}
               <select
                 id="date"
                 name="Datum"

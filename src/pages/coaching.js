@@ -4,7 +4,6 @@ import Layout from "../components/layout"
 import styled from "styled-components"
 import bg from "../images/hero-bg.svg"
 import {
-  Section,
   Heading,
   SectionWithBackgroundImage,
   Inner,
@@ -18,8 +17,14 @@ import { ScaleBox } from "../components/scaleBox"
 
 const Coaching = () => {
   return (
-    <Layout transparentNavigation>
-      <Head title="Coaching" />
+    <Layout>
+      <Head
+        title="Coaching"
+        description="Individuell coaching innebär att du är i fokus. Målet med
+              coachingen är att ge dig stöd och utveckling i din yrkesroll. Vi
+              matchar ditt behov med våra konsulters erfarenhet av liknande
+              uppdrag."
+      />
 
       <SectionWithBackgroundImage background backgroundImage={bg} firstSection>
         <StyledInner>
@@ -45,7 +50,6 @@ const Coaching = () => {
             </ScaleBox>
           </IntersectionObserver>
         </StyledInner>
-        {/* <StyledSection background> */}
         <IntersectionObserver>
           <ScaleBox>
             <Grid>
@@ -76,25 +80,11 @@ const Coaching = () => {
           </ScaleBox>
         </IntersectionObserver>
       </SectionWithBackgroundImage>
-      {/* </StyledSection> */}
     </Layout>
   )
 }
 
 export default Coaching
-
-const StyledSection = styled(Section)`
-  p {
-    font-size: 20px;
-  }
-
-  h2,
-  h3,
-  h4,
-  h5 {
-    margin-top: 40px;
-  }
-`
 
 const StyledInner = styled(Inner)`
   display: grid;
