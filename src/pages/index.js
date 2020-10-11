@@ -21,7 +21,10 @@ import { Button, Section } from "../components/new/styledComponents"
 const IndexPage = () => {
   return (
     <Layout transparentNavigation>
-      <Head title="Startsida" />
+      <Head
+        title="Din flexibla kursleverantör"
+        description="Vi hjälper medarbetare och chefer att prestera bättre i sin yrkesroll. Genom behovsanpassad utbildning, individuell coaching och praktiska checklistor ger vi stöd i det dagliga arbetet."
+      />
       <Hero />
       <NoticePositioner>
         <Notice />

@@ -120,7 +120,10 @@ const Course = props => {
 
   return (
     <Layout>
-      <Head title={`Kurs: ${course.title}`} />
+      <Head
+        title={`Kurs: ${course.title}`}
+        description={course.shortDescription}
+      />
 
       <SectionWithBackgroundImage backgroundImage={bg} inverted firstSection>
         <Inner>

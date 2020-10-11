@@ -77,7 +77,11 @@ const Courses = () => {
 
   return (
     <Layout>
-      <Head title="Kurser" />
+      <Head
+        title="Kurser"
+        description="Vi utvecklar och genomför behovsanpassade kurser för medarbetare och
+            chefer."
+      />
       <SectionWithBackgroundImage backgroundImage={bg} inverted firstSection>
         <Inner>
           <Heading as="h1" inverted>

@@ -33,7 +33,7 @@ module.exports = {
         background_color: `#2185d0`,
         theme_color: `#2185d0`,
         display: `standalone`,
-        icon: `src/images/logo.svg`, // This path is relative to the root of the site.
+        icon: `src/images/logo-circle.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-offline`,
