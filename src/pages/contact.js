@@ -44,7 +44,6 @@ const Contact = () => {
   return (
     <Layout transparentNavigation>
       <Head title={page.title} />
-
       <SectionWithBackgroundImage backgroundImage={bg} firstSection>
         <StyledInner>
           <Heading as="h1" inverted>
