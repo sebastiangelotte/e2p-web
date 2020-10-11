@@ -13,6 +13,8 @@ import { BsPersonBoundingBox } from "react-icons/bs"
 import { FaHandHoldingHeart, FaMagic } from "react-icons/fa"
 import Card from "../components/new/card"
 import CoachingForm from "../components/coachingForm"
+import { IntersectionObserver } from "../components/intersectionObserver"
+import { ScaleBox } from "../components/scaleBox"
 
 const Coaching = () => {
   return (
@@ -37,31 +39,42 @@ const Coaching = () => {
               12månadersperiod.
             </p>
           </div>
-          <CoachingForm source="Coaching" />
+          <IntersectionObserver>
+            <ScaleBox>
+              <CoachingForm source="Coaching" />
+            </ScaleBox>
+          </IntersectionObserver>
         </StyledInner>
         {/* <StyledSection background> */}
-        <Grid>
-          <CardWrapper withBackground>
-            <FaMagic />
-            <h3>Få ut ännu mer</h3>
-            <p>
-              Få individuell coaching som anpassas efter dina behov, önskemål
-              och uppsatta mål
-            </p>
-          </CardWrapper>
-          <CardWrapper withBackground>
-            <BsPersonBoundingBox />
-            <h3>All fokus på dig</h3>
-            <p>
-              All fokus på dig och gott om tid för dina frågor och utmaningar
-            </p>
-          </CardWrapper>
-          <CardWrapper withBackground>
-            <FaHandHoldingHeart />
-            <h3>Handplockad kompetens</h3>
-            <p>Vi handplockar en konsult med lång erfarenhet inom området</p>
-          </CardWrapper>
-        </Grid>
+        <IntersectionObserver>
+          <ScaleBox>
+            <Grid>
+              <CardWrapper withBackground>
+                <FaMagic />
+                <h3>Få ut ännu mer</h3>
+                <p>
+                  Få individuell coaching som anpassas efter dina behov,
+                  önskemål och uppsatta mål
+                </p>
+              </CardWrapper>
+              <CardWrapper withBackground>
+                <BsPersonBoundingBox />
+                <h3>All fokus på dig</h3>
+                <p>
+                  All fokus på dig och gott om tid för dina frågor och
+                  utmaningar
+                </p>
+              </CardWrapper>
+              <CardWrapper withBackground>
+                <FaHandHoldingHeart />
+                <h3>Handplockad kompetens</h3>
+                <p>
+                  Vi handplockar en konsult med lång erfarenhet inom området
+                </p>
+              </CardWrapper>
+            </Grid>
+          </ScaleBox>
+        </IntersectionObserver>
       </SectionWithBackgroundImage>
       {/* </StyledSection> */}
     </Layout>
