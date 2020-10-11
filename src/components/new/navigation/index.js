@@ -103,4 +103,5 @@ const StyledLogo = styled(Logo)`
 
 const StyledLink = styled(Link)`
   line-height: 0;
+  height: 36px;
 `
