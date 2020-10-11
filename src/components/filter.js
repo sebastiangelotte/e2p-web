@@ -85,7 +85,6 @@ const Text = styled.span`
 const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
   flex-wrap: wrap;
 
   @media screen and (max-width: 500px) {

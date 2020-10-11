@@ -28,6 +28,9 @@ const Footer = () => {
               <Link to="/courses">Kurser</Link>
             </li>
             <li>
+              <Link to="/coaching">Coaching</Link>
+            </li>
+            <li>
               <Link to="/services">Tjänster</Link>
             </li>
             <li>
@@ -39,10 +42,10 @@ const Footer = () => {
           <h3>Kurser</h3>
           <ul>
             <li>
-              <Link to="/courses">Grupputbildningar</Link>
+              <Link to="/courses">Öppna utbildningar</Link>
             </li>
             <li>
-              <Link to="/courses">Skräddarsydd coaching</Link>
+              <Link to="/courses">Företagsinterna utbildningar</Link>
             </li>
             <li>
               <Link to="/courses">Onlinekurser</Link>
