@@ -159,11 +159,12 @@ const Form = styled.form`
 `
 
 const Input = styled.input`
-  border: none;
-  border-radius: 100px;
+  border: none !important;
+  border-radius: 100px !important;
   flex-basis: 412px;
   margin-right: 26px;
-  padding: 18px 32px 14px 32px;
+  margin-bottom: 0 !important;
+  padding: 18px 32px 14px 32px !important;
   font-size: 16px;
 
   &::placeholder {
