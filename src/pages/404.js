@@ -1,4 +1,4 @@
-import React from "react"
+import React, { createRef, useEffect } from "react"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import styled from "styled-components"
@@ -11,26 +11,41 @@ import {
   Inner,
   Button,
 } from "../components/styledComponents"
+import lottie from "lottie-web"
+import animation from "../animations/404.json"
 
-const NotFoundPage = () => (
-  <Layout transparentNavigation>
-    <Head title="404: Hittar ej sidan" />
-    <SectionWithBackgroundImage backgroundImage={bg} firstSection>
-      <StyledInner>
-        <Heading as="h1" inverted>
-          404: Hittar ej sidan
-        </Heading>
-      </StyledInner>
-    </SectionWithBackgroundImage>
-    <StyledSection background>
-      <StyledInner>
-        <Link to="/">
-          <Button>Ta mig hem</Button>
-        </Link>
-      </StyledInner>
-    </StyledSection>
-  </Layout>
-)
+const NotFoundPage = () => {
+  const animationRef = createRef()
+
+  useEffect(() => {
+    const anim = lottie.loadAnimation({
+      container: animationRef.current,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: animation,
+    })
+    return () => anim.destroy()
+  }, [])
+
+  return (
+    <Layout transparentNavigation>
+      <Head title="404: Hittar ej sidan" />
+      <SectionWithBackgroundImage backgroundImage={bg} firstSection>
+        <StyledInner>
+          <Heading as="h1" inverted>
+            404: Hittar ej sidan
+          </Heading>
+        </StyledInner>
+      </SectionWithBackgroundImage>
+      <StyledSection background>
+        <StyledInner>
+          <div ref={animationRef}></div>
+        </StyledInner>
+      </StyledSection>
+    </Layout>
+  )
+}
 
 export default NotFoundPage
 
