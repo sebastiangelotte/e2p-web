@@ -2,14 +2,12 @@ import React, { createRef, useEffect } from "react"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import styled from "styled-components"
-import { Link } from "gatsby"
 import bg from "../images/hero-bg.svg"
 import {
   Section,
   Heading,
   SectionWithBackgroundImage,
   Inner,
-  Button,
 } from "../components/styledComponents"
 import lottie from "lottie-web"
 import animation from "../animations/404.json"
