@@ -36,7 +36,7 @@ const Filter = ({ courses, onChange }) => {
 
   const filterByType = course => {
     if (activeType === "open") {
-      return course.node.companyInternalCourse === false
+      return course.node.openCourse === true
     } else if (activeType === "companyInternal") {
       return course.node.companyInternalCourse === true
     }

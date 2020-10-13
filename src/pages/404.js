@@ -24,7 +24,7 @@ const NotFoundPage = () => {
       animationData: animation,
     })
     return () => anim.destroy()
-  }, [])
+  }, [animationRef])
 
   return (
     <Layout transparentNavigation>

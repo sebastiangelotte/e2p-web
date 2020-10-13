@@ -30,8 +30,9 @@ export const query = graphql`
       title
       numberOfDays
       price
-      companyInternalCourse
       shortDescription
+      companyInternalCourse
+      openCourse
       onlineCourse
       onSite
 
@@ -97,7 +98,11 @@ export const query = graphql`
 `
 
 const Course = props => {
-  const [showCourseSignupModal, setShowCourseSignupModal] = useState(false)
+  const [showOpenSignupModal, setShowOpenSignupModal] = useState(false)
+  const [
+    showCompanyInternalSignupModal,
+    setShowCompanyInternalSignupModal,
+  ] = useState(false)
   const [showContactModal, setShowContactModal] = useState(false)
 
   const options = {
@@ -110,13 +115,13 @@ const Course = props => {
     },
   }
 
-  const services = props.data.contentfulCourse.linkedServices || []
-  const courses = props.data.contentfulCourse.linkedCourses || []
-  const tools = props.data.contentfulCourse.linkedTools || []
+  const course = props.data.contentfulCourse
+
+  const services = course.linkedServices || []
+  const courses = course.linkedCourses || []
+  const tools = course.linkedTools || []
 
   const relatedItems = [...services, ...courses, ...tools]
-
-  const course = props.data.contentfulCourse
 
   return (
     <Layout>
@@ -150,7 +155,7 @@ const Course = props => {
               {documentToReactComponents(course.description.json, options)}
             </ExpandableCard>
             {course.includedInfo && (
-              <ExpandableCard heading="Mer info">
+              <ExpandableCard heading="Vad som ingår">
                 <div>
                   {documentToReactComponents(course.includedInfo.json, options)}
                 </div>
@@ -171,7 +176,7 @@ const Course = props => {
                           return (
                             <li key={i}>
                               <BsCalendar />{" "}
-                              {`${tillfalle.city}: ${tillfalle.date}`}
+                              {`${tillfalle.title}: ${tillfalle.date}`}
                             </li>
                           )
                         })}
@@ -215,11 +220,11 @@ const Course = props => {
                 </li>
               </List>
 
-              <Modal
-                isOpen={showCourseSignupModal}
-                closeModal={() => setShowCourseSignupModal(false)}
-              >
-                {course.companyInternalCourse ? (
+              {course.companyInternalCourse && (
+                <Modal
+                  isOpen={showCompanyInternalSignupModal}
+                  closeModal={() => setShowCompanyInternalSignupModal(false)}
+                >
                   <>
                     <h3>Begär offert</h3>
                     <p>
@@ -228,7 +233,13 @@ const Course = props => {
                     </p>
                     <ContactForm source={course.title} />
                   </>
-                ) : (
+                </Modal>
+              )}
+              {course.openCourse && (
+                <Modal
+                  isOpen={showOpenSignupModal}
+                  closeModal={() => setShowOpenSignupModal(false)}
+                >
                   <>
                     <CourseSignup
                       courseName={course.title}
@@ -236,8 +247,8 @@ const Course = props => {
                       courseDates={course.kurstillflle}
                     />
                   </>
-                )}
-              </Modal>
+                </Modal>
+              )}
               <Modal
                 isOpen={showContactModal}
                 closeModal={() => setShowContactModal(false)}
@@ -247,9 +258,18 @@ const Course = props => {
               </Modal>
               <IntersectionObserver>
                 <ScaleBox>
-                  <BookButton onClick={() => setShowCourseSignupModal(true)}>
-                    {course.companyInternalCourse ? "Begär offert" : "Boka"}
-                  </BookButton>
+                  {course.companyInternalCourse && (
+                    <QuoteButton
+                      onClick={() => setShowCompanyInternalSignupModal(true)}
+                    >
+                      Begär offert
+                    </QuoteButton>
+                  )}
+                  {course.openCourse && (
+                    <BookButton onClick={() => setShowOpenSignupModal(true)}>
+                      Boka
+                    </BookButton>
+                  )}
                   <AskButton onClick={() => setShowContactModal(true)}>
                     Fråga oss
                   </AskButton>
@@ -334,6 +354,15 @@ const List = styled.ul`
 `
 
 const BookButton = styled(Button)`
+  background: linear-gradient(180deg, #fbc917 0%, #ff8364 100%);
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 18px 45px 16px 45px;
+  width: 100%;
+`
+
+const QuoteButton = styled(Button)`
   background: linear-gradient(180deg, #fbc917 0%, #ff8364 100%);
   border: none;
   font-size: 18px;

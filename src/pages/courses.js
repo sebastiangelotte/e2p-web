@@ -34,6 +34,7 @@ const Courses = () => {
             numberOfDays
             tags
             companyInternalCourse
+            openCourse
             onlineCourse
             onSite
             shortDescription

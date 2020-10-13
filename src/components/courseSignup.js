@@ -76,7 +76,7 @@ const CourseSignup = ({ courseName, courseDates }) => {
                   <option
                     key={i}
                     value={tillfalle.date}
-                  >{`${tillfalle.city}: ${tillfalle.date}`}</option>
+                  >{`${tillfalle.title}: ${tillfalle.date}`}</option>
                 ))}
               </select>
             </Section>
