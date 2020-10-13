@@ -1,9 +1,17 @@
 import React, { useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import Head from "../components/head"
-import Layout from "../components/layout"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import { motion, AnimatePresence } from "framer-motion"
+import {
+  BsFillTagFill,
+  BsSearch,
+  BsEnvelope,
+  BsChatDots,
+  BsBuilding,
+} from "react-icons/bs"
+import Layout from "../components/layout"
+import Head from "../components/head"
 import bg from "../images/hero-bg.svg"
 import {
   Heading,
@@ -12,14 +20,6 @@ import {
   Inner,
 } from "../components/styledComponents"
 import Filter from "../components/filter"
-import {
-  BsFillTagFill,
-  BsSearch,
-  BsEnvelope,
-  BsChatDots,
-  BsBuilding,
-} from "react-icons/bs"
-import { motion, AnimatePresence } from "framer-motion"
 import Newsletter from "../components/newsletter"
 
 const Courses = () => {
