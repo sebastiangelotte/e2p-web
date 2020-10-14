@@ -11,7 +11,7 @@ const Footer = () => {
         <div>
           <img src={logo} alt="logo" height="42px" />
           <Text>
-            Vi som jobbar med Easy2perform fokuserar på att ge stöd och
+            Vi som jobbar med easy2perform fokuserar på att ge stöd och
             vägledning till företag, chefer och medarbetare. Oavsett om det sker
             genom våra gratislösningar på mobil & webb, kurser eller
             konsulttjänster, levererar vi kunskap som gör det enklare att

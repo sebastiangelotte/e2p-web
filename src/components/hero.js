@@ -17,7 +17,7 @@ const Hero = () => {
               Kompetensutveckling som ger stöd i det dagliga arbetet
             </Heading>
             <Text>
-              Easy2perform* hjälper medarbetare och chefer att prestera bättre i
+              easy2perform* hjälper medarbetare och chefer att prestera bättre i
               sin yrkesroll. Genom behovsanpassad utbildning, individuell
               coaching och praktiska checklistor ger vi stöd i det dagliga
               arbetet.

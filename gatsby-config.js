@@ -27,8 +27,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Easy2perform`,
-        short_name: `Easy2perform`,
+        name: `easy2perform`,
+        short_name: `easy2perform`,
         start_url: `/`,
         background_color: `#2185d0`,
         theme_color: `#2185d0`,
