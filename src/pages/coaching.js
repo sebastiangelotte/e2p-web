@@ -40,8 +40,8 @@ const Coaching = () => {
             </p>
             <p>
               Du väljer själv i vilken omfattning du önskar coaching, från något
-              enstaka tillfälle till ett antal möten under en 6 till
-              12månadersperiod.
+              enstaka tillfälle till ett antal möten under en 6- till
+              12-månadersperiod.
             </p>
           </div>
           <IntersectionObserver>
