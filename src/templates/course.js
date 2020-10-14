@@ -136,6 +136,39 @@ const Course = props => {
             {course.title}
           </StyledHeading>
           <p>{course.shortDescription}</p>
+          <IntersectionObserver>
+            <ScaleBox>
+              <h4 style={{ fontSize: "22px", paddingTop: "20px" }}>
+                Kurs på företaget?
+              </h4>
+              <p style={{ fontSize: "18px" }}>
+                Önskar du få kursen genomförd som företagsintern utbildning?
+              </p>
+              {course.companyInternalCourse && (
+                <QuoteButton
+                  onClick={() => setShowCompanyInternalSignupModal(true)}
+                  autoWidth
+                >
+                  Begär offert
+                </QuoteButton>
+              )}
+              {course.companyInternalCourse && (
+                <Modal
+                  isOpen={showCompanyInternalSignupModal}
+                  closeModal={() => setShowCompanyInternalSignupModal(false)}
+                >
+                  <>
+                    <h3>Begär offert</h3>
+                    <p>
+                      Beskriv dina önskemål, så sänder vi dig en offert
+                      kostnadsfritt.
+                    </p>
+                    <ContactForm source={course.title} />
+                  </>
+                </Modal>
+              )}
+            </ScaleBox>
+          </IntersectionObserver>
         </Inner>
       </SectionWithBackgroundImage>
       <Section background>
@@ -220,35 +253,32 @@ const Course = props => {
                 </li>
               </List>
 
-              {course.companyInternalCourse && (
-                <Modal
-                  isOpen={showCompanyInternalSignupModal}
-                  closeModal={() => setShowCompanyInternalSignupModal(false)}
-                >
-                  <>
-                    <h3>Begär offert</h3>
-                    <p>
-                      Beskriv dina önskemål, så sänder vi dig en offert
-                      kostnadsfritt.
-                    </p>
-                    <ContactForm source={course.title} />
-                  </>
-                </Modal>
-              )}
-              {course.openCourse && (
-                <Modal
-                  isOpen={showOpenSignupModal}
-                  closeModal={() => setShowOpenSignupModal(false)}
-                >
-                  <>
-                    <CourseSignup
-                      courseName={course.title}
-                      courseID={course.id}
-                      courseDates={course.kurstillflle}
-                    />
-                  </>
-                </Modal>
-              )}
+              <IntersectionObserver>
+                <ScaleBox>
+                  {course.openCourse && (
+                    <BookButton onClick={() => setShowOpenSignupModal(true)}>
+                      Boka
+                    </BookButton>
+                  )}
+                  {course.openCourse && (
+                    <Modal
+                      isOpen={showOpenSignupModal}
+                      closeModal={() => setShowOpenSignupModal(false)}
+                    >
+                      <>
+                        <CourseSignup
+                          courseName={course.title}
+                          courseID={course.id}
+                          courseDates={course.kurstillflle}
+                        />
+                      </>
+                    </Modal>
+                  )}
+                </ScaleBox>
+              </IntersectionObserver>
+              <AskButton onClick={() => setShowContactModal(true)}>
+                Fråga oss
+              </AskButton>
               <Modal
                 isOpen={showContactModal}
                 closeModal={() => setShowContactModal(false)}
@@ -256,25 +286,6 @@ const Course = props => {
                 <h3>Fråga oss</h3>
                 <ContactForm source={course.title} />
               </Modal>
-              <IntersectionObserver>
-                <ScaleBox>
-                  {course.companyInternalCourse && (
-                    <QuoteButton
-                      onClick={() => setShowCompanyInternalSignupModal(true)}
-                    >
-                      Begär offert
-                    </QuoteButton>
-                  )}
-                  {course.openCourse && (
-                    <BookButton onClick={() => setShowOpenSignupModal(true)}>
-                      Boka
-                    </BookButton>
-                  )}
-                  <AskButton onClick={() => setShowContactModal(true)}>
-                    Fråga oss
-                  </AskButton>
-                </ScaleBox>
-              </IntersectionObserver>
             </StickyWrapper>
           </ExtraInfo>
         </StyledInner>
@@ -369,6 +380,11 @@ const QuoteButton = styled(Button)`
   font-weight: bold;
   padding: 18px 45px 16px 45px;
   width: 100%;
+  ${props =>
+    props.autoWidth &&
+    `
+    width: auto;
+  `}
 `
 
 const AskButton = styled(Button)`

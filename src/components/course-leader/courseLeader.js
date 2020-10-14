@@ -11,7 +11,7 @@ const CouseLeader = ({ data }) => {
       <div>
         <h3>{data.name}</h3>
         <Title>{data.title}</Title>
-        {documentToReactComponents(data.description.json)}
+        {data.description && documentToReactComponents(data.description.json)}
       </div>
     </Wrapper>
   )
