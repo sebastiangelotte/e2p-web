@@ -1,4 +1,0 @@
-type UserData @model {
-  id: String!
-  courses: [String]
-}

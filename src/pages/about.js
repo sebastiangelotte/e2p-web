@@ -1,22 +1,17 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import Layout from "../components/layout"
-import { Segment, Container } from "semantic-ui-react"
-import Head from "../components/head"
-import PageHeader from "../components/page-header/pageHeader"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-
-const style = {
-  segment: {
-    paddingTop: "10em",
-    paddingBottom: "6em",
-    backgroundColor: "#f7f7f7",
-  },
-  link: {
-    paddingTop: "2em",
-    display: "inline-block",
-  },
-}
+import Head from "../components/head"
+import Layout from "../components/layout"
+import ContactForm from "../components/contactForm"
+import styled from "styled-components"
+import bg from "../images/hero-bg.svg"
+import {
+  Section,
+  Heading,
+  SectionWithBackgroundImage,
+  Inner,
+} from "../components/styledComponents"
 
 const About = () => {
   const data = useStaticQuery(graphql`
@@ -44,21 +39,44 @@ const About = () => {
     },
   }
 
+  const page = data.allContentfulPage.edges[0].node
+
   return (
     <Layout transparentNavigation>
-      <Head title={data.allContentfulPage.edges[0].node.title} />
-      <PageHeader title={data.allContentfulPage.edges[0].node.title} />
-      <Segment style={style.segment} vertical>
-        <Container>
-          {data.allContentfulPage.edges[0].node.content &&
-            documentToReactComponents(
-              data.allContentfulPage.edges[0].node.content.json,
-              options
-            )}
-        </Container>
-      </Segment>
+      <Head title={page.title} />
+
+      <SectionWithBackgroundImage backgroundImage={bg} firstSection>
+        <StyledInner>
+          <Heading as="h1" inverted>
+            {page.title}
+          </Heading>
+        </StyledInner>
+      </SectionWithBackgroundImage>
+      <StyledSection background>
+        <StyledInner>
+          {documentToReactComponents(page.content.json, options)}
+          <h2>Har du ytterligare frågor?</h2>
+          <ContactForm source={page.title} />
+        </StyledInner>
+      </StyledSection>
     </Layout>
   )
 }
 
 export default About
+
+const StyledSection = styled(Section)`
+  p {
+    font-size: 20px;
+    font-family: "Crimson Text", Georgia, "Times New Roman", Times, serif;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-top: 40px;
+  }
+`
+
+const StyledInner = styled(Inner)``

@@ -1,16 +1,13 @@
 import React, { useState } from "react"
-import { Form, Button, Message } from "semantic-ui-react"
+import styled from "styled-components"
+import { Button } from "./styledComponents"
 
-import { API, graphqlOperation } from "aws-amplify"
-import * as mutations from "../graphql/mutations"
-import * as queries from "../graphql/queries"
-
-const CourseSignup = ({ courseName, courseID, courseDates }) => {
+const CourseSignup = ({ courseName, courseDates }) => {
   const [extraParticipants, setExtraParticipants] = useState(0)
   const [showContactPerson, setShowContactPerson] = useState(false)
   const [email, setEmail] = useState("")
   const [date, setDate] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  const [, setIsLoading] = useState(false)
   const [message, setMessage] = useState({
     isVisible: false,
     header: "Ett meddelande",
@@ -22,240 +19,161 @@ const CourseSignup = ({ courseName, courseID, courseDates }) => {
   const handleSubmit = async event => {
     setIsLoading(true)
     event.preventDefault()
-    const data = new FormData(event.target)
+    const formData = new FormData(event.target)
+    const searchParams = new URLSearchParams(formData).toString() // create URL params
 
-    // TODO: can we loop this for all email addresses in the form?
-    API.graphql(
-      graphqlOperation(queries.getUserData, {
-        id: email,
-      })
-    )
-      .then(user => {
-        API.graphql(
-          graphqlOperation(mutations.updateUserData, {
-            input: {
-              id: email,
-              courses: [...user.data.getUserData.courses, courseID],
-            },
-          })
-        )
-      })
-      .catch(() => {
-        // No existing record of this email in DynamoDB.
-        // Therefore create a new UserData record
-        API.graphql(
-          graphqlOperation(mutations.createUserData, {
-            input: {
-              id: email,
-              courses: [courseID],
-            },
-          })
-        )
-      })
-      .then(() =>
-        fetch("https://formspree.io/mpeaqozx", {
-          method: "POST",
-          body: data,
-          dataType: "json",
-          mode: "no-cors",
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: searchParams,
+      dataType: "json",
+      mode: "no-cors",
+    })
+      .then(() => {
+        setIsLoading(false)
+        setMessage({
+          isVisible: true,
+          header: "Tack för din anmälan!",
+          content: "En bekräftelse har skickats till din e-post.",
+          positive: true,
         })
-          .then(() => {
-            setIsLoading(false)
-            setMessage({
-              isVisible: true,
-              header: "Tack för din anmälan!",
-              content: "En bekräftelse har skickats till din e-post.",
-              positive: true,
-            })
-            document.getElementById("form-signup").reset() // reset form after submit
-            setEmail("") // reset controlled form field
-          })
-          .catch(err => {
-            console.log(err)
-            setIsLoading(false)
-          })
-      )
+        document.getElementById("form-signup").reset() // reset form after submit
+        setEmail("") // reset controlled form field
+      })
+      .catch(err => {
+        console.log(err)
+        setIsLoading(false)
+      })
   }
-
-  //   const upcomingDates = courseDates.filter(date => {
-  //     const courseDate = new Date(
-  //       date.split("/")[2],
-  //       date.split("/")[1] - 1,
-  //       date.split("/")[0]
-  //     ).toISOString()
-  //     const currentTime = new Date().toISOString()
-  //     return courseDate > currentTime
-  //   })
-
-  //   const dateOptions = Array.from(upcomingDates).map(date => {
-  //     return {
-  //       key: date,
-  //       text: date,
-  //       value: date,
-  //     }
-  //   })
 
   return (
     <>
       {message.isVisible ? (
-        <Message
-          negative={message.negative}
-          positive={message.positive}
-          header={message.header}
-          content={message.content}
-        />
+        <Message>
+          <h3>{message.header}</h3>
+          <p>{message.content}</p>
+        </Message>
       ) : (
         <Form
           id="form-signup"
-          name="Kursanmälan"
+          name="courseSignup"
           onSubmit={event => handleSubmit(event)}
+          data-netlify="true"
         >
+          {/* needed for netlify */}
+          <input type="hidden" name="form-name" value="courseSignup" />
           <input type="hidden" name="Kurs" value={courseName} />
-          <input
-            type="hidden"
-            name="_next"
-            value="https://pedantic-morse-58901e.netlify.com/"
-          />
-          <Form.Group widths="equal">
-            <select
-              id="date"
-              label="Datum"
-              name="Datum"
-              value={date}
-              onChange={e => setDate(e.target.value)}
-            >
-              {courseDates.map(tillfalle => (
-                <option
-                  value={tillfalle.date}
-                >{`${tillfalle.city}: ${tillfalle.date}`}</option>
-              ))}
-            </select>
-          </Form.Group>
-          <h3>Deltagare</h3>
-          <Form.Group widths="equal">
-            <Form.Input
-              fluid
-              label="Namn"
-              placeholder="Namn"
-              required
-              name="namn"
-            />
-            <Form.Input
+          {courseDates && (
+            <Section>
+              {/* eslint-disable-next-line */}
+              <select
+                id="date"
+                name="Datum"
+                value={date}
+                onChange={e => setDate(e.target.value)}
+              >
+                {courseDates.map((tillfalle, i) => (
+                  <option
+                    key={i}
+                    value={tillfalle.date}
+                  >{`${tillfalle.title}: ${tillfalle.date}`}</option>
+                ))}
+              </select>
+            </Section>
+          )}
+          <Section>
+            <h3>Deltagare</h3>
+            <input type="text" placeholder="Namn *" required name="namn" />
+            <input
               type="email"
-              fluid
-              label="E-post"
-              placeholder="E-post"
+              placeholder="E-post *"
               required
               name="email"
               value={email}
-              onInput={e => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
             />
-          </Form.Group>
-          {Array.apply(null, { length: extraParticipants - 1 }).map(
-            (_, index) => (
-              <Form.Group widths="equal" key={index}>
-                <Form.Input
-                  fluid
-                  label="Namn"
-                  placeholder="Namn"
-                  required
-                  name={`namn${index}`}
-                />
-                <Form.Input
-                  type="email"
-                  fluid
-                  label="E-post"
-                  placeholder="E-post"
-                  required
-                  name={`email${index}`}
-                />
-              </Form.Group>
-            )
-          )}
-          <Button
-            content="Anmäl fler deltagare"
-            icon="plus"
-            labelPosition="left"
-            onClick={() => {
-              setExtraParticipants(extraParticipants + 1)
-            }}
-          />
-          <h3>Faktureringsinformation</h3>
-          <Form.Group widths="equal">
-            <Form.Input fluid label="Företag" placeholder="Företag" required />
-            <Form.Input
-              fluid
-              label="Fakturaadress"
-              placeholder="Fakturaadress"
+            <MutedButton
+              onClick={e => {
+                e.preventDefault()
+                setExtraParticipants(extraParticipants + 1)
+              }}
+            >
+              Anmäl fler deltagare
+            </MutedButton>
+            {Array.apply(null, { length: extraParticipants }).map(
+              (_, index) => (
+                <>
+                  <input
+                    type="text"
+                    placeholder="Namn *"
+                    required
+                    name={`namn${index}`}
+                  />
+                  <input
+                    type="email"
+                    placeholder="E-post *"
+                    required
+                    name={`email${index}`}
+                  />
+                </>
+              )
+            )}
+          </Section>
+          <Section>
+            <h3>Faktureringsinformation</h3>
+            <input type="text" placeholder="Företag *" required />
+            <input
+              type="text"
+              placeholder="Fakturaadress *"
               required
               name="fakturaadress"
             />
-            <Form.Input
-              fluid
-              label="Postnummer"
-              placeholder="Postnummer"
+            <input
+              type="text"
+              placeholder="Postnummer *"
               required
               name="postnummer"
             />
-            <Form.Input
-              fluid
-              label="Ort"
-              placeholder="Ort"
-              required
-              name="ort"
-            />
-          </Form.Group>
-          {!showContactPerson ? (
-            <Button
-              size="small"
+            <input type="text" placeholder="Ort *" required name="ort" />
+            <MutedButton
               onClick={e => {
                 e.preventDefault()
                 setShowContactPerson(true)
               }}
             >
               Annan kontaktperson?
-            </Button>
-          ) : (
+            </MutedButton>
+          </Section>
+          {showContactPerson && (
             <>
-              <h3>Kontaktperson</h3>
-              <Form.Group widths="equal">
-                <Form.Input
-                  fluid
-                  label="Namn"
+              <Section>
+                <h3>Kontaktperson</h3>
+                <input
+                  type="text"
                   placeholder="Namn"
                   name="kontaktperson-namn"
                 />
-                <Form.Input
-                  fluid
-                  label="E-post"
+                <input
+                  type="email"
                   placeholder="E-post"
                   name="kontaktperson-epost"
                 />
-                <Form.Input fluid label="Postnummer" placeholder="Postnummer" />
-                <Form.Input
-                  fluid
-                  label="Ort"
-                  placeholder="Ort"
-                  name="kontaktperson-ort"
-                />
-              </Form.Group>
+                <input type="text" placeholder="Postnummer" />
+                <input type="text" placeholder="Ort" name="kontaktperson-ort" />
+              </Section>
             </>
           )}
-
-          <h3>Övrigt</h3>
-          <Form.TextArea
-            placeholder="Allergier, speciella önskemål m.m."
-            name="ovrigt"
-          />
-          <Button
-            loading={isLoading}
-            type="submit"
-            value="Send"
-            content="Skicka anmälan"
-            icon="send"
-            labelPosition="left"
-            positive
-          />
+          <Section>
+            <h3>Övrigt</h3>
+            <textarea
+              placeholder="Allergier, speciella önskemål m.m."
+              name="ovrigt"
+            />
+            <SubmitButton type="submit" value="Send">
+              Slutför bokning *
+            </SubmitButton>
+            <span>* bekräftelse skickas till din e-post</span>
+          </Section>
         </Form>
       )}
     </>
@@ -263,3 +181,33 @@ const CourseSignup = ({ courseName, courseID, courseDates }) => {
 }
 
 export default CourseSignup
+
+const Form = styled.form``
+
+const Section = styled.div`
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: 20px;
+  }
+`
+
+const MutedButton = styled(Button)`
+  width: 100%;
+  background-color: #1a1a1a;
+  padding: 8px 10px;
+`
+
+const SubmitButton = styled(Button)`
+  width: 100%;
+  font-size: 20px;
+`
+
+const Message = styled.div`
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+`

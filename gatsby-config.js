@@ -21,7 +21,7 @@ module.exports = {
       resolve: "gatsby-plugin-mailchimp",
       options: {
         endpoint:
-          "https://easy2perform.us17.list-manage.com/subscribe/post?u=bcd516fbabfad6023116c3f82&id=02f682493a",
+          "https://easy2perform.us17.list-manage.com/subscribe/post?u=bcd516fbabfad6023116c3f82&id=5873d8195e",
       },
     },
     {
@@ -33,7 +33,7 @@ module.exports = {
         background_color: `#2185d0`,
         theme_color: `#2185d0`,
         display: `standalone`,
-        icon: `src/images/logo.svg`, // This path is relative to the root of the site.
+        icon: `src/images/logo-circle.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-offline`,
@@ -80,6 +80,28 @@ module.exports = {
       resolve: `gatsby-plugin-facebook-pixel`,
       options: {
         pixelId: "1621963837942974",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Crimson Text:400,600`, `Lato:400,400i,700,700i`],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-crisp-chat",
+      options: {
+        websiteId: "fab1efa6-8c31-4066-b280-8ab46230ec88",
+        enableDuringDevelop: true, // Optional. Disables Crisp Chat during gatsby develop. Defaults to true.
+        defer: true, // Optional. Sets the Crisp loading script to defer instead of async. Defaults to false.
+        enableImprovedAccessibility: false, // Optional. Sets aria-label attribute on pop-up icon for screen readers. Defaults to true.
+      },
+    },
+    {
+      resolve: `gatsby-plugin-portal`,
+      options: {
+        key: "modal",
+        id: "modal",
       },
     },
   ],

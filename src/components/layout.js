@@ -1,32 +1,13 @@
 import React, { useState, useEffect } from "react"
-import Navigation from "./navigation/navigation"
-import Footer from "./footer/footer"
+// import Navigation from "./navigation/navigation"
+import Navigation from "./navigation"
 import ScrollUpButton from "react-scroll-up-button"
 import CookieConsent from "react-cookie-consent"
+import Footer from "./footer"
+import styled from "styled-components"
+import { GlobalStyle } from "../globalStyle"
 
-import { createGlobalStyle } from "styled-components"
-
-const GlobalStyle = createGlobalStyle`
-  ul > li > p {
-      margin-bottom: 0;
-  }
-
-  ul > li > ul {
-      margin-bottom: 0.75em;
-  }
-
-  .segment img {
-      max-width: 100%;
-  }
-
-  .segment blockquote {
-    border-left: 4px solid #7dcdea;
-    padding-left: 10px;
-    margin-left: 15px;
-  }
-`
-
-const Layout = ({ children, transparentNavigation }) => {
+const Layout = ({ children, darkNavigation }) => {
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -36,8 +17,8 @@ const Layout = ({ children, transparentNavigation }) => {
   return (
     <React.Fragment key={isClient}>
       <GlobalStyle />
-      <Navigation transparent={transparentNavigation} />
-      <main style={{ minHeight: "100vh" }}>{children}</main>
+      <Navigation darkNavigation={darkNavigation} />
+      <Main>{children}</Main>
       <Footer />
       <ScrollUpButton />
       <CookieConsent
@@ -58,3 +39,7 @@ const Layout = ({ children, transparentNavigation }) => {
 }
 
 export default Layout
+
+const Main = styled.main`
+  // min-height: 100vh;
+`

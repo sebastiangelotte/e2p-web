@@ -1,46 +1,105 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+import styled from "styled-components"
+import { Button } from "./styledComponents"
+import { BsCheck, BsPlus, BsFillPersonFill, BsBuilding } from "react-icons/bs"
 
-import { Dropdown } from "semantic-ui-react"
-
-const Filter = props => {
+const Filter = ({ courses, onChange }) => {
+  const [activeTags, setActiveTags] = useState([])
+  const [activeType, setActiveType] = useState("open")
   let uniqueTags = new Set()
-  let activeTags = []
 
-  props.data.forEach(edge => {
-    edge.node.tags && edge.node.tags.forEach(tag => uniqueTags.add(tag))
+  courses.forEach(course => {
+    course.node.tags && course.node.tags.forEach(tag => uniqueTags.add(tag))
   })
 
-  const filterOptions = Array.from(uniqueTags).map(tag => {
-    return {
-      key: tag,
-      text: tag,
-      value: tag,
-    }
-  })
-
-  const filterItems = (event, dropdownData) => {
-    activeTags = dropdownData.value
-
-    props.onChange(
-      activeTags.length
-        ? props.data.filter(item => itemHasMatchingTag(item, activeTags))
-        : [] // Tells parent component to reset its state if no tags are active
-    )
+  const updateTags = tag => {
+    activeTags.includes(tag)
+      ? setActiveTags(activeTags.filter(activeTag => activeTag !== tag))
+      : setActiveTags([...activeTags, tag])
   }
 
-  const itemHasMatchingTag = item =>
-    item.node.tags &&
-    item.node.tags.filter(tag => activeTags.includes(tag)).length > 0
+  useEffect(() => {
+    onChange(
+      courses.filter(course => {
+        return filterByTag(course) && filterByType(course)
+      })
+    ) // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTags, activeType])
+
+  const filterByTag = course => {
+    if (activeTags.length === 0) {
+      return true // if no filter active, return all
+    } else {
+      return course.node.tags.filter(tag => activeTags.includes(tag)).length > 0
+    }
+  }
+
+  const filterByType = course => {
+    if (activeType === "open") {
+      return course.node.openCourse === true
+    } else if (activeType === "companyInternal") {
+      return course.node.companyInternalCourse === true
+    }
+  }
 
   return (
-    <Dropdown
-      placeholder="Filtrera på område"
-      multiple
-      selection
-      options={filterOptions}
-      onChange={filterItems}
-    />
+    <Wrapper>
+      <ButtonsWrapper>
+        {Array.from(uniqueTags).map(tag => (
+          <StyledButton
+            key={tag}
+            active={activeTags.includes(tag)}
+            onClick={() => updateTags(tag)}
+          >
+            {activeTags.includes(tag) ? <BsCheck /> : <BsPlus />}
+            {tag}
+          </StyledButton>
+        ))}
+      </ButtonsWrapper>
+      <ButtonsWrapper>
+        <StyledButton
+          active={activeType === "open"}
+          onClick={() => setActiveType("open")}
+        >
+          <BsFillPersonFill /> Öppen
+        </StyledButton>
+        <StyledButton
+          active={activeType === "companyInternal"}
+          onClick={() => setActiveType("companyInternal")}
+        >
+          <BsBuilding /> Företagsintern
+        </StyledButton>
+      </ButtonsWrapper>
+    </Wrapper>
   )
 }
 
 export default Filter
+
+const Wrapper = styled.div``
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 500px) {
+    align-items: center;
+    justify-content: center;
+  }
+`
+
+const StyledButton = styled(Button).attrs(({ active }) => ({
+  color: active ? "#fff" : "var(--color-heading)",
+  backgroundColor: active ? "var(--color-heading)" : "transparent",
+  borderColor: active ? "transparent" : "#bfc9ea",
+}))`
+  font-size: 14px;
+  padding: 8px 20px 8px 30px;
+
+  @media screen and (max-width: 500px) {
+    width: auto;
+    font-size: 13px;
+    padding: 5px 15px 5px 23px;
+  }
+`
