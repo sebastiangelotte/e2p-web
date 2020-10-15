@@ -169,6 +169,7 @@ const CourseSignup = ({ courseName, courseDates }) => {
               placeholder="Allergier, speciella önskemål m.m."
               name="ovrigt"
             />
+            <input type="text" placeholder="Rabattkod" name="rabattkod" />
             <SubmitButton type="submit" value="Send">
               Slutför bokning *
             </SubmitButton>

@@ -9,18 +9,22 @@ import circle1 from "../images/circle1.svg"
 
 const Notice = () => {
   return (
-    <Link to="/tools/medarbetarundersökning">
+    <Link to="/courses">
       <Wrapper>
         <Icon>
           <img alt="notice" src={cup} />
         </Icon>
         <TextWrapper>
           <Heading>
-            Viktiga punkter att tänka på vid medarbetarundersökning år 2020
+            Vi firar nu vår nya hemsida - 20% rabatt på alla kurser!
           </Heading>
           <Text>
-            Det är välkänt att medarbetare presterar bättre när de trivs och mår
-            bra på sin arbetsplats. Rätt använt är...
+            Vi vill fira vår nya hemsida och ”look” med att ge dig som kund 20%
+            rabatt på alla våra kurser. Gäller vid beställning från 15/10 -
+            31/12 2020.
+          </Text>
+          <Text>
+            Ange koden <b>AK20</b> vid anmälan.
           </Text>
         </TextWrapper>
         <Button>
