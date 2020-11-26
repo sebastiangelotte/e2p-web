@@ -21,6 +21,7 @@ export const query = graphql`
     contentfulTool(slug: { eq: $slug }) {
       createdAt(formatString: "DD MMM, YYYY")
       title
+      shortDescription
       description {
         json
       }
@@ -64,7 +65,7 @@ const Tool = props => {
 
   return (
     <Layout>
-      <Head title={`Verktyg: ${tool.title}`} />
+      <Head title={`${tool.title}`} description={tool.shortDescription} />
       <SectionWithBackgroundImage backgroundImage={bg} firstSection>
         <StyledInner>
           <Heading as="h1" inverted serif>
