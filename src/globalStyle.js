@@ -54,7 +54,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h3 {
-    font-size: 30px;
+    font-size: 24px;
   }
 
   @media screen and (max-width: 800px) {
@@ -139,4 +139,3 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
   }
 `
-

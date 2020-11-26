@@ -69,7 +69,7 @@ const Wrapper = styled.div`
   }
 
   h3 {
-    font-size: 28px;
+    font-size: 22px;
     margin-bottom: 27px;
     margin-top: 0;
     color: #1e266d;
