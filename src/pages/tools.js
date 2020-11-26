@@ -18,7 +18,7 @@ import Card from "../components/card"
 const Tools = () => {
   const data = useStaticQuery(graphql`
     query {
-      allContentfulTool {
+      allContentfulTool(sort: { fields: createdAt, order: DESC }) {
         edges {
           node {
             slug
