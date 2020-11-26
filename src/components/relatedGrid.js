@@ -21,7 +21,6 @@ const RelatedGrid = ({ items, title }) => {
   return (
     <Wrapper>
       <h2>{title}</h2>
-      <hr />
       <Grid>
         {items?.map((item, i) => (
           <Link key={i} to={`/${getType(item)}/${item.slug}`}>
@@ -49,6 +48,7 @@ const Wrapper = styled.div`
   h2 {
     color: #1e266d;
     font-size: 32px;
+    text-align: center;
   }
 `
 
