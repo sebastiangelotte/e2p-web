@@ -205,14 +205,18 @@ const Course = props => {
                         <li>
                           <b>Kommande tillfällen:</b>
                         </li>
-                        {course.kurstillflle.map((tillfalle, i) => {
-                          return (
-                            <li key={i}>
-                              <BsCalendar />{" "}
-                              {`${tillfalle.title}: ${tillfalle.date}`}
-                            </li>
-                          )
-                        })}
+                        {course.kurstillflle.length > 0 ? (
+                          course.kurstillflle.map((tillfalle, i) => {
+                            return (
+                              <li key={i}>
+                                <BsCalendar />{" "}
+                                {`${tillfalle.title}: ${tillfalle.date}`}
+                              </li>
+                            )
+                          })
+                        ) : (
+                          <li>Fråga oss för bokning.</li>
+                        )}
                       </ul>
                     </div>
                   </li>
@@ -260,25 +264,25 @@ const Course = props => {
                       Boka
                     </BookButton>
                   )}
-                  {course.openCourse && (
-                    <Modal
-                      isOpen={showOpenSignupModal}
-                      closeModal={() => setShowOpenSignupModal(false)}
-                    >
-                      <>
-                        <CourseSignup
-                          courseName={course.title}
-                          courseID={course.id}
-                          courseDates={course.kurstillflle}
-                        />
-                      </>
-                    </Modal>
-                  )}
+                  <AskButton onClick={() => setShowContactModal(true)}>
+                    Fråga oss
+                  </AskButton>
                 </ScaleBox>
               </IntersectionObserver>
-              <AskButton onClick={() => setShowContactModal(true)}>
-                Fråga oss
-              </AskButton>
+              {course.openCourse && (
+                <Modal
+                  isOpen={showOpenSignupModal}
+                  closeModal={() => setShowOpenSignupModal(false)}
+                >
+                  <>
+                    <CourseSignup
+                      courseName={course.title}
+                      courseID={course.id}
+                      courseDates={course.kurstillflle}
+                    />
+                  </>
+                </Modal>
+              )}
               <Modal
                 isOpen={showContactModal}
                 closeModal={() => setShowContactModal(false)}
