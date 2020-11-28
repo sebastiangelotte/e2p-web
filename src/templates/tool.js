@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { BLOCKS } from "@contentful/rich-text-types"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import ContactForm from "../components/contactForm"
@@ -15,6 +16,33 @@ import {
   SectionWithBackgroundImage,
   Inner,
 } from "../components/styledComponents"
+import EmbeddedCourseItem from "../components/embeddedCourseItem"
+
+const options = {
+  renderNode: {
+    [BLOCKS.EMBEDDED_ENTRY]: node => {
+      console.log(node)
+      const fields = node.data.target.fields
+      const contentType = node.data.target.sys.contentType.sys.id
+
+      switch (contentType) {
+        case "course":
+          console.log(fields)
+          const course = {
+            slug: fields.slug.sv,
+            title: fields.title.sv,
+            shortDescription: fields.shortDescription.sv,
+            tags: fields.tags.sv,
+            onlineCourse: fields.onlineCourse.sv,
+            onSite: fields.onSite.sv,
+          }
+          return <EmbeddedCourseItem course={course} />
+        default:
+          return <pre>Content type not supported: {contentType}</pre>
+      }
+    },
+  },
+}
 
 export const query = graphql`
   query($slug: String!) {
@@ -71,8 +99,8 @@ const Tool = props => {
           <Heading as="h1" inverted serif>
             {tool.title}
           </Heading>
-          {tool.tags?.map(tag => (
-            <Tag>{tag}</Tag>
+          {tool.tags?.map((tag, i) => (
+            <Tag key={i}>{tag}</Tag>
           ))}
         </StyledInner>
       </SectionWithBackgroundImage>
@@ -80,7 +108,7 @@ const Tool = props => {
         <StyledInner>
           <CreatedAt>{tool.createdAt}</CreatedAt>
           <Share title={tool.title} />
-          {documentToReactComponents(tool.description.json)}
+          {documentToReactComponents(tool.description.json, options)}
           <hr />
           <h2>Har du ytterligare frågor?</h2>
           <ContactForm source={tool.title} />
@@ -103,10 +131,10 @@ const StyledSection = styled(Section)`
     font-family: "Crimson Text", Georgia, "Times New Roman", Times, serif;
   }
 
-  h2,
-  h3,
-  h4,
-  h5 {
+  p + h2,
+  p + h3,
+  p + h4,
+  p + h5 {
     margin-top: 40px;
   }
 `

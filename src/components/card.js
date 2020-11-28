@@ -3,18 +3,18 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import circle2 from "../images/circle2.svg"
 
-const Card = ({ link, withBackground, children, className }) => {
+const Card = ({ link, title, withBackground, children, className }) => {
   return (
     <>
       {link ? (
-        <Link to={link}>
+        <Link to={link} title={title}>
           <Wrapper withBackground={withBackground} className={className}>
-            <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
+            {children}
           </Wrapper>
         </Link>
       ) : (
         <Wrapper withBackground={withBackground} className={className}>
-          <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
+          {children}
         </Wrapper>
       )}
     </>

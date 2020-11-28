@@ -1,15 +1,8 @@
 import React, { useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import { Link } from "gatsby"
 import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
-import {
-  BsFillTagFill,
-  BsSearch,
-  BsEnvelope,
-  BsChatDots,
-  BsBuilding,
-} from "react-icons/bs"
+import { BsSearch, BsEnvelope, BsChatDots } from "react-icons/bs"
 import Layout from "../components/layout"
 import Head from "../components/head"
 import bg from "../images/hero-bg.svg"
@@ -21,6 +14,7 @@ import {
 } from "../components/styledComponents"
 import Filter from "../components/filter"
 import Newsletter from "../components/newsletter"
+import CourseItem from "../components/courseItem"
 
 const Courses = () => {
   const data = useStaticQuery(graphql`
@@ -117,34 +111,7 @@ const Courses = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <CourseListItem to={`/courses/${course.node.slug}`}>
-                      <Title>{course.node.title}</Title>
-                      <ShortDescription>
-                        {course.node.shortDescription}
-                      </ShortDescription>
-                      <TagWrapper>
-                        {course.node.tags?.map(tag => {
-                          return (
-                            <span key={tag}>
-                              <BsFillTagFill /> {tag}
-                            </span>
-                          )
-                        })}
-                      </TagWrapper>
-                      <TagWrapper>
-                        <span>Tillgänglighet: </span>
-                        {course.node.onlineCourse && (
-                          <span role="img" aria-label="online">
-                            🟢 Online
-                          </span>
-                        )}
-                        {course.node.onSite && (
-                          <span>
-                            <BsBuilding /> On-site
-                          </span>
-                        )}
-                      </TagWrapper>
-                    </CourseListItem>
+                    <CourseItem course={course.node} />
                   </motion.div>
                 ))}
               </AnimatePresence>
@@ -184,38 +151,8 @@ export default Courses
 
 const CourseList = styled.div``
 
-const CourseListItem = styled(Link)`
-  display: block;
-  box-shadow: 0px 4px 4px rgba(135, 146, 161, 0.16),
-    0px 6px 41px rgba(135, 146, 161, 0.11);
-  border-radius: 18px;
-  padding: 15px 30px;
-  margin-bottom: 20px;
-  background-color: #fff;
-  color: var(--color-heading);
-`
-
-const Title = styled.h3`
-  font-size: 20px;
-
-  @media screen and (max-width: 500px) {
-    font-size: 16px;
-  }
-`
-
 const FilterWrapper = styled.div`
   margin-bottom: 20px;
-`
-
-const TagWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  > * {
-    margin-right: 20px;
-    margin-bottom: 10px;
-  }
 `
 
 const Grid = styled.div`
@@ -247,9 +184,4 @@ const HowTo = styled.div`
   svg {
     font-size: 30px;
   }
-`
-
-const ShortDescription = styled.div`
-  color: var(--color-text);
-  margin-bottom: 25px;
 `
