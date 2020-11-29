@@ -3,17 +3,13 @@ import styled from "styled-components"
 import Card from "../components/card"
 import { Button, Heading } from "../components/styledComponents"
 
-const EmbeddedCourseItem = ({ course }) => {
+const EmbeddedToolItem = ({ tool }) => {
   return (
-    <StyledCard
-      withBackground
-      link={`/courses/${course.slug}`}
-      title={course.title}
-    >
+    <StyledCard withBackground link={`/tools/${tool.slug}`} title={tool.title}>
       <TextWrapper>
-        <Type>Rekommenderad kurs</Type>
+        <Type>Lästips</Type>
         <Heading as="h3" inverted>
-          {course.title}
+          {tool.title}
         </Heading>
       </TextWrapper>
       <StyledButton>Läs mer</StyledButton>
@@ -21,7 +17,7 @@ const EmbeddedCourseItem = ({ course }) => {
   )
 }
 
-export default EmbeddedCourseItem
+export default EmbeddedToolItem
 
 const Type = styled.span`
   color: #fff;
