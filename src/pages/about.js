@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { options } from "../richTextRendererOptions"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import ContactForm from "../components/contactForm"
@@ -28,16 +29,6 @@ const About = () => {
       }
     }
   `)
-
-  const options = {
-    renderNode: {
-      "embedded-asset-block": node => {
-        const alt = node.data.target.fields.title["sv-SE"]
-        const url = node.data.target.fields.file["sv-SE"].url
-        return <img alt={alt} src={url} />
-      },
-    },
-  }
 
   const page = data.allContentfulPage.edges[0].node
 

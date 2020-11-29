@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { options } from "../../richTextRendererOptions"
 
 const CouseLeader = ({ data }) => {
   return (
@@ -11,7 +12,8 @@ const CouseLeader = ({ data }) => {
       <div>
         <h3>{data.name}</h3>
         <Title>{data.title}</Title>
-        {data.description && documentToReactComponents(data.description.json)}
+        {data.description &&
+          documentToReactComponents(data.description.json, options)}
       </div>
     </Wrapper>
   )

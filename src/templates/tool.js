@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import { BLOCKS } from "@contentful/rich-text-types"
+import { options } from "../richTextRendererOptions"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import ContactForm from "../components/contactForm"
@@ -16,33 +16,6 @@ import {
   SectionWithBackgroundImage,
   Inner,
 } from "../components/styledComponents"
-import EmbeddedCourseItem from "../components/embeddedCourseItem"
-
-const options = {
-  renderNode: {
-    [BLOCKS.EMBEDDED_ENTRY]: node => {
-      console.log(node)
-      const fields = node.data.target.fields
-      const contentType = node.data.target.sys.contentType.sys.id
-
-      switch (contentType) {
-        case "course":
-          console.log(fields)
-          const course = {
-            slug: fields.slug.sv,
-            title: fields.title.sv,
-            shortDescription: fields.shortDescription.sv,
-            tags: fields.tags.sv,
-            onlineCourse: fields.onlineCourse.sv,
-            onSite: fields.onSite.sv,
-          }
-          return <EmbeddedCourseItem course={course} />
-        default:
-          return <pre>Content type not supported: {contentType}</pre>
-      }
-    },
-  },
-}
 
 export const query = graphql`
   query($slug: String!) {

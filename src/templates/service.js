@@ -15,6 +15,7 @@ import {
   SectionWithBackgroundImage,
   Inner,
 } from "../components/styledComponents"
+import { options } from "../richTextRendererOptions"
 
 export const query = graphql`
   query($slug: String!) {
@@ -79,7 +80,7 @@ const Service = props => {
       <StyledSection>
         <StyledInner>
           <Share title={service.title} />
-          {documentToReactComponents(service.description.json)}
+          {documentToReactComponents(service.description.json, options)}
           <hr />
           <h2>Har du ytterligare frågor?</h2>
           <ContactForm source={service.title} />
@@ -113,4 +114,3 @@ const StyledSection = styled(Section)`
 const StyledInner = styled(Inner)`
   max-width: 680px;
 `
-

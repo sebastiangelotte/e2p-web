@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-
+import { options } from "../richTextRendererOptions"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import CourseLeader from "../components/course-leader/courseLeader"
@@ -104,19 +104,7 @@ const Course = props => {
     setShowCompanyInternalSignupModal,
   ] = useState(false)
   const [showContactModal, setShowContactModal] = useState(false)
-
-  const options = {
-    renderNode: {
-      "embedded-asset-block": node => {
-        const alt = node.data.target.fields.title["sv-SE"]
-        const url = node.data.target.fields.file["sv-SE"].url
-        return <img alt={alt} src={url} />
-      },
-    },
-  }
-
   const course = props.data.contentfulCourse
-
   const services = course.linkedServices || []
   const courses = course.linkedCourses || []
   const tools = course.linkedTools || []
