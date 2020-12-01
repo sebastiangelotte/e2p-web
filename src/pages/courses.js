@@ -32,19 +32,6 @@ const Courses = () => {
             onlineCourse
             onSite
             shortDescription
-
-            courseLeader {
-              name
-              image {
-                title
-                fixed(width: 200) {
-                  width
-                  height
-                  src
-                }
-              }
-              title
-            }
             kurstillflle {
               city
               date(formatString: "D/M/YYYY")

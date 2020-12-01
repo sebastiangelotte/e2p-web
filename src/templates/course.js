@@ -45,7 +45,7 @@ export const query = graphql`
       includedInfo {
         json
       }
-      courseLeader {
+      courseLeaders {
         name
         title
         description {
@@ -167,9 +167,11 @@ const Course = props => {
                 {documentToReactComponents(course.practicalInfo.json, options)}
               </ExpandableCard>
             )}
-            {course.courseLeader && (
+            {course.courseLeaders && (
               <ExpandableCard heading="Kursledare" forceOpen>
-                <CourseLeader data={course.courseLeader} />
+                {course.courseLeaders.map((courseLeader, i) => (
+                  <CourseLeader key={i} data={courseLeader} />
+                ))}
               </ExpandableCard>
             )}
             <ExpandableCard heading="Kursbeskrivning" forceOpen>
