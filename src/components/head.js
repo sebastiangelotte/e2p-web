@@ -49,6 +49,7 @@ const Head = ({ title, description }) => {
         name="twitter:title"
         content={`${title} | ${data.site.siteMetadata.title}`}
       />
+      <meta property="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={description} />
       {/* <meta name="twitter:image" content="LINK TO IMAGE" /> */}
       <meta name="twitter:site" content="@easy2perform" />
