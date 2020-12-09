@@ -22,6 +22,7 @@ import { BsClock, BsTag, BsCalendar, BsBuilding } from "react-icons/bs"
 import { IntersectionObserver } from "../components/intersectionObserver"
 import { ScaleBox } from "../components/scaleBox"
 import Modal from "../components/modal"
+import CheckoutButton from "../components/checkoutButton"
 
 export const query = graphql`
   query($slug: String!) {
@@ -93,6 +94,7 @@ export const query = graphql`
           lon
         }
       }
+      stripePriceId
     }
   }
 `
@@ -122,6 +124,11 @@ const Course = props => {
         <Inner>
           <StyledHeading as="h1" inverted>
             {course.title}
+            <CheckoutButton
+              priceId={course.stripePriceId}
+              name={course.title}
+              shortDescription={course.shortDescription}
+            />
           </StyledHeading>
           <p>{course.shortDescription}</p>
           <IntersectionObserver>
