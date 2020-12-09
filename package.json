@@ -6,6 +6,7 @@
   "author": "Sebastian Gelotte <sebastian.gelotte@gmail.com>",
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.2.0",
+    "@jlengstorf/get-share-image": "^0.8.0",
     "@reach/dialog": "^0.2.9",
     "@reach/tabs": "^0.1.6",
     "@reach/visually-hidden": "^0.1.4",
