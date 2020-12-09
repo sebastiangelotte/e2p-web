@@ -1,0 +1,10 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Sebastian Gelotte <sebastian.gelotte@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "stripe": "^8.127.0"
+  }
+}
