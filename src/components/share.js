@@ -9,7 +9,7 @@ import {
   TwitterIcon,
 } from "react-share"
 
-const Share = ({ title }) => {
+const Share = ({ title, className }) => {
   const url = () => {
     if (typeof window !== "undefined") {
       return (
@@ -23,7 +23,8 @@ const Share = ({ title }) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
+      <Text>Dela:</Text>
       <TwitterShareButton url={url()} title={title} hashtags={["easy2perform"]}>
         <TwitterIcon round />
       </TwitterShareButton>
@@ -49,10 +50,18 @@ export default Share
 
 const Wrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: 10px;
 
   svg {
     height: 40px;
     width: 40px;
   }
+`
+
+const Text = styled.span`
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  font-weight: bold;
 `

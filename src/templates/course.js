@@ -22,6 +22,7 @@ import { BsClock, BsTag, BsCalendar, BsBuilding } from "react-icons/bs"
 import { IntersectionObserver } from "../components/intersectionObserver"
 import { ScaleBox } from "../components/scaleBox"
 import Modal from "../components/modal"
+import Share from "../components/share"
 
 export const query = graphql`
   query($slug: String!) {
@@ -280,6 +281,7 @@ const Course = props => {
                 <h3>Fråga oss</h3>
                 <ContactForm source={course.title} />
               </Modal>
+              <StyledShare title="Kurser" />
             </StickyWrapper>
           </ExtraInfo>
         </StyledInner>
@@ -387,4 +389,8 @@ const AskButton = styled(Button)`
   font-weight: bold;
   padding: 18px 45px 16px 45px;
   width: 100%;
+`
+
+const StyledShare = styled(Share)`
+  padding-top: 30px;
 `
