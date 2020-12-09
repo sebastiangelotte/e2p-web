@@ -10,28 +10,32 @@ import {
 } from "react-share"
 
 const Share = ({ title }) => {
-  // const url = () => {
-  //   if (typeof window !== "undefined") {
-  //     return
-  //     "https://www.easy2perform.se" +
-  //       window.location.pathname +
-  //       window.location.search
-  //   } else {
-  //     return "https://www.easy2perform.se"
-  //   }
-  // }
-  const url = "https://www.easy2perform.se"
+  const url = () => {
+    if (typeof window !== "undefined") {
+      return (
+        "https://www.easy2perform.se" +
+        window.location.pathname +
+        window.location.search
+      )
+    } else {
+      return "https://www.easy2perform.se"
+    }
+  }
 
   return (
     <Wrapper>
-      <TwitterShareButton url={url} title={title} hashtags={["easy2perform"]}>
+      <TwitterShareButton url={url()} title={title} hashtags={["easy2perform"]}>
         <TwitterIcon round />
       </TwitterShareButton>
-      <FacebookShareButton url={url} quote={title} hashtags={["easy2perform"]}>
+      <FacebookShareButton
+        url={url()}
+        quote={title}
+        hashtags={["easy2perform"]}
+      >
         <FacebookIcon round />
       </FacebookShareButton>
       <LinkedinShareButton
-        url={url}
+        url={url()}
         title={title}
         source={"https://www.easy2perform.se"}
       >
