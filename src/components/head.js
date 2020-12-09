@@ -42,7 +42,7 @@ const Head = ({ title, description }) => {
       {/* <meta property="og:type" content="article" /> */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      {/* <meta property="og:image" content="LINK TO THE IMAGE FILE" /> */}
+      <meta property="og:image" content={socialImage} />
       {/* <meta property="og:url" content="PERMALINK" /> */}
       <meta property="og:site_name" content="easy2perform.se" />
       <meta
