@@ -55,9 +55,9 @@ const Tools = () => {
             Varför uppfinna hjulet varje gång?
           </Heading>
           <p>
-            Att ha en användbar checklista till hands när man skall utföra
-            viktiga och svåra uppgifter i rollen som chef och ledare är
-            ovärderligt. Alla våra checklistor är gratis att använda.
+            Att ha användbara checklistor, guider och verktyg till hands när man
+            skall utföra viktiga och svåra uppgifter i rollen som chef och
+            ledare är ovärderligt.
           </p>
         </Inner>
       </SectionWithBackgroundImage>
