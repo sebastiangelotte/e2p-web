@@ -88,9 +88,9 @@ export const SectionWithBackgroundImage = styled(Section)`
 export const Tag = styled.span`
   color: #ff2e6a;
   background-color: #f9f3fe;
-  padding: 12px 28px 15px 28px;
+  padding: 8px 15px 8px 15px;
   border-radius: 7px;
-  font-size: 16px;
+  font-size: 13px;
   display: inline-block;
   margin-right: 10px;
   margin-bottom: 10px;

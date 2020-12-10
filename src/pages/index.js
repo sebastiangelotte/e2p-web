@@ -80,9 +80,10 @@ const IndexPage = () => {
               <Card link="/coaching">
                 <Coaching />
                 <h3>Individuell coaching</h3>
+                <p>Individuell coaching innebär att du är i fokus.</p>
                 <p>
-                  Individuell coaching innebär att du är i fokus. Målet med
-                  coachingen är att ge dig stöd och utveckling i din yrkesroll.
+                  Målet med coachingen är att ge dig stöd och utveckling i din
+                  yrkesroll.
                 </p>
               </Card>
             </ScaleBox>

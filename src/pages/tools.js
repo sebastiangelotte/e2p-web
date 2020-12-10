@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { graphql, useStaticQuery, Link } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
@@ -11,9 +11,11 @@ import {
   Section,
   Inner,
   Tag,
+  Button,
 } from "../components/styledComponents"
 import bg from "../images/hero-bg.svg"
 import Card from "../components/card"
+import { BsArrowRightShort } from "react-icons/bs"
 
 const Tools = () => {
   const data = useStaticQuery(graphql`
@@ -75,15 +77,19 @@ const Tools = () => {
               data={tools}
               renderResults={results => {
                 return results.map((el, i) => (
-                  <Link to={`/tools/${el.node.slug}`}>
-                    <Card key={i}>
-                      <CreatedAt>{el.node.createdAt}</CreatedAt>
-                      <Heading as="h3">{el.node.title}</Heading>
+                  <Card link={`/tools/${el.node.slug}`} key={i}>
+                    <CreatedAt>{el.node.createdAt}</CreatedAt>
+                    <Heading as="h3">{el.node.title}</Heading>
+                    <TagsWrapper>
                       {el.node.tags?.map(tag => (
                         <Tag>{tag}</Tag>
                       ))}
-                    </Card>
-                  </Link>
+                    </TagsWrapper>
+                    <p>{el.node.shortDescription}</p>
+                    <StyledButton>
+                      Läs mer <BsArrowRightShort />
+                    </StyledButton>
+                  </Card>
                 ))
               }}
             />
@@ -99,17 +105,23 @@ export default Tools
 const SearchBox = styled.input`
   display: block;
   padding: 10px 16px;
-  border: 1px solid #ccc;
+  box-shadow: 0px 4px 4px rgba(135, 146, 161, 0.16),
+    0px 6px 41px rgba(135, 146, 161, 0.11);
+  border-radius: 7px;
+  border: none;
   margin-top: 10px;
   width: 100%;
-  border-radius: 3px;
 `
 
 const Grid = styled.div`
   margin-top: 50px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 40px;
+
+  @media screen and (max-width: 1230px) {
+    grid-template-columns: 1fr 1fr;
+  }
 
   @media screen and (max-width: 1000px) {
     grid-template-columns: 1fr;
@@ -117,3 +129,19 @@ const Grid = styled.div`
 `
 
 const CreatedAt = styled.p``
+
+const StyledButton = styled(Button)`
+  margin-top: auto;
+  font-size: 16px;
+  padding: 8px 10px 8px 20px;
+  border-radius: 7px;
+
+  > svg {
+    margin: 0;
+    margin-left: 7px;
+  }
+`
+
+const TagsWrapper = styled.div`
+  margin-top: -15px;
+`
