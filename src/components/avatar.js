@@ -7,8 +7,8 @@ import woman1 from "../images/woman1.png"
 import woman2 from "../images/woman2.png"
 import woman3 from "../images/woman3.png"
 
-const Avatar = ({ round, preset }) => {
-  const [image, setImage] = useState(man1)
+const Avatar = ({ round, preset, customImage }) => {
+  const [image, setImage] = useState(customImage || man1)
 
   useEffect(() => {
     switch (preset) {
@@ -31,7 +31,7 @@ const Avatar = ({ round, preset }) => {
         setImage(woman3)
         break
       default:
-        setImage(woman1)
+        break
     }
   }, [preset])
 
