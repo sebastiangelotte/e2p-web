@@ -42,7 +42,7 @@ export const Button = styled.button.attrs(props => ({
 
 export const Section = styled.section`
   padding-top: 60px;
-  padding-bottom: 120px;
+  padding-bottom: 50px;
   padding-left: 30px;
   padding-right: 30px;
   display: flex;
@@ -69,18 +69,14 @@ export const Section = styled.section`
   ${props =>
     props.firstSection &&
     `
-    padding-top: 150px;
-
-    p {
-      font-size: 20px;
-    }
+    padding-top: 120px;
   `}
 `
 
 export const SectionWithBackgroundImage = styled(Section)`
   background-image: url(${props => props.backgroundImage});
   background-repeat: no-repeat;
-  background-position: center bottom;
+  background-position: center center;
   background-size: cover;
   color: #fff;
 `
@@ -99,10 +95,10 @@ export const Tag = styled.span`
 export const Heading = styled.h2`
   color: #1e266d;
   font-weight: 600;
-  font-size: 48px;
+  font-size: 30px;
 
   @media screen and (max-width: 800px) {
-    font-size: 26px;
+    font-size: 22px;
   }
 
   ${props =>

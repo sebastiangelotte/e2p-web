@@ -25,7 +25,6 @@ const Courses = () => {
             title
             slug
             price
-            numberOfDays
             tags
             companyInternalCourse
             openCourse
