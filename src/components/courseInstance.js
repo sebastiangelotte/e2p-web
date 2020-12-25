@@ -23,13 +23,11 @@ const CourseInstance = ({
       <Details>
         {!companyInternal && <b>Kurstillfälle:</b>}
         <Date title="Datum">
-          {/* <b>Datum: </b> */}
           <BsCalendar />
           {instance.date}
         </Date>
         {instance.online ? (
           <City title="Plats">
-            {/* <b>Plats: </b> */}
             <FaMapMarkerAlt />
             Online via <StyledSiZoom />
           </City>
