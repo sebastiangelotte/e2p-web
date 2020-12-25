@@ -45,7 +45,6 @@ const CircleWrapper = styled.div`
 
 const Title = styled.span`
   display: block;
-  color: var(--color-text);
   margin-top: -10px;
   margin-bottom: 10px;
 `

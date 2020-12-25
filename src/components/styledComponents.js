@@ -41,8 +41,8 @@ export const Button = styled.button.attrs(props => ({
 `
 
 export const Section = styled.section`
-  padding-top: 60px;
-  padding-bottom: 50px;
+  padding-top: 40px;
+  padding-bottom: 30px;
   padding-left: 30px;
   padding-right: 30px;
   display: flex;
@@ -53,7 +53,6 @@ export const Section = styled.section`
   @media screen and (max-width: 600px) {
     padding-left: 15px;
     padding-right: 15px;
-    padding-bottom: 60px;
   }
 
   ${props =>
@@ -69,7 +68,7 @@ export const Section = styled.section`
   ${props =>
     props.firstSection &&
     `
-    padding-top: 120px;
+    padding-top: 110px;
   `}
 `
 
