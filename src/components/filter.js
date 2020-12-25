@@ -56,20 +56,20 @@ const Filter = ({ courses, onChange }) => {
           </StyledButton>
         ))}
       </ButtonsWrapper>
-      <ButtonsWrapper>
-        <StyledButton
-          active={activeType === "open"}
-          onClick={() => setActiveType("open")}
-        >
-          <BsFillPersonFill /> Öppen
-        </StyledButton>
-        <StyledButton
-          active={activeType === "companyInternal"}
-          onClick={() => setActiveType("companyInternal")}
-        >
-          <BsBuilding /> Företagsintern
-        </StyledButton>
-      </ButtonsWrapper>
+      {/* <ButtonsWrapper> */}
+      {/*   <StyledButton */}
+      {/*     active={activeType === "open"} */}
+      {/*     onClick={() => setActiveType("open")} */}
+      {/*   > */}
+      {/*     <BsFillPersonFill /> Öppen */}
+      {/*   </StyledButton> */}
+      {/*   <StyledButton */}
+      {/*     active={activeType === "companyInternal"} */}
+      {/*     onClick={() => setActiveType("companyInternal")} */}
+      {/*   > */}
+      {/*     <BsBuilding /> Företagsintern */}
+      {/*   </StyledButton> */}
+      {/* </ButtonsWrapper> */}
     </Wrapper>
   )
 }
