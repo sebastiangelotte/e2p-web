@@ -1,10 +1,9 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { options } from "../richTextRendererOptions"
 import Head from "../components/head"
 import Layout from "../components/layout"
-import CourseLeader from "../components/course-leader/courseLeader"
 
 import styled from "styled-components"
 import bg from "../images/section-bg.svg"
@@ -20,6 +19,8 @@ import { IntersectionObserver } from "../components/intersectionObserver"
 import { ScaleBox } from "../components/scaleBox"
 import Share from "../components/share"
 import CourseInstance from "../components/courseInstance"
+import Profile from "../components/profile"
+import { BsArrowLeftShort } from "react-icons/bs"
 
 export const query = graphql`
   query($slug: String!) {
@@ -44,6 +45,7 @@ export const query = graphql`
         json
       }
       courseLeaders {
+        slug
         name
         title
         description {
@@ -119,22 +121,21 @@ const Course = props => {
 
       <SectionWithBackgroundImage backgroundImage={bg} inverted firstSection>
         <Inner>
+          <BackButton to="/courses">
+            <BsArrowLeftShort /> Alla kurser
+          </BackButton>
           <StyledHeading as="h1" inverted>
             {course.title}
           </StyledHeading>
           <p>{course.shortDescription}</p>
+          {course.courseLeaders?.map((courseLeader, i) => (
+            <Profile profile={courseLeader} key={i} />
+          ))}
         </Inner>
       </SectionWithBackgroundImage>
       <Section background>
         <StyledInner>
           <Description>
-            {course.courseLeaders && (
-              <ExpandableCard heading="Kursledare" forceOpen>
-                {course.courseLeaders.map((courseLeader, i) => (
-                  <CourseLeader key={i} data={courseLeader} />
-                ))}
-              </ExpandableCard>
-            )}
             <ExpandableCard heading="Kursbeskrivning" forceOpen>
               {documentToReactComponents(course.description.json, options)}
             </ExpandableCard>
@@ -240,9 +241,7 @@ const ExtraInfo = styled.div`
   }
 `
 
-const StyledHeading = styled(Heading)`
-  font-size: 30px;
-`
+const StyledHeading = styled(Heading)``
 
 const List = styled.ul`
   list-style: none;
@@ -273,3 +272,19 @@ const List = styled.ul`
 `
 
 const StyledShare = styled(Share)``
+
+const BackButton = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+  margin-bottom: 10px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  > svg {
+    font-size: 24px;
+  }
+`
