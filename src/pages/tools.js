@@ -16,6 +16,8 @@ import {
 import bg from "../images/hero-bg.svg"
 import Card from "../components/card"
 import { BsArrowRightShort } from "react-icons/bs"
+import Profile from "../components/profile"
+import ArticleItem from "../components/articleItem"
 
 const Tools = () => {
   const data = useStaticQuery(graphql`
@@ -29,8 +31,27 @@ const Tools = () => {
             tags
             description {
               json
+              fields {
+                readingTime {
+                  minutes
+                }
+              }
             }
-            createdAt(formatString: "DD MMM, YYYY")
+            shortDate: createdAt(formatString: "DD MMM")
+            fullDate: createdAt(formatString: "DD MMMM YYYY")
+            author {
+              slug
+              name
+              title
+              image {
+                title
+                fixed(width: 400) {
+                  width
+                  height
+                  src
+                }
+              }
+            }
           }
         }
       }
@@ -44,6 +65,7 @@ const Tools = () => {
     const { value } = event.target
     setSearchTerm(value)
   }
+  console.log(tools)
 
   return (
     <Layout transparentNavigation>
@@ -77,19 +99,7 @@ const Tools = () => {
               data={tools}
               renderResults={results => {
                 return results.map((el, i) => (
-                  <Card link={`/tools/${el.node.slug}`} key={i}>
-                    <CreatedAt>{el.node.createdAt}</CreatedAt>
-                    <Heading as="h3">{el.node.title}</Heading>
-                    <TagsWrapper>
-                      {el.node.tags?.map(tag => (
-                        <Tag>{tag}</Tag>
-                      ))}
-                    </TagsWrapper>
-                    <p>{el.node.shortDescription}</p>
-                    <StyledButton>
-                      Läs mer <BsArrowRightShort />
-                    </StyledButton>
-                  </Card>
+                  <ArticleItem article={el.node} key={i} />
                 ))
               }}
             />
@@ -116,12 +126,8 @@ const SearchBox = styled.input`
 const Grid = styled.div`
   margin-top: 50px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 40px;
-
-  @media screen and (max-width: 1230px) {
-    grid-template-columns: 1fr 1fr;
-  }
 
   @media screen and (max-width: 1000px) {
     grid-template-columns: 1fr;

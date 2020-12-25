@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { options } from "../richTextRendererOptions"
 import Head from "../components/head"
@@ -16,15 +16,23 @@ import {
   SectionWithBackgroundImage,
   Inner,
 } from "../components/styledComponents"
+import Profile from "../components/profile"
+import { BsArrowLeftShort } from "react-icons/bs"
 
 export const query = graphql`
   query($slug: String!) {
     contentfulTool(slug: { eq: $slug }) {
-      createdAt(formatString: "DD MMM, YYYY")
+      shortDate: createdAt(formatString: "DD MMM YYYY")
+      fullDate: createdAt(formatString: "DD MMMM YYYY")
       title
       shortDescription
       description {
         json
+        fields {
+          readingTime {
+            minutes
+          }
+        }
       }
       tags
       linkedServices {
@@ -52,6 +60,22 @@ export const query = graphql`
         }
         createdAt(formatString: "DD MMM, YYYY")
       }
+      author {
+        slug
+        name
+        title
+        description {
+          json
+        }
+        image {
+          title
+          fixed(width: 400) {
+            width
+            height
+            src
+          }
+        }
+      }
     }
   }
 `
@@ -61,25 +85,37 @@ const Tool = props => {
   const services = props.data.contentfulTool.linkedServices || []
   const courses = props.data.contentfulTool.linkedCourses || []
   const tools = props.data.contentfulTool.linkedTools || []
+  const author = props.data.contentfulTool.author
 
   const relatedItems = [...services, ...courses, ...tools]
+  const readingTime = Math.ceil(tool.description.fields.readingTime.minutes)
 
   return (
     <Layout>
       <Head title={`${tool.title}`} description={tool.shortDescription} />
       <SectionWithBackgroundImage backgroundImage={bg} firstSection>
-        <StyledInner>
-          <Heading as="h1" inverted serif>
+        <Inner>
+          <BackButton to="/tools">
+            <BsArrowLeftShort /> Alla artiklar
+          </BackButton>
+          <Heading as="h1" inverted>
             {tool.title}
           </Heading>
-          {tool.tags?.map((tag, i) => (
-            <Tag key={i}>{tag}</Tag>
-          ))}
-        </StyledInner>
+          <p>{tool.shortDescription}</p>
+          {tool.author && <Profile profile={author} />}
+        </Inner>
       </SectionWithBackgroundImage>
       <StyledSection>
         <StyledInner>
-          <CreatedAt>{tool.createdAt}</CreatedAt>
+          <MetaWrapper>
+            <Meta>
+              <Date dateTime={tool.fullDate} title={tool.fullDate}>
+                {tool.shortDate}
+              </Date>
+              <Separator>·</Separator>
+              <ReadingTime>{readingTime} min läsning</ReadingTime>
+            </Meta>
+          </MetaWrapper>
           <Share title={tool.title} />
           {documentToReactComponents(tool.description.json, options)}
           <hr />
@@ -100,7 +136,7 @@ export default Tool
 
 const StyledSection = styled(Section)`
   p {
-    font-size: 20px;
+    font-size: 18px;
     font-family: "Crimson Text", Georgia, "Times New Roman", Times, serif;
   }
 
@@ -113,9 +149,50 @@ const StyledSection = styled(Section)`
 `
 
 const StyledInner = styled(Inner)`
-  max-width: 680px;
+  * {
+    max-width: 680px;
+  }
 `
 
 const CreatedAt = styled.div`
   padding-bottom: 20px;
 `
+
+const BackButton = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+  margin-bottom: 10px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  > svg {
+    font-size: 24px;
+  }
+`
+
+const MetaWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: auto;
+
+  > * {
+    margin-bottom: 10px;
+  }
+`
+
+const Meta = styled.div`
+  display: flex;
+  gap: 5px;
+`
+
+const Separator = styled.span``
+
+const Date = styled.time``
+
+const ReadingTime = styled.span``
