@@ -1,4 +1,4 @@
-import React, { createRef, useEffect } from "react"
+import React from "react"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import styled from "styled-components"
@@ -9,23 +9,10 @@ import {
   SectionWithBackgroundImage,
   Inner,
 } from "../components/styledComponents"
-import lottie from "lottie-web"
+import Lottie from "react-lottie-player"
 import animation from "../animations/404.json"
 
 const NotFoundPage = () => {
-  const animationRef = createRef()
-
-  useEffect(() => {
-    const anim = lottie.loadAnimation({
-      container: animationRef.current,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      animationData: animation,
-    })
-    return () => anim.destroy()
-  }, [animationRef])
-
   return (
     <Layout transparentNavigation>
       <Head title="404: Hittar ej sidan" />
@@ -38,7 +25,7 @@ const NotFoundPage = () => {
       </SectionWithBackgroundImage>
       <StyledSection background>
         <StyledInner>
-          <div ref={animationRef}></div>
+          <Lottie loop play animationData={animation} renderer="svg" />
         </StyledInner>
       </StyledSection>
     </Layout>
