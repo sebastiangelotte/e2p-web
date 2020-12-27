@@ -9287,10 +9287,10 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-lottie-web@^5.7.3:
-  version "5.7.3"
-  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.7.3.tgz#dbe542270665be5dd5b32deae19e27de6e77728c"
-  integrity sha512-ftN4AdiNmtoVpCfN1doiUIUbhOrDSMikH1Yl64/xO5lzQ31AO0+G82bqrCNHIW5Ec2zE/g7y4iz7zBR1YJwDaA==
+lottie-web@^5.7.5:
+  version "5.7.5"
+  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.7.5.tgz#92d72de9d94c733ac21ce613a5f3fc21ebe3f92c"
+  integrity sha512-jXgxG5od5F1QkTItb8wMej3aFEQ+tg95jma33GBDn1K3kRfy9zXXG+F62B440wphCdwY5sjg6h6664L5dvnuWw==
 
 loud-rejection@^1.0.0:
   version "1.6.0"
@@ -11856,6 +11856,14 @@ react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-lottie-player@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-lottie-player/-/react-lottie-player-1.1.0.tgz#bfd3962f50f6881f82fe2cbc05006241ee112e6b"
+  integrity sha512-BwipLuqMyobPIzucIBtNqhSrjsvM+3tQPpP5usBrAdNxHUE6qFHTqWJNzXOW7lImXjwRHUuPriTQWHor3G9bzQ==
+  dependencies:
+    lodash "^4.17.19"
+    lottie-web "^5.7.5"
 
 react-reconciler@^0.24.0:
   version "0.24.0"
