@@ -17,8 +17,35 @@ import FullWidthCard from "../components/fullWidthCard"
 import ImageTextSection from "../components/imageTextSection"
 import Avatar from "../components/avatar"
 import { Button, Section } from "../components/styledComponents"
+import { graphql, useStaticQuery } from "gatsby"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { options } from "../richTextRendererOptions"
 
 const IndexPage = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      allContentfulReview(filter: { showOnStartpage: { eq: true } }) {
+        edges {
+          node {
+            id
+            rating
+            image {
+              fixed(height: 100) {
+                src
+              }
+            }
+            name
+            text {
+              json
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const reviews = data.allContentfulReview.edges
+
   return (
     <Layout transparentNavigation>
       <Head
@@ -53,9 +80,10 @@ const IndexPage = () => {
               <Card link="/coaching">
                 <Coaching />
                 <h3>Individuell coaching</h3>
+                <p>Individuell coaching innebär att du är i fokus.</p>
                 <p>
-                  Individuell coaching innebär att du är i fokus. Målet med
-                  coachingen är att ge dig stöd och utveckling i din yrkesroll.
+                  Målet med coachingen är att ge dig stöd och utveckling i din
+                  yrkesroll.
                 </p>
               </Card>
             </ScaleBox>
@@ -85,46 +113,19 @@ const IndexPage = () => {
         </Tag>
         <Heading secondary>Vad våra kursdeltagare säger...</Heading>
         <Grid>
-          <IntersectionObserver>
-            <ScaleBox>
-              <ReviewCard rating={5}>
-                <h4>
-                  <Avatar round preset="man1" /> Kursdeltagare
-                </h4>
-                <p>Man hade verkligen fokus på vårt företag och vårt behov.</p>
-                <p>
-                  Kommer ha mycket nytta av det vi gick igenom om hur man
-                  coachar och stöttar teamet.
-                </p>
-              </ReviewCard>
-            </ScaleBox>
-          </IntersectionObserver>
-          <IntersectionObserver>
-            <ScaleBox>
-              <ReviewCard rating={5}>
-                <h4>
-                  <Avatar round preset="woman1" /> Kursdeltagare
-                </h4>
-                <p>
-                  Kursledaren gav personlig feedback och var lyhörd för våra
-                  utmaningar. Bra med liten grupp.
-                </p>
-              </ReviewCard>
-            </ScaleBox>
-          </IntersectionObserver>
-          <IntersectionObserver>
-            <ScaleBox>
-              <ReviewCard rating={5}>
-                <h4>
-                  <Avatar round preset="woman2" /> Kursdeltagare
-                </h4>
-                <p>
-                  Tack för bra dag. Stärkte mig oerhört inför några jobbiga
-                  samtal jag skall ha snart.
-                </p>
-              </ReviewCard>
-            </ScaleBox>
-          </IntersectionObserver>
+          {reviews.map((review, i) => (
+            <IntersectionObserver key={i}>
+              <ScaleBox>
+                <ReviewCard rating={review.node.rating}>
+                  <h4>
+                    <Avatar round customImage={review.node.image.fixed.src} />{" "}
+                    {review.node.name}
+                  </h4>
+                  {documentToReactComponents(review.node.text.json, options)}
+                </ReviewCard>
+              </ScaleBox>
+            </IntersectionObserver>
+          ))}
         </Grid>
         <a
           href="https://www.utbildning.se/kurser/easy2perform/recensioner"

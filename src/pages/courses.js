@@ -19,13 +19,12 @@ import CourseItem from "../components/courseItem"
 const Courses = () => {
   const data = useStaticQuery(graphql`
     query {
-      allContentfulCourse(sort: { fields: title, order: ASC }) {
+      allContentfulCourse(sort: { fields: createdAt, order: DESC }) {
         edges {
           node {
             title
             slug
             price
-            numberOfDays
             tags
             companyInternalCourse
             openCourse
@@ -34,11 +33,25 @@ const Courses = () => {
             shortDescription
             kurstillflle {
               city
-              date(formatString: "D/M/YYYY")
+              shortDate: date(formatString: "DD/MM/YYYY")
+              fullDate: date(formatString: "DD MMMM YYYY")
               title
               location {
                 lat
                 lon
+              }
+            }
+            courseLeaders {
+              slug
+              name
+              title
+              image {
+                title
+                fixed(width: 400) {
+                  width
+                  height
+                  src
+                }
               }
             }
           }

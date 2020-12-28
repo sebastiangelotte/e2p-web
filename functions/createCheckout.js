@@ -21,6 +21,9 @@ exports.handler = async event => {
       },
     ],
     mode: "payment",
+    metadata: {
+      test: "some test data",
+    },
   })
 
   return {

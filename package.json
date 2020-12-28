@@ -6,6 +6,7 @@
   "author": "Sebastian Gelotte <sebastian.gelotte@gmail.com>",
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.2.0",
+    "@jlengstorf/get-share-image": "^0.8.0",
     "@reach/dialog": "^0.2.9",
     "@reach/tabs": "^0.1.6",
     "@reach/visually-hidden": "^0.1.4",
@@ -25,6 +26,7 @@
     "gatsby-plugin-offline": "^2.2.9",
     "gatsby-plugin-portal": "^1.0.7",
     "gatsby-plugin-react-helmet": "^3.0.12",
+    "gatsby-plugin-readingtime-contentful": "^1.0.0",
     "gatsby-plugin-sharp": "^2.2.27",
     "gatsby-plugin-styled-components": "^3.1.8",
     "gatsby-source-contentful": "^2.0.55",

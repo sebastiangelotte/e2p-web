@@ -24,7 +24,7 @@ const Card = ({ link, title, withBackground, children, className }) => {
 export default Card
 
 const Wrapper = styled.div`
-  padding: 58px;
+  padding: 40px 54px;
   box-shadow: 0px 4px 4px rgba(135, 146, 161, 0.16),
     0px 6px 41px rgba(135, 146, 161, 0.11);
   border-radius: 18px;
@@ -34,6 +34,8 @@ const Wrapper = styled.div`
   position: relative;
   background-color: #ffffff;
   color: #1e266d;
+  display: flex;
+  flex-direction: column;
 
   &:after {
     content: "";
@@ -69,14 +71,14 @@ const Wrapper = styled.div`
   }
 
   h3 {
-    font-size: 22px;
+    font-size: 20px;
     margin-bottom: 27px;
     margin-top: 0;
     color: #1e266d;
   }
 
   p {
-    font-size: 18px;
+    font-size: 16px;
     color: #455880;
     line-height: 27px;
   }
@@ -109,7 +111,7 @@ const Wrapper = styled.div`
     padding: 20px;
 
     h3 {
-      font-size: 22px;
+      font-size: 20px;
     }
   }
 `

@@ -9,29 +9,34 @@ import {
   TwitterIcon,
 } from "react-share"
 
-const Share = ({ title }) => {
-  // const url = () => {
-  //   if (typeof window !== "undefined") {
-  //     return
-  //     "https://www.easy2perform.se" +
-  //       window.location.pathname +
-  //       window.location.search
-  //   } else {
-  //     return "https://www.easy2perform.se"
-  //   }
-  // }
-  const url = "https://www.easy2perform.se"
+const Share = ({ title, className }) => {
+  const url = () => {
+    if (typeof window !== "undefined") {
+      return (
+        "https://www.easy2perform.se" +
+        window.location.pathname +
+        window.location.search
+      )
+    } else {
+      return "https://www.easy2perform.se"
+    }
+  }
 
   return (
-    <Wrapper>
-      <TwitterShareButton url={url} title={title} hashtags={["easy2perform"]}>
+    <Wrapper className={className}>
+      <Text>Dela:</Text>
+      <TwitterShareButton url={url()} title={title} hashtags={["easy2perform"]}>
         <TwitterIcon round />
       </TwitterShareButton>
-      <FacebookShareButton url={url} quote={title} hashtags={["easy2perform"]}>
+      <FacebookShareButton
+        url={url()}
+        quote={title}
+        hashtags={["easy2perform"]}
+      >
         <FacebookIcon round />
       </FacebookShareButton>
       <LinkedinShareButton
-        url={url}
+        url={url()}
         title={title}
         source={"https://www.easy2perform.se"}
       >
@@ -45,10 +50,18 @@ export default Share
 
 const Wrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: 10px;
 
   svg {
     height: 40px;
     width: 40px;
   }
+`
+
+const Text = styled.span`
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  font-weight: bold;
 `

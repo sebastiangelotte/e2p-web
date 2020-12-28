@@ -104,5 +104,6 @@ module.exports = {
         id: "modal",
       },
     },
+    "gatsby-plugin-readingtime-contentful",
   ],
 }

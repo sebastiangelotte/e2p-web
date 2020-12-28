@@ -28,7 +28,7 @@ const MobileMenu = () => {
         <Link to="/coaching">Coaching</Link>
       </Item>
       <Item>
-        <Link to="/tools">Checklistor</Link>
+        <Link to="/tools">Artiklar</Link>
       </Item>
       <Item>
         <Link to="/services">Tjänster</Link>

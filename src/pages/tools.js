@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { graphql, useStaticQuery, Link } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 
 import Head from "../components/head"
 import Layout from "../components/layout"
@@ -11,9 +11,13 @@ import {
   Section,
   Inner,
   Tag,
+  Button,
 } from "../components/styledComponents"
 import bg from "../images/hero-bg.svg"
 import Card from "../components/card"
+import { BsArrowRightShort } from "react-icons/bs"
+import Profile from "../components/profile"
+import ArticleItem from "../components/articleItem"
 
 const Tools = () => {
   const data = useStaticQuery(graphql`
@@ -27,8 +31,27 @@ const Tools = () => {
             tags
             description {
               json
+              fields {
+                readingTime {
+                  minutes
+                }
+              }
             }
-            createdAt(formatString: "DD MMM, YYYY")
+            shortDate: createdAt(formatString: "DD MMM")
+            fullDate: createdAt(formatString: "DD MMMM YYYY")
+            author {
+              slug
+              name
+              title
+              image {
+                title
+                fixed(width: 400) {
+                  width
+                  height
+                  src
+                }
+              }
+            }
           }
         }
       }
@@ -42,6 +65,7 @@ const Tools = () => {
     const { value } = event.target
     setSearchTerm(value)
   }
+  console.log(tools)
 
   return (
     <Layout transparentNavigation>
@@ -53,9 +77,9 @@ const Tools = () => {
             Varför uppfinna hjulet varje gång?
           </Heading>
           <p>
-            Att ha en användbar checklista till hands när man skall utföra
-            viktiga och svåra uppgifter i rollen som chef och ledare är
-            ovärderligt. Alla våra checklistor är gratis att använda.
+            Att ha användbara checklistor, guider och verktyg till hands när man
+            skall utföra viktiga och svåra uppgifter i rollen som chef och
+            ledare är ovärderligt.
           </p>
         </Inner>
       </SectionWithBackgroundImage>
@@ -75,15 +99,7 @@ const Tools = () => {
               data={tools}
               renderResults={results => {
                 return results.map((el, i) => (
-                  <Link to={`/tools/${el.node.slug}`}>
-                    <Card key={i}>
-                      <CreatedAt>{el.node.createdAt}</CreatedAt>
-                      <Heading as="h3">{el.node.title}</Heading>
-                      {el.node.tags?.map(tag => (
-                        <Tag>{tag}</Tag>
-                      ))}
-                    </Card>
-                  </Link>
+                  <ArticleItem article={el.node} key={i} />
                 ))
               }}
             />
@@ -99,10 +115,12 @@ export default Tools
 const SearchBox = styled.input`
   display: block;
   padding: 10px 16px;
-  border: 1px solid #ccc;
+  box-shadow: 0px 4px 4px rgba(135, 146, 161, 0.16),
+    0px 6px 41px rgba(135, 146, 161, 0.11);
+  border-radius: 7px;
+  border: none;
   margin-top: 10px;
   width: 100%;
-  border-radius: 3px;
 `
 
 const Grid = styled.div`
@@ -117,3 +135,19 @@ const Grid = styled.div`
 `
 
 const CreatedAt = styled.p``
+
+const StyledButton = styled(Button)`
+  margin-top: auto;
+  font-size: 16px;
+  padding: 8px 10px 8px 20px;
+  border-radius: 7px;
+
+  > svg {
+    margin: 0;
+    margin-left: 7px;
+  }
+`
+
+const TagsWrapper = styled.div`
+  margin-top: -15px;
+`

@@ -115,6 +115,7 @@ const Grid = styled(Inner)`
 const CardWrapper = styled(Card)`
   text-align: center;
   padding: 65px 50px 40px 50px;
+  align-items: center;
 
   svg {
     font-size: 60px;

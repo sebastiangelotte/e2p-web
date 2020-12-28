@@ -6,6 +6,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
   const courseTemplate = path.resolve("./src/templates/course.js")
   const toolTemplate = path.resolve("./src/templates/tool.js")
   const serviceTemplate = path.resolve("./src/templates/service.js")
+  const profileTemplate = path.resolve("./src/templates/profile.js")
 
   const res = await graphql(`
     query {
@@ -24,6 +25,13 @@ module.exports.createPages = async ({ graphql, actions }) => {
         }
       }
       allContentfulService {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+      allContentfulCourseLeader {
         edges {
           node {
             slug
@@ -57,6 +65,16 @@ module.exports.createPages = async ({ graphql, actions }) => {
     createPage({
       component: serviceTemplate,
       path: `/services/${edge.node.slug}`,
+      context: {
+        slug: edge.node.slug,
+      },
+    })
+  })
+
+  res.data.allContentfulCourseLeader.edges.forEach(edge => {
+    createPage({
+      component: profileTemplate,
+      path: `/profile/${edge.node.slug}`,
       context: {
         slug: edge.node.slug,
       },
