@@ -11,7 +11,6 @@ import Share from "../components/share"
 import bg from "../images/hero-bg.svg"
 import {
   Section,
-  Tag,
   Heading,
   SectionWithBackgroundImage,
   Inner,
@@ -152,10 +151,6 @@ const StyledInner = styled(Inner)`
   * {
     max-width: 680px;
   }
-`
-
-const CreatedAt = styled.div`
-  padding-bottom: 20px;
 `
 
 const BackButton = styled(Link)`

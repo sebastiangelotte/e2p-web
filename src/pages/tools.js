@@ -10,13 +10,8 @@ import {
   SectionWithBackgroundImage,
   Section,
   Inner,
-  Tag,
-  Button,
 } from "../components/styledComponents"
 import bg from "../images/hero-bg.svg"
-import Card from "../components/card"
-import { BsArrowRightShort } from "react-icons/bs"
-import Profile from "../components/profile"
 import ArticleItem from "../components/articleItem"
 
 const Tools = () => {
@@ -65,7 +60,6 @@ const Tools = () => {
     const { value } = event.target
     setSearchTerm(value)
   }
-  console.log(tools)
 
   return (
     <Layout transparentNavigation>
@@ -132,22 +126,4 @@ const Grid = styled.div`
   @media screen and (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
-`
-
-const CreatedAt = styled.p``
-
-const StyledButton = styled(Button)`
-  margin-top: auto;
-  font-size: 16px;
-  padding: 8px 10px 8px 20px;
-  border-radius: 7px;
-
-  > svg {
-    margin: 0;
-    margin-left: 7px;
-  }
-`
-
-const TagsWrapper = styled.div`
-  margin-top: -15px;
 `

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { Button } from "./styledComponents"
-import { BsCheck, BsPlus, BsFillPersonFill, BsBuilding } from "react-icons/bs"
+import { BsCheck, BsPlus } from "react-icons/bs"
 
 const Filter = ({ courses, onChange }) => {
   const [activeTags, setActiveTags] = useState([])
-  const [activeType, setActiveType] = useState("open")
   let uniqueTags = new Set()
 
   courses.forEach(course => {
@@ -21,24 +20,16 @@ const Filter = ({ courses, onChange }) => {
   useEffect(() => {
     onChange(
       courses.filter(course => {
-        return filterByTag(course) && filterByType(course)
+        return filterByTag(course)
       })
     ) // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTags, activeType])
+  }, [activeTags])
 
   const filterByTag = course => {
     if (activeTags.length === 0) {
       return true // if no filter active, return all
     } else {
       return course.node.tags.filter(tag => activeTags.includes(tag)).length > 0
-    }
-  }
-
-  const filterByType = course => {
-    if (activeType === "open") {
-      return course.node.openCourse === true
-    } else if (activeType === "companyInternal") {
-      return course.node.companyInternalCourse === true
     }
   }
 
@@ -56,20 +47,6 @@ const Filter = ({ courses, onChange }) => {
           </StyledButton>
         ))}
       </ButtonsWrapper>
-      {/* <ButtonsWrapper> */}
-      {/*   <StyledButton */}
-      {/*     active={activeType === "open"} */}
-      {/*     onClick={() => setActiveType("open")} */}
-      {/*   > */}
-      {/*     <BsFillPersonFill /> Öppen */}
-      {/*   </StyledButton> */}
-      {/*   <StyledButton */}
-      {/*     active={activeType === "companyInternal"} */}
-      {/*     onClick={() => setActiveType("companyInternal")} */}
-      {/*   > */}
-      {/*     <BsBuilding /> Företagsintern */}
-      {/*   </StyledButton> */}
-      {/* </ButtonsWrapper> */}
     </Wrapper>
   )
 }

@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import Profile from "./profile"
-import { Tag, Button } from "./styledComponents"
+import { Tag } from "./styledComponents"
 import { Link } from "gatsby"
 
 const ArticleItem = ({ article }) => {
