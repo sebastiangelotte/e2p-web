@@ -1,12 +1,17 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { Button } from "./styledComponents"
+import CheckoutButton from "../components/checkoutButton"
 
-const CourseSignup = ({ courseName, courseDates }) => {
+const CourseSignup = ({ courseDates, course }) => {
   const [extraParticipants, setExtraParticipants] = useState(0)
   const [showContactPerson, setShowContactPerson] = useState(false)
   const [email, setEmail] = useState("")
-  const [date, setDate] = useState("")
+  const [name, setName] = useState("")
+  const [otherInfo, setOtherInfo] = useState("")
+  const [date, setDate] = useState(
+    `${courseDates[0].city}, ${courseDates[0].title}`
+  )
   const [, setIsLoading] = useState(false)
   const [message, setMessage] = useState({
     isVisible: false,
@@ -62,9 +67,19 @@ const CourseSignup = ({ courseName, courseDates }) => {
         >
           {/* needed for netlify */}
           <input type="hidden" name="form-name" value="courseSignup" />
-          <input type="hidden" name="Kurs" value={courseName} />
+          <input type="hidden" name="Kurs" value={course.title} />
           {courseDates && (
             <Section>
+              <CheckoutButton
+                priceId={course.stripePriceId}
+                name={course.title}
+                metadata={{
+                  date: date,
+                  name: name,
+                  email: email,
+                  otherInfo: otherInfo,
+                }}
+              />
               {/* eslint-disable-next-line */}
               <select
                 id="date"
@@ -83,7 +98,14 @@ const CourseSignup = ({ courseName, courseDates }) => {
           )}
           <Section>
             <h3>Deltagare</h3>
-            <input type="text" placeholder="Namn *" required name="namn" />
+            <input
+              type="text"
+              placeholder="Namn *"
+              required
+              name="namn"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
             <input
               type="email"
               placeholder="E-post *"
@@ -168,6 +190,8 @@ const CourseSignup = ({ courseName, courseDates }) => {
             <textarea
               placeholder="Allergier, speciella önskemål m.m."
               name="ovrigt"
+              value={otherInfo}
+              onChange={e => setOtherInfo(e.target.value)}
             />
             <input type="text" placeholder="Rabattkod" name="rabattkod" />
             <SubmitButton type="submit" value="Send">

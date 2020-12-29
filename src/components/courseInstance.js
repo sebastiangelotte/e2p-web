@@ -8,20 +8,13 @@ import Modal from "./modal"
 import CourseSignup from "./courseSignup"
 import ContactForm from "../components/contactForm"
 
-const CourseInstance = ({
-  instance,
-  courseID,
-  courseTitle,
-  coursePrice,
-  courseDuration,
-  companyInternal,
-}) => {
+const CourseInstance = ({ instance, course }) => {
   const [showOpenSignupModal, setShowOpenSignupModal] = useState(false)
 
   return (
     <Wrapper>
       <Details>
-        {!companyInternal && <b>Kurstillfälle:</b>}
+        {!course.companyInternal && <b>Kurstillfälle:</b>}
         <Date title="Datum">
           <BsCalendar />
           {instance.date}
@@ -38,34 +31,30 @@ const CourseInstance = ({
           </City>
         )}
         <Price title="Pris">
-          <BsTag /> {coursePrice}
+          <BsTag /> {Number(course.price).toLocaleString() + " SEK exkl. moms"}
         </Price>
         <Duration title="Längd">
-          <BsClock /> {courseDuration}
+          <BsClock /> {course.duration}
         </Duration>
       </Details>
 
       <BookButton onClick={() => setShowOpenSignupModal(true)}>
-        {companyInternal ? "Begär offert" : "Boka"}
+        {course.companyInternal ? "Begär offert" : "Boka"}
       </BookButton>
       <Modal
         isOpen={showOpenSignupModal}
         closeModal={() => setShowOpenSignupModal(false)}
       >
-        {companyInternal ? (
+        {course.companyInternal ? (
           <>
             <h3>Begär offert</h3>
             <p>
               Beskriv dina önskemål, så sänder vi dig en offert kostnadsfritt.
             </p>
-            <ContactForm source={courseTitle} />
+            <ContactForm source={course.title} />
           </>
         ) : (
-          <CourseSignup
-            courseName={courseTitle}
-            courseID={courseID}
-            courseDates={[instance]}
-          />
+          <CourseSignup courseDates={[instance]} course={course} />
         )}
       </Modal>
     </Wrapper>

@@ -17,7 +17,6 @@ import RelatedGrid from "../components/relatedGrid"
 import ExpandableCard from "../components/expandableCard"
 import { IntersectionObserver } from "../components/intersectionObserver"
 import { ScaleBox } from "../components/scaleBox"
-import CheckoutButton from "../components/checkoutButton"
 import Share from "../components/share"
 import CourseInstance from "../components/courseInstance"
 import Profile from "../components/profile"
@@ -128,11 +127,6 @@ const Course = props => {
           </BackButton>
           <StyledHeading as="h1" inverted>
             {course.title}
-            <CheckoutButton
-              priceId={course.stripePriceId}
-              name={course.title}
-              shortDescription={course.shortDescription}
-            />
           </StyledHeading>
           <p>{course.shortDescription}</p>
           {course.courseLeaders?.map((courseLeader, i) => (
@@ -165,17 +159,7 @@ const Course = props => {
                 <List>
                   {course.kurstillflle?.map((instance, i) => (
                     <li key={i}>
-                      <CourseInstance
-                        instance={instance}
-                        courseTitle={course.title}
-                        courseID={course.id}
-                        coursePrice={
-                          Number(course.price).toLocaleString() +
-                          " SEK exkl. moms"
-                        }
-                        courseDuration={course.duration}
-                        companyInternal={false}
-                      />
+                      <CourseInstance instance={instance} course={course} />
                     </li>
                   ))}
                 </List>
@@ -192,10 +176,7 @@ const Course = props => {
                         </p>
                         <CourseInstance
                           instance={companyInternalCourse}
-                          coursePrice="Pris offereras"
-                          courseDuration={course.duration}
-                          courseTitle={course.title}
-                          companyInternal={true}
+                          course={course}
                         />
                       </div>
                     </li>

@@ -2,14 +2,14 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 exports.handler = async event => {
   const body = JSON.parse(event.body)
-  const { name, priceId, image } = body
+  const { cancelUrl, name, priceId, image, metadata } = body
   const { currency, unit_amount: amount } = await stripe.prices.retrieve(
     priceId
   ) // get price from stripe to avoid scamz
 
   const session = await stripe.checkout.sessions.create({
     success_url: `https://www.easy2perform.se`,
-    cancel_url: `https://www.easy2perform.se`,
+    cancel_url: cancelUrl,
     payment_method_types: ["card"],
     line_items: [
       {
@@ -21,9 +21,7 @@ exports.handler = async event => {
       },
     ],
     mode: "payment",
-    metadata: {
-      test: "some test data",
-    },
+    metadata,
   })
 
   return {

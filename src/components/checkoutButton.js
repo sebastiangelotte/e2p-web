@@ -4,7 +4,7 @@ import getShareImage from "@jlengstorf/get-share-image"
 
 const stripePromise = loadStripe("pk_test_iMg3jrAGkCY8LZezFr9ndteq") // publishable key, no worries
 
-const CheckoutButton = ({ priceId, name, shortDescription }) => {
+const CheckoutButton = ({ priceId, name, shortDescription, metadata }) => {
   const image = getShareImage({
     title: name,
     tagline: shortDescription,
@@ -25,10 +25,11 @@ const CheckoutButton = ({ priceId, name, shortDescription }) => {
   })
 
   const data = {
-    priceId,
+    cancelUrl: document.location.href, // back to previous page if error
     name,
-    shortDescription,
+    priceId,
     image,
+    metadata,
   }
 
   const redirectToCheckout = async () => {
