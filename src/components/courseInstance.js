@@ -5,8 +5,9 @@ import { FaMapMarkerAlt } from "react-icons/fa"
 import { SiZoom } from "react-icons/si"
 import { Button } from "./styledComponents"
 import Modal from "./modal"
-import CourseSignup from "./courseSignup"
-import ContactForm from "../components/contactForm"
+// import CourseSignup from "./courseSignup"
+import ContactForm from "../components/forms/contactForm"
+import BookingForm from "../components/forms/bookingForm"
 
 const CourseInstance = ({ instance, course }) => {
   const [showOpenSignupModal, setShowOpenSignupModal] = useState(false)
@@ -54,7 +55,8 @@ const CourseInstance = ({ instance, course }) => {
             <ContactForm source={course.title} />
           </>
         ) : (
-          <CourseSignup courseDates={[instance]} course={course} />
+          // <CourseSignup courseDates={[instance]} course={course} />
+          <BookingForm course={course} instance={instance} />
         )}
       </Modal>
     </Wrapper>

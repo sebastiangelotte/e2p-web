@@ -13,7 +13,7 @@ import {
   Inner,
 } from "../components/styledComponents"
 import Filter from "../components/filter"
-import Newsletter from "../components/newsletter"
+import Newsletter from "../components/forms/newsletter"
 import CourseItem from "../components/courseItem"
 
 const Courses = () => {

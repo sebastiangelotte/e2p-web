@@ -4,7 +4,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { options } from "../richTextRendererOptions"
 import Head from "../components/head"
 import Layout from "../components/layout"
-import ContactForm from "../components/contactForm"
+import ContactForm from "../components/forms/contactForm"
 import styled from "styled-components"
 import bg from "../images/hero-bg.svg"
 import {

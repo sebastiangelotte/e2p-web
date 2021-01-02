@@ -8,7 +8,7 @@ const CourseItem = ({ course }) => {
   return (
     <Wrapper>
       {course.courseLeaders?.map((courseLeader, i) => (
-        <Profile profile={courseLeader} />
+        <Profile key={i} profile={courseLeader} />
       ))}
       <Link to={`/courses/${course.slug}`}>
         <Title>{course.title}</Title>
