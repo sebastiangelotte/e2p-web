@@ -139,4 +139,10 @@ export const GlobalStyle = createGlobalStyle`
     padding: 8px 10px;
     width: 100%;
   }
+
+  button, input {
+    &:active, &:focus  {
+      outline: 1px dotted #000;
+    }
+  }
 `
