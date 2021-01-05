@@ -10,24 +10,13 @@ exports.handler = async event => {
 
   // const body = JSON.parse(event.body)
   const { email, name } = {
-    email: "aoa@pasd.se",
+    email: "aoa@pa123123ssd.se",
     name: "dsdsd",
   }
 
   const { course } = {
     course: "Testkurs",
   }
-
-  base("Orders").create([
-    {
-      fields: {
-        Course: course,
-        Created: Date.now(),
-        PaymentMethod: "Card",
-        Status: "Completed",
-      },
-    },
-  ])
   base("Users")
     .select({
       filterByFormula: `email = "${email}"`,
@@ -45,16 +34,42 @@ exports.handler = async event => {
                 },
               },
             ],
-            err => {
+            (err, records) => {
               if (err) {
                 console.log(err)
                 return
               }
+
+              base("Orders").create([
+                {
+                  fields: {
+                    Course: course,
+                    Created: Date.now(),
+                    PaymentMethod: "Card",
+                    Status: "Completed",
+                    User: [records[0].id],
+                  },
+                },
+              ])
             }
           )
+        } else {
+          base("Orders").create([
+            {
+              fields: {
+                Course: course,
+                Created: Date.now(),
+                PaymentMethod: "Card",
+                Status: "Completed",
+                User: [records[0].id],
+              },
+            },
+          ])
         }
       },
-      (err, records) => {
+      function (err, records) {
+        console.log("hej")
+
         if (err) {
           console.log(err)
           return
