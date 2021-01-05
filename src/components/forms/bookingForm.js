@@ -32,7 +32,6 @@ const BookingForm = ({ course, instance }) => {
     e.preventDefault()
     const formData = new FormData(e.target)
     const searchParams = new URLSearchParams(formData).toString() // convert FormData to URLSearchParams
-    console.log(searchParams)
     navigate("/orderConfirmation", {
       state: {
         course,

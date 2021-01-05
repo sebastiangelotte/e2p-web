@@ -48,19 +48,18 @@ const Overlay = styled.div`
 
 const Inner = styled.div`
   background-color: #f2f9ff;
-  padding: 30px 0 20px 20px;
+  padding: 40px 0 20px 20px;
   border-radius: 16px;
   position: relative;
-  height: 90vh;
+  max-height: 90vh;
   width: 100%;
   max-width: 400px;
-  overflow: hidden;
+  overflow: auto;
 `
 
 const ScrollInner = styled.div`
   overflow: auto;
-  height: 100%;
-  padding: 1px 20px 1px 1px;
+  padding: 1px 20px 40px 1px;
 `
 
 const CloseButton = styled(MdClose)`
