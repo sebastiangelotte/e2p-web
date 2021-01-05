@@ -10,7 +10,7 @@ exports.handler = async event => {
   )
 
   const { email, name } = {
-    email: "aaaa11122aa999aoass@99999.se",
+    email: "aaaaaaaa11122aa999aoass@99999.se",
     name: "dsdsd",
   }
 
@@ -23,8 +23,10 @@ exports.handler = async event => {
     {
       where: { email: email },
     },
-    1
+    1 // page 1
   )
+
+  const userExists = existingUsers.length !== 0
 
   const createOrder = async userId => {
     await asyncAirtable.createRecord("Orders", {
@@ -36,16 +38,14 @@ exports.handler = async event => {
     })
   }
 
-  if (existingUsers.length === 0) {
+  if (userExists) {
+    createOrder(existingUsers[0].id)
+  } else {
     const newUser = await asyncAirtable.createRecord("Users", {
       Email: email,
       Name: name,
     })
-    const userId = newUser.id
-    createOrder(userId)
-  } else {
-    const userId = existingUsers[0].id
-    createOrder(userId)
+    createOrder(newUser.id)
   }
 
   return {
