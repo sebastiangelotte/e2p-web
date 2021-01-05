@@ -18,6 +18,53 @@ exports.handler = async event => {
     course: "Testkurs",
   }
 
+  function getUserRecords() {
+    return new Promise((resolve, reject) => {
+        base("Users")
+      .select({
+        filterByFormula: `email = "${email}"`,
+      })
+      .firstPage(
+        (err, records) => {
+          if (err) {
+            reject(err)
+          }
+          resolve(records)
+        }
+      )
+    })
+  }
+  
+  function createUser() {
+    return new Promise((resolve, reject) => {
+      base("Users").create(
+        [
+          {
+            fields: {
+              Email: email,
+              Name: name,
+            },
+          },
+        ],
+        (err, records) => {
+          if (err) {
+            console.log("Error creating user")
+            console.log(err)
+            reject(err)
+          }
+          if (records.length === 0) {
+            console.log("Records.length is 0 after creating new user")
+            reject(err)
+          }
+          record = records[0]
+          userId = record.getId()
+  
+          resolve(userId)
+        }
+      )
+    })
+  }
+
   const createOrder = async userId => {
     await base("Orders").create([
       {
@@ -31,49 +78,22 @@ exports.handler = async event => {
       },
     ])
   }
-
-  const createUser = async () => {
-    base("Users").create(
-      [
-        {
-          fields: {
-            Email: email,
-            Name: name,
-          },
-        },
-      ],
-      (err, records) => {
-        if (err) {
-          console.log(err)
-          return
-        }
-        userId = records[0].getId()
-        return userId
-      }
-    )
+  
+  records = await getUserRecords()
+  let userId
+  if (records.length === 0) {
+    // if user doesn't exist, create it
+    userId = await createUser()
+    if (!userId) {
+      return
+    }
+  }
+  else {
+    const record = records[0]
+    userId = record.getId()
   }
 
-  base("Users")
-    .select({
-      filterByFormula: `email = "${email}"`,
-    })
-    .firstPage(
-      (err, records) => {
-        if (records.length === 0) {
-          // if user doesn't exist, create it
-          const userId = createUser()
-          createOrder(userId)
-        } else {
-          createOrder(records[0].id)
-        }
-      },
-      function (err, records) {
-        if (err) {
-          console.log(err)
-          return
-        }
-      }
-    )
+  await createOrder(userId)
 
   return {
     statusCode: 200,
