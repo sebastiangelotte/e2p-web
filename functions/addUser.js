@@ -20,21 +20,19 @@ exports.handler = async event => {
 
   function getUserRecords() {
     return new Promise((resolve, reject) => {
-        base("Users")
-      .select({
-        filterByFormula: `email = "${email}"`,
-      })
-      .firstPage(
-        (err, records) => {
+      base("Users")
+        .select({
+          filterByFormula: `email = "${email}"`,
+        })
+        .firstPage((err, records) => {
           if (err) {
             reject(err)
           }
           resolve(records)
-        }
-      )
+        })
     })
   }
-  
+
   function createUser() {
     return new Promise((resolve, reject) => {
       base("Users").create(
@@ -58,7 +56,7 @@ exports.handler = async event => {
           }
           record = records[0]
           userId = record.getId()
-  
+
           resolve(userId)
         }
       )
@@ -78,7 +76,7 @@ exports.handler = async event => {
       },
     ])
   }
-  
+
   records = await getUserRecords()
   let userId
   if (records.length === 0) {
@@ -87,8 +85,7 @@ exports.handler = async event => {
     if (!userId) {
       return
     }
-  }
-  else {
+  } else {
     const record = records[0]
     userId = record.getId()
   }
