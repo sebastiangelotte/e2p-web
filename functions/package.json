@@ -5,6 +5,7 @@
   "author": "Sebastian Gelotte <sebastian.gelotte@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "airtable": "^0.10.1",
     "stripe": "^8.127.0"
   }
 }
