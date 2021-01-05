@@ -10,7 +10,7 @@ exports.handler = async event => {
 
   // const body = JSON.parse(event.body)
   const { email, name } = {
-    email: "aoa@pa123123ssd.se",
+    email: "aoa@3333333.se",
     name: "dsdsd",
   }
 
@@ -32,6 +32,27 @@ exports.handler = async event => {
     ])
   }
 
+  const createUser = async () => {
+    base("Users").create(
+      [
+        {
+          fields: {
+            Email: email,
+            Name: name,
+          },
+        },
+      ],
+      (err, records) => {
+        if (err) {
+          console.log(err)
+          return
+        }
+        userId = records[0].getId()
+        return userId
+      }
+    )
+  }
+
   base("Users")
     .select({
       filterByFormula: `email = "${email}"`,
@@ -40,23 +61,8 @@ exports.handler = async event => {
       (err, records) => {
         if (records.length === 0) {
           // if user doesn't exist, create it
-          base("Users").create(
-            [
-              {
-                fields: {
-                  Email: email,
-                  Name: name,
-                },
-              },
-            ],
-            (err, records) => {
-              if (err) {
-                console.log(err)
-                return
-              }
-              createOrder(records[0].id)
-            }
-          )
+          const userId = createUser()
+          createOrder(userId)
         } else {
           createOrder(records[0].id)
         }
