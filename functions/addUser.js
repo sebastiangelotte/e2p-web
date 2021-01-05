@@ -17,12 +17,27 @@ exports.handler = async event => {
   const { course } = {
     course: "Testkurs",
   }
+
+  const createOrder = async userId => {
+    await base("Orders").create([
+      {
+        fields: {
+          Course: course,
+          Created: Date.now(),
+          PaymentMethod: "Card",
+          Status: "Completed",
+          User: [userId],
+        },
+      },
+    ])
+  }
+
   base("Users")
     .select({
       filterByFormula: `email = "${email}"`,
     })
-    .eachPage(
-      records => {
+    .firstPage(
+      (err, records) => {
         if (records.length === 0) {
           // if user doesn't exist, create it
           base("Users").create(
@@ -39,37 +54,14 @@ exports.handler = async event => {
                 console.log(err)
                 return
               }
-
-              base("Orders").create([
-                {
-                  fields: {
-                    Course: course,
-                    Created: Date.now(),
-                    PaymentMethod: "Card",
-                    Status: "Completed",
-                    User: [records[0].id],
-                  },
-                },
-              ])
+              createOrder(records[0].id)
             }
           )
         } else {
-          base("Orders").create([
-            {
-              fields: {
-                Course: course,
-                Created: Date.now(),
-                PaymentMethod: "Card",
-                Status: "Completed",
-                User: [records[0].id],
-              },
-            },
-          ])
+          createOrder(records[0].id)
         }
       },
       function (err, records) {
-        console.log("hej")
-
         if (err) {
           console.log(err)
           return
