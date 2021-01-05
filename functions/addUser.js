@@ -80,16 +80,17 @@ exports.handler = async event => {
   }
   
   records = await getUserRecords()
+  let userId
   if (records.length === 0) {
     // if user doesn't exist, create it
-    const userId = await createUser()
+    userId = await createUser()
     if (!userId) {
       return
     }
   }
   else {
     const record = records[0]
-    const userId = records.getId()
+    userId = record.getId()
   }
 
   await createOrder(userId)
