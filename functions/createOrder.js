@@ -23,6 +23,7 @@ exports.handler = async event => {
   const userExists = existingUsers.length !== 0
 
   const createOrder = async userId => {
+    console.log("Creating order with userId:", userId)
     await asyncAirtable.createRecord("Orders", {
       Course: course,
       Date: date,
@@ -34,6 +35,7 @@ exports.handler = async event => {
   }
 
   const createUser = async () => {
+    console.log("Creating user..")
     return await asyncAirtable.createRecord("Users", {
       Email: email,
       Name: name,
