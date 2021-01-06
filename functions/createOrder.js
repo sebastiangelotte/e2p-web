@@ -26,10 +26,10 @@ exports.handler = async event => {
     console.log("Creating order with userId:", userId)
     await asyncAirtable.createRecord("Orders", {
       Course: course,
-      Date: date,
-      Created: Date.now(),
-      PaymentMethod: "Card",
-      Status: "Completed",
+      // Date: date,
+      // Created: Date.now(),
+      // PaymentMethod: "Card",
+      // Status: "Completed",
       User: [userId],
     })
   }
@@ -43,6 +43,7 @@ exports.handler = async event => {
   }
 
   if (userExists) {
+    console.log("User already exists..")
     createOrder(existingUsers[0].id)
   } else {
     const newUser = await createUser()
