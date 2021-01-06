@@ -1,6 +1,8 @@
 const AsyncAirtable = require("asyncairtable")
 
 exports.handler = async event => {
+  const body = JSON.parse(event.body)
+  console.log("BODY:", body)
   const asyncAirtable = new AsyncAirtable(
     process.env.AIRTABLE_API_KEY,
     "appZSS4vS2rTk6XqG",
