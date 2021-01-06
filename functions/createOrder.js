@@ -2,7 +2,8 @@ const AsyncAirtable = require("asyncairtable")
 
 exports.handler = async event => {
   const body = JSON.parse(event.body)
-  console.log("BODY:", body)
+  const { email, name, course, date } = body.data.metadata
+  console.log("BODY:", body.data.metadata)
   const asyncAirtable = new AsyncAirtable(
     process.env.AIRTABLE_API_KEY,
     "appZSS4vS2rTk6XqG",
@@ -10,15 +11,6 @@ exports.handler = async event => {
       endpointUrl: "https://api.airtable.com",
     }
   )
-
-  const { email, name } = {
-    email: "555@99999.se",
-    name: "dsdsd",
-  }
-
-  const { course } = {
-    course: "Testkurs",
-  }
 
   const existingUsers = await asyncAirtable.select(
     "Users",
@@ -33,6 +25,7 @@ exports.handler = async event => {
   const createOrder = async userId => {
     await asyncAirtable.createRecord("Orders", {
       Course: course,
+      Date: date,
       Created: Date.now(),
       PaymentMethod: "Card",
       Status: "Completed",

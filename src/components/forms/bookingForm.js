@@ -147,6 +147,7 @@ const BookingForm = ({ course, instance }) => {
               name: name,
               email: email,
               otherInfo: otherInfo,
+              course: course.title,
             }}
           >
             Till kortbetalning
