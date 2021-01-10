@@ -28,23 +28,23 @@ const BookingForm = ({ course, instance }) => {
     setMainTab("step2") // on successful submit, switch to nex tab
   }
 
-  const handleInvoiceFormSubmit = e => {
+  const handleInvoiceFormSubmit = async e => {
     e.preventDefault()
-    const formData = new FormData(e.target)
-    const searchParams = new URLSearchParams(formData).toString() // convert FormData to URLSearchParams
-    navigate("/orderConfirmation", {
-      state: {
-        course,
-        instance,
+    await fetch("/.netlify/functions/createOrder", {
+      method: "POST",
+      body: JSON.stringify({
         email,
         name,
-        otherInfo,
+        course: course.title,
+        date: instance.date,
+        paymentMethod: "Invoice",
         company,
         address,
         zipCode,
         county,
-      },
-    }) // navigate to OrderConfirmation and pass order data as state
+      }),
+    })
+    navigate(`/orderConfirmation`) // navigate to OrderConfirmation and pass order data as state
   }
 
   return (
@@ -120,13 +120,15 @@ const BookingForm = ({ course, instance }) => {
             onChange={e => setOtherInfo(e.target.value)}
           />
           <Tabs>
-            <PaymentOption
-              onClick={() => setSecondaryTab("card")}
-              active={secondayTab === "card"}
-            >
-              <BsCreditCard />
-              Kortbetalning
-            </PaymentOption>
+            {course.stripePriceId && (
+              <PaymentOption
+                onClick={() => setSecondaryTab("card")}
+                active={secondayTab === "card"}
+              >
+                <BsCreditCard />
+                Kortbetalning
+              </PaymentOption>
+            )}
             <PaymentOption
               onClick={() => setSecondaryTab("invoice")}
               active={secondayTab === "invoice"}
@@ -148,6 +150,7 @@ const BookingForm = ({ course, instance }) => {
               email: email,
               otherInfo: otherInfo,
               course: course.title,
+              paymentMethod: "Card",
             }}
           >
             Till kortbetalning
@@ -274,6 +277,7 @@ const PaymentOption = styled.button`
   border-radius: 6px;
   background: #fff;
   color: var(--color-heading);
+  cursor: pointer;
 
   > svg {
     font-size: 30px;
