@@ -43,9 +43,28 @@ export const query = graphql`
         }
       }
       linkedCourses {
-        slug
         title
+        slug
         tags
+        companyInternalCourse
+        openCourse
+        onlineCourse
+        onSite
+        shortDescription
+
+        courseLeaders {
+          slug
+          name
+          title
+          image {
+            title
+            fixed(width: 400) {
+              width
+              height
+              src
+            }
+          }
+        }
         internal {
           type
         }
@@ -53,7 +72,31 @@ export const query = graphql`
       linkedTools {
         slug
         title
+        shortDescription
         tags
+        description {
+          json
+          fields {
+            readingTime {
+              minutes
+            }
+          }
+        }
+        shortDate: createdAt(formatString: "DD MMM")
+        fullDate: createdAt(formatString: "DD MMMM YYYY")
+        author {
+          slug
+          name
+          title
+          image {
+            title
+            fixed(width: 400) {
+              width
+              height
+              src
+            }
+          }
+        }
         internal {
           type
         }

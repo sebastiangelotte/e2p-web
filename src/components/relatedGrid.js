@@ -3,6 +3,8 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import Card from "./card"
 import { Tag, Heading } from "./styledComponents"
+import CourseItem from "./courseItem"
+import ArticleItem from "./articleItem"
 
 const RelatedGrid = ({ items, title }) => {
   const getType = item => {
@@ -23,15 +25,10 @@ const RelatedGrid = ({ items, title }) => {
       <h2>{title}</h2>
       <Grid>
         {items?.map((item, i) => (
-          <Link key={i} to={`/${getType(item)}/${item.slug}`}>
-            <Card>
-              <CreatedAt>{item.createdAt}</CreatedAt>
-              <Heading as="h3">{item.title}</Heading>
-              {item.tags?.map(tag => (
-                <Tag key={tag}>{tag}</Tag>
-              ))}
-            </Card>
-          </Link>
+          <>
+            {getType(item) === "courses" && <CourseItem course={item} />}
+            {getType(item) === "tools" && <ArticleItem article={item} />}
+          </>
         ))}
       </Grid>
     </Wrapper>
