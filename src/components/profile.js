@@ -34,7 +34,11 @@ const Details = styled.div`
   flex-direction: column;
 `
 
-const Image = styled.img``
+const Image = styled.img`
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+`
 
 const Name = styled(Link)`
   font-size: 16px;
