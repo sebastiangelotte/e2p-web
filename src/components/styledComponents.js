@@ -68,14 +68,15 @@ export const Section = styled.section`
   ${props =>
     props.firstSection &&
     `
-    padding-top: 110px;
+    padding-top: 130px;
   `}
 `
 
 export const SectionWithBackgroundImage = styled(Section)`
   background-image: url(${props => props.backgroundImage});
   background-repeat: no-repeat;
-  background-position: center center;
+  padding-bottom: 180px;
+  background-position: bottom center;
   background-size: cover;
   color: #fff;
 `
