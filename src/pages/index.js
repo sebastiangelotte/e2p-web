@@ -2,7 +2,6 @@ import React from "react"
 import Layout from "../components/layout"
 import Head from "../components/head"
 import Hero from "../components/hero"
-import Notice from "../components/notice"
 import styled from "styled-components"
 import Card from "../components/card"
 import MegaPhone from "../components/icons/megaphone"
@@ -53,9 +52,6 @@ const IndexPage = () => {
         description="Vi hjälper medarbetare och chefer att prestera bättre i sin yrkesroll. Genom behovsanpassad utbildning, individuell coaching och praktiska checklistor ger vi stöd i det dagliga arbetet."
       />
       <Hero />
-      <NoticePositioner>
-        <Notice />
-      </NoticePositioner>
       <Section>
         <Tag>
           <span>Kurser</span>
@@ -67,11 +63,6 @@ const IndexPage = () => {
               <Card link="/courses">
                 <MegaPhone />
                 <h3>Grupputbildning</h3>
-                <p>Små och stora grupper.</p>
-                <p>
-                  Färdiga moduler eller behovsanpassad utbildning. Online (live)
-                  eller on-site. När det passar dig.
-                </p>
               </Card>
             </ScaleBox>
           </IntersectionObserver>
@@ -80,11 +71,6 @@ const IndexPage = () => {
               <Card link="/coaching">
                 <Coaching />
                 <h3>Individuell coaching</h3>
-                <p>Individuell coaching innebär att du är i fokus.</p>
-                <p>
-                  Målet med coachingen är att ge dig stöd och utveckling i din
-                  yrkesroll.
-                </p>
               </Card>
             </ScaleBox>
           </IntersectionObserver>
@@ -93,12 +79,6 @@ const IndexPage = () => {
               <Card link="/tools">
                 <Online />
                 <h3>Praktiska checklistor</h3>
-                <p>
-                  Att ha en användbar checklista till hands när man skall utföra
-                  viktiga och svåra uppgifter i rollen som chef och ledare är
-                  ovärderligt.
-                </p>
-                <p>Alla våra checklistor är gratis.</p>
               </Card>
             </ScaleBox>
           </IntersectionObserver>
@@ -153,16 +133,6 @@ const IndexPage = () => {
 
 export default IndexPage
 
-const NoticePositioner = styled.div`
-  position: relative;
-  top: -90px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 818px;
-  padding-left: 10px;
-  padding-right: 10px;
-`
-
 const Tag = styled.div`
   > span {
     color: #ff2e6a;
@@ -183,12 +153,20 @@ const Heading = styled.h2`
     props.primary &&
     `
   font-size: 48px;
+
+  @media screen and (max-width: 700px) {
+    font-size: 30px;
+  }
   `}
   ${props =>
     props.secondary &&
     `
     font-size: 38px;
     font-style: italic;
+
+  @media screen and (max-width: 700px) {
+    font-size: 30px;
+  }
   `}
 `
 const Grid = styled.div`

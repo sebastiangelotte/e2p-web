@@ -24,7 +24,7 @@ const Card = ({ link, title, withBackground, children, className }) => {
 export default Card
 
 const Wrapper = styled.div`
-  padding: 40px 54px;
+  padding: 20px 30px;
   box-shadow: 0px 4px 4px rgba(135, 146, 161, 0.16),
     0px 6px 41px rgba(135, 146, 161, 0.11);
   border-radius: 18px;
@@ -36,6 +36,8 @@ const Wrapper = styled.div`
   color: #1e266d;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
 
   &:after {
     content: "";
@@ -71,8 +73,7 @@ const Wrapper = styled.div`
   }
 
   h3 {
-    font-size: 20px;
-    margin-bottom: 27px;
+    font-size: 22px;
     margin-top: 0;
     color: #1e266d;
   }

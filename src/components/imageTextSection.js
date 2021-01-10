@@ -86,9 +86,12 @@ const Image = styled.img`
 const TextWrapper = styled.div`
   > h2 {
     font-size: 48px;
-    line-height: 60px;
     margin-bottom: 58px;
     color: #1e266d;
+
+    @media screen and (max-width: 700px) {
+      font-size: 30px;
+    }
   }
 
   > p {
