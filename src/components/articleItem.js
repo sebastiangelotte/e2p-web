@@ -17,9 +17,11 @@ const ArticleItem = ({ article }) => {
         <ShortDescription>{article.shortDescription}</ShortDescription>
       </Link>
       <MetaWrapper>
-        {article.tags?.map((tag, i) => (
-          <Tag key={i}>{tag}</Tag>
-        ))}
+        <TagWrapper>
+          {article.tags?.map((tag, i) => (
+            <Tag key={i}>{tag}</Tag>
+          ))}
+        </TagWrapper>
         <Meta>
           <Date dateTime={article.fullDate} title={article.fullDate}>
             {article.shortDate}
@@ -71,7 +73,12 @@ const Date = styled.time``
 
 const ReadingTime = styled.span``
 
-const ShortDescription = styled.p``
+const ShortDescription = styled.p`
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+`
 
 const MetaWrapper = styled.div`
   display: flex;
@@ -82,5 +89,18 @@ const MetaWrapper = styled.div`
 
   > * {
     margin-bottom: 10px;
+  }
+`
+
+const TagWrapper = styled.div`
+  @media screen and (max-width: 500px) {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+  }
+
+  > * {
+    flex-shrink: 0;
   }
 `

@@ -5,10 +5,7 @@ import decoration1 from "../images/decoration1.svg"
 import decoration2 from "../images/decoration2.svg"
 import decoration3 from "../images/decoration3.svg"
 import decoration4 from "../images/decoration4.svg"
-import image from "../images/computer.png"
 import { Button } from "./styledComponents"
-import { ScaleBox } from "./scaleBox"
-import { IntersectionObserver } from "./intersectionObserver"
 import ArticleItem from "./articleItem"
 
 const ImageTextSection = () => {
@@ -76,7 +73,7 @@ const ImageTextSection = () => {
 export default ImageTextSection
 
 const Wrapper = styled.div`
-  padding: 100px 30px;
+  padding: 100px 0;
   max-width: 1280px;
   margin-right: auto;
   margin-left: auto;

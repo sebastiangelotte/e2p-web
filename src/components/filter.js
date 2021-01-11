@@ -61,8 +61,9 @@ const ButtonsWrapper = styled.div`
   flex-wrap: wrap;
 
   @media screen and (max-width: 500px) {
-    align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
   }
 `
 
@@ -73,6 +74,7 @@ const StyledButton = styled(Button).attrs(({ active }) => ({
 }))`
   font-size: 14px;
   padding: 8px 20px 8px 30px;
+  flex-shrink: 0;
 
   @media screen and (max-width: 500px) {
     width: auto;

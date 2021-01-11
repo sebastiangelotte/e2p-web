@@ -32,8 +32,8 @@ const Wrapper = styled.div`
 const Details = styled.div`
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `
-
 const Image = styled.img`
   min-width: 100%;
   min-height: 100%;
@@ -44,6 +44,9 @@ const Name = styled(Link)`
   font-size: 16px;
   font-weight: bold;
   color: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover {
     text-decoration: underline;
@@ -52,6 +55,9 @@ const Name = styled(Link)`
 
 const Title = styled.span`
   font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const CircleWrapper = styled(Link)`
@@ -59,4 +65,5 @@ const CircleWrapper = styled(Link)`
   width: 50px;
   overflow: hidden;
   border-radius: 100px;
+  flex-shrink: 0;
 `
