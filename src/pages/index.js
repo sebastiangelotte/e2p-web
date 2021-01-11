@@ -60,7 +60,7 @@ const IndexPage = () => {
         <Grid>
           <IntersectionObserver>
             <ScaleBox>
-              <Card link="/courses">
+              <Card link="/courses" withBackground>
                 <MegaPhone />
                 <h3>Grupputbildning</h3>
               </Card>
@@ -112,7 +112,7 @@ const IndexPage = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <StyledButton>Fler recensioner på utbildning.se</StyledButton>
+          <StyledButton>Fler recensioner på utbildning.se »</StyledButton>
         </a>
       </Section>
       <Section background>
