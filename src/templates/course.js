@@ -4,7 +4,6 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { options } from "../richTextRendererOptions"
 import Head from "../components/head"
 import Layout from "../components/layout"
-
 import styled from "styled-components"
 import bg from "../images/section-bg.svg"
 import {
@@ -213,15 +212,16 @@ const Course = props => {
                     <li>
                       <div>
                         <h4 style={{ fontSize: "18px", paddingTop: "15px" }}>
-                          Kurs på företaget?
+                          Skräddarsy kursen
                         </h4>
                         <p style={{ fontSize: "16px" }}>
-                          Önskar du få kursen genomförd som företagsintern
-                          utbildning?
+                          Vi kan utföra kursen på flera olika format, platser
+                          och tider.
                         </p>
                         <CourseInstance
                           instance={companyInternalCourse}
                           course={course}
+                          customRequest
                         />
                       </div>
                     </li>
