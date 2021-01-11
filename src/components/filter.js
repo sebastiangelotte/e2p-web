@@ -3,12 +3,12 @@ import styled from "styled-components"
 import { Button } from "./styledComponents"
 import { BsCheck, BsPlus } from "react-icons/bs"
 
-const Filter = ({ courses, onChange }) => {
+const Filter = ({ items, onChange }) => {
   const [activeTags, setActiveTags] = useState([])
   let uniqueTags = new Set()
 
-  courses.forEach(course => {
-    course.node.tags && course.node.tags.forEach(tag => uniqueTags.add(tag))
+  items.forEach(item => {
+    item.node.tags && item.node.tags.forEach(tag => uniqueTags.add(tag))
   })
 
   const updateTags = tag => {
@@ -19,17 +19,17 @@ const Filter = ({ courses, onChange }) => {
 
   useEffect(() => {
     onChange(
-      courses.filter(course => {
-        return filterByTag(course)
+      items.filter(item => {
+        return filterByTag(item)
       })
     ) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTags])
 
-  const filterByTag = course => {
+  const filterByTag = item => {
     if (activeTags.length === 0) {
       return true // if no filter active, return all
     } else {
-      return course.node.tags.filter(tag => activeTags.includes(tag)).length > 0
+      return item.node.tags?.filter(tag => activeTags.includes(tag)).length > 0
     }
   }
 
@@ -68,7 +68,7 @@ const ButtonsWrapper = styled.div`
 
 const StyledButton = styled(Button).attrs(({ active }) => ({
   color: active ? "#fff" : "var(--color-heading)",
-  backgroundColor: active ? "var(--color-heading)" : "transparent",
+  backgroundColor: active ? "var(--color-heading)" : "#ffffff",
   borderColor: active ? "transparent" : "#bfc9ea",
 }))`
   font-size: 14px;
