@@ -13,6 +13,7 @@ import {
 } from "../components/styledComponents"
 import bg from "../images/hero-bg.svg"
 import ArticleItem from "../components/articleItem"
+import Filter from "../components/filter"
 
 const Tools = () => {
   const data = useStaticQuery(graphql`
@@ -53,12 +54,20 @@ const Tools = () => {
     }
   `)
 
-  const [tools] = useState(data.allContentfulTool.edges)
+  const [tools, setTools] = useState(data.allContentfulTool.edges)
   const [searchTerm, setSearchTerm] = useState("")
 
   const handleSearch = event => {
     const { value } = event.target
     setSearchTerm(value)
+  }
+
+  const updateTools = tools => {
+    if (tools.length > 0) {
+      setTools(tools)
+    } else {
+      setTools([]) // reset state
+    }
   }
 
   return (
@@ -75,6 +84,7 @@ const Tools = () => {
             skall utföra viktiga och svåra uppgifter i rollen som chef och
             ledare är ovärderligt.
           </p>
+          <Filter items={data.allContentfulTool.edges} onChange={updateTools} />
         </Inner>
       </SectionWithBackgroundImage>
 
@@ -86,8 +96,13 @@ const Tools = () => {
             value={searchTerm}
             onChange={handleSearch}
           />
-
           <Grid>
+            <Total>
+              Visar:{" "}
+              {tools.length > 1
+                ? `${tools.length} artiklar`
+                : `${tools.length} artikel`}
+            </Total>
             <FilterResults
               value={searchTerm}
               data={tools}
@@ -113,17 +128,24 @@ const SearchBox = styled.input`
     0px 6px 41px rgba(135, 146, 161, 0.11);
   border-radius: 7px;
   border: none;
-  margin-top: 10px;
   width: 100%;
 `
 
 const Grid = styled.div`
-  margin-top: 50px;
+  margin-top: 60px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 40px;
+  position: relative;
 
   @media screen and (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
+`
+
+const Total = styled.div`
+  color: var(--color-heading);
+  font-weight: bold;
+  position: absolute;
+  top: -40px;
 `
