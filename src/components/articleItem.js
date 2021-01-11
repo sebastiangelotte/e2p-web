@@ -1,11 +1,13 @@
 import React from "react"
 import styled from "styled-components"
 import Profile from "./profile"
-import { Tag, Button } from "./styledComponents"
+import { Tag } from "./styledComponents"
 import { Link } from "gatsby"
 
 const ArticleItem = ({ article }) => {
-  const readingTime = Math.ceil(article.description.fields.readingTime.minutes)
+  const readingTime = article.description
+    ? Math.ceil(article.description.fields.readingTime.minutes)
+    : undefined
 
   return (
     <Wrapper>
@@ -22,8 +24,12 @@ const ArticleItem = ({ article }) => {
           <Date dateTime={article.fullDate} title={article.fullDate}>
             {article.shortDate}
           </Date>
-          <Separator>·</Separator>
-          <ReadingTime>{readingTime} min läsning</ReadingTime>
+          {readingTime && (
+            <>
+              <Separator>·</Separator>
+              <ReadingTime>{readingTime} min läsning</ReadingTime>
+            </>
+          )}
         </Meta>
       </MetaWrapper>
     </Wrapper>

@@ -25,7 +25,6 @@ const Wrapper = styled.div`
   margin-bottom: 20px;
   background-color: #fff;
   color: var(--color-heading);
-  cursor: pointer;
 `
 
 const Content = styled.div`
@@ -54,6 +53,7 @@ const Activator = styled.div`
   align-items: center;
   font-size: 25px;
   padding: 15px 30px;
+  cursor: pointer;
 
   h3 {
     margin-bottom: 0;

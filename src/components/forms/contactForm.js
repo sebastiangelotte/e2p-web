@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { Button } from "./styledComponents"
+import { Button } from "../styledComponents"
 
 const ContactForm = ({ source }) => {
   const [, setIsLoading] = useState(false)

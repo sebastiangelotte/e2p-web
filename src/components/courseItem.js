@@ -1,16 +1,14 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import { BsFillTagFill, BsBuilding } from "react-icons/bs"
 import Profile from "../components/profile"
 import { Tag } from "../components/styledComponents"
 
 const CourseItem = ({ course }) => {
-  console.log(course)
   return (
     <Wrapper>
       {course.courseLeaders?.map((courseLeader, i) => (
-        <Profile profile={courseLeader} />
+        <Profile key={i} profile={courseLeader} />
       ))}
       <Link to={`/courses/${course.slug}`}>
         <Title>{course.title}</Title>

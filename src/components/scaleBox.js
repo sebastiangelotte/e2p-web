@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 export const ScaleBox = ({
   children,
   delayOrder, // order of appearance
-  duration = 0.4,
+  duration = 0.25,
   easing = [0.42, 0, 0.58, 1],
 }) => {
   const { inView } = useContext(IntersectionContext)

@@ -3,6 +3,7 @@ import { createPortal } from "react-dom"
 import styled from "styled-components"
 import { MdClose } from "react-icons/md"
 import useClickOutside from "../hooks/useClickOutside"
+import { ScaleBox } from "./scaleBox"
 
 const Modal = ({ children, closeModal, isOpen }) => {
   const innerElement = useRef()
@@ -15,12 +16,14 @@ const Modal = ({ children, closeModal, isOpen }) => {
     isOpen &&
     createPortal(
       <Overlay>
-        <Inner ref={innerElement}>
-          <ScrollInner>
-            <CloseButton onClick={closeModal} />
-            {children}
-          </ScrollInner>
-        </Inner>
+        <ScaleBox>
+          <Inner ref={innerElement}>
+            <ScrollInner>
+              <CloseButton onClick={closeModal} />
+              {children}
+            </ScrollInner>
+          </Inner>
+        </ScaleBox>
       </Overlay>,
       document.getElementById("modal")
     )
@@ -44,27 +47,28 @@ const Overlay = styled.div`
 `
 
 const Inner = styled.div`
-  background-color: #fff;
-  padding: 60px 0 20px 20px;
-  height: 100%;
+  background-color: #f2f9ff;
+  padding: 40px 0 20px 20px;
   border-radius: 16px;
   position: relative;
+  max-height: 90vh;
   width: 100%;
   max-width: 400px;
-  max-height: 700px;
-  overflow: hidden;
+  overflow: auto;
 `
 
 const ScrollInner = styled.div`
   overflow: auto;
-  height: 100%;
-  padding-right: 20px;
+  padding: 1px 20px 40px 1px;
 `
 
 const CloseButton = styled(MdClose)`
   position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 30px;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  padding: 3px;
+  background-color: var(--color-heading);
+  border-radius: 50%;
+  color: #fff;
 `
-

@@ -13,7 +13,7 @@ import {
   Inner,
 } from "../components/styledComponents"
 import Filter from "../components/filter"
-import Newsletter from "../components/newsletter"
+import Newsletter from "../components/forms/newsletter"
 import CourseItem from "../components/courseItem"
 
 const Courses = () => {
@@ -87,22 +87,22 @@ const Courses = () => {
             område behöver man ibland uppdatera, fylla på och komplettera med ny
             kunskap för att kunna prestera optimalt i det dagliga arbetet.
           </p>
-          <p>
-            Vi utvecklar och genomför behovsanpassade kurser för medarbetare och
-            chefer.
-          </p>
+          <Filter
+            items={data.allContentfulCourse.edges}
+            onChange={updateCourses}
+          />
         </Inner>
       </SectionWithBackgroundImage>
       <Section background>
         <Inner>
-          <FilterWrapper>
-            <Filter
-              courses={data.allContentfulCourse.edges}
-              onChange={updateCourses}
-            />
-          </FilterWrapper>
           <Grid>
             <CourseList>
+              <Total>
+                Visar:{" "}
+                {courses.length > 1
+                  ? `${courses.length} kurser`
+                  : `${courses.length} kurs`}
+              </Total>
               <AnimatePresence>
                 {courses.map((course, i) => (
                   <motion.div
@@ -149,10 +149,8 @@ const Courses = () => {
 
 export default Courses
 
-const CourseList = styled.div``
-
-const FilterWrapper = styled.div`
-  margin-bottom: 20px;
+const CourseList = styled.div`
+  position: relative;
 `
 
 const Grid = styled.div`
@@ -184,4 +182,11 @@ const HowTo = styled.div`
   svg {
     font-size: 30px;
   }
+`
+
+const Total = styled.div`
+  color: var(--color-heading);
+  font-weight: bold;
+  position: absolute;
+  top: -40px;
 `

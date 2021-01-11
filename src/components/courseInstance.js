@@ -5,23 +5,17 @@ import { FaMapMarkerAlt } from "react-icons/fa"
 import { SiZoom } from "react-icons/si"
 import { Button } from "./styledComponents"
 import Modal from "./modal"
-import CourseSignup from "./courseSignup"
-import ContactForm from "../components/contactForm"
+import ContactForm from "../components/forms/contactForm"
+import BookingForm from "../components/forms/bookingForm"
+import CustomRequestForm from "../components/forms/customRequestForm"
 
-const CourseInstance = ({
-  instance,
-  courseID,
-  courseTitle,
-  coursePrice,
-  courseDuration,
-  companyInternal,
-}) => {
+const CourseInstance = ({ instance, course, customRequest }) => {
   const [showOpenSignupModal, setShowOpenSignupModal] = useState(false)
 
   return (
     <Wrapper>
       <Details>
-        {!companyInternal && <b>Kurstillfälle:</b>}
+        {customRequest ? <b>Skräddarsy:</b> : <b>Kurstillfälle:</b>}
         <Date title="Datum">
           <BsCalendar />
           {instance.date}
@@ -38,34 +32,27 @@ const CourseInstance = ({
           </City>
         )}
         <Price title="Pris">
-          <BsTag /> {coursePrice}
+          <BsTag />
+          {customRequest
+            ? "Pris offereras"
+            : Number(course.price).toLocaleString() + " SEK exkl. moms"}
         </Price>
         <Duration title="Längd">
-          <BsClock /> {courseDuration}
+          <BsClock /> {course.duration}
         </Duration>
       </Details>
 
       <BookButton onClick={() => setShowOpenSignupModal(true)}>
-        {companyInternal ? "Begär offert" : "Boka"}
+        {customRequest ? "Skicka förfrågan" : "Boka"}
       </BookButton>
       <Modal
         isOpen={showOpenSignupModal}
         closeModal={() => setShowOpenSignupModal(false)}
       >
-        {companyInternal ? (
-          <>
-            <h3>Begär offert</h3>
-            <p>
-              Beskriv dina önskemål, så sänder vi dig en offert kostnadsfritt.
-            </p>
-            <ContactForm source={courseTitle} />
-          </>
+        {customRequest ? (
+          <CustomRequestForm course={course} instance={instance} />
         ) : (
-          <CourseSignup
-            courseName={courseTitle}
-            courseID={courseID}
-            courseDates={[instance]}
-          />
+          <BookingForm course={course} instance={instance} />
         )}
       </Modal>
     </Wrapper>

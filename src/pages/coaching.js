@@ -11,7 +11,7 @@ import {
 import { BsPersonBoundingBox } from "react-icons/bs"
 import { FaHandHoldingHeart, FaMagic } from "react-icons/fa"
 import Card from "../components/card"
-import CoachingForm from "../components/coachingForm"
+import CoachingForm from "../components/forms/coachingForm"
 import { IntersectionObserver } from "../components/intersectionObserver"
 import { ScaleBox } from "../components/scaleBox"
 

@@ -37,6 +37,7 @@ const StyledCard = styled(Card)`
   border-radius: 5px;
   gap: 10px;
   margin: 20px 0;
+  text-align: left;
 
   h3 {
     margin-bottom: 0px;

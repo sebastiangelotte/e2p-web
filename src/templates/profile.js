@@ -1,26 +1,17 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import Head from "../components/head"
 import Layout from "../components/layout"
-import ContactForm from "../components/contactForm"
 import styled from "styled-components"
-import RelatedGrid from "../components/relatedGrid"
-import Share from "../components/share"
 import bg from "../images/hero-bg.svg"
 import {
   Section,
-  Tag,
   Heading,
   SectionWithBackgroundImage,
   Inner,
-  Button,
 } from "../components/styledComponents"
-import { options } from "../richTextRendererOptions"
 import CourseLeader from "../components/course-leader/courseLeader"
 import CourseItem from "../components/courseItem"
-import Card from "../components/card"
-import { BsArrowRightShort } from "react-icons/bs"
 import ArticleItem from "../components/articleItem"
 
 export const query = graphql`
@@ -160,24 +151,6 @@ export default Profile
 const StyledSection = styled(Section)``
 
 const StyledInner = styled(Inner)``
-
-const CreatedAt = styled.p``
-
-const StyledButton = styled(Button)`
-  margin-top: auto;
-  font-size: 16px;
-  padding: 8px 10px 8px 20px;
-  border-radius: 7px;
-
-  > svg {
-    margin: 0;
-    margin-left: 7px;
-  }
-`
-
-const TagsWrapper = styled.div`
-  margin-top: -15px;
-`
 
 const Grid = styled.div`
   display: grid;

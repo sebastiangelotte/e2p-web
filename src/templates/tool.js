@@ -4,14 +4,13 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { options } from "../richTextRendererOptions"
 import Head from "../components/head"
 import Layout from "../components/layout"
-import ContactForm from "../components/contactForm"
+import ContactForm from "../components/forms/contactForm"
 import styled from "styled-components"
 import RelatedGrid from "../components/relatedGrid"
 import Share from "../components/share"
 import bg from "../images/hero-bg.svg"
 import {
   Section,
-  Tag,
   Heading,
   SectionWithBackgroundImage,
   Inner,
@@ -44,9 +43,28 @@ export const query = graphql`
         }
       }
       linkedCourses {
-        slug
         title
+        slug
         tags
+        companyInternalCourse
+        openCourse
+        onlineCourse
+        onSite
+        shortDescription
+
+        courseLeaders {
+          slug
+          name
+          title
+          image {
+            title
+            fixed(width: 400) {
+              width
+              height
+              src
+            }
+          }
+        }
         internal {
           type
         }
@@ -54,7 +72,31 @@ export const query = graphql`
       linkedTools {
         slug
         title
+        shortDescription
         tags
+        description {
+          json
+          fields {
+            readingTime {
+              minutes
+            }
+          }
+        }
+        shortDate: createdAt(formatString: "DD MMM")
+        fullDate: createdAt(formatString: "DD MMMM YYYY")
+        author {
+          slug
+          name
+          title
+          image {
+            title
+            fixed(width: 400) {
+              width
+              height
+              src
+            }
+          }
+        }
         internal {
           type
         }
@@ -152,10 +194,6 @@ const StyledInner = styled(Inner)`
   * {
     max-width: 680px;
   }
-`
-
-const CreatedAt = styled.div`
-  padding-bottom: 20px;
 `
 
 const BackButton = styled(Link)`

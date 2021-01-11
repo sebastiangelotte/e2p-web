@@ -4,7 +4,6 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { options } from "../richTextRendererOptions"
 import Head from "../components/head"
 import Layout from "../components/layout"
-
 import styled from "styled-components"
 import bg from "../images/section-bg.svg"
 import {
@@ -69,9 +68,28 @@ export const query = graphql`
         }
       }
       linkedCourses {
-        slug
         title
+        slug
         tags
+        companyInternalCourse
+        openCourse
+        onlineCourse
+        onSite
+        shortDescription
+
+        courseLeaders {
+          slug
+          name
+          title
+          image {
+            title
+            fixed(width: 400) {
+              width
+              height
+              src
+            }
+          }
+        }
         internal {
           type
         }
@@ -79,11 +97,37 @@ export const query = graphql`
       linkedTools {
         slug
         title
+        shortDescription
         tags
+        description {
+          json
+          fields {
+            readingTime {
+              minutes
+            }
+          }
+        }
+        shortDate: createdAt(formatString: "DD MMM")
+        fullDate: createdAt(formatString: "DD MMMM YYYY")
+        author {
+          slug
+          name
+          title
+          image {
+            title
+            fixed(width: 400) {
+              width
+              height
+              src
+            }
+          }
+        }
         internal {
           type
         }
+        createdAt(formatString: "DD MMM, YYYY")
       }
+
       kurstillflle {
         city
         date(formatString: "D/M/YYYY")
@@ -94,6 +138,7 @@ export const query = graphql`
           lon
         }
       }
+      stripePriceId
     }
   }
 `
@@ -158,17 +203,7 @@ const Course = props => {
                 <List>
                   {course.kurstillflle?.map((instance, i) => (
                     <li key={i}>
-                      <CourseInstance
-                        instance={instance}
-                        courseTitle={course.title}
-                        courseID={course.id}
-                        coursePrice={
-                          Number(course.price).toLocaleString() +
-                          " SEK exkl. moms"
-                        }
-                        courseDuration={course.duration}
-                        companyInternal={false}
-                      />
+                      <CourseInstance instance={instance} course={course} />
                     </li>
                   ))}
                 </List>
@@ -177,18 +212,16 @@ const Course = props => {
                     <li>
                       <div>
                         <h4 style={{ fontSize: "18px", paddingTop: "15px" }}>
-                          Kurs på företaget?
+                          Skräddarsy kursen
                         </h4>
                         <p style={{ fontSize: "16px" }}>
-                          Önskar du få kursen genomförd som företagsintern
-                          utbildning?
+                          Vi kan utföra kursen på flera olika format, platser
+                          och tider.
                         </p>
                         <CourseInstance
                           instance={companyInternalCourse}
-                          coursePrice="Pris offereras"
-                          courseDuration={course.duration}
-                          courseTitle={course.title}
-                          companyInternal={true}
+                          course={course}
+                          customRequest
                         />
                       </div>
                     </li>

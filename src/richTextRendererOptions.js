@@ -6,13 +6,11 @@ import EmbeddedToolItem from "./components/embeddedToolItem"
 export const options = {
   renderNode: {
     [BLOCKS.EMBEDDED_ENTRY]: node => {
-      console.log(node)
       const fields = node.data.target.fields
       const contentType = node.data.target.sys.contentType.sys.id
 
       switch (contentType) {
         case "course":
-          console.log(fields)
           const course = {
             slug: fields.slug.sv,
             title: fields.title.sv,

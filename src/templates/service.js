@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import Head from "../components/head"
 import Layout from "../components/layout"
-import ContactForm from "../components/contactForm"
+import ContactForm from "../components/forms/contactForm"
 import styled from "styled-components"
 import RelatedGrid from "../components/relatedGrid"
 import Share from "../components/share"
@@ -35,9 +35,28 @@ export const query = graphql`
         }
       }
       linkedCourses {
-        slug
         title
+        slug
         tags
+        companyInternalCourse
+        openCourse
+        onlineCourse
+        onSite
+        shortDescription
+
+        courseLeaders {
+          slug
+          name
+          title
+          image {
+            title
+            fixed(width: 400) {
+              width
+              height
+              src
+            }
+          }
+        }
         internal {
           type
         }
@@ -45,11 +64,34 @@ export const query = graphql`
       linkedTools {
         slug
         title
+        shortDescription
         tags
+        description {
+          json
+          fields {
+            readingTime {
+              minutes
+            }
+          }
+        }
+        shortDate: createdAt(formatString: "DD MMM")
+        fullDate: createdAt(formatString: "DD MMMM YYYY")
+        author {
+          slug
+          name
+          title
+          image {
+            title
+            fixed(width: 400) {
+              width
+              height
+              src
+            }
+          }
+        }
         internal {
           type
         }
-        createdAt(formatString: "DD MMM, YYYY")
       }
     }
   }

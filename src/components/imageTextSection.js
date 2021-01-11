@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
 import decoration1 from "../images/decoration1.svg"
 import decoration2 from "../images/decoration2.svg"
 import decoration3 from "../images/decoration3.svg"
@@ -9,37 +9,66 @@ import image from "../images/computer.png"
 import { Button } from "./styledComponents"
 import { ScaleBox } from "./scaleBox"
 import { IntersectionObserver } from "./intersectionObserver"
+import ArticleItem from "./articleItem"
 
 const ImageTextSection = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      allContentfulTool(sort: { fields: createdAt, order: DESC }, limit: 2) {
+        edges {
+          node {
+            slug
+            title
+            shortDescription
+            tags
+            description {
+              json
+              fields {
+                readingTime {
+                  minutes
+                }
+              }
+            }
+            shortDate: createdAt(formatString: "DD MMM")
+            fullDate: createdAt(formatString: "DD MMMM YYYY")
+            author {
+              slug
+              name
+              title
+              image {
+                title
+                fixed(width: 400) {
+                  width
+                  height
+                  src
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const tools = data.allContentfulTool.edges
+
   return (
     <Wrapper>
-      <ImageWrapper>
-        <Decoration src={decoration1} alt="decoration" top={-80} left={-50} />
-        <Decoration src={decoration2} alt="decoration" top={300} left={-100} />
-        <Decoration src={decoration3} alt="decoration" top={-50} left={200} />
-        <Decoration
-          src={decoration4}
-          alt="decoration"
-          bottom={50}
-          right={-48}
-          zIndex={2}
-        />
-        <IntersectionObserver>
-          <ScaleBox>
-            <Image src={image} alt="Image Text Section" />
-          </ScaleBox>
-        </IntersectionObserver>
-      </ImageWrapper>
+      <Decoration src={decoration1} alt="decoration" top={80} left={-50} />
+      <Decoration src={decoration2} alt="decoration" top={300} left={-100} />
+      <Decoration src={decoration3} alt="decoration" top={50} left={200} />
+      <Decoration src={decoration4} alt="decoration" bottom={50} right={-48} />
       <TextWrapper>
-        <h2>Varför uppfinna hjulet varje gång?</h2>
-        <p>
-          Med våra enkla, praktiska checklistor får du stöd och vägledning i hur
-          vissa viktiga arbetsmoment bör utföras. Helt gratis.
-        </p>
-        <Link to="/tools">
-          <StyledButton>Till checklistorna</StyledButton>
-        </Link>
+        <h2>Senaste artiklarna</h2>
+        <Grid>
+          {tools.map((tool, i) => (
+            <ArticleItem article={tool.node} />
+          ))}
+        </Grid>
       </TextWrapper>
+      <Link to="/tools">
+        <StyledButton>Alla artiklar »</StyledButton>
+      </Link>
     </Wrapper>
   )
 }
@@ -47,13 +76,14 @@ const ImageTextSection = () => {
 export default ImageTextSection
 
 const Wrapper = styled.div`
-  padding: 100px 0;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-gap: 100px;
+  padding: 100px 30px;
   max-width: 1280px;
   margin-right: auto;
   margin-left: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @media screen and (max-width: 1000px) {
     grid-template-columns: auto;
@@ -71,7 +101,7 @@ const Decoration = styled.img`
   bottom: ${props => props.bottom}px;
   left: ${props => props.left}px;
   right: ${props => props.right}px;
-  z-index: ${props => props.zIndex};
+  z-index: -1;
 `
 
 const Image = styled.img`
@@ -84,11 +114,16 @@ const Image = styled.img`
 `
 
 const TextWrapper = styled.div`
+  z-index: 10;
+
   > h2 {
     font-size: 48px;
-    line-height: 60px;
-    margin-bottom: 58px;
     color: #1e266d;
+    text-align: center;
+
+    @media screen and (max-width: 700px) {
+      font-size: 30px;
+    }
   }
 
   > p {
@@ -100,4 +135,15 @@ const TextWrapper = styled.div`
 
 const StyledButton = styled(Button)`
   margin-top: 50px;
+`
+
+const Grid = styled.div`
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 40px;
+
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
 `
