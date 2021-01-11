@@ -53,6 +53,7 @@ export const Section = styled.section`
   @media screen and (max-width: 600px) {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 30px;
   }
 
   ${props =>
@@ -69,6 +70,10 @@ export const Section = styled.section`
     props.firstSection &&
     `
     padding-top: 130px;
+
+    @media screen and (max-width: 600px) {
+      padding-top: 130px;
+    }
   `}
 `
 
@@ -79,6 +84,10 @@ export const SectionWithBackgroundImage = styled(Section)`
   background-position: bottom center;
   background-size: cover;
   color: #fff;
+
+  @media screen and (max-width: 600px) {
+    padding-bottom: 110px;
+  }
 `
 
 export const Tag = styled.span`

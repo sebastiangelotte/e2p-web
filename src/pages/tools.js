@@ -139,7 +139,11 @@ const Grid = styled.div`
   position: relative;
 
   @media screen and (max-width: 1000px) {
-    grid-template-columns: 1fr;
+    display: block;
+
+    > * {
+      margin-bottom: 20px;
+    }
   }
 `
 

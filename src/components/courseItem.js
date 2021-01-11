@@ -15,9 +15,11 @@ const CourseItem = ({ course }) => {
         <ShortDescription>{course.shortDescription}</ShortDescription>
       </Link>
       <MetaWrapper>
-        {course.tags?.map((tag, i) => {
-          return <Tag key={i}>{tag}</Tag>
-        })}
+        <TagWrapper>
+          {course.tags?.map((tag, i) => {
+            return <Tag key={i}>{tag}</Tag>
+          })}
+        </TagWrapper>
         {course.kurstillflle && (
           <Meta>
             <Date
@@ -83,4 +85,21 @@ const Date = styled.time``
 const ShortDescription = styled.div`
   color: var(--color-text);
   margin-bottom: 25px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+`
+
+const TagWrapper = styled.div`
+  @media screen and (max-width: 500px) {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+  }
+
+  > * {
+    flex-shrink: 0;
+  }
 `

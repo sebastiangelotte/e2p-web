@@ -159,7 +159,7 @@ const Grid = styled.div`
   grid-gap: 30px;
 
   @media screen and (max-width: 900px) {
-    grid-template-columns: 1fr;
+    display: block;
   }
 `
 
