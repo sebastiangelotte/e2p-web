@@ -5,7 +5,6 @@ import { FaMapMarkerAlt } from "react-icons/fa"
 import { SiZoom } from "react-icons/si"
 import { Button } from "./styledComponents"
 import Modal from "./modal"
-import ContactForm from "../components/forms/contactForm"
 import BookingForm from "../components/forms/bookingForm"
 import CustomRequestForm from "../components/forms/customRequestForm"
 

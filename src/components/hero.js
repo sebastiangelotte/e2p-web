@@ -110,10 +110,6 @@ const Text = styled.p`
   line-height: 190%;
 `
 
-const SmallText = styled.p`
-  font-size: 14px;
-`
-
 const Image = styled.div`
   max-width: 100%;
   transform: scale(1.2);

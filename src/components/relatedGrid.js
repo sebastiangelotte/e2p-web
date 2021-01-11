@@ -1,8 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
 import styled from "styled-components"
-import Card from "./card"
-import { Tag, Heading } from "./styledComponents"
 import CourseItem from "./courseItem"
 import ArticleItem from "./articleItem"
 
@@ -59,5 +56,3 @@ const Grid = styled.div`
     grid-template-columns: 1fr;
   }
 `
-
-const CreatedAt = styled.p``

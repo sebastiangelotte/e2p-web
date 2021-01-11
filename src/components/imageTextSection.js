@@ -87,10 +87,6 @@ const Wrapper = styled.div`
   }
 `
 
-const ImageWrapper = styled.div`
-  position: relative;
-`
-
 const Decoration = styled.img`
   pointer-events: none;
   position: absolute;
@@ -99,15 +95,6 @@ const Decoration = styled.img`
   left: ${props => props.left}px;
   right: ${props => props.right}px;
   z-index: -1;
-`
-
-const Image = styled.img`
-  position: relative;
-  z-index: 1;
-  margin-left: auto;
-  display: block;
-  margin-right: auto;
-  max-width: 100%;
 `
 
 const TextWrapper = styled.div`

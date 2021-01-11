@@ -2,15 +2,14 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { Button } from "../styledComponents"
 
-const CustomRequestForm = ({ course, instance }) => {
+const CustomRequestForm = () => {
   const [mainTab, setMainTab] = useState("step1")
-  const [secondayTab, setSecondaryTab] = useState("")
+  const [, setSecondaryTab] = useState("")
 
   // Form data
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [otherInfo, setOtherInfo] = useState("")
-  const [company, setCompany] = useState("")
 
   const handleSetMainTab = tab => {
     setSecondaryTab("") // close payment options
