@@ -26,14 +26,11 @@ const Hero = () => {
       <Container>
         <Grid>
           <TextWrapper>
-            <Heading>
-              Kompetensutveckling som ger stöd i det dagliga arbetet
-            </Heading>
+            <Heading>Företagsintern utbildning - Online och På Plats!</Heading>
             <Text>
-              easy2perform hjälper medarbetare och chefer att prestera bättre i
-              sin yrkesroll. Genom behovsanpassad utbildning, individuell
-              coaching och praktiska checklistor ger vi stöd i det dagliga
-              arbetet.
+              Vi hjälper medarbetare och chefer att prestera bättre i sin
+              yrkesroll. Genom behovsanpassad utbildning, individuell coaching
+              och praktiska checklistor ger vi stöd i det dagliga arbetet.
             </Text>
             <ButtonWrapper>
               <Link to="/courses">
@@ -80,7 +77,11 @@ const Container = styled.div`
   max-width: 1280px;
   margin-right: auto;
   margin-left: auto;
-  padding: 100px 30px;
+  padding: 100px 30px 200px 30px;
+
+  @media screen and (max-width: 700px) {
+    padding: 100px 30px;
+  }
 `
 
 const Grid = styled.div`

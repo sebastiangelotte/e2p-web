@@ -48,8 +48,8 @@ const IndexPage = () => {
   return (
     <Layout transparentNavigation>
       <Head
-        title="Din flexibla kursleverantör"
-        description="Vi hjälper medarbetare och chefer att prestera bättre i sin yrkesroll. Genom behovsanpassad utbildning, individuell coaching och praktiska checklistor ger vi stöd i det dagliga arbetet."
+        title="Företagsintern utbildning - Online och På Plats!"
+        description="Vi utvecklar & genomför behovsanpassad kompetensutveckling inom ledarskap och kommunikation."
       />
       <Hero />
       <Section>
