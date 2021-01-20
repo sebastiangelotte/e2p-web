@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
-import { BsSearch, BsEnvelope, BsChatDots } from "react-icons/bs"
+import { BsSearch, BsEnvelope, BsChatDots, BsCheckCircle } from "react-icons/bs"
 import Layout from "../components/layout"
 import Head from "../components/head"
 import bg from "../images/hero-bg.svg"
@@ -15,6 +15,7 @@ import {
 import Filter from "../components/filter"
 import Newsletter from "../components/forms/newsletter"
 import CourseItem from "../components/courseItem"
+import { FaCheck } from "react-icons/fa"
 
 const Courses = () => {
   const data = useStaticQuery(graphql`
@@ -87,6 +88,11 @@ const Courses = () => {
             område behöver man ibland uppdatera, fylla på och komplettera med ny
             kunskap för att kunna prestera optimalt i det dagliga arbetet.
           </p>
+          <p>
+            <ItemDecoration>
+              <FaCheck /> Alla kurser kan fås företagsinternt
+            </ItemDecoration>
+          </p>
           <Filter
             items={data.allContentfulCourse.edges}
             onChange={updateCourses}
@@ -124,6 +130,15 @@ const Courses = () => {
                     <BsSearch />
                   </p>
                   <p>Hitta en kurs som passar dig</p>
+                </li>
+                <li>
+                  <p>
+                    <BsCheckCircle />
+                  </p>
+                  <p>
+                    Välj företagsintern kurs eller något av de tillgängliga
+                    öppna datumen
+                  </p>
                 </li>
                 <li>
                   <p>
@@ -189,4 +204,15 @@ const Total = styled.div`
   font-weight: bold;
   position: absolute;
   top: -40px;
+`
+
+const ItemDecoration = styled.div`
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #fbc917 0%, #ff8364 100%);
+  color: white;
+  padding: 5px 15px;
+  font-size: 14px;
 `

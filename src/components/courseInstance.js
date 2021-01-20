@@ -14,7 +14,7 @@ const CourseInstance = ({ instance, course, customRequest }) => {
   return (
     <Wrapper>
       <Details>
-        {customRequest ? <b>Skräddarsy:</b> : <b>Kurstillfälle:</b>}
+        {customRequest ? <b>Företagsinternt:</b> : <b>Kurstillfälle:</b>}
         <Date title="Datum">
           <BsCalendar />
           {instance.date}

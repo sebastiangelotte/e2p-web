@@ -212,7 +212,7 @@ const Course = props => {
                     <li>
                       <div>
                         <h4 style={{ fontSize: "18px", paddingTop: "15px" }}>
-                          Skräddarsy kursen
+                          Företagsinternt
                         </h4>
                         <p style={{ fontSize: "16px" }}>
                           Vi kan utföra kursen på flera olika format, platser
