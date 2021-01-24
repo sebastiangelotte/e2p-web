@@ -105,5 +105,11 @@ module.exports = {
       },
     },
     "gatsby-plugin-readingtime-contentful",
+    {
+      resolve: `gatsby-plugin-postcss`,
+      options: {
+        postCssPlugins: [require(`flex-gap-polyfill`)],
+      },
+    },
   ],
 }
