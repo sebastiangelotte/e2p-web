@@ -12,7 +12,8 @@ exports.handler = async event => {
     address,
     zipCode,
     county,
-  } = body.data?.object.metadata || body
+    // } = body.data?.object.metadata || body
+  } = body
   console.log("BODY:", body)
   const asyncAirtable = new AsyncAirtable(
     process.env.AIRTABLE_API_KEY,
