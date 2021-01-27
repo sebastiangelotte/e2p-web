@@ -59,7 +59,7 @@ const ImageTextSection = () => {
         <h2>Senaste artiklarna</h2>
         <Grid>
           {tools.map((tool, i) => (
-            <ArticleItem article={tool.node} />
+            <ArticleItem key={i} article={tool.node} />
           ))}
         </Grid>
       </TextWrapper>
