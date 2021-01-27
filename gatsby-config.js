@@ -108,7 +108,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-postcss`,
       options: {
-        postCssPlugins: [require(`flex-gap-polyfill`)],
+        postCssPlugins: [require(`flex-gap-polyfill`)()],
       },
     },
   ],
