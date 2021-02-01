@@ -26,7 +26,7 @@ const Hero = () => {
       <Container>
         <Grid>
           <TextWrapper>
-            <Heading>Företagsintern utbildning - Online och På Plats!</Heading>
+            <Heading>Behovsanpassade kurser - Online och På Plats!</Heading>
             <Text>
               Vi hjälper medarbetare och chefer att prestera bättre i sin
               yrkesroll. Genom behovsanpassad utbildning, individuell coaching
