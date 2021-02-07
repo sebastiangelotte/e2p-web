@@ -1,8 +1,9 @@
+import { navigate } from "gatsby"
 import React, { useState } from "react"
 import styled from "styled-components"
 import { Button } from "../styledComponents"
 
-const CustomRequestForm = () => {
+const CustomRequestForm = ({ course }) => {
   const [mainTab, setMainTab] = useState("step1")
   const [, setSecondaryTab] = useState("")
 
@@ -23,6 +24,17 @@ const CustomRequestForm = () => {
 
   const handleCustomRequestFormSubmit = async e => {
     e.preventDefault()
+    await fetch("/.netlify/functions/createOrder", {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        name,
+        course: course.title,
+        paymentMethod: "Request",
+        otherInfo,
+      }),
+    })
+    navigate(`/requestConfirmation`) // navigate to OrderConfirmation and pass order data as state
   }
 
   return (

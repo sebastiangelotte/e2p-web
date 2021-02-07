@@ -49,7 +49,7 @@ const CourseInstance = ({ instance, course, customRequest }) => {
         closeModal={() => setShowOpenSignupModal(false)}
       >
         {customRequest ? (
-          <CustomRequestForm course={course} instance={instance} />
+          <CustomRequestForm course={course} />
         ) : (
           <BookingForm course={course} instance={instance} />
         )}

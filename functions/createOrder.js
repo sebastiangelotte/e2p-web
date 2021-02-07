@@ -12,6 +12,7 @@ exports.handler = async event => {
     address,
     zipCode,
     county,
+    otherInfo,
     // } = body.data?.object.metadata || body
   } = body
   console.log("BODY:", body)
@@ -42,10 +43,12 @@ exports.handler = async event => {
       PaymentMethod: paymentMethod,
       Status: "Completed",
       User: [userId],
+      Email: email,
       Company: company,
       Address: address,
       ZipCode: zipCode,
       County: county,
+      OtherInfo: otherInfo,
     })
   }
 
