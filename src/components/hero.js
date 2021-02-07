@@ -28,13 +28,17 @@ const Hero = () => {
           <TextWrapper>
             <Heading>Behovsanpassade kurser - Online och På Plats!</Heading>
             <Text>
-              Vi hjälper medarbetare och chefer att prestera bättre i sin
-              yrkesroll. Genom behovsanpassad utbildning, individuell coaching
-              och praktiska checklistor ger vi stöd i det dagliga arbetet.
+              Vi utvecklar och genomför kurser som hjälper medarbetare och
+              chefer prestera bättre i yrkesrollen. Kurserna anpassas utifrån
+              behov och genomförs när det passar dig och ditt företag, plats
+              eller online.
             </Text>
             <ButtonWrapper>
               <Link to="/courses">
-                <StyledButton secondary>Boka kurs</StyledButton>
+                <StyledButton secondary>Företagsinterna kurser</StyledButton>
+              </Link>
+              <Link to="/openCourses">
+                <StyledButton secondary>Öppna kurser</StyledButton>
               </Link>
             </ButtonWrapper>
           </TextWrapper>

@@ -3,18 +3,23 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import Profile from "../components/profile"
 import { Tag } from "../components/styledComponents"
-import { FaCheck } from "react-icons/fa"
 
-const CourseItem = ({ course }) => {
+const CourseItem = ({
+  course,
+  companyInternalCourse,
+  openCourse,
+  instance,
+}) => {
   return (
     <Wrapper>
-      <ItemDecoration>
-        <FaCheck /> Kan fås företagsinternt
-      </ItemDecoration>
       {course.courseLeaders?.map((courseLeader, i) => (
         <Profile key={i} profile={courseLeader} />
       ))}
-      <Link to={`/courses/${course.slug}`}>
+      <Link
+        to={`/${companyInternalCourse ? "courses" : "openCourses"}/${
+          course.slug
+        }`}
+      >
         <Title>{course.title}</Title>
         <ShortDescription>{course.shortDescription}</ShortDescription>
       </Link>
@@ -24,13 +29,13 @@ const CourseItem = ({ course }) => {
             return <Tag key={i}>{tag}</Tag>
           })}
         </TagWrapper>
-        {course.kurstillflle && (
+        {instance && openCourse && (
           <Meta>
             <Date
-              dateTime={course.kurstillflle[0].fullDate}
-              title={`Nästa tillfälle: ${course.kurstillflle[0].fullDate}`}
+              dateTime={instance.fullDate}
+              title={`Nästa tillfälle: ${instance.fullDate}`}
             >
-              <b>Nästa tillfälle:</b> {course.kurstillflle[0].shortDate}
+              <b>Datum:</b> {instance.shortDate}
             </Date>
             <Separator>·</Separator>
             <Price>{course.price} SEK</Price>
@@ -56,20 +61,6 @@ const Wrapper = styled.article`
   @media screen and (max-width: 600px) {
     padding-top: 40px;
   }
-`
-
-const ItemDecoration = styled.div`
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: linear-gradient(180deg, #fbc917 0%, #ff8364 100%);
-  color: white;
-  padding: 5px 10px;
-  font-size: 14px;
 `
 
 const Title = styled.h3`

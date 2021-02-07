@@ -21,12 +21,13 @@ const RelatedGrid = ({ items, title }) => {
     <Wrapper>
       <h2>{title}</h2>
       <Grid>
-        {items?.map((item, i) => (
-          <>
-            {getType(item) === "courses" && <CourseItem course={item} />}
-            {getType(item) === "tools" && <ArticleItem article={item} />}
-          </>
-        ))}
+        {items?.map((item, i) => {
+          if (getType(item) === "courses") {
+            return <CourseItem key={i} course={item} />
+          } else if (getType(item) === "tools") {
+            return <ArticleItem key={i} article={item} />
+          } else return null
+        })}
       </Grid>
     </Wrapper>
   )

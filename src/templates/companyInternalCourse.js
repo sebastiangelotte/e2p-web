@@ -127,17 +127,6 @@ export const query = graphql`
         }
         createdAt(formatString: "DD MMM, YYYY")
       }
-
-      kurstillflle {
-        city
-        date(formatString: "D/M/YYYY")
-        title
-        online
-        location {
-          lat
-          lon
-        }
-      }
       stripePriceId
     }
   }
@@ -201,31 +190,15 @@ const Course = props => {
             <IntersectionObserver>
               <ScaleBox>
                 <List>
-                  {course.kurstillflle?.map((instance, i) => (
-                    <li key={i}>
-                      <CourseInstance instance={instance} course={course} />
-                    </li>
-                  ))}
-                </List>
-                <List>
-                  {course.companyInternalCourse && (
-                    <li>
-                      <div>
-                        <h4 style={{ fontSize: "18px", paddingTop: "15px" }}>
-                          Företagsinternt
-                        </h4>
-                        <p style={{ fontSize: "16px" }}>
-                          Vi kan utföra kursen på flera olika format, platser
-                          och tider.
-                        </p>
-                        <CourseInstance
-                          instance={companyInternalCourse}
-                          course={course}
-                          customRequest
-                        />
-                      </div>
-                    </li>
-                  )}
+                  <li>
+                    <div>
+                      <CourseInstance
+                        instance={companyInternalCourse}
+                        course={course}
+                        customRequest
+                      />
+                    </div>
+                  </li>
                 </List>
                 <StyledShare title="Kurser" />
               </ScaleBox>

@@ -20,7 +20,7 @@ const Courses = () => {
   const data = useStaticQuery(graphql`
     query {
       allContentfulCourse(
-        filter: { companyInternalCourse: { eq: true } }
+        filter: { openCourse: { eq: true } }
         sort: { fields: createdAt, order: DESC }
       ) {
         edges {
@@ -65,6 +65,25 @@ const Courses = () => {
 
   const [courses, setCourses] = useState(data.allContentfulCourse.edges)
 
+  let coursesExplodedOnInstances = [] // course array where each instance has its own course object
+
+  courses.forEach(course => {
+    return course.node.kurstillflle?.forEach(instance => {
+      coursesExplodedOnInstances.push({
+        ...course.node,
+        kurstillflle: instance,
+      })
+    })
+  })
+
+  const sortedCoursesExplodedOnInstances = coursesExplodedOnInstances.sort(
+    (a, b) => {
+      const date1 = new Date(a.kurstillflle.fullDate)
+      const date2 = new Date(b.kurstillflle.fullDate)
+      return date1.getTime() - date2.getTime()
+    }
+  )
+
   const updateCourses = courses => {
     if (courses.length > 0) {
       setCourses(courses)
@@ -83,19 +102,14 @@ const Courses = () => {
       <SectionWithBackgroundImage backgroundImage={bg} inverted firstSection>
         <Inner>
           <Heading as="h1" inverted>
-            Företagsinterna kurser
+            Öppna kurser
           </Heading>
           <p>
-            Vi hjälper företag och organisationer att ta fram och genomföra
-            <b> företagsanpassade</b> kurser. Utifrån kundens behov tar vi fram
-            förslag på kursinnehåll och <b>matchar</b> mot kursledare med rätt
-            erfarenhet. Vi genomför <b>behovsanalys</b> digitalt,{" "}
-            <b>kvalitetssäkrar </b>
-            kursinnehåll och kursledare samt genomför kursen företagsinternt (på
-            plats) eller digitalt (live).
-          </p>
-          <p>
-            <b>Du väljer datum och tid som passar!</b>
+            Vi utvecklar och genomför kurser för <b>medarbetare</b> och{" "}
+            <b>chefer</b> online (live) eller på plats i Stockholm och Göteborg.
+            Vid genomförande på plats sker alltid kursen på väletablerade kurs-
+            & konferenscenter, för att kunna erbjuda hög kvalitet på kurslokal,
+            kost och logi.
           </p>
           <Filter
             items={data.allContentfulCourse.edges}
@@ -114,16 +128,21 @@ const Courses = () => {
                   : `${courses.length} kurs`}
               </Total>
               <AnimatePresence>
-                {courses.map((course, i) => (
+                {sortedCoursesExplodedOnInstances.map((course, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <CourseItem course={course.node} companyInternalCourse />
+                    <CourseItem
+                      course={course}
+                      instance={course.kurstillflle}
+                      openCourse
+                    />
                   </motion.div>
                 ))}
+                )
               </AnimatePresence>
             </CourseList>
             <HowTo>
@@ -139,7 +158,7 @@ const Courses = () => {
                   <p>
                     <BsChatDots />
                   </p>
-                  <p>Skicka förfrågan direkt eller ställ frågor till oss</p>
+                  <p>Boka direkt eller ställ frågor till oss</p>
                 </li>
                 <li>
                   <p>
