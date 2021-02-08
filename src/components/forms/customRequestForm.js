@@ -24,13 +24,12 @@ const CustomRequestForm = ({ course }) => {
 
   const handleCustomRequestFormSubmit = async e => {
     e.preventDefault()
-    await fetch("/.netlify/functions/createOrder", {
+    await fetch("/.netlify/functions/createRequest", {
       method: "POST",
       body: JSON.stringify({
         email,
         name,
         course: course.title,
-        paymentMethod: "Request",
         otherInfo,
       }),
     })
