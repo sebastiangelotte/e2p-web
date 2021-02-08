@@ -21,7 +21,7 @@ const Courses = () => {
     query {
       allContentfulCourse(
         filter: { companyInternalCourse: { eq: true } }
-        sort: { fields: createdAt, order: DESC }
+        sort: { fields: title, order: ASC }
       ) {
         edges {
           node {

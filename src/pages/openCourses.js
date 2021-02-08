@@ -44,7 +44,7 @@ const Courses = () => {
                 lon
               }
             }
-            courseLeaders {
+            courseLeaders: courseLeadersOpenCourse {
               slug
               name
               title

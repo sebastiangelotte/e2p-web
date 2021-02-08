@@ -32,7 +32,9 @@ export const query = graphql`
       }
     }
     allContentfulCourse(
-      filter: { courseLeaders: { elemMatch: { slug: { eq: $slug } } } }
+      filter: {
+        courseLeadersOpenCourse: { elemMatch: { slug: { eq: $slug } } }
+      }
     ) {
       edges {
         node {
@@ -55,7 +57,7 @@ export const query = graphql`
               lon
             }
           }
-          courseLeaders {
+          courseLeaders: courseLeadersOpenCourse {
             slug
             name
             title

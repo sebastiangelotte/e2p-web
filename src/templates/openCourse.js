@@ -43,7 +43,7 @@ export const query = graphql`
       includedInfo: includedInfoOpenCourse {
         json
       }
-      courseLeaders {
+      courseLeaders: courseLeadersOpenCourse {
         slug
         name
         title
@@ -77,7 +77,7 @@ export const query = graphql`
         onSite
         shortDescription
 
-        courseLeaders {
+        courseLeaders: courseLeadersOpenCourse {
           slug
           name
           title

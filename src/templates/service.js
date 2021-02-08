@@ -44,7 +44,7 @@ export const query = graphql`
         onSite
         shortDescription
 
-        courseLeaders {
+        courseLeaders: courseLeadersOpenCourse {
           slug
           name
           title
