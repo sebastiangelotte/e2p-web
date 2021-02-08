@@ -127,7 +127,6 @@ export const query = graphql`
         }
         createdAt(formatString: "DD MMM, YYYY")
       }
-      stripePriceId
     }
   }
 `

@@ -138,7 +138,6 @@ export const query = graphql`
           lon
         }
       }
-      stripePriceId
     }
   }
 `
