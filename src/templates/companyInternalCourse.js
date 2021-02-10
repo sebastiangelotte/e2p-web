@@ -19,7 +19,7 @@ import { ScaleBox } from "../components/scaleBox"
 import Share from "../components/share"
 import CourseInstance from "../components/courseInstance"
 import Profile from "../components/profile"
-import { BsArrowLeftShort } from "react-icons/bs"
+import { BsArrowLeftShort, BsViewList } from "react-icons/bs"
 
 export const query = graphql`
   query($slug: String!) {
@@ -37,11 +37,11 @@ export const query = graphql`
       description {
         json
       }
-      practicalInfo {
-        json
-      }
-      includedInfo {
-        json
+      infoBoxesCompanyInternalCourse {
+        title
+        description {
+          json
+        }
       }
       courseLeaders {
         slug
@@ -145,6 +145,8 @@ const Course = props => {
 
   const relatedItems = [...services, ...courses, ...tools]
 
+  console.log(course)
+
   return (
     <Layout>
       <Head
@@ -172,18 +174,13 @@ const Course = props => {
             <ExpandableCard heading="Kursbeskrivning" forceOpen>
               {documentToReactComponents(course.description.json, options)}
             </ExpandableCard>
-            {course.practicalInfo && (
-              <ExpandableCard heading="Praktisk information">
-                {documentToReactComponents(course.practicalInfo.json, options)}
-              </ExpandableCard>
-            )}
-            {course.includedInfo && (
-              <ExpandableCard heading="Vad som ingår">
+            {course.infoBoxesCompanyInternalCourse.map((box, i) => (
+              <ExpandableCard heading={box.title} key={i}>
                 <div>
-                  {documentToReactComponents(course.includedInfo.json, options)}
+                  {documentToReactComponents(box.description.json, options)}
                 </div>
               </ExpandableCard>
-            )}
+            ))}
           </Description>
           <ExtraInfo>
             <IntersectionObserver>

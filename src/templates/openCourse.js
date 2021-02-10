@@ -37,11 +37,11 @@ export const query = graphql`
       description {
         json
       }
-      practicalInfo {
-        json
-      }
-      includedInfo: includedInfoOpenCourse {
-        json
+      infoBoxesOpenCourse {
+        title
+        description {
+          json
+        }
       }
       courseLeaders: courseLeadersOpenCourse {
         slug
@@ -177,18 +177,13 @@ const Course = props => {
             <ExpandableCard heading="Kursbeskrivning" forceOpen>
               {documentToReactComponents(course.description.json, options)}
             </ExpandableCard>
-            {course.practicalInfo && (
-              <ExpandableCard heading="Praktisk information">
-                {documentToReactComponents(course.practicalInfo.json, options)}
-              </ExpandableCard>
-            )}
-            {course.includedInfo && (
-              <ExpandableCard heading="Vad som ingår">
+            {course.infoBoxesOpenCourse.map((box, i) => (
+              <ExpandableCard heading={box.title} key={i}>
                 <div>
-                  {documentToReactComponents(course.includedInfo.json, options)}
+                  {documentToReactComponents(box.description.json, options)}
                 </div>
               </ExpandableCard>
-            )}
+            ))}
           </Description>
           <ExtraInfo>
             <IntersectionObserver>

@@ -34,6 +34,7 @@ const IndexPage = () => {
               }
             }
             name
+            subtitle
             text {
               json
             }
@@ -97,10 +98,15 @@ const IndexPage = () => {
             <IntersectionObserver key={i}>
               <ScaleBox>
                 <ReviewCard rating={review.node.rating}>
-                  <h4>
+                  <div style={{ display: "flex", marginBottom: "20px" }}>
                     <Avatar round customImage={review.node.image.fixed.src} />{" "}
-                    {review.node.name}
-                  </h4>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <h4 style={{ marginBottom: "0" }}>{review.node.name}</h4>
+                      <span style={{ color: "#455880" }}>
+                        {review.node.subtitle}
+                      </span>
+                    </div>
+                  </div>
                   {documentToReactComponents(review.node.text.json, options)}
                 </ReviewCard>
               </ScaleBox>
