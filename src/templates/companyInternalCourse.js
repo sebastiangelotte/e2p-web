@@ -174,7 +174,7 @@ const Course = props => {
             <ExpandableCard heading="Kursbeskrivning" forceOpen>
               {documentToReactComponents(course.description.json, options)}
             </ExpandableCard>
-            {course.infoBoxesCompanyInternalCourse.map((box, i) => (
+            {course.infoBoxesCompanyInternalCourse?.map((box, i) => (
               <ExpandableCard heading={box.title} key={i}>
                 <div>
                   {documentToReactComponents(box.description.json, options)}

@@ -7,6 +7,7 @@ import { Button } from "./styledComponents"
 import Modal from "./modal"
 import BookingForm from "../components/forms/bookingForm"
 import CustomRequestForm from "../components/forms/customRequestForm"
+import SimpleBookingForm from "./forms/simpleBookingForm"
 
 const CourseInstance = ({ instance, course, customRequest }) => {
   const [showOpenSignupModal, setShowOpenSignupModal] = useState(false)
@@ -34,6 +35,8 @@ const CourseInstance = ({ instance, course, customRequest }) => {
           <BsTag />
           {customRequest
             ? "Pris offereras"
+            : Number(course.price) === 0
+            ? "Gratis"
             : Number(course.price).toLocaleString() + " SEK exkl. moms"}
         </Price>
         <Duration title="Längd">
@@ -48,7 +51,9 @@ const CourseInstance = ({ instance, course, customRequest }) => {
         isOpen={showOpenSignupModal}
         closeModal={() => setShowOpenSignupModal(false)}
       >
-        {customRequest ? (
+        {Number(course.price) === 0 ? (
+          <SimpleBookingForm course={course} instance={instance} />
+        ) : customRequest ? (
           <CustomRequestForm course={course} />
         ) : (
           <BookingForm course={course} instance={instance} />
