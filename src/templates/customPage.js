@@ -21,7 +21,9 @@ export const query = graphql`
     customPage: contentfulCustomPage(slug: { eq: $slug }) {
       title
       showForm
-      shortDescription
+      shortDescription {
+        shortDescription
+      }
       animation {
         file {
           url
@@ -50,7 +52,7 @@ const CustomPage = props => {
       </SectionWithBackgroundImage> */}
       <Hero
         title={customPage.title}
-        text={customPage.shortDescription}
+        text={customPage.shortDescription?.shortDescription}
         animation={animation}
         narrow
       />
