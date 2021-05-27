@@ -50,7 +50,7 @@ const CustomPage = props => {
       </SectionWithBackgroundImage> */}
       <Hero
         title={customPage.title}
-        text={customPage.shortDescription.shortDescription}
+        text={customPage.shortDescription}
         animation={animation}
         narrow
       />
