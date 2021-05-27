@@ -21,9 +21,7 @@ export const query = graphql`
     customPage: contentfulCustomPage(slug: { eq: $slug }) {
       title
       showForm
-      shortDescription {
-        shortDescription
-      }
+      shortDescription
       animation {
         file {
           url
