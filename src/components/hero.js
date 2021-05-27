@@ -4,10 +4,9 @@ import background from "../images/hero-bg.svg"
 import { Link } from "gatsby"
 import { ScaleBox } from "./scaleBox"
 import lottie from "lottie-web"
-import animation from "../animations/hero.json"
 import { Button } from "./styledComponents"
 
-const Hero = () => {
+const Hero = ({ showButtons, title, text, animation, narrow }) => {
   const animationRef = createRef()
   useEffect(() => {
     const anim = lottie.loadAnimation({
@@ -23,24 +22,21 @@ const Hero = () => {
 
   return (
     <Wrapper background={background}>
-      <Container>
+      <Container narrow={narrow}>
         <Grid>
           <TextWrapper>
-            <Heading>Behovsanpassade kurser - Online och På Plats!</Heading>
-            <Text>
-              Vi utvecklar och genomför kurser som hjälper medarbetare och
-              chefer prestera bättre i yrkesrollen. Kurserna anpassas utifrån
-              behov och genomförs när det passar dig och ditt företag, plats
-              eller online.
-            </Text>
-            <ButtonWrapper>
-              <Link to="/courses">
-                <StyledButton secondary>Företagsinterna kurser</StyledButton>
-              </Link>
-              <Link to="/openCourses">
-                <StyledButton secondary>Öppna kurser</StyledButton>
-              </Link>
-            </ButtonWrapper>
+            <Heading>{title}</Heading>
+            <Text>{text}</Text>
+            {showButtons && (
+              <ButtonWrapper>
+                <Link to="/courses">
+                  <StyledButton secondary>Företagsinterna kurser</StyledButton>
+                </Link>
+                <Link to="/openCourses">
+                  <StyledButton secondary>Öppna kurser</StyledButton>
+                </Link>
+              </ButtonWrapper>
+            )}
           </TextWrapper>
           <ScaleBox>
             <Image ref={animationRef}></Image>
@@ -82,6 +78,12 @@ const Container = styled.div`
   margin-right: auto;
   margin-left: auto;
   padding: 100px 30px 200px 30px;
+
+  ${props =>
+    props.narrow &&
+    `
+    padding-bottom: 100px;
+  `}
 
   @media screen and (max-width: 700px) {
     padding: 100px 30px;

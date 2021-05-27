@@ -19,6 +19,7 @@ import { Button, Section } from "../components/styledComponents"
 import { graphql, useStaticQuery } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { options } from "../richTextRendererOptions"
+import animation from "../animations/hero.json"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -52,7 +53,14 @@ const IndexPage = () => {
         title="Behovsanpassade kurser – Online och På Plats!"
         description="Vi utvecklar och genomför kurser som hjälper medarbetare och chefer prestera bättre i yrkesrollen. Kurserna anpassas utifrån behov och genomförs när det passar dig och ditt företag, plats eller online."
       />
-      <Hero />
+      <Hero
+        title={"Behovsanpassade kurser - Online och På Plats!"}
+        text={
+          "Vi utvecklar och genomför kurser som hjälper medarbetare och chefer prestera bättre i yrkesrollen. Kurserna anpassas utifrån behov och genomförs när det passar dig och ditt företag, plats eller online."
+        }
+        animation={animation}
+        showButtons
+      />
       <Section>
         <Tag>
           <span>Kurser</span>

@@ -11,6 +11,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
   const toolTemplate = path.resolve("./src/templates/tool.js")
   const serviceTemplate = path.resolve("./src/templates/service.js")
   const profileTemplate = path.resolve("./src/templates/profile.js")
+  const customPageTemplate = path.resolve("./src/templates/customPage.js")
 
   const res = await graphql(`
     query {
@@ -45,6 +46,13 @@ module.exports.createPages = async ({ graphql, actions }) => {
         }
       }
       allContentfulCourseLeader {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+      allContentfulCustomPage {
         edges {
           node {
             slug
@@ -98,6 +106,16 @@ module.exports.createPages = async ({ graphql, actions }) => {
     createPage({
       component: profileTemplate,
       path: `/profile/${edge.node.slug}`,
+      context: {
+        slug: edge.node.slug,
+      },
+    })
+  })
+
+  res.data.allContentfulCustomPage.edges.forEach(edge => {
+    createPage({
+      component: customPageTemplate,
+      path: edge.node.slug,
       context: {
         slug: edge.node.slug,
       },
