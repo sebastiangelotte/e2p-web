@@ -59,7 +59,7 @@ const IndexPage = () => {
       />
       <Section>
         <Container>
-          <SmallText>Några kunder vi jobbat med:</SmallText>
+          <SmallText>Ett urval av kunder:</SmallText>
           <LogoList />
         </Container>
         <Grid>

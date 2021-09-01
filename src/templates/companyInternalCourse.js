@@ -14,6 +14,10 @@ import {
 } from "../components/styledComponents"
 import RelatedGrid from "../components/relatedGrid"
 import ExpandableCard from "../components/expandableCard"
+import { IntersectionObserver } from "../components/intersectionObserver"
+import { ScaleBox } from "../components/scaleBox"
+import Share from "../components/share"
+import CourseInstance from "../components/courseInstance"
 import Profile from "../components/profile"
 import { BsArrowLeftShort } from "react-icons/bs"
 
@@ -125,6 +129,12 @@ export const query = graphql`
   }
 `
 
+const companyInternalCourse = {
+  date: "Du väljer datum",
+  online: false,
+  city: "Du väljer plats",
+}
+
 const Course = props => {
   const course = props.data.contentfulCourse
   const services = course.linkedServices || []
@@ -132,6 +142,8 @@ const Course = props => {
   const tools = course.linkedTools || []
 
   const relatedItems = [...services, ...courses, ...tools]
+
+  console.log(course)
 
   return (
     <Layout>
@@ -168,6 +180,24 @@ const Course = props => {
               </ExpandableCard>
             ))}
           </Description>
+          <ExtraInfo>
+            <IntersectionObserver>
+              <ScaleBox>
+                <List>
+                  <li>
+                    <div>
+                      <CourseInstance
+                        instance={companyInternalCourse}
+                        course={course}
+                        customRequest
+                      />
+                    </div>
+                  </li>
+                </List>
+                <StyledShare title="Kurser" />
+              </ScaleBox>
+            </IntersectionObserver>
+          </ExtraInfo>
         </StyledInner>
       </Section>
       {relatedItems.length !== 0 && (
@@ -193,7 +223,55 @@ const StyledInner = styled(Inner)`
 
 const Description = styled.div``
 
+const ExtraInfo = styled.div`
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 550px) {
+    grid-template-columns: 1fr;
+  }
+  @media screen and (max-width: 900px) {
+    order: -1;
+  }
+`
+
 const StyledHeading = styled(Heading)``
+
+const List = styled.ul`
+  list-style: none;
+  padding-left: 0;
+  font-size: 18px;
+  color: var(--color-heading);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  @media screen and (max-width: 900px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    li {
+      flex: 1 0 250px;
+    }
+  }
+`
+
+const StyledShare = styled(Share)``
 
 const BackButton = styled(Link)`
   display: flex;

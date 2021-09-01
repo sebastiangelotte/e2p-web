@@ -1,4 +1,3 @@
-import { navigate } from "gatsby"
 import React, { useState } from "react"
 import styled from "styled-components"
 import { Button } from "../styledComponents"
