@@ -49,7 +49,7 @@ const SimpleBookingForm = ({ course }) => {
         </Message>
       ) : (
         <Form
-          id="booking"
+          id="form"
           name="courseContactForm"
           onSubmit={event => handleSubmit(event)}
           data-netlify="true"
