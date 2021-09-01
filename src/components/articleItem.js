@@ -11,7 +11,7 @@ const ArticleItem = ({ article }) => {
 
   return (
     <Wrapper>
-      {article.author && <Profile profile={article.author} />}
+      {article.author && <Profile profile={article.author} hideReadMore />}
       <Link to={`/tools/${article.slug}`}>
         <Title>{article.title}</Title>
         <ShortDescription>{article.shortDescription}</ShortDescription>

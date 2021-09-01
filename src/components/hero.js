@@ -30,10 +30,10 @@ const Hero = ({ showButtons, title, text, animation, narrow }) => {
             {showButtons && (
               <ButtonWrapper>
                 <Link to="/courses">
-                  <StyledButton secondary>Företagsinterna kurser</StyledButton>
+                  <StyledButton>Se färdiga kurspaket</StyledButton>
                 </Link>
-                <Link to="/openCourses">
-                  <StyledButton secondary>Öppna kurser</StyledButton>
+                <Link to="/customCourse">
+                  <StyledButton secondary>Forma din egen kurs</StyledButton>
                 </Link>
               </ButtonWrapper>
             )}
@@ -139,4 +139,13 @@ const StyledButton = styled(Button)`
     width: 100%;
     margin-bottom: 20px;
   }
+
+  ${props =>
+    props.secondary &&
+    `
+    background: linear-gradient(180deg,#fdfdfd 0%,#a4afdb 100%);
+    color: black;
+    font-weight: normal;
+    color: var(--color-heading);
+  `}
 `

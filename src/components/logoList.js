@@ -27,11 +27,17 @@ export default LogoList
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   padding: 0 0 103px 0;
+  width: 100%;
 
   > * {
     padding: 20px;
+  }
+
+  @media screen and (max-width: 1100px) {
+    text-align: center;
+    display: block;
   }
 `

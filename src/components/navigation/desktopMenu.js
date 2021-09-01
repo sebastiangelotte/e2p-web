@@ -6,10 +6,9 @@ const DesktopMenu = () => {
   return (
     <Wrapper>
       <Item>
-        <Link to="/courses">Företagsinterna kurser</Link>
-        <Link to="/openCourses">Öppna kurser</Link>
-        <Link to="/tools">Artiklar</Link>
-        <Link to="/coaching">Coaching</Link>
+        <Link to="/courses">Färdiga kurspaket</Link>
+        <Link to="/customCourse">Forma din egen kurs</Link>
+        <Link to="/tools">Råd & Tips</Link>
         <Link to="/services">Tjänster</Link>
       </Item>
     </Wrapper>

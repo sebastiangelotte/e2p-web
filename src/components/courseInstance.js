@@ -8,9 +8,11 @@ import Modal from "./modal"
 import BookingForm from "../components/forms/bookingForm"
 import CustomRequestForm from "../components/forms/customRequestForm"
 import SimpleBookingForm from "./forms/simpleBookingForm"
+import CallForm from './forms/callForm'
 
 const CourseInstance = ({ instance, course, customRequest }) => {
   const [showOpenSignupModal, setShowOpenSignupModal] = useState(false)
+  const [showOpenCallModal, setShowOpenCallModal] = useState(false)
 
   return (
     <Wrapper>
@@ -35,8 +37,6 @@ const CourseInstance = ({ instance, course, customRequest }) => {
           <BsTag />
           {customRequest
             ? "Pris offereras"
-            : Number(course.price) === 0
-            ? "Gratis"
             : Number(course.price).toLocaleString() + " SEK exkl. moms"}
         </Price>
         <Duration title="Längd">
@@ -46,6 +46,12 @@ const CourseInstance = ({ instance, course, customRequest }) => {
 
       <BookButton onClick={() => setShowOpenSignupModal(true)}>
         {customRequest ? "Skicka förfrågan" : "Boka"}
+      </BookButton>
+      <BookButton secondary onClick={() => window.$crisp.push(['do', 'chat:open'])}>
+        Chatta med oss
+      </BookButton>
+      <BookButton secondary onClick={() => setShowOpenCallModal(true)}>
+        Bli uppringd
       </BookButton>
       <Modal
         isOpen={showOpenSignupModal}
@@ -58,6 +64,12 @@ const CourseInstance = ({ instance, course, customRequest }) => {
         ) : (
           <BookingForm course={course} instance={instance} />
         )}
+      </Modal>
+      <Modal
+        isOpen={showOpenCallModal}
+        closeModal={() => setShowOpenCallModal(false)}
+      >
+        <CallForm course={course} />
       </Modal>
     </Wrapper>
   )
@@ -124,6 +136,13 @@ const BookButton = styled(Button)`
   padding: 5px 15px;
   margin-bottom: 0;
   width: 100%;
+
+  ${props => props.secondary && `
+    border: 1px solid var(--color-heading);
+    background: none;
+    color: var(--color-heading);
+    font-weight: normal;
+  `}
 `
 
 const StyledSiZoom = styled(SiZoom)`

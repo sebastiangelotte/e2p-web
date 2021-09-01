@@ -30,7 +30,6 @@ export const query = graphql`
       price
       shortDescription
       companyInternalCourse
-      openCourse
       onlineCourse
       onSite
 
@@ -72,7 +71,6 @@ export const query = graphql`
         slug
         tags
         companyInternalCourse
-        openCourse
         onlineCourse
         onSite
         shortDescription

@@ -3,7 +3,7 @@ const AsyncAirtable = require("asyncairtable")
 exports.handler = async event => {
   const body = JSON.parse(event.body)
   const {
-    email,
+    phonenumber: email,
     name,
     course,
     otherInfo,

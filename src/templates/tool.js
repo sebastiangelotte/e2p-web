@@ -47,7 +47,6 @@ export const query = graphql`
         slug
         tags
         companyInternalCourse
-        openCourse
         onlineCourse
         onSite
         shortDescription
@@ -144,7 +143,7 @@ const Tool = props => {
             {tool.title}
           </Heading>
           <p>{tool.shortDescription}</p>
-          {tool.author && <Profile profile={author} />}
+          {tool.author && <Profile profile={author} hideReadMore />}
         </Inner>
       </SectionWithBackgroundImage>
       <StyledSection>

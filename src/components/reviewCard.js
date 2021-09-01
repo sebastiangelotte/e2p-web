@@ -6,13 +6,13 @@ const ReviewCard = ({ children, rating }) => {
   return (
     <Wrapper>
       {children}
-      <StarsWrapper>
+{/*       <StarsWrapper>
         <img src={star} alt="star" />
         <img src={star} alt="star" />
         <img src={star} alt="star" />
         <img src={star} alt="star" />
         <img src={star} alt="star" />
-      </StarsWrapper>
+      </StarsWrapper> */}
     </Wrapper>
   )
 }

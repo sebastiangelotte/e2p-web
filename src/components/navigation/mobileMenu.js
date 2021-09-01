@@ -22,16 +22,13 @@ const MobileMenu = () => {
         <Link to="/">Hem</Link>
       </Item>
       <Item>
-        <Link to="/courses">Företagsinterna kurser</Link>
+        <Link to="/courses">Färdiga kurspaket</Link>
       </Item>
       <Item>
-        <Link to="/openCourses">Öppna kurser</Link>
+        <Link to="/customCourse">Forma din egen kurs</Link>
       </Item>
       <Item>
-        <Link to="/tools">Artiklar</Link>
-      </Item>
-      <Item>
-        <Link to="/coaching">Coaching</Link>
+        <Link to="/tools">Råd & Tips</Link>
       </Item>
       <Item>
         <Link to="/services">Tjänster</Link>

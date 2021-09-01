@@ -106,6 +106,11 @@ export const GlobalStyle = createGlobalStyle`
     margin-bottom: 20px;
     margin-top: 0;
     max-width: 680px;
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
   }
 
  input[type="text"],
@@ -113,7 +118,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #a8a8a8;
+    border: 1px solid #13216269;
     border-radius: 6px;
 
 
@@ -126,7 +131,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #a8a8a8;
+    border: 1px solid #13216269;
     border-radius: 6px;
 
 

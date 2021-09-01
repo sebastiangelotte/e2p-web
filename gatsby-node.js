@@ -6,8 +6,6 @@ module.exports.createPages = async ({ graphql, actions }) => {
   const companyInternalCourseTemplate = path.resolve(
     "./src/templates/companyInternalCourse.js"
   )
-  const openCourseTemplate = path.resolve("./src/templates/openCourse.js")
-
   const toolTemplate = path.resolve("./src/templates/tool.js")
   const serviceTemplate = path.resolve("./src/templates/service.js")
   const profileTemplate = path.resolve("./src/templates/profile.js")
@@ -18,13 +16,6 @@ module.exports.createPages = async ({ graphql, actions }) => {
       companyInternalCourses: allContentfulCourse(
         filter: { companyInternalCourse: { eq: true } }
       ) {
-        edges {
-          node {
-            slug
-          }
-        }
-      }
-      openCourses: allContentfulCourse(filter: { openCourse: { eq: true } }) {
         edges {
           node {
             slug
@@ -66,16 +57,6 @@ module.exports.createPages = async ({ graphql, actions }) => {
     createPage({
       component: companyInternalCourseTemplate,
       path: `/courses/${edge.node.slug}`,
-      context: {
-        slug: edge.node.slug,
-      },
-    })
-  })
-
-  res.data.openCourses.edges.forEach(edge => {
-    createPage({
-      component: openCourseTemplate,
-      path: `/openCourses/${edge.node.slug}`,
       context: {
         slug: edge.node.slug,
       },

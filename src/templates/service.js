@@ -39,7 +39,6 @@ export const query = graphql`
         slug
         tags
         companyInternalCourse
-        openCourse
         onlineCourse
         onSite
         shortDescription
