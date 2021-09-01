@@ -11,6 +11,7 @@ import decoration2 from "../images/decoration2.svg"
 import decoration3 from "../images/decoration3.svg"
 import decoration4 from "../images/decoration4.svg"
 import Hero from "../components/hero"
+import animation from "../animations/configure.json"
 
 const CustomCourse = () => {
   const data = useStaticQuery(graphql`
@@ -37,6 +38,7 @@ const CustomCourse = () => {
         title={page.title}
         text={documentToReactComponents(page.content.json, options)}
         narrow
+        animation={animation}
       />
       <DecorationWrapper>
         <Decoration src={decoration1} alt="decoration" top={80} left={-50} />
