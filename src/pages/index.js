@@ -64,32 +64,24 @@ const IndexPage = () => {
         </Container>
         <Grid>
           {reviews.map((review, i) => (
-            <IntersectionObserver key={i}>
-              <ScaleBox>
-                <ReviewCard rating={review.node.rating}>
-                  <div
-                    style={{
-                      display: "flex",
-                      marginBottom: "20px",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <div style={{ display: "flex", marginBottom: "10px" }}>
-                      <Avatar round customImage={review.node.image.fixed.src} />{" "}
-                      <div style={{ display: "flex", flexDirection: "column" }}>
-                        <h4 style={{ marginBottom: "0" }}>
-                          {review.node.name}
-                        </h4>
-                      </div>
-                    </div>
-                    <span style={{ color: "#455880" }}>
-                      {review.node.subtitle}
-                    </span>
+            <ReviewCard rating={review.node.rating}>
+              <div
+                style={{
+                  display: "flex",
+                  marginBottom: "20px",
+                  flexDirection: "column",
+                }}
+              >
+                <div style={{ display: "flex", marginBottom: "10px" }}>
+                  <Avatar round customImage={review.node.image.fixed.src} />{" "}
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <h4 style={{ marginBottom: "0" }}>{review.node.name}</h4>
                   </div>
-                  {documentToReactComponents(review.node.text.json, options)}
-                </ReviewCard>
-              </ScaleBox>
-            </IntersectionObserver>
+                </div>
+                <span style={{ color: "#455880" }}>{review.node.subtitle}</span>
+              </div>
+              {documentToReactComponents(review.node.text.json, options)}
+            </ReviewCard>
           ))}
         </Grid>
       </Section>
