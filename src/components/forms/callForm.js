@@ -52,7 +52,7 @@ const CallForm = ({ course }) => {
         </Message>
       ) : (
         <Form
-          id="callForm"
+          id="form"
           name="callForm"
           onSubmit={event => handleSubmit(event)}
           data-netlify="true"

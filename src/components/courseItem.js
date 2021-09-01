@@ -59,18 +59,6 @@ const MetaWrapper = styled.div`
   }
 `
 
-const Meta = styled.div`
-  display: flex;
-  gap: 5px;
-  color: var(--color-text);
-  margin-left: auto;
-`
-const Price = styled.b``
-
-const Separator = styled.span``
-
-const Date = styled.time``
-
 const ShortDescription = styled.div`
   color: var(--color-text);
   margin-bottom: 15px;

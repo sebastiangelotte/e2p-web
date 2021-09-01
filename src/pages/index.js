@@ -11,7 +11,7 @@ import { ScaleBox } from "../components/scaleBox"
 import FullWidthCard from "../components/fullWidthCard"
 import ImageTextSection from "../components/imageTextSection"
 import Avatar from "../components/avatar"
-import { Button, Section } from "../components/styledComponents"
+import { Section } from "../components/styledComponents"
 import { graphql, useStaticQuery } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { options } from "../richTextRendererOptions"
@@ -110,42 +110,6 @@ const IndexPage = () => {
 
 export default IndexPage
 
-const Tag = styled.div`
-  > span {
-    color: #ff2e6a;
-    background-color: #f9f3fe;
-    padding: 15px 55px 18px 55px;
-    border-radius: 7px;
-    font-size: 22px;
-  }
-`
-
-const Heading = styled.h2`
-  color: #1e266d;
-  margin-bottom: 82px;
-  margin-top: 39px;
-  text-align: center;
-
-  ${props =>
-    props.primary &&
-    `
-  font-size: 48px;
-
-  @media screen and (max-width: 700px) {
-    font-size: 30px;
-  }
-  `}
-  ${props =>
-    props.secondary &&
-    `
-    font-size: 38px;
-    font-style: italic;
-
-  @media screen and (max-width: 700px) {
-    font-size: 30px;
-  }
-  `}
-`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -157,10 +121,6 @@ const Grid = styled.div`
   @media screen and (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
-`
-
-const StyledButton = styled(Button)`
-  margin-top: 50px;
 `
 const Container = styled.div`
   max-width: 1280px;

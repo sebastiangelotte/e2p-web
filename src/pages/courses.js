@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from "gatsby"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
-import { BsSearch, BsEnvelope, BsChatDots, BsCheckCircle } from "react-icons/bs"
+import { BsSearch, BsEnvelope, BsChatDots } from "react-icons/bs"
 import Layout from "../components/layout"
 import Head from "../components/head"
 import bg from "../images/hero-bg.svg"
@@ -12,7 +12,6 @@ import {
   SectionWithBackgroundImage,
   Section,
   Inner,
-  Button,
 } from "../components/styledComponents"
 import Filter from "../components/filter"
 import Newsletter from "../components/forms/newsletter"

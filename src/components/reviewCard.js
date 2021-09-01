@@ -1,20 +1,8 @@
 import React from "react"
-import star from "../images/star.svg"
 import styled from "styled-components"
 
-const ReviewCard = ({ children, rating }) => {
-  return (
-    <Wrapper>
-      {children}
-{/*       <StarsWrapper>
-        <img src={star} alt="star" />
-        <img src={star} alt="star" />
-        <img src={star} alt="star" />
-        <img src={star} alt="star" />
-        <img src={star} alt="star" />
-      </StarsWrapper> */}
-    </Wrapper>
-  )
+const ReviewCard = ({ children }) => {
+  return <Wrapper>{children}</Wrapper>
 }
 
 export default ReviewCard
@@ -39,8 +27,4 @@ const Wrapper = styled.div`
     color: #455880;
     font-size: 18px;
   }
-`
-
-const StarsWrapper = styled.div`
-  margin-top: auto;
 `

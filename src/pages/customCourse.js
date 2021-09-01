@@ -5,13 +5,6 @@ import { options } from "../richTextRendererOptions"
 import Head from "../components/head"
 import Layout from "../components/layout"
 import styled from "styled-components"
-import bg from "../images/hero-bg.svg"
-import {
-  Section,
-  Heading,
-  SectionWithBackgroundImage,
-  Inner,
-} from "../components/styledComponents"
 import CustomCourseContactForm from "../components/forms/customCourseContactForm"
 import decoration1 from "../images/decoration1.svg"
 import decoration2 from "../images/decoration2.svg"
@@ -65,21 +58,6 @@ const CustomCourse = () => {
 }
 
 export default CustomCourse
-
-const StyledSection = styled(Section)`
-  p {
-    font-size: 20px;
-  }
-
-  h2,
-  h3,
-  h4,
-  h5 {
-    margin-top: 40px;
-  }
-`
-
-const StyledInner = styled(Inner)``
 
 const DecorationWrapper = styled.div`
   max-width: 1280px;
