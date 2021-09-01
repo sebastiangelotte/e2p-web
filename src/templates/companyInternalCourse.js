@@ -19,7 +19,7 @@ import { ScaleBox } from "../components/scaleBox"
 import Share from "../components/share"
 import CourseInstance from "../components/courseInstance"
 import Profile from "../components/profile"
-import { BsArrowLeftShort, BsViewList } from "react-icons/bs"
+import { BsArrowLeftShort } from "react-icons/bs"
 
 export const query = graphql`
   query($slug: String!) {
@@ -30,7 +30,6 @@ export const query = graphql`
       price
       shortDescription
       companyInternalCourse
-      openCourse
       onlineCourse
       onSite
 
@@ -72,7 +71,6 @@ export const query = graphql`
         slug
         tags
         companyInternalCourse
-        openCourse
         onlineCourse
         onSite
         shortDescription

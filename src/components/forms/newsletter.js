@@ -58,8 +58,7 @@ const Newsletter = () => {
           <Button type="submit">{isLoading ? "Skickar..." : "Skicka"}</Button>
         </Form>
         <Text>
-          Anmäl dig till vårt nyhetsbrev för smarta checklistor, enkla råd och
-          tips.
+          Anmäl dig till vårt nyhetsbrev där du som personalansvarig får praktiska råd & tips.
         </Text>
         {message.isVisible && (
           <div>

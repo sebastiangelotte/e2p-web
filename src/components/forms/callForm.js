@@ -2,8 +2,9 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { Button } from "../styledComponents"
 
-const CoachingForm = ({ source }) => {
+const CallForm = ({ course }) => {
   const [, setIsLoading] = useState(false)
+
   const [message, setMessage] = useState({
     isVisible: false,
     header: "Ett meddelande",
@@ -29,7 +30,7 @@ const CoachingForm = ({ source }) => {
         setIsLoading(false)
         setMessage({
           isVisible: true,
-          header: "Tack för ditt intresse!",
+          header: "Förfrågan skickad!",
           content: "Vi återkommer så snart vi kan.",
           positive: true,
         })
@@ -51,52 +52,79 @@ const CoachingForm = ({ source }) => {
       ) : (
         <Form
           id="form"
-          name="coaching"
+          name="callForm"
           onSubmit={event => handleSubmit(event)}
           data-netlify="true"
         >
           {/* needed for netlify */}
-          <input type="hidden" name="form-name" value="contact" />
-          <input type="hidden" name="Skickat från" value={source} />
-          <Section widths="equal">
-            <input type="text" label="Namn" placeholder="Namn" name="namn" />
-            <input type="email" placeholder="E-post *" required name="email" />
-          </Section>
-          <textarea
-            placeholder="Dina mål, utmaningar, önskemål"
-            name="Meddelande"
+          <input type="hidden" name="form-name" value="callForm" />
+          <input
+            type="hidden"
+            name="Skickat från"
+            value={`Ring upp mig! Kurs: ${course.title}`}
           />
-          <SubmitButton type="submit" value="Send">
-            Anmäl intresse
-          </SubmitButton>
+          <BookingDetails>
+            <span>Kontaktuppgifter</span>
+          </BookingDetails>
+          <input type="hidden" name="form-name" value="callForm" />
+          <input type="hidden" name="Skickat från" value={course.title} />
+          <input type="text" placeholder="Namn *" required name="namn" />
+          <input
+            type="text"
+            placeholder="Telefonnummer *"
+            required
+            name="phonenumber"
+          />
+          <BookingDetails>
+            <span>Övrig information (valfritt)</span>
+          </BookingDetails>
+          <textarea
+            placeholder="Övrig information, tid för samtal, etc."
+            name="ovrigt"
+            rows="4"
+          />
+          <StyledButton type="submit" value="Send">
+            Bli uppringd
+          </StyledButton>
         </Form>
       )}
     </>
   )
 }
 
-export default CoachingForm
+export default CallForm
 
 const Form = styled.form`
-  max-width: 680px;
-  padding-top: 20px;
+  max-width: 480px;
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    border-color: var(--color-text);
+  }
+
+  color: var(--color-heading);
 `
 
-const Section = styled.div`
-  margin-bottom: 20px;
+const BookingDetails = styled.div`
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-  h3 {
-    font-size: 20px;
+  > span {
+    font-weight: bold;
   }
 `
 
-const SubmitButton = styled(Button)`
+const StyledButton = styled(Button)`
   background: linear-gradient(180deg, #fbc917 0%, #ff8364 100%);
   border: none;
-  font-size: 18px;
   font-weight: bold;
-  padding: 18px 45px 16px 45px;
+  margin-bottom: 0;
+  margin-top: 10px;
   width: 100%;
+  font-size: 17px;
 `
 
 const Message = styled.div`

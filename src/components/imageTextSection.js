@@ -56,7 +56,7 @@ const ImageTextSection = () => {
       <Decoration src={decoration3} alt="decoration" top={50} left={200} />
       <Decoration src={decoration4} alt="decoration" bottom={50} right={-48} />
       <TextWrapper>
-        <h2>Senaste artiklarna</h2>
+        <h2>Senaste Råd & Tips 💡</h2>
         <Grid>
           {tools.map((tool, i) => (
             <ArticleItem key={i} article={tool.node} />
@@ -64,7 +64,7 @@ const ImageTextSection = () => {
         </Grid>
       </TextWrapper>
       <Link to="/tools">
-        <StyledButton>Alla artiklar »</StyledButton>
+        <StyledButton>Fler Råd & Tips »</StyledButton>
       </Link>
     </Wrapper>
   )

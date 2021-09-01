@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { Button } from "../styledComponents"
 
-const SimpleBookingForm = ({ course }) => {
+const CustomCourseContactForm = () => {
   const [, setIsLoading] = useState(false)
   const [message, setMessage] = useState({
     isVisible: false,
@@ -28,7 +28,7 @@ const SimpleBookingForm = ({ course }) => {
         setIsLoading(false)
         setMessage({
           isVisible: true,
-          header: "Förfrågan skickad!",
+          header: "Meddelande skickat!",
           content: "Vi återkommer så snart vi kan.",
           positive: true,
         })
@@ -50,20 +50,21 @@ const SimpleBookingForm = ({ course }) => {
       ) : (
         <Form
           id="form"
-          name="courseContactForm"
+          name="customCourseContactForm"
           onSubmit={event => handleSubmit(event)}
           data-netlify="true"
         >
           {/* needed for netlify */}
-          <input type="hidden" name="form-name" value="courseContactForm" />
+          <input
+            type="hidden"
+            name="form-name"
+            value="customCourseContactForm"
+          />
           <input
             type="hidden"
             name="Skickat från"
-            value={`Förfrågan! Kurs: ${course.title}`}
+            value={`Forma din egen kurs`}
           />
-          <BookingDetails>
-            <span>Kontaktuppgifter</span>
-          </BookingDetails>
           <Section>
             <input
               type="text"
@@ -82,9 +83,7 @@ const SimpleBookingForm = ({ course }) => {
             <input type="email" placeholder="E-post *" required name="email" />
             <input type="text" placeholder="Telefonnummer" name="phonenumber" />
           </Section>
-          <BookingDetails>
-            <span>Övrig information</span>
-          </BookingDetails>
+          <span>Beskriv utbildningsbehov och mål</span>
           <textarea
             placeholder="Behov, mål, annan information"
             name="Meddelande"
@@ -100,37 +99,19 @@ const SimpleBookingForm = ({ course }) => {
             placeholder="Önskat datum för genomförande"
             name="date"
           />
-          <StyledButton type="submit" value="Send">
-            Skicka förfrågan
-          </StyledButton>
+          <SubmitButton type="submit" value="Send">
+            Skicka
+          </SubmitButton>
         </Form>
       )}
     </>
   )
 }
 
-export default SimpleBookingForm
-
-const StyledButton = styled(Button)`
-  background: linear-gradient(180deg, #fbc917 0%, #ff8364 100%);
-  border: none;
-  font-weight: bold;
-  margin-bottom: 0;
-  margin-top: 10px;
-  width: 100%;
-  font-size: 17px;
-`
+export default CustomCourseContactForm
 
 const Form = styled.form`
   max-width: 480px;
-
-  input[type="text"],
-  input[type="email"],
-  textarea {
-    border-color: var(--color-text);
-  }
-
-  color: var(--color-heading);
 `
 
 const Section = styled.div`
@@ -141,6 +122,12 @@ const Section = styled.div`
   }
 `
 
+const SubmitButton = styled(Button)`
+  width: 100%;
+  font-size: 20px;
+  margin-top: 10px;
+`
+
 const Message = styled.div`
   text-align: center;
   display: flex;
@@ -148,14 +135,4 @@ const Message = styled.div`
   justify-content: center;
   flex-direction: column;
   height: 100%;
-`
-const BookingDetails = styled.div`
-  margin: 5px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  > span {
-    font-weight: bold;
-  }
 `

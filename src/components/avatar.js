@@ -37,7 +37,7 @@ const Avatar = ({ round, preset, customImage }) => {
 
   return (
     <Wrapper round={round}>
-      <img src={image} alt="avatar" />
+      <img src={image} alt="avatar" title="Kund" />
     </Wrapper>
   )
 }
@@ -50,6 +50,7 @@ const Wrapper = styled.div`
   display: inline-block;
   vertical-align: top;
   margin-right: 20px;
+  flex-shrink: 0;
 
   ${props =>
     props.round &&

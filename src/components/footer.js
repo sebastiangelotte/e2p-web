@@ -25,30 +25,13 @@ const Footer = () => {
               <Link to="/">Hem</Link>
             </li>
             <li>
-              <Link to="/courses">Kurser</Link>
-            </li>
-            <li>
-              <Link to="/coaching">Coaching</Link>
+              <Link to="/courses">Färdiga kurspaket</Link>
             </li>
             <li>
               <Link to="/services">Tjänster</Link>
             </li>
             <li>
-              <Link to="/tools">Verktyg</Link>
-            </li>
-          </ul>
-        </LinkColumn>
-        <LinkColumn>
-          <h3>Kurser</h3>
-          <ul>
-            <li>
-              <Link to="/courses">Öppna utbildningar</Link>
-            </li>
-            <li>
-              <Link to="/courses">Företagsinterna utbildningar</Link>
-            </li>
-            <li>
-              <Link to="/courses">Onlinekurser</Link>
+              <Link to="/tools">Råd & Tips</Link>
             </li>
           </ul>
         </LinkColumn>

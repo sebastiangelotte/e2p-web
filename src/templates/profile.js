@@ -11,8 +11,12 @@ import {
   Inner,
 } from "../components/styledComponents"
 import CourseLeader from "../components/course-leader/courseLeader"
-import CourseItem from "../components/courseItem"
 import ArticleItem from "../components/articleItem"
+import CourseLeaderCard from "../components/course-leader/courseLeaderCard"
+import decoration1 from "../images/decoration1.svg"
+import decoration2 from "../images/decoration2.svg"
+import decoration3 from "../images/decoration3.svg"
+import decoration4 from "../images/decoration4.svg"
 
 export const query = graphql`
   query($slug: String!) {
@@ -30,6 +34,19 @@ export const query = graphql`
       description {
         json
       }
+      courseLeaders {
+        image {
+          fixed {
+            src
+          }
+        }
+        description {
+          json
+        }
+        name
+        title
+        slug
+      }
     }
     allContentfulCourse(
       filter: {
@@ -43,7 +60,6 @@ export const query = graphql`
           price
           tags
           companyInternalCourse
-          openCourse
           onlineCourse
           onSite
           shortDescription
@@ -111,8 +127,8 @@ export const query = graphql`
 
 const Profile = props => {
   const profile = props.data.contentfulCourseLeader
-  const courses = props.data.allContentfulCourse.edges
   const articles = props.data.allContentfulTool.edges
+  const connectedCourseLeaders = props.data.contentfulCourseLeader.courseLeaders
 
   return (
     <Layout transparentNavigation>
@@ -123,7 +139,24 @@ const Profile = props => {
         </StyledInner>
       </SectionWithBackgroundImage>
       <StyledSection>
+        <Decoration src={decoration1} alt="decoration" top={80} left={-50} />
+        <Decoration src={decoration2} alt="decoration" top={300} left={200} />
+        <Decoration src={decoration3} alt="decoration" top={50} left={200} />
+        <Decoration
+          src={decoration4}
+          alt="decoration"
+          bottom={50}
+          right={-48}
+        />
         <StyledInner>
+          {connectedCourseLeaders && (
+            <Heading>Träffa några av våra ✨fantastiska✨ kursledare</Heading>
+          )}
+          <Grid>
+            {connectedCourseLeaders?.map((connectedCourseLeader, i) => (
+              <CourseLeaderCard key={i} courseLeader={connectedCourseLeader} />
+            ))}
+          </Grid>
           {articles.length > 0 && (
             <>
               <Heading>Artiklar</Heading>
@@ -134,14 +167,6 @@ const Profile = props => {
               </Grid>
             </>
           )}
-          {courses.length > 0 && (
-            <>
-              <Heading>Kurser</Heading>
-              {courses.map((course, i) => (
-                <CourseItem course={course.node} />
-              ))}
-            </>
-          )}
         </StyledInner>
       </StyledSection>
     </Layout>
@@ -150,7 +175,9 @@ const Profile = props => {
 
 export default Profile
 
-const StyledSection = styled(Section)``
+const StyledSection = styled(Section)`
+  position: relative;
+`
 
 const StyledInner = styled(Inner)``
 
@@ -163,4 +190,14 @@ const Grid = styled.div`
   @media screen and (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
+`
+
+const Decoration = styled.img`
+  pointer-events: none;
+  position: absolute;
+  top: ${props => props.top}px;
+  bottom: ${props => props.bottom}px;
+  left: ${props => props.left}px;
+  right: ${props => props.right}px;
+  z-index: -1;
 `

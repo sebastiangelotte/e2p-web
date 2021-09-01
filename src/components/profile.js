@@ -2,18 +2,27 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
-const Profile = ({ profile }) => {
+const Profile = ({ profile, hideReadMore }) => {
   return (
     <Wrapper>
       <CircleWrapper to={`/profile/${profile.slug}`}>
         <Image
           src={profile.image.fixed.src}
           alt="Profilbild"
-          title={profile.image.title}
+          title="Kursledare"
         />
       </CircleWrapper>
       <Details>
-        <Name to={`/profile/${profile.slug}`}>{profile.name}</Name>
+        <Name>
+          {`${profile.name}`}
+          {!hideReadMore && (
+            <>
+              {`. `}
+              <Link to={`/profile/${profile.slug}`}>Läs mer</Link>
+            </>
+          )}
+        </Name>
+
         <Title>{profile.title}</Title>
       </Details>
     </Wrapper>
@@ -40,7 +49,7 @@ const Image = styled.img`
   object-fit: cover;
 `
 
-const Name = styled(Link)`
+const Name = styled.span`
   font-size: 16px;
   font-weight: bold;
   color: inherit;
@@ -48,7 +57,8 @@ const Name = styled(Link)`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  &:hover {
+  > a {
+    color: inherit;
     text-decoration: underline;
   }
 `

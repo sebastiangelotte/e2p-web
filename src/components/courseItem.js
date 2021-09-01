@@ -1,25 +1,12 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import Profile from "../components/profile"
 import { Tag } from "../components/styledComponents"
 
-const CourseItem = ({
-  course,
-  companyInternalCourse,
-  openCourse,
-  instance,
-}) => {
+const CourseItem = ({ course }) => {
   return (
     <Wrapper>
-      {course.courseLeaders?.map((courseLeader, i) => (
-        <Profile key={i} profile={courseLeader} />
-      ))}
-      <Link
-        to={`/${companyInternalCourse ? "courses" : "openCourses"}/${
-          course.slug
-        }`}
-      >
+      <Link to={`/courses/${course.slug}`}>
         <Title>{course.title}</Title>
         <ShortDescription>{course.shortDescription}</ShortDescription>
       </Link>
@@ -29,18 +16,6 @@ const CourseItem = ({
             return <Tag key={i}>{tag}</Tag>
           })}
         </TagWrapper>
-        {instance && openCourse && (
-          <Meta>
-            <Date
-              dateTime={instance.fullDate}
-              title={`Nästa tillfälle: ${instance.fullDate}`}
-            >
-              <b>Datum:</b> {instance.shortDate}
-            </Date>
-            <Separator>·</Separator>
-            <Price>{course.price} SEK</Price>
-          </Meta>
-        )}
       </MetaWrapper>
     </Wrapper>
   )
@@ -52,7 +27,7 @@ const Wrapper = styled.article`
   box-shadow: 0px 4px 4px rgba(135, 146, 161, 0.16),
     0px 6px 41px rgba(135, 146, 161, 0.11);
   border-radius: 18px;
-  padding: 20px 30px 15px 30px;
+  padding: 15px 20px 0 20px;
   margin-bottom: 20px;
   background-color: #fff;
   color: var(--color-heading);
@@ -80,25 +55,13 @@ const MetaWrapper = styled.div`
   margin-top: auto;
 
   > * {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 `
 
-const Meta = styled.div`
-  display: flex;
-  gap: 5px;
-  color: var(--color-text);
-  margin-left: auto;
-`
-const Price = styled.b``
-
-const Separator = styled.span``
-
-const Date = styled.time``
-
 const ShortDescription = styled.div`
   color: var(--color-text);
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;

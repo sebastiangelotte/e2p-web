@@ -3,10 +3,6 @@ import Layout from "../components/layout"
 import Head from "../components/head"
 import Hero from "../components/hero"
 import styled from "styled-components"
-import Card from "../components/card"
-import MegaPhone from "../components/icons/megaphone"
-import Coaching from "../components/icons/coaching"
-import Online from "../components/icons/online"
 import ReviewCard from "../components/reviewCard"
 import LogoList from "../components/logoList"
 import Newsletter from "../components/forms/newsletter"
@@ -15,7 +11,7 @@ import { ScaleBox } from "../components/scaleBox"
 import FullWidthCard from "../components/fullWidthCard"
 import ImageTextSection from "../components/imageTextSection"
 import Avatar from "../components/avatar"
-import { Button, Section } from "../components/styledComponents"
+import { Section } from "../components/styledComponents"
 import { graphql, useStaticQuery } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { options } from "../richTextRendererOptions"
@@ -50,88 +46,47 @@ const IndexPage = () => {
   return (
     <Layout transparentNavigation>
       <Head
-        title="Behovsanpassade kurser – Online och På Plats!"
-        description="Vi utvecklar och genomför kurser som hjälper medarbetare och chefer prestera bättre i yrkesrollen. Kurserna anpassas utifrån behov och genomförs när det passar dig och ditt företag, plats eller online."
+        title="Företagsanpassade kurser för medarbetare och chefer"
+        description="Alla kurser anpassas utifrån kundens behov. Genomförandet sker antingen på plats hos er, digitalt eller en mix, det avgör ni. Kursledarna är duktiga pedagoger och vana att utbilda i olika miljöer, små och stora grupper, på plats eller digitalt. Vi har mer än 25 års erfarenhet av att utveckla och genomföra kundspecfika företagsinterna kurser"
       />
       <Hero
-        title={"Behovsanpassade kurser - Online och På Plats!"}
+        title={"Företagsanpassade kurser för medarbetare och chefer"}
         text={
-          "Vi utvecklar och genomför kurser som hjälper medarbetare och chefer prestera bättre i yrkesrollen. Kurserna anpassas utifrån behov och genomförs när det passar dig och ditt företag, plats eller online."
+          "Alla kurser anpassas utifrån kundens behov. Genomförandet sker antingen på plats hos er, digitalt eller en mix, det avgör ni. Kursledarna är duktiga pedagoger och vana att utbilda i olika miljöer, små och stora grupper, på plats eller digitalt. Vi har mer än 25 års erfarenhet av att utveckla och genomföra kundspecfika företagsinterna kurser."
         }
         animation={animation}
         showButtons
       />
       <Section>
-        <Tag>
-          <span>Kurser</span>
-        </Tag>
-        <Heading primary>Vad passar dig bäst?</Heading>
+        <Container>
+          <SmallText>Ett urval av kunder:</SmallText>
+          <LogoList />
+        </Container>
         <Grid>
-          <IntersectionObserver>
-            <ScaleBox>
-              <Card link="/courses" withBackground>
-                <MegaPhone />
-                <h3>Grupputbildning</h3>
-              </Card>
-            </ScaleBox>
-          </IntersectionObserver>
-          <IntersectionObserver>
-            <ScaleBox>
-              <Card link="/coaching">
-                <Coaching />
-                <h3>Individuell coaching</h3>
-              </Card>
-            </ScaleBox>
-          </IntersectionObserver>
-          <IntersectionObserver>
-            <ScaleBox>
-              <Card link="/tools">
-                <Online />
-                <h3>Praktiska checklistor</h3>
-              </Card>
-            </ScaleBox>
-          </IntersectionObserver>
+          {reviews.map((review, i) => (
+            <ReviewCard rating={review.node.rating}>
+              <div
+                style={{
+                  display: "flex",
+                  marginBottom: "20px",
+                  flexDirection: "column",
+                }}
+              >
+                <div style={{ display: "flex", marginBottom: "10px" }}>
+                  <Avatar round customImage={review.node.image.fixed.src} />{" "}
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <h4 style={{ marginBottom: "0" }}>{review.node.name}</h4>
+                  </div>
+                </div>
+                <span style={{ color: "#455880" }}>{review.node.subtitle}</span>
+              </div>
+              {documentToReactComponents(review.node.text.json, options)}
+            </ReviewCard>
+          ))}
         </Grid>
       </Section>
       <Section>
         <ImageTextSection />
-      </Section>
-      <Section gradient>
-        <Tag>
-          <span>Recensioner</span>
-        </Tag>
-        <Heading secondary>Vad våra kursdeltagare säger...</Heading>
-        <Grid>
-          {reviews.map((review, i) => (
-            <IntersectionObserver key={i}>
-              <ScaleBox>
-                <ReviewCard rating={review.node.rating}>
-                  <div style={{ display: "flex", marginBottom: "20px" }}>
-                    <Avatar round customImage={review.node.image.fixed.src} />{" "}
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <h4 style={{ marginBottom: "0" }}>{review.node.name}</h4>
-                      <span style={{ color: "#455880" }}>
-                        {review.node.subtitle}
-                      </span>
-                    </div>
-                  </div>
-                  {documentToReactComponents(review.node.text.json, options)}
-                </ReviewCard>
-              </ScaleBox>
-            </IntersectionObserver>
-          ))}
-        </Grid>
-        <a
-          href="https://www.utbildning.se/kurser/easy2perform/recensioner"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <StyledButton>Fler recensioner på utbildning.se »</StyledButton>
-        </a>
-      </Section>
-      <Section background>
-        <Heading secondary>Några kunder vi jobbat med...</Heading>
-        <LogoList />
       </Section>
       <Newsletter />
       <Section gradient>
@@ -147,42 +102,6 @@ const IndexPage = () => {
 
 export default IndexPage
 
-const Tag = styled.div`
-  > span {
-    color: #ff2e6a;
-    background-color: #f9f3fe;
-    padding: 15px 55px 18px 55px;
-    border-radius: 7px;
-    font-size: 22px;
-  }
-`
-
-const Heading = styled.h2`
-  color: #1e266d;
-  margin-bottom: 82px;
-  margin-top: 39px;
-  text-align: center;
-
-  ${props =>
-    props.primary &&
-    `
-  font-size: 48px;
-
-  @media screen and (max-width: 700px) {
-    font-size: 30px;
-  }
-  `}
-  ${props =>
-    props.secondary &&
-    `
-    font-size: 38px;
-    font-style: italic;
-
-  @media screen and (max-width: 700px) {
-    font-size: 30px;
-  }
-  `}
-`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -195,7 +114,19 @@ const Grid = styled.div`
     grid-template-columns: 1fr;
   }
 `
+const Container = styled.div`
+  max-width: 1280px;
+  margin: 0 auto;
+`
 
-const StyledButton = styled(Button)`
-  margin-top: 50px;
+const SmallText = styled.span`
+  font-size: 0.9rem;
+  color: var(--color-text);
+  opacity: 0.8;
+  padding-left: 20px;
+
+  @media screen and (max-width: 1100px) {
+    text-align: center;
+    display: block;
+  }
 `

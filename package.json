@@ -10,7 +10,6 @@
     "@reach/dialog": "^0.2.9",
     "@reach/tabs": "^0.1.6",
     "@reach/visually-hidden": "^0.1.4",
-    "@stripe/stripe-js": "^1.11.0",
     "babel-plugin-styled-components": "^1.10.6",
     "env-cmd": "^9.0.0",
     "flex-gap-polyfill": "^2.0.1",

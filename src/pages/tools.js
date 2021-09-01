@@ -77,7 +77,7 @@ const Tools = () => {
       <SectionWithBackgroundImage backgroundImage={bg} inverted firstSection>
         <Inner>
           <Heading as="h1" inverted>
-            Varför uppfinna hjulet varje gång?
+            Råd & Tips
           </Heading>
           <p>
             Att ha användbara checklistor, guider och verktyg till hands när man
