@@ -57,6 +57,13 @@ const CallForm = ({ course }) => {
           onSubmit={event => handleSubmit(event)}
           data-netlify="true"
         >
+          {/* needed for netlify */}
+          <input type="hidden" name="form-name" value="callForm" />
+          <input
+            type="hidden"
+            name="Skickat från"
+            value={`Ring upp mig! Kurs: ${course.name}`}
+          />
           <BookingDetails>
             <span>Kontaktuppgifter</span>
           </BookingDetails>
@@ -77,7 +84,7 @@ const CallForm = ({ course }) => {
             name="ovrigt"
             rows="4"
           />
-          <StyledButton type="submit" form="callForm">
+          <StyledButton type="submit" value="Send">
             Bli uppringd
           </StyledButton>
         </Form>

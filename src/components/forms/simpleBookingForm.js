@@ -56,7 +56,11 @@ const SimpleBookingForm = ({ course }) => {
         >
           {/* needed for netlify */}
           <input type="hidden" name="form-name" value="courseContactForm" />
-          <input type="hidden" name="Skickat från" value={course.name} />
+          <input
+            type="hidden"
+            name="Skickat från"
+            value={`Förfrågan! Kurs: ${course.name}`}
+          />
           <BookingDetails>
             <span>Kontaktuppgifter</span>
           </BookingDetails>
@@ -96,7 +100,7 @@ const SimpleBookingForm = ({ course }) => {
             placeholder="Önskat datum för genomförande"
             name="date"
           />
-          <StyledButton type="submit" form="booking">
+          <StyledButton type="submit" value="Send">
             Skicka förfrågan
           </StyledButton>
         </Form>
