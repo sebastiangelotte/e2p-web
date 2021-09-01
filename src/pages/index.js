@@ -46,13 +46,13 @@ const IndexPage = () => {
   return (
     <Layout transparentNavigation>
       <Head
-        title="Vi utvecklar och genomför företagsanpassade kurser för medarbetare och chefer"
-        description="Kursinnehållet anpassas till deltagarnas behov och kursledaren genomför kursen på plats hos er.  Vill du hellre ha kursen utförd på extern plats eller digitalt? Det löser vi såklart!"
+        title="Företagsanpassade kurser för medarbetare och chefer"
+        description="Alla kurser anpassas utifrån kundens behov. Genomförandet sker antingen på plats hos er, digitalt eller en mix, det avgör ni. Kursledarna är duktiga pedagoger och vana att utbilda i olika miljöer, små och stora grupper, på plats eller digitalt. Vi har mer än 25 års erfarenhet av att utveckla och genomföra kundspecfika företagsinterna kurser"
       />
       <Hero
         title={"Företagsanpassade kurser för medarbetare och chefer"}
         text={
-          "Kursinnehållet anpassas till deltagarnas behov och kursledaren genomför kursen på plats hos er.  Vill du hellre ha kursen utförd på extern plats eller digitalt? Det löser vi såklart!"
+          "Alla kurser anpassas utifrån kundens behov. Genomförandet sker antingen på plats hos er, digitalt eller en mix, det avgör ni. Kursledarna är duktiga pedagoger och vana att utbilda i olika miljöer, små och stora grupper, på plats eller digitalt. Vi har mer än 25 års erfarenhet av att utveckla och genomföra kundspecfika företagsinterna kurser."
         }
         animation={animation}
         showButtons

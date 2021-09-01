@@ -93,8 +93,7 @@ const Courses = () => {
     <Layout>
       <Head
         title="Kurser"
-        description="Vi utvecklar och genomför behovsanpassade kurser för medarbetare och
-            chefer."
+        description="Vi utvecklar och genomför behovsanpassade kurser för medarbetare och chefer."
       />
       <SectionWithBackgroundImage backgroundImage={bg} inverted firstSection>
         <Inner>
@@ -103,7 +102,7 @@ const Courses = () => {
           </Heading>
           <p>
             Vi hjälper företag och organisationer att ta fram och genomföra
-            <b> företagsanpassade</b> kurser.{" "}
+            <b> företagsanpassade</b> kurser. <br />
             <b>Du väljer datum och tid som passar!</b>
           </p>
           <p>
