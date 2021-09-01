@@ -59,7 +59,7 @@ const SimpleBookingForm = ({ course }) => {
           <input
             type="hidden"
             name="Skickat från"
-            value={`Förfrågan! Kurs: ${course.name}`}
+            value={`Förfrågan! Kurs: ${course.title}`}
           />
           <BookingDetails>
             <span>Kontaktuppgifter</span>

@@ -61,7 +61,7 @@ const CallForm = ({ course }) => {
           <input
             type="hidden"
             name="Skickat från"
-            value={`Ring upp mig! Kurs: ${course.name}`}
+            value={`Ring upp mig! Kurs: ${course.title}`}
           />
           <BookingDetails>
             <span>Kontaktuppgifter</span>
