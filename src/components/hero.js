@@ -5,6 +5,7 @@ import { Link } from "gatsby"
 import { ScaleBox } from "./scaleBox"
 import lottie from "lottie-web"
 import { Button } from "./styledComponents"
+import Card from "./card"
 
 const Hero = ({ showButtons, title, text, animation, narrow }) => {
   const animationRef = createRef()
@@ -27,7 +28,7 @@ const Hero = ({ showButtons, title, text, animation, narrow }) => {
           <TextWrapper>
             <Heading>{title}</Heading>
             <Text>{text}</Text>
-            {showButtons && (
+            {/*             {showButtons && (
               <ButtonWrapper>
                 <Link to="/courses">
                   <StyledButton>Se färdiga kurspaket</StyledButton>
@@ -36,12 +37,59 @@ const Hero = ({ showButtons, title, text, animation, narrow }) => {
                   <StyledButton secondary>Forma din egen kurs</StyledButton>
                 </Link>
               </ButtonWrapper>
-            )}
+            )} */}
           </TextWrapper>
           <ScaleBox>
             <Image ref={animationRef}></Image>
           </ScaleBox>
         </Grid>
+        {showButtons && (
+          <Grid>
+            <Card link={"ny-i-chefsrollen"}>
+              <h2>Ny i chefsrollen?</h2>
+              <p>
+                Kurser för medarbetare som är nya i chefs- & ledarrollen och som
+                vill lära sig mer om personligt ledarskap, kommunikation och vad
+                det innebär att ha personal- och arbetsmiljöansvar.
+              </p>
+              <Link to="/courses" style={{ marginTop: "auto" }}>
+                <StyledButton>Gå vidare</StyledButton>
+              </Link>
+            </Card>
+            <Card link={"leda-andra-utan-att-vara-chef"}>
+              <h2>Leder andra utan att vara chef?</h2>
+              <p>
+                Kurser för medarbetare som idag inte har chefsroll, men uppgift
+                att leda, samordna och koordinera aktiviteter och uppgifter i
+                gruppen eller teamet.
+              </p>
+              <Link to="/courses" style={{ marginTop: "auto" }}>
+                <StyledButton>Gå vidare</StyledButton>
+              </Link>
+            </Card>
+            <Card link={"leder-projekt"}>
+              <h2>Leder projekt?</h2>
+              <p>
+                Kurser för medarbetare som planerar och leder projekt och som
+                har uppgift att motivera projektgruppen att leverera rätt sak i
+                rätt tid, till rätt kvalité.
+              </p>
+              <Link to="/courses" style={{ marginTop: "auto" }}>
+                <StyledButton>Gå vidare</StyledButton>
+              </Link>
+            </Card>
+            <Card link={"organisatorisk-och-social-arbetsmiljö"}>
+              <h2>Ansvarar för arbetsmiljö?</h2>
+              <p>
+                Kurser för medarbetare som har en aktiv roll i verksamhetens
+                organisatoriska och sociala arbetsmiljöarbete.
+              </p>
+              <Link to="/courses" style={{ marginTop: "auto" }}>
+                <StyledButton>Gå vidare</StyledButton>
+              </Link>
+            </Card>
+          </Grid>
+        )}
       </Container>
     </Wrapper>
   )
@@ -95,6 +143,7 @@ const Grid = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
   align-items: center;
+  grid-auto-rows: 1fr;
 
   @media screen and (max-width: 1023px) {
     grid-template-columns: 1fr;

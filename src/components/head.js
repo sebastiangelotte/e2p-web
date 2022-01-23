@@ -54,6 +54,16 @@ const Head = ({ title, description }) => {
       {/* <meta name="twitter:image" content="LINK TO IMAGE" /> */}
       <meta name="twitter:site" content="@easy2perform" />
       <meta name="twitter:creator" content="@easy2perform" />
+      {/* Global site tag (gtag.js) - Google Ads: 10828793359 */}
+      {/*    <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=AW-10828793359"
+      ></script>
+      <script>
+        window.dataLayer = window.dataLayer || []; function gtag()
+        {dataLayer.push(arguments)}
+        gtag('js', new Date()); gtag('config', 'AW-10828793359');
+      </script> */}
     </Helmet>
   )
 }

@@ -7,7 +7,7 @@ const Card = ({ link, title, withBackground, children, className }) => {
   return (
     <>
       {link ? (
-        <Link to={link} title={title}>
+        <Link to={link} title={title} style={{ height: "100%" }}>
           <Wrapper withBackground={withBackground} className={className}>
             {children}
           </Wrapper>
@@ -79,7 +79,7 @@ const Wrapper = styled.div`
   }
 
   p {
-    font-size: 16px;
+    font-size: 18px;
     color: #455880;
     line-height: 27px;
   }

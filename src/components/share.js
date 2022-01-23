@@ -9,7 +9,7 @@ import {
   TwitterIcon,
 } from "react-share"
 
-const Share = ({ title, className }) => {
+const Share = ({ title, className, style }) => {
   const url = () => {
     if (typeof window !== "undefined") {
       return (
@@ -23,7 +23,7 @@ const Share = ({ title, className }) => {
   }
 
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} style={style}>
       <Text>Dela:</Text>
       <TwitterShareButton url={url()} title={title} hashtags={["easy2perform"]}>
         <TwitterIcon round />
