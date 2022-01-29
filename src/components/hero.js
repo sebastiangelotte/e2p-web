@@ -143,7 +143,6 @@ const Grid = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
   align-items: center;
-  grid-auto-rows: 1fr;
 
   @media screen and (max-width: 1023px) {
     grid-template-columns: 1fr;
