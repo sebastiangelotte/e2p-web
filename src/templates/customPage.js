@@ -193,7 +193,6 @@ const Grid = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
   align-items: flex-start;
-  grid-auto-rows: 1fr;
   max-width: 1280px;
   margin: 0 auto;
 
