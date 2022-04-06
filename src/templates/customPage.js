@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { options } from "../richTextRendererOptions"
@@ -14,6 +14,10 @@ import decoration3 from "../images/decoration3.svg"
 import decoration4 from "../images/decoration4.svg"
 import CustomCourseContactForm from "../components/forms/customCourseContactForm"
 import Share from "../components/share"
+import Card from "../components/card"
+import { Link } from "gatsby"
+import { Button } from "../components/styledComponents"
+import Modal from "../components/modal"
 
 export const query = graphql`
   query($slug: String!) {
@@ -34,9 +38,33 @@ export const query = graphql`
     }
   }
 `
+const card1 = {
+  heading: "Jag vill gå kursen själv",
+  content:
+    "Vi väljer tillsammans ett upplägg som passar dig och matchar ihop dig med flera deltagare som vill gå samma kurs.",
+  type: "individual",
+}
+const card2 = {
+  heading: "Vi är en grupp som önskar företagsanpassad kurs",
+  content:
+    "Ni är en grupp inom ert företag eller annan gemenskap som är i behov av en mer skräddarsydd kurs utefter era egna behov.",
+  type: "group",
+}
+const card3 = {
+  heading: "Jag önskar personlig coachning",
+  content:
+    "Vi skapar tillsammans ett upplägg och matchar ihop dig med rätt coach utifrån dina specifika behov.",
+  type: "coaching",
+}
 
 const CustomPage = props => {
   const customPage = props.data.customPage
+  const [showOpenSignupModal, setShowOpenSignupModal] = useState(false)
+  const [signupModalText, setSignupModalText] = useState({
+    heading: "",
+    content: "",
+    type: "",
+  })
 
   return (
     <Layout transparentNavigation>
@@ -47,6 +75,59 @@ const CustomPage = props => {
         animation={animation}
         narrow
       />
+      <UpperGrid>
+        <div
+          onClick={() => {
+            setShowOpenSignupModal(true)
+            setSignupModalText(card1)
+          }}
+          style={{ height: "100%", cursor: "pointer" }}
+        >
+          <Card>
+            <h3>{card1.heading}</h3>
+            <p>{card1.content}</p>
+            <StyledButton style={{ marginTop: "auto" }}>Välj</StyledButton>
+          </Card>
+        </div>
+        <div
+          onClick={() => {
+            setShowOpenSignupModal(true)
+            setSignupModalText(card2)
+          }}
+          style={{ height: "100%", cursor: "pointer" }}
+        >
+          <Card>
+            <h3>{card2.heading}</h3>
+            <p>{card2.content}</p>
+            <StyledButton style={{ marginTop: "auto" }}>Välj</StyledButton>
+          </Card>
+        </div>
+        <div
+          onClick={() => {
+            setShowOpenSignupModal(true)
+            setSignupModalText(card3)
+          }}
+          style={{ height: "100%", cursor: "pointer" }}
+        >
+          <Card>
+            <h3>{card3.heading}</h3>
+            <p>{card3.content}</p>
+            <StyledButton style={{ marginTop: "auto" }}>Välj</StyledButton>
+          </Card>
+        </div>
+        <Modal
+          isOpen={showOpenSignupModal}
+          closeModal={() => setShowOpenSignupModal(false)}
+        >
+          <CustomCourseContactForm
+            heading={signupModalText.heading}
+            content={signupModalText.content}
+            type={signupModalText.type}
+            source={`Skickat från: ${customPage.title}. Valt upplägg: ${signupModalText.type}`}
+          />
+        </Modal>
+      </UpperGrid>
+
       <Grid>
         <StyledSection>
           <StyledInner>
@@ -121,6 +202,20 @@ const Grid = styled.div`
   }
 `
 
+const UpperGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  align-items: flex-start;
+  grid-auto-rows: 1fr;
+  max-width: 1280px;
+  margin: 0 auto 100px auto;
+
+  @media screen and (max-width: 1023px) {
+    grid-template-columns: 1fr;
+  }
+`
+
 const DecorationWrapper = styled.div`
   max-width: 1280px;
   margin-right: auto;
@@ -155,4 +250,18 @@ const FormWrapper = styled.article`
   border-radius: 18px;
   color: var(--color-heading);
   max-width: 540px;
+`
+
+const StyledButton = styled(Button)`
+  background: linear-gradient(180deg, #fbc917 0%, #ff8364 100%);
+  border: none;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-top: 10px;
+  font-size: 17px;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 `
