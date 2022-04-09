@@ -46,42 +46,42 @@ const Hero = ({ showButtons, title, text, animation, narrow }) => {
         {showButtons && (
           <Grid>
             <Card link={"ny-i-chefsrollen"}>
-              <h2>Ny i chefsrollen?</h2>
+              <h2>Är du ny i chefsrollen?</h2>
               <p>
-                Kurser för medarbetare som är nya i chefs- & ledarrollen och som
-                vill lära sig mer om personligt ledarskap, kommunikation och vad
-                det innebär att ha personal- och arbetsmiljöansvar.
+                Kurser för dig som är ny i chefs- & ledarrollen och vill lära
+                sig mer om det personliga ledarskapet och vad det innebär att ha
+                personalansvar.
               </p>
               <Link to="/courses" style={{ marginTop: "auto" }}>
                 <StyledButton>Gå vidare</StyledButton>
               </Link>
             </Card>
             <Card link={"leda-andra-utan-att-vara-chef"}>
-              <h2>Leder andra utan att vara chef?</h2>
+              <h2>Leder du andra utan att vara chef?</h2>
               <p>
-                Kurser för medarbetare som idag inte har chefsroll, men uppgift
-                att leda, samordna och koordinera aktiviteter och uppgifter i
-                gruppen eller teamet.
+                Kurser för dig som idag inte har en formell chefsroll, men
+                leder, samordnar eller koordinerar aktiviteter och uppgifter i
+                gruppen.
               </p>
               <Link to="/courses" style={{ marginTop: "auto" }}>
                 <StyledButton>Gå vidare</StyledButton>
               </Link>
             </Card>
             <Card link={"leder-projekt"}>
-              <h2>Leder projekt?</h2>
+              <h2>Leder du projekt?</h2>
               <p>
-                Kurser för medarbetare som planerar och leder projekt och som
-                har uppgift att motivera projektgruppen att leverera rätt sak i
-                rätt tid, till rätt kvalité.
+                Kurser för dig som idag planerar och leder projekt och har som
+                uppgift att motivera projektgruppen att leverera i rätt tid och
+                med rätt kvalité.
               </p>
               <Link to="/courses" style={{ marginTop: "auto" }}>
                 <StyledButton>Gå vidare</StyledButton>
               </Link>
             </Card>
             <Card link={"organisatorisk-och-social-arbetsmiljö"}>
-              <h2>Ansvarar för arbetsmiljö?</h2>
+              <h2>Ansvarar du för arbetsmiljöarbetet?</h2>
               <p>
-                Kurser för medarbetare som har en aktiv roll i verksamhetens
+                Kurser för dig som har en aktiv roll i verksamhetens
                 organisatoriska och sociala arbetsmiljöarbete.
               </p>
               <Link to="/courses" style={{ marginTop: "auto" }}>
