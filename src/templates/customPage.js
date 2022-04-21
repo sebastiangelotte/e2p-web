@@ -66,6 +66,16 @@ const CustomPage = props => {
     type: "",
   })
 
+  const trackClick = data => {
+    return (
+      window !== "undefined" &&
+      window.gtag("event", "click", {
+        something: "TEST?",
+        data: data,
+      })
+    )
+  }
+
   return (
     <Layout transparentNavigation>
       <Head title={`${customPage.title}`} />
@@ -80,8 +90,10 @@ const CustomPage = props => {
           onClick={() => {
             setShowOpenSignupModal(true)
             setSignupModalText(card1)
+            trackClick(card1.heading)
           }}
           style={{ height: "100%", cursor: "pointer" }}
+          className="track-click"
         >
           <Card>
             <h3>{card1.heading}</h3>
@@ -93,8 +105,10 @@ const CustomPage = props => {
           onClick={() => {
             setShowOpenSignupModal(true)
             setSignupModalText(card2)
+            trackClick(card2.heading)
           }}
           style={{ height: "100%", cursor: "pointer" }}
+          className="track-click"
         >
           <Card>
             <h3>{card2.heading}</h3>
@@ -106,8 +120,10 @@ const CustomPage = props => {
           onClick={() => {
             setShowOpenSignupModal(true)
             setSignupModalText(card3)
+            trackClick(card3.heading)
           }}
           style={{ height: "100%", cursor: "pointer" }}
+          className="track-click"
         >
           <Card>
             <h3>{card3.heading}</h3>
